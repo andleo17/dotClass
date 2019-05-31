@@ -1,0 +1,173 @@
+html, body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0px;
+    background-color: black;
+    display: grid;
+}
+
+nav {
+  height: 70px;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-items {
+  width: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 30px;
+}
+
+.dot {
+  font-family: 'Arial Rounded MT', sans-serif;
+  font-size: 28px;
+  color: white;
+}
+
+.class {
+  font-family: 'Arial Rounded MT', sans-serif;
+  font-size: 28px;
+  color: #00FB86;
+}
+
+nav a {
+  color: white;
+  font-size: 12px;
+}
+
+.nav-botones {
+  margin-right: 30px;
+  display: flex;
+  justify-content: space-between;
+  width: 40px;
+}
+
+.nav-botones a {
+  font-size: 14px;
+}
+
+nav ul {
+  display: flex;
+  padding: 0px;
+  width: 300px;
+  margin: 0px;
+  justify-content: space-between;
+}
+ul {
+    list-style: none;
+}
+  
+li {
+    height: auto;
+    width: auto;
+}
+  
+li a {
+    text-decoration: none;
+}
+
+main{
+    color: white;
+    display: grid;
+    grid-template-rows: 15% 15% 70%;
+    grid-template-columns: repeat(3,calc(100%/3));
+    text-align: center;
+    height: 450px;
+}
+.title{
+  grid-row: 1/2;  
+  grid-column: 2/3; 
+}
+.central-mssg{
+  text-align: center;
+  grid-row: 2/3;  
+  grid-column: 2/3; 
+}
+.llamanos{
+  grid-row: 3/4;  
+  grid-column: 1/2;
+  margin-left: 190px; 
+}
+.chatea{
+  grid-row: 3/4;  
+  grid-column: 2/3;
+  margin-left: 100px;  
+  margin-right: 90px;  
+}
+.escribenos{
+  grid-row: 3/4;  
+  grid-column: 3/4;  
+}
+.information-box{
+    color: black;
+    background-color: white;
+    padding: 10px;
+    /* margin: 50px; */
+    width: 280px;
+    padding-top: 50px;
+    /* height: 200px; */
+}
+.fa-comments, .fa-phone, .fa-envelope{
+    font-size: 50px;
+}
+
+footer {
+    height: 150px;
+    background-color: black;
+    padding: 30px 40px 0px;
+    color: white;
+    display: flex;
+    font-size: 13px;
+}
+  
+.footer-datos {
+    display: flex;
+    justify-content: space-between;
+    align-self: center;
+    flex: 1 0 auto;
+}
+  
+  footer ul {
+    padding: 0px;
+    margin: 0px;
+  }
+  
+  footer a {
+    color: white;
+  }
+
+
+  footer i {
+    margin-right: 10px;
+  }
+  
+  .correo {
+    margin-top: 15px;
+  }
+  
+  .correo input[type="email"] {
+    height: 40px;
+    width: 270px;
+    background-color: transparent;
+    border: 1px solid white;
+    border-radius: 4px 0px 0px 4px;
+    color: white;
+    padding: 1px 20px;
+  }
+  
+  .correo input[type="email"]::placeholder {
+    color: white;
+  }
+  
+  .correo button {
+    height: 40px;
+    width: 60px;
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 0px 4px 4px 0px;
+    box-sizing: content-box;
+    margin-left: -4px;
+  }
