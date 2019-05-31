@@ -153,6 +153,8 @@ body {
 
     50% {
         transform: rotateZ(0deg);
+        margin-bottom: 0px;
+        margin-right: -25rem;
     }
 
     100% {
