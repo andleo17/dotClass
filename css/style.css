@@ -309,20 +309,19 @@ label {
 }
 
 footer {
-  height: 130px;
+  height: 150px;
   background-color: black;
   padding: 30px 40px 0px;
   color: white;
   display: flex;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .footer-datos {
   display: flex;
   justify-content: space-between;
-  flex-grow: 1;
   align-self: center;
-  margin-left: 100px;
+  flex: 1 0 auto;
 }
 
 footer ul {
@@ -336,4 +335,32 @@ footer a {
 
 footer i {
   margin-right: 10px;
+}
+
+.correo {
+  margin-top: 15px;
+}
+
+.correo input[type="email"] {
+  height: 40px;
+  width: 270px;
+  background-color: transparent;
+  border: 1px solid white;
+  border-radius: 4px 0px 0px 4px;
+  color: white;
+  padding: 1px 20px;
+}
+
+.correo input[type="email"]::placeholder {
+  color: white;
+}
+
+.correo button {
+  height: 40px;
+  width: 60px;
+  background-color: white;
+  border: 1px solid white;
+  border-radius: 0px 4px 4px 0px;
+  box-sizing: content-box;
+  margin-left: -4px;
 }
