@@ -1,0 +1,125 @@
+body {
+    overflow: hidden;
+    width: 100%;
+    height: 900px;
+    font-family: 'Arial Rounded MT', sans-serif;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dot {
+    font-size: 150px;
+    color: white;
+    display: flex;
+    /* justify-content: center;
+    align-items: center; */
+    animation-name: inicio_dot;
+    animation-duration:  .5s;
+    animation-iteration-count: 1;
+    animation-timing-function: linear;
+    /* animation-fill-mode: forwards; */
+}
+.class {
+    /* color: #00FB86; */
+    font-size: 150px;
+    animation-name: inicio_class;
+    animation-timing-function: linear;
+    animation-duration:  .5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+.punto {
+    height: 80px;
+    width: 80px;
+    background-color: white;
+    animation-name:  punto;
+    border-radius: 50%;
+    animation-timing-function: linear;
+    animation-duration: .5s;
+    animation-iteration-count: 1;
+    margin-top: 60px;
+}
+@keyframes punto{
+    0%{
+        background-color: #00FB86;
+        opacity: 1;
+    }
+    89%{
+        background-color: #00FB86;
+    }
+    90%{
+        background-color: white;
+        
+        opacity: 1;
+    }
+    100%{
+        background-color: white;
+        opacity: 1;
+    }
+}
+@keyframes inicio_class{
+    0%{
+        opacity: 1;
+        transform:translate(400px,0);
+        color: white;
+    }
+    89%{
+        color: white;
+    }
+    90%{
+        transform:translate(-23px,0);
+        color: #00FB86;
+        opacity: 1;
+        
+    }
+    91%{
+        transform: rotateZ(-25deg);
+    }
+    93%{
+        transform: rotateZ(15deg);
+    }
+    95%{
+        transform: rotateZ(-15deg);
+    }
+    
+    100%{
+        transform:translate(0,0);
+        transform: rotateZ(0deg);
+        opacity: 1;
+        color: #00FB86;
+    }
+}
+@keyframes inicio_dot{
+    0%{
+        opacity: 1;
+        transform:translate(-400px,0);
+        color: #00FB86;
+    }
+    89%{
+        color: #00FB86;
+    }
+    90%{
+        transform:translate(23px,0);
+        color: white;
+        opacity: 1;
+        
+    }
+    91%{
+        transform: rotateZ(-25deg);
+    }
+    93%{
+        transform: rotateZ(15deg);
+    }
+    95%{
+        transform: rotateZ(-15deg);
+    }
+    100%{
+        transform:translate(0,0);
+        transform: rotateZ(0deg);
+        opacity: 1;
+        color: white;
+    }
+}
