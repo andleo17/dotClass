@@ -1,0 +1,191 @@
+
+body {
+    overflow: hidden;
+    width: 100%;
+    height: 900px;
+    font-family: 'Arial Rounded MT', sans-serif;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dot {
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: -25rem;
+    color: white;
+    animation-name: sacudir_dot;
+    animation-duration: 1s;
+    animation-delay: 3s;
+    animation-iteration-count: 1;
+}
+
+.punto {
+    background-color: #00FB86;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    animation-name: animar_punto;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    opacity: 0;
+    margin-top: 40px;
+}
+
+.d {
+    font-size: 150px;
+    opacity: 0;
+    animation-name: aparecer, letra_d;
+    animation-duration: .5s, 1s;
+    animation-delay: 1s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    margin-right: -50px;
+}
+
+.t {
+    font-size: 150px;
+    opacity: 0;
+    animation-name: aparecer, letra_t;
+    animation-duration: .5s, 1s;
+    animation-delay: 1s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    margin-left: -50px;
+}
+
+.class {
+    z-index: 1;
+    color: rgb(197, 251, 0);
+    opacity: 0;
+    font-size: 150px;
+    animation-name: aparecer, animar_class, sacudir_class;
+    animation-duration: .5s, 1s, 1s;
+    animation-delay: 2s, 2s, 3.33s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes aparecer {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes animar_punto {
+    0% {
+        height: 0px;
+        width: 0px;
+    }
+
+    1% {
+        opacity: 1;
+    }
+    
+    50% {
+        background-color: #00FB86;
+        height: 150px;
+        width: 150px;
+    }
+    
+    100% {
+        height: 80px;
+        width: 80px;
+        opacity: 1;
+        background-color: white;
+    }
+}
+
+@keyframes letra_d {
+    0% {
+    }
+    
+    100% {
+        margin-right: 0px;
+    }
+}
+
+@keyframes letra_t {
+    0% {
+    }
+    
+    100% {
+        margin-left: 0px;
+    }
+}
+
+@keyframes animar_class {
+    0% {
+
+    }
+
+    100% {
+        margin-left: 26rem;
+    }
+}
+
+@keyframes sacudir_dot {
+    0% {
+
+    }
+
+    30% {
+        margin-right: -27rem;
+        margin-bottom: 100px;
+        transform: rotateZ(-50deg);
+    }
+
+    40% {
+        transform: rotateZ(20deg);
+    }
+
+    45% {
+        transform: rotateZ(-10deg);
+    }
+
+    50% {
+        transform: rotateZ(0deg);
+        margin-bottom: 0px;
+        margin-right: -25rem;
+    }
+
+    100% {
+    }
+}
+
+@keyframes sacudir_class {
+    0% {
+
+    }
+
+    10% {
+        transform: rotateZ(-15deg);
+    }
+
+    20% {
+        color: #00FB86;
+        transform: rotateZ(5deg);
+        font-size: 160px;
+    }
+
+    25% {
+        transform: rotateZ(-5deg);
+        font-size: 150px;
+    }
+
+    30% {
+        transform: rotateZ(0deg);
+    }
+
+    100% {
+        color: #00FB86;
+    }
+}

@@ -1,12 +1,300 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>dotClass home page</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <title>dotClass</title>
 </head>
+
 <body>
-    <h1>dotClass</h1>
+    <nav>
+        <div class="nav-items">
+            <div class="logo">
+                <span class="dot">dot</span>
+                <span class="class">Class</span>
+            </div>
+            <ul>
+                <li><a href="html/explorar.html">EXPLORAR</a></li>
+                <li><a href="html/blog.html">BLOG</a></li>
+                <li><a href="html/contacto.html">CONTÁCTANOS</a></li>
+            </ul>
+        </div>
+        <div class="nav-botones">
+            <a href="html/notificaciones.html"><i class="fas fa-bell"></i></a>
+            <a href="html/inicio_sesion.html"><i class="fas fa-user"></i></a>
+        </div>
+    </nav>
+    <div class="wrapper">
+        <div class="hero">
+            <div class="fondo">
+                <div class="imagen-fondo"></div>
+            </div>
+            <div class="filtro"></div>
+            <div class="hero-contenido">
+                <h1>Aprende o comparte conocimientos</h1>
+                <span>Demuéstrale al mundo que puedes enseñar lo que sabes y también aprender de los demás.</span>
+                <a href="html/registro.html">Da tus primeros pasos</a>
+            </div>
+        </div>
+        <div class="cursos-populares-container">
+            <h3>Cursos más populares</h3>
+            <div class="cursos-populares">
+                <div class="curso">
+                    <div class="curso-titulo">
+                        <img src="https://static.platzi.com/media/learningpath/badges/Badge-desarrollo-java.png"
+                            alt="logo">
+                        <span>Java avanzado</span>
+                    </div>
+                    <div class="curso-cuerpo">
+                        <p>
+                            En este curso aprenderás el lenguaje de
+                            programación más demandado por el sector
+                            empresarial y el mejor remunerado en la actualidad.
+                        </p>
+                    </div>
+                    <div class="curso-datos">
+                        <span>
+                            <b>Docente:</b>andleo17
+                        </span>
+                        <span>
+                            <b>Duración:</b>25 h
+                        </span>
+                    </div>
+                    <div class="curso-rating">
+                        <span>1.2K subscriptores</span>
+                        <span class="clasificacion">
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="curso">
+                    <div class="curso-titulo">
+                        <img src="https://static.platzi.com/media/achievements/1378-6fbee8c2-fb79-45db-bd28-d25878a0104c.png"
+                            alt="logo">
+                        <span>Python</span>
+                    </div>
+                    <div class="curso-cuerpo">
+                        <p>
+                            Aprende el lenguaje de programación más popular del mundo y sé parte de su enorme comunidad.
+                            Además comprende sus distintos usos en el mundo de la ciencia.
+                        </p>
+                    </div>
+                    <div class="curso-datos">
+                        <span>
+                            <b>Docente:</b>sspacecowbboy
+                        </span>
+                        <span>
+                            <b>Duración:</b>36 h
+                        </span>
+                    </div>
+                    <div class="curso-rating">
+                        <span>1.1K subscriptores</span>
+                        <span class="clasificacion">
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="curso">
+                    <div class="curso-titulo">
+                        <img src="https://static.platzi.com/media/achievements/badges-html-css-b0a71550-d5e7-4e27-aca2-f09f1321a517.png"
+                            alt="logo">
+                        <span>HTML5 y CSS3</span>
+                    </div>
+                    <div class="curso-cuerpo">
+                        <p>
+                            Diseña tus propias páginas o sitios web y aprende los mejores frameworks de diseño.
+                            Sé un buen arquitecto fronted con este curso.
+                        </p>
+                    </div>
+                    <div class="curso-datos">
+                        <span>
+                            <b>Docente:</b>piscoyron
+                        </span>
+                        <span>
+                            <b>Duración:</b>21 h
+                        </span>
+                    </div>
+                    <div class="curso-rating">
+                        <span>1K subscriptores</span>
+                        <span class="clasificacion">
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="docentes-populares-container">
+            <h3>Docentes más populares</h3>
+            <div class="docentes-populares">
+                <div class="docente">
+                    <div class="docente-titulo">
+                        <img src="https://scontent.ftru2-1.fna.fbcdn.net/v/t1.0-9/53456356_2038856099502369_3592419085708689408_n.jpg?_nc_cat=108&_nc_ht=scontent.ftru2-1.fna&oh=25fd8b8d3489c07dafcd3f5fd6631b46&oe=5D61D117"
+                            alt="foto-perfil">
+                        <div class="docente-perfil">
+                            <b>paolacieza09</b>
+                            <span>15.2K seguidores</span>
+                        </div>
+                    </div>
+                    <div class="docente-cuerpo">
+                        <p>
+                            Soy una chica emocionada por enseñar, muy
+                            social y alegre. Me gusta interactuar con la gente
+                            a la que enseño. Quisiera seguir aprendiendo toda
+                            la vida :)
+                        </p>
+                    </div>
+                    <div class="docente-datos">
+                        <span>
+                            <b>N° de cursos que enseña:</b>
+                            15 cursos
+                            <a href="html/perfil.html" class="flecha"><i class="fas fa-chevron-right"></i></a>
+                        </span>
+                        <span>
+                            <b>N° de cursos que aprendió:</b>
+                            19 cursos
+                            <a href="html/perfil.html" class="flecha"><i class="fas fa-chevron-right"></i></a>
+                        </span>
+                        <span>
+                            <b>Cursos destacados:</b>
+                            <span class="docente-cursos">
+                                <a href="html/curso-java.html">Java desde cero</a>,
+                                <a href="html/curso-poo.html">Programación Orientada a Objetos (POO)</a>,
+                                <a href="html/css-grid.html">CSS Grid Layout</a>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+                <div class="docente">
+                    <div class="docente-titulo">
+                        <img src="https://scontent.ftru2-1.fna.fbcdn.net/v/t1.0-9/53456356_2038856099502369_3592419085708689408_n.jpg?_nc_cat=108&_nc_ht=scontent.ftru2-1.fna&oh=25fd8b8d3489c07dafcd3f5fd6631b46&oe=5D61D117"
+                            alt="foto-perfil">
+                        <div class="docente-perfil">
+                            <b>paolacieza09</b>
+                            <span>15.2K seguidores</span>
+                        </div>
+                    </div>
+                    <div class="docente-cuerpo">
+                        <p>
+                            Soy una chica emocionada por enseñar, muy
+                            social y alegre. Me gusta interactuar con la gente
+                            a la que enseño. Quisiera seguir aprendiendo toda
+                            la vida :)
+                        </p>
+                    </div>
+                    <div class="docente-datos">
+                        <span>
+                            <b>N° de cursos que enseña:</b>
+                            15 cursos
+                            <a href="html/perfil.html" class="flecha"><i class="fas fa-chevron-right"></i></a>
+                        </span>
+                        <span>
+                            <b>N° de cursos que aprendió:</b>
+                            19 cursos
+                            <a href="html/perfil.html" class="flecha"><i class="fas fa-chevron-right"></i></a>
+                        </span>
+                        <span>
+                            <b>Cursos destacados:</b>
+                            <span class="docente-cursos">
+                                <a href="html/curso-java.html">Java desde cero</a>,
+                                <a href="html/curso-poo.html">Programación Orientada a Objetos (POO)</a>,
+                                <a href="html/css-grid.html">CSS Grid Layout</a>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+                <div class="docente">
+                    <div class="docente-titulo">
+                        <img src="https://scontent.ftru2-1.fna.fbcdn.net/v/t1.0-9/53456356_2038856099502369_3592419085708689408_n.jpg?_nc_cat=108&_nc_ht=scontent.ftru2-1.fna&oh=25fd8b8d3489c07dafcd3f5fd6631b46&oe=5D61D117"
+                            alt="foto-perfil">
+                        <div class="docente-perfil">
+                            <b>paolacieza09</b>
+                            <span>15.2K seguidores</span>
+                        </div>
+                    </div>
+                    <div class="docente-cuerpo">
+                        <p>
+                            Soy una chica emocionada por enseñar, muy
+                            social y alegre. Me gusta interactuar con la gente
+                            a la que enseño. Quisiera seguir aprendiendo toda
+                            la vida :)
+                        </p>
+                    </div>
+                    <div class="docente-datos">
+                        <span>
+                            <b>N° de cursos que enseña:</b>
+                            15 cursos
+                            <a href="html/perfil.html" class="flecha"><i class="fas fa-chevron-right"></i></a>
+                        </span>
+                        <span>
+                            <b>N° de cursos que aprendió:</b>
+                            19 cursos
+                            <a href="html/perfil.html" class="flecha"><i class="fas fa-chevron-right"></i></a>
+                        </span>
+                        <span>
+                            <b>Cursos destacados:</b>
+                            <span class="docente-cursos">
+                                <a href="html/curso-java.html">Java desde cero</a>,
+                                <a href="html/curso-poo.html">Programación Orientada a Objetos (POO)</a>,
+                                <a href="html/css-grid.html">CSS Grid Layout</a>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="logo">
+            <span class="dot">dot</span>
+            <span class="class">Class</span>
+        </div>
+        <div class="footer-datos">
+            <div class="informacion">
+                <ul>
+                    <li><a href="html/about.html">Acerca de nosotros</a></li>
+                    <li><a href="html/contacto.html">Contacto</a></li>
+                    <li><a href="html/terminos-condiciones.html">Términos y Condiciones</a></li>
+                </ul>
+            </div>
+            <div class="redes-sociales">
+                <ul>
+                    <li><a href=""><i class="fab fa-facebook-square"></i>Facebook</a></li>
+                    <li><a href=""><i class="fab fa-twitter-square"></i>Twitter</a></li>
+                    <li><a href=""><i class="fab fa-instagram"></i>Instagram</a></li>
+                </ul>
+            </div>
+            <form class="novedades-contacto">
+                <span>¿Quieres que te avisemos cuando haya novedades?</span>
+                <div class="correo">
+                    <input type="email" placeholder="Correo electrónico">
+                    <button>OK</button>
+                </div>
+            </form>
+            <div class="datos">
+                <ul>
+                    <li>Av. San Josemaría Escrivá de Balaguer N° 855 Chiclayo - Perú</li>
+                    <li>+51 942 993 030</li>
+                    <li>contacto@dotclass.com</li>
+                </ul>
+            </div>
+        </div>
+    </footer>
 </body>
+
 </html>
