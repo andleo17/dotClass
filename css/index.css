@@ -20,6 +20,10 @@ nav {
   margin-left: 30px;
 }
 
+.logo {
+  text-decoration: none;
+}
+
 .dot {
   font-family: 'Arial Rounded MT', sans-serif;
   font-size: 28px;
