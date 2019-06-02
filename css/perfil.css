@@ -2,7 +2,13 @@ html, body {
     font-family: 'Segoe UI', sans-serif;
     margin: 0px;
     background-color: #dadada;
-    display: grid;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.container {
+  flex: 1 0 auto;
 }
 
 nav {
@@ -70,58 +76,58 @@ li a {
 }
 
 footer {
-    height: 150px;
-    background-color: black;
-    padding: 30px 40px 0px;
-    color: white;
-    display: flex;
-    font-size: 13px;
-  }
+  height: 150px;
+  background-color: black;
+  padding: 30px 40px 0px;
+  color: white;
+  display: flex;
+  font-size: 13px;
+}
   
-  .footer-datos {
-    display: flex;
-    justify-content: space-between;
-    align-self: center;
-    flex: 1 0 auto;
-  }
-  
-  footer ul {
-    padding: 0px;
-    margin: 0px;
-  }
-  
-  footer a {
-    color: white;
-  }
-  
-  footer i {
-    margin-right: 10px;
-  }
-  
-  .correo {
+.footer-datos {
+  display: flex;
+  justify-content: space-between;
+  align-self: center;
+  flex: 1 0 auto;
+}
+
+footer ul {
+  padding: 0px;
+  margin: 0px;
+}
+
+footer a {
+  color: white;
+}
+
+footer i {
+  margin-right: 10px;
+}
+
+.correo {
     margin-top: 15px;
-  }
+}
   
-  .correo input[type="email"] {
-    height: 40px;
-    width: 270px;
-    background-color: transparent;
-    border: 1px solid white;
-    border-radius: 4px 0px 0px 4px;
-    color: white;
-    padding: 1px 20px;
-  }
-  
-  .correo input[type="email"]::placeholder {
-    color: white;
-  }
-  
-  .correo button {
-    height: 40px;
-    width: 60px;
-    background-color: white;
-    border: 1px solid white;
-    border-radius: 0px 4px 4px 0px;
-    box-sizing: content-box;
-    margin-left: -4px;
-  }
+.correo input[type="email"] {
+  height: 40px;
+  width: 270px;
+  background-color: transparent;
+  border: 1px solid white;
+  border-radius: 4px 0px 0px 4px;
+  color: white;
+  padding: 1px 20px;
+}
+
+.correo input[type="email"]::placeholder {
+  color: white;
+}
+
+.correo button {
+  height: 40px;
+  width: 60px;
+  background-color: white;
+  border: 1px solid white;
+  border-radius: 0px 4px 4px 0px;
+  box-sizing: content-box;
+  margin-left: -4px;
+}
