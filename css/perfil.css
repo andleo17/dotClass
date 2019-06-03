@@ -131,20 +131,37 @@ footer i {
   box-sizing: content-box;
   margin-left: -4px;
 }
+.user_img{
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  align-self: center;
+}
+.username{
+  text-align: center;
+  font-weight: bold;
+}
 .aboutme {
-  margin: 40px;
+  margin: 30px;
   display: flex;
   color: white;
+  height: 730px;
 }
 .me{
   background-color: black;
   flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding-top: 30px;
+  width: 350px;
+  
 }
 .about{
   padding: 40PX;
   background-color: #2C3A32;
   display: flex;
   flex-direction: column;
+  width: 950px;
 }
 .about .title{
   margin: 0;
@@ -164,11 +181,16 @@ footer i {
 }
 .curso_row{
   display: flex;
-  flex-direction: row; 
+  flex-direction: row;
+   
 }
 h3{
   margin-block-start: 0;
-  
+}
+.curso h4, .curso p{
+  margin: 0;
+  text-align: left;
+  font-size: 1 rem;
 }
 hr{
   margin: 0;
@@ -176,9 +198,9 @@ hr{
 .curso{
   background-color: white;
   border-color: black;
-  border-radius: 20%;
+  border-radius: 10%;
   width: 240px; 
   height: 135px;
   text-align: justify;
-  
+  margin-right: 20px;
 }
