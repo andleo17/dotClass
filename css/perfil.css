@@ -139,7 +139,10 @@ footer i {
 }
 .username{
   text-align: center;
-  font-weight: bold;
+  font-size: 20px;
+}
+.subs{
+  color: whitesmoke;
 }
 .aboutme {
   margin: 30px;
