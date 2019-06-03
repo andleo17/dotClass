@@ -160,12 +160,18 @@ footer i {
   color: black;
   padding: 20px;
   text-align: center;
+   
+}
+.curso_row{
   display: flex;
-  flex-direction: row;  
+  flex-direction: row; 
 }
 h3{
   margin-block-start: 0;
   
+}
+hr{
+  margin: 0;
 }
 .curso{
   background-color: white;
