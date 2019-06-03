@@ -144,6 +144,9 @@ footer i {
 .subs{
   color: whitesmoke;
 }
+.username, .subs{
+  margin: 0;
+}
 .aboutme {
   margin: 30px;
   display: flex;

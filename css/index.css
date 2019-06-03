@@ -163,7 +163,7 @@ h3 {
 }
 
 .curso {
-  width: 450px;
+  width: 300px;
   background-color: white;
   border-radius: 25px;
   padding: 40px;
@@ -188,11 +188,11 @@ h3 {
 
 .curso-datos {
   margin-top: 15px;
-  font-size: 23px;
+  font-size: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 75px;
+  height: 60px;
 }
 
 .curso-datos b {
@@ -206,35 +206,9 @@ h3 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 20px;
+  font-size: 15px;
 }
   
-label {
-    font-size: 35px;
-  }
-  
-  input[type="radio"] {
-    display: none;
-  }
-  
-  label {
-    color: grey;
-  }
-  
-  .clasificacion {
-    direction: rtl;
-    unicode-bidi: bidi-override;
-  }
-  
-  label:hover,
-  label:hover ~ label {
-    color: orange;
-  }
-  
-  input[type="radio"]:checked ~ label {
-    color: orange;
-  }
-
 .docentes-populares-container {
   background-color: #01140B;
   margin: 40px 40px 20px;
@@ -248,9 +222,10 @@ label {
 }
 
 .docente {
-  width: 450px;
+  width: 300px;
   background-color: white;
   padding: 40px;
+  border-radius: 25px;
 }
 
 .docente-titulo {
@@ -270,14 +245,14 @@ label {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 59px;
-  font-size: 16px;
+  height: 49px;
+  font-size: 14px;
   margin-top: 5px;
   color: #7F7F7F;
 }
 
 .docente-perfil b {
-  font-size: 25px;
+  font-size: 20px;
   font-weight: 500;
   color: black;
 }
@@ -295,6 +270,7 @@ label {
   display: flex;
   flex-direction: column;
   color: #7F7F7F;
+  font-size: 14px;
 }
 
 .docente-datos b {
@@ -306,10 +282,10 @@ label {
 }
 
 .flecha {
-  margin-left: 10px;
+  margin-left: 5px;
   text-decoration: none;
   color: #0A390A;
-  font-size: 13px;
+  font-size: 10px;
 }
 
 footer {
