@@ -2,6 +2,9 @@ html, body {
   font-family: 'Segoe UI', sans-serif;
   margin: 0px;
   background-color: #DADADA;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 nav {
@@ -89,13 +92,6 @@ main {
   display: flex;
   justify-content: space-around;
   margin-top: 70px;
-}
-
-//this no aporta
-.wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .information-box{

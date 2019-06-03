@@ -97,7 +97,7 @@ a {
     flex-direction: column;
     justify-content: space-between;
     margin: 40px 0px 30px;
-    height: 90px;
+    height: 200px;
 }
 
 .datos-usuario input {
@@ -105,7 +105,7 @@ a {
     font-size: 16px;
     padding: 5px;
     font-family: 'Segoe UI', sans-serif;
-    width: 92%;
+    width: 100%;
 }
 
 .datos-usuario input::placeholder {
@@ -121,28 +121,20 @@ hr {
     border-color: black;
 }
 
-.extras {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 45px;
-    width: 100%;
+form a {
+    align-self: flex-start;
     font-size: 14px;
-    margin-bottom: 40px;
-}
-
-.extras a {
     color: #0A390A;
 }
 
-.btnIngresar {
-    padding: 13px 30px;
+.btnSiguiente {
+    padding: 8px 15px;
     background-color: #0AB83E;
     border: none;
-    font-size: 17px;
-    font-weight: 500;
+    font-size: 15px;
     color: white;
     font-family: 'Segoe UI', sans-serif;
+    align-self: flex-end;
 }
 
 .btnIngresar:hover {

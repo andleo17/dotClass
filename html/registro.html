@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="../css/iniciar_sesion.css">
+    <link rel="stylesheet" href="../css/registro.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
         integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <title>Iniciar Sesión</title>
@@ -31,24 +31,27 @@
     </nav>
     <div class="wrapper">
         <form>
-            <span>Acceder</span>
+            <span>Regístrate</span>
             <div class="datos-usuario">
-                <div>
-                    <i class="fas fa-user"></i>
+                <div class="inputs">
                     <input type="text" name="usuario" id="usuario" placeholder="Usuario">
                     <hr>
                 </div>
-                <div>
-                    <i class="fas fa-lock"></i>
+                <div class="inputs">
+                    <input type="email" name="email" id="email" placeholder="Correo electrónico">
+                    <hr>
+                </div>
+                <div class="inputs">
                     <input type="password" name="password" id="password" placeholder="Contraseña">
                     <hr>
                 </div>
+                <div class="inputs">
+                    <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirmar contraseña">
+                    <hr>
+                </div>
             </div>
-            <div class="extras">
-                <a href="olvidar-contrasena.html">¿Olvidaste la contraseña?</a>
-                <a href="registro.html">Crear cuenta.</a>
-            </div>
-            <button class="btnIngresar">INGRESAR</button>
+            <a href="iniciar_sesion.html">Ya tengo una cuenta.</a>
+            <button class="btnSiguiente">Siguiente</button>
         </form>
     </div>
     <footer>
