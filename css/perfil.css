@@ -87,6 +87,7 @@ footer {
   color: white;
   display: flex;
   font-size: 13px;
+  margin-top: 42.4px;
 }
   
 .footer-datos {
@@ -232,3 +233,7 @@ hr{
   text-align: justify;
   margin-right: 20px;
 }
+.datos li{
+  font-weight: bold;  
+}
+
