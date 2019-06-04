@@ -27,6 +27,10 @@ nav {
   margin-left: 30px;
 }
 
+.logo {
+  text-decoration: none;
+}
+
 .dot {
   font-family: 'Arial Rounded MT', sans-serif;
   font-size: 28px;
@@ -62,6 +66,7 @@ nav ul {
   margin: 0px;
   justify-content: space-between;
 }
+
 ul {
     list-style: none;
 }
@@ -131,28 +136,36 @@ footer i {
   box-sizing: content-box;
   margin-left: -4px;
 }
+
 .user_img{
   border-radius: 50%;
   width: 200px;
   height: 200px;
   align-self: center;
 }
+
 .username{
   text-align: center;
   font-size: 20px;
 }
+
 .subs{
-  color: whitesmoke;
+  color: #929292;
+  text-align: center;
+  font-size: 13px;
 }
+
 .username, .subs{
   margin: 0;
 }
+
 .aboutme {
   margin: 30px;
   display: flex;
   color: white;
   height: 730px;
 }
+
 .me{
   background-color: black;
   flex: 1 0 auto;
@@ -162,6 +175,7 @@ footer i {
   width: 350px;
   
 }
+
 .about{
   padding: 40PX;
   background-color: #2C3A32;
@@ -169,15 +183,18 @@ footer i {
   flex-direction: column;
   width: 950px;
 }
+
 .about .title{
   margin: 0;
 }
+
 .experience{
   padding-left: 30px;
   padding-right: 30px;
   padding-top: 10px;
   background-color: #004D40;
 }
+
 .curso_box{
   background-color: #DADADA;
   color: black;
@@ -185,22 +202,27 @@ footer i {
   text-align: center;
    
 }
+
 .curso_row{
   display: flex;
   flex-direction: row;
    
 }
+
 h3{
   margin-block-start: 0;
 }
+
 .curso h4, .curso p{
   margin: 0;
   text-align: left;
   font-size: 1 rem;
 }
+
 hr{
   margin: 0;
 }
+
 .curso{
   background-color: white;
   border-color: black;
