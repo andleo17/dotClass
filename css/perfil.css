@@ -200,8 +200,7 @@ footer i {
   background-color: #DADADA;
   color: black;
   padding: 20px;
-  text-align: center;
-   
+  text-align: center;   
 }
 
 .curso_row{
@@ -212,6 +211,10 @@ footer i {
 
 h3{
   margin-block-start: 0;
+  margin-block-end: 0;
+}
+.experience ul{
+  margin-top: 0.5em;
 }
 
 .curso h4, .curso p{
@@ -232,8 +235,16 @@ hr{
   height: 135px;
   text-align: justify;
   margin-right: 20px;
+  margin-top: 15px;
 }
-.datos li{
-  font-weight: bold;  
+
+.variable{
+  font-weight: bold;
+  margin-bottom: 3px;  
+}
+
+.dato{
+  margin-bottom: 6px;
+  margin-left: 17px;
 }
 
