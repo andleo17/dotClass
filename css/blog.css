@@ -75,7 +75,7 @@ li a {
 
 .container {
     width: 100%;
-    height: 590px;
+    height: 100%;
     position: relative;
 }
 
@@ -84,11 +84,12 @@ li a {
     height: 150px;
 }
 
-.blog{
+.blog, .blog_principal{
     height: 300px;
     width: 270px;
     background-color: white;
     font-size: 14.5px;
+    margin-bottom: 20px;
 }
 
 .container h1{
@@ -102,12 +103,30 @@ li a {
     margin-block-end: 0.40em;
 }
 
+.blog_principal {
+    grid-column: 3/5;
+    
+}
+
+.blog_body h3{
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+.blog_body p{
+    margin-block-end: 2em;
+}
+
 .blog_box{
     margin: 20px 70px;
+    display: grid;
+    grid-template-columns: repeat(4,25%);
+    grid-template-rows: repeat(2,50%);
+    height: 100%;
 }
 
 .blog_body {
-    padding: 7px 5px;
+    padding: 10px 25px;
 }
 
 footer {
