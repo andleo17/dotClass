@@ -200,6 +200,7 @@ footer i {
   background-color: #DADADA;
   color: black;
   padding: 20px;
+  padding-top: 10px;
   text-align: center;   
 }
 
@@ -212,15 +213,22 @@ footer i {
 h3{
   margin-block-start: 0;
   margin-block-end: 0;
+  font-weight: lighter;
+  font-size: 25px;
 }
 .experience ul{
   margin-top: 0.5em;
 }
 
-.curso h4, .curso p{
+.curso p{
   margin: 0;
-  text-align: left;
-  font-size: 1 rem;
+}
+
+.curso h4{
+  display: inline;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  font-size: 10px;
 }
 
 hr{
@@ -233,9 +241,13 @@ hr{
   border-radius: 10%;
   width: 240px; 
   height: 135px;
-  text-align: justify;
   margin-right: 20px;
   margin-top: 15px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  font-size: 15px;
+  padding: 5px;
 }
 
 .variable{
@@ -246,5 +258,50 @@ hr{
 .dato{
   margin-bottom: 6px;
   margin-left: 17px;
+}
+
+.comments h2{
+  text-align: center;
+  font-size: 30px;
+  font-weight: lighter;
+}
+
+.comentario_box {
+  background-color: white;
+  width: 290px;
+  height: 230px;
+  margin-bottom: 25px;
+  padding: 15px;
+}
+
+.comentarios_box {
+  align-self: center;
+  display: grid;
+  grid-template-columns: repeat(4,25%);
+  margin: 70px;
+  margin-top: 30px;
+}
+
+.comments {
+  margin: 30px;
+}
+
+.comentario_box img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.curso-rating {
+  font-size: 12px;
+}
+
+.comentario{
+  background-color: #DADADA;
+  height: 120px;
+}
+
+.asunto{
+  font-weight: 500;
 }
 
