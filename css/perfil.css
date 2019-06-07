@@ -272,6 +272,14 @@ hr{
   height: 230px;
   margin-bottom: 25px;
   padding: 15px;
+  border-radius: 10%;
+  border-color: black;
+}
+
+.user_comment{
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
 }
 
 .comentarios_box {
@@ -299,9 +307,15 @@ hr{
 .comentario{
   background-color: #DADADA;
   height: 120px;
+  padding: 15px;
 }
 
-.asunto{
+.asunto, .usuario{
   font-weight: 500;
 }
+
+.usuario{
+  margin-left: 15px;
+}
+
 
