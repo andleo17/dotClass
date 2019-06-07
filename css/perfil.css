@@ -228,7 +228,7 @@ h3{
   display: inline;
   margin-block-start: 0;
   margin-block-end: 0;
-  font-size: 10px;
+  font-size: 15px;
 }
 
 hr{
@@ -240,13 +240,13 @@ hr{
   border-color: black;
   border-radius: 10%;
   width: 240px; 
-  height: 135px;
+  height: 120px;
   margin-right: 20px;
   margin-top: 15px;
   text-align: left;
   display: flex;
   flex-direction: column;
-  font-size: 15px;
+  font-size: 13px;
   padding: 5px;
 }
 
@@ -276,7 +276,7 @@ hr{
   border-color: black;
 }
 
-.user_comment{
+.user_comment, .head_curso{
   display: flex;
   align-items: center;
   margin-bottom: 15px;
