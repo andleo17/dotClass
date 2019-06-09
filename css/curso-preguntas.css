@@ -353,99 +353,99 @@ hr {
   font-size: 15px;
 }
 
-#menu-contenido {
+#menu-preguntas {
   color: black;
   background-color: white;
 }
 
 .contenido {
-  padding: 40px;
-}
-
-.curso-seccion {
-  border: 1px solid #707070;
-  margin-bottom: 10px;
-  padding: 15px 30px;
-  display: flex;
-  flex-direction: column;
-  color: #717171;
-}
-
-.curso-seccion > span {
-  font-size: 18px;
-  font-weight: 500;
-  margin-bottom: 15px;
-}
-
-.clases {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 20px;
-}
-
-.clase {
-  border: 1px solid #707070;
-  border-radius: 0px 0px 25px 25px;
-}
-
-.clase-estado {
-  background-color: green;
-  height: 10px;
-}
-
-.clase-contenido {
-  padding: 15px 25px;
-}
-
-.clase-titulo {
-  font-size: 16px;
-  font-weight: 500;
-  height: 80px;
-  display: flex;
-  align-items: flex-start;
-}
-
-.clase-duracion {
-  font-size: 14px;
-}
-
-.clase-duracion b {
-  font-weight: 500;
-}
-
-.curso-examen {
-  padding: 20px 40px;
-  background-color: #01140B;
-  color: white;
+  padding: 40px 100px;
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.contenido > span {
+  font-size: 30px;
+  text-align: center;
+}
+
+.contenido > div > a {
+  font-size: 22px;
+  text-decoration: none;
+  color: black;
+}
+
+.fa-plus-circle {
+  color: #004D40;
+}
+
+.preguntas {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
+  grid-gap: 20px;
+  margin-top: 30px;
+}
+
+.pregunta {
+  border-radius: 15px;
+  border: 1px solid black;
+  padding: 30px 20px;
+}
+
+.pregunta-header {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 
-.curso-examen div {
+.pregunta-perfil {
   display: flex;
-  flex: 1 1 auto;
-  flex-wrap: wrap;
-}
-
-.curso-examen b {
-  flex: 1 1 100%;
+  align-items: center;
+  font-size: 16px;
   font-weight: 500;
-  font-size: 20px;
+  text-decoration: none;
+  color: black;
 }
 
-.curso-examen span {
-  font-size: 17px;
-  flex: 1 1 auto;
+.pregunta-perfil img {
+  width: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
 }
 
-.curso-examen a {
-  padding: 10px 15px;
+.pregunta-tiempo {
+  font-size: 12px;
+  color: #7E7E7E;
+}
+
+.pregunta-body {
+  background-color: #DADADA;
+  padding: 10px;
+  margin-top: 15px;
+  height: 100px;
+}
+
+.pregunta-body a {
   color: black;
   text-decoration: none;
-  background-color: white;
+}
+
+.pregunta-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  font-size: 14px;
   font-weight: 500;
-  border-radius: 25px;
+}
+
+.fa-heart {
+  color: #840000;
+}
+
+.fa-comment-alt {
+  color: #073b23;
 }
 
 footer {
