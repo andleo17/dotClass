@@ -74,115 +74,140 @@ li a {
 }
 
 .container {
-    width: 100%;
-    height: 100%;
-    position: relative;
+  width: 100%;
+  height: 100%;
+  position: relative;
 }
 
 .blog_head img{
-    width: 270px;
-    height: 150px;
+  width: 270px;
+  height: 150px;
+}
+
+.blog {
+  height: 300px;
+  width: 270px;
+  background-color: white;
 }
 
 .blog, .blog_principal{
-    height: 300px;
-    width: 270px;
-    background-color: white;
-    font-size: 14.5px;
-    margin-bottom: 20px;
+  font-size: 14.5px;
+  margin-bottom: 30px;
+  margin: 20px;
 }
 
 .container h1{
-    text-align: center;
-    font-weight: lighter;
+  text-align: center;
+  font-weight: lighter;
 }
 
 .container h2{
-    margin: 70px;
-    margin-block-start: 0.40em;
-    margin-block-end: 0.40em;
+  margin: 120px;
+  margin-block-start: 0.40em;
+  margin-block-end: 0.40em;
+  font-weight: 500;
+  font-size: 1.5em;
+}
+
+.blog_foot span {
+  margin-left: 20px;
+}
+
+.likes {
+  margin-right: 20px;
 }
 
 .blog_principal {
-    grid-column: 3/5;
-    
+  grid-column: 3/5;
+  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHDWX8mxurmVSlqIlOFxtfskUvIUdyqB86Fr6ZsQ-hVjKawKKI');
+  /* background-repeat: no-repeat; */
+  background-size: cover;
+  background-position: center;
+  filter: blur(2px) brightness(70%);
+  z-index: 1;
+}
+
+.blog_principal .blog_body h2 {
+
 }
 
 .blog_body h3{
-    margin-block-start: 0;
-    margin-block-end: 0;
+  margin-block-start: 0;
+  margin-block-end: 0;
 }
 
 .blog_body p{
-    margin-block-end: 2em;
+  margin-block-end: 2em;
 }
 
 .blog_box{
-    margin: 20px 70px;
-    display: grid;
-    grid-template-columns: repeat(4,25%);
-    grid-template-rows: repeat(2,50%);
-    height: 100%;
+  margin: 20px 120px;
+  display: grid;
+  grid-template-columns: repeat(4,25%);
+  /* grid-template-rows: repeat(2,50%); */
+  height: 100%;
+  width: auto;
+  align-content: center;
 }
 
 .blog_body {
-    padding: 10px 25px;
+  padding: 10px 25px;
 }
 
 footer {
-    height: 150px;
-    background-color: black;
-    padding: 30px 40px 0px;
-    color: white;
-    display: flex;
-    font-size: 13px;
+  height: 150px;
+  background-color: black;
+  padding: 30px 40px 0px;
+  color: white;
+  display: flex;
+  font-size: 13px;
 }
   
 .footer-datos {
-display: flex;
-justify-content: space-between;
-align-self: center;
-flex: 1 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-self: center;
+  flex: 1 0 auto;
 }
   
 footer ul {
-padding: 0px;
-margin: 0px;
+  padding: 0px;
+  margin: 0px;
 }
 
 footer a {
-color: white;
+  color: white;
 }
 
 footer i {
-margin-right: 10px;
+  margin-right: 10px;
 }
 
 .correo {
-margin-top: 15px;
+  margin-top: 15px;
 }
   
 .correo input[type="email"] {
-height: 40px;
-width: 270px;
-background-color: transparent;
-border: 1px solid white;
-border-radius: 4px 0px 0px 4px;
-color: white;
-padding: 1px 20px;
+  height: 40px;
+  width: 270px;
+  background-color: transparent;
+  border: 1px solid white;
+  border-radius: 4px 0px 0px 4px;
+  color: white;
+  padding: 1px 20px;
 }
 
 .correo input[type="email"]::placeholder {
-color: white;
+  color: white;
 }
 
 .correo button {
-height: 40px;
-width: 60px;
-background-color: white;
-border: 1px solid white;
-border-radius: 0px 4px 4px 0px;
-box-sizing: content-box;
-margin-left: -4px;
+  height: 40px;
+  width: 60px;
+  background-color: white;
+  border: 1px solid white;
+  border-radius: 0px 4px 4px 0px;
+  box-sizing: content-box;
+  margin-left: -4px;
 }
 
