@@ -111,6 +111,7 @@ li a {
 
 .blog_foot span {
   margin-left: 20px;
+  color: #004D40;
 }
 
 .likes {
@@ -194,6 +195,18 @@ li a {
 .blog_body {
   padding: 10px 25px;
 }
+
+.fa-heart{
+  color: red;
+}
+
+.fa-comment-alt{
+  color: #004D40;
+}
+
+
+
+
 
 footer {
   height: 150px;
