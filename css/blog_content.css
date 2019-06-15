@@ -98,37 +98,25 @@ aside hr {
   margin-top: 20px;
 }
 
+.author_data{
+  
+}
 
+.post_pop{
+  display: flex;
+  flex-direction: column;
+  /* align-content: center; */
+}
 
+.post_pop li img{
+  width:  50px;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.post_pop li{
+  display: flex;
+  /* align-self: center; */
+  align-items: center;
+}
 
 
 
