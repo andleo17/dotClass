@@ -78,7 +78,7 @@ h1 {
 }
 
 .container {
-    margin: 20px 90px;
+    margin: 20px 110px;
     display: grid;
     grid-template-columns: 70% 30%;
 }
@@ -109,17 +109,18 @@ aside hr {
 }
 
 .post_pop li img{
-  width:  50px;
+  width:  90px;
+  margin-right: 10px;
 }
 
 .post_pop li{
   display: flex;
-  /* align-self: center; */
   align-items: center;
 }
 
-
-
+.cursos_top li, .post_pop li{
+  margin: 15px 0;
+}
 
 
 
