@@ -85,7 +85,17 @@ h1 {
 
 .wrapper img {
   width: 500px;
-  vertical-align: center;
+  display:block;
+  margin:auto;
+}
+
+.wrapper p {
+  font-size: 1.2em;
+}
+
+aside hr {
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 
