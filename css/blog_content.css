@@ -78,7 +78,7 @@ h1 {
 }
 
 .container {
-    margin: 20px 110px;
+    margin: 20px 120px;
     display: grid;
     grid-template-columns: 70% 30%;
 }
@@ -90,16 +90,12 @@ h1 {
 }
 
 .wrapper p {
-  font-size: 1.2em;
+  font-size: 1.1em;
 }
 
 aside hr {
   margin-bottom: 20px;
   margin-top: 20px;
-}
-
-.author_data{
-  
 }
 
 .post_pop{
