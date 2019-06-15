@@ -7,14 +7,14 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
         integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/curso-preguntas.css">
+    <link rel="stylesheet" href="../css/style.css">
     <title>Curso de Java avanzado</title>
 </head>
 
 <body>
     <nav>
         <div class="nav-items">
-            <a href="index.html" class="logo">
+            <a href="../index.html" class="logo">
                 <span class="dot">dot</span>
                 <span class="class">Class</span>
             </a>
@@ -25,26 +25,23 @@
             </ul>
         </div>
         <div class="nav-botones">
-            <a href="html/notificaciones.html"><i class="fas fa-bell"></i></a>
-            <a href="html/iniciar_sesion.html"><i class="fas fa-user"></i></a>
+            <a href="notificaciones.html"><i class="fas fa-bell"></i></a>
+            <a href="iniciar_sesion.html"><i class="fas fa-user"></i></a>
         </div>
     </nav>
-    <div class="wrapper">
-        <div class="curso-presentacion">
-            <div class="curso-informacion">
-                <div class="curso-header">
-                    <div class="curso-titulo">
-                        <img src="https://static.platzi.com/media/learningpath/badges/Badge-desarrollo-java.png"
-                            alt="logo">
-                        <h1>Java avanzado</h1>
-                    </div>
-                    <div class="curso-progreso">
-                        <div class="progreso"></div>
-                        <div class="progreso-total"></div>
+    <div class="container">
+        <div class="panel-container">
+            <div class="panel">
+                <div class="panel-header">
+                    <img src="https://static.platzi.com/media/learningpath/badges/Badge-desarrollo-java.png" alt="logo">
+                    <h1>Java avanzado</h1>
+                    <div class="progress-bar">
+                        <div class="progress"></div>
+                        <div class="full-progress"></div>
                         <span>75%</span>
                     </div>
                 </div>
-                <div class="curso-body">
+                <div class="panel-body">
                     <p>
                         En este curso aprenderás el lenguaje de programación más demandado por el sector empresarial y
                         el mejor remunerado en la actualidad.
@@ -53,11 +50,11 @@
                         más.
                     </p>
                 </div>
-                <div class="curso-footer">
+                <div class="panel-footer">
                     <span>
                         <b>Duración:</b>25 h
                     </span>
-                    <div class="curso-rating">
+                    <div class="panel-rating">
                         <span>1.2K subscriptores</span>
                         <span class="clasificacion">
                             <i class="far fa-star"></i>
@@ -69,27 +66,27 @@
                     </div>
                 </div>
             </div>
-            <hr>
-            <div class="docente-informacion">
-                <div class="docente-header">
-                    <a href="perfil.html">
+            <hr class="panel-divisor">
+            <div class="panel">
+                <div class="panel-header">
+                    <a href="perfil.html" class="docente-foto">
                         <img src="https://www.famousbirthdays.com/headshots/pasha-harulia-6.jpg" alt="foto-perfil">
                     </a>
                     <div class="docente-perfil">
-                        <b>pashaharu</b>
-                        <span>15.2K seguidores</span>
+                        <b class="panel-perfil">pashaharu</b>
+                        <span class="panel-subs">15.2K seguidores</span>
                     </div>
-                    <div class="docente-live">
+                    <div class="live">
                         <i class="fas fa-circle"></i>
                         <span>LIVE</span>
                     </div>
                 </div>
-                <div class="docente-body">
+                <div class="panel-body panel-descripcion-d">
                     <p>
                         Me agrada compartir con los demás lo que sé. También jugar a videojuegos en mi PC.
                     </p>
                 </div>
-                <div class="docente-footer">
+                <div class="panel-footer">
                     <span>
                         <b>N° de cursos que enseña:</b>
                         15 cursos
@@ -112,14 +109,14 @@
             </div>
             <div class="plan-estudio">
                 <h2>Plan de estudio para empezar este curso</h2>
-                <div class="cursos-prerequisitos">
-                    <div class="pre-curso">
-                        <div class="pre-curso-header">
+                <div class="card-list pre-requisitos">
+                    <div class="mini-card">
+                        <div class="mini-card-header">
                             <img src="https://static.platzi.com/media/achievements/badges-html-css-b0a71550-d5e7-4e27-aca2-f09f1321a517.png"
                                 alt="logo">
                             <span>HTML5 y CSS3</span>
                         </div>
-                        <div class="pre-curso-footer">
+                        <div class="mini-card-footer">
                             <span>
                                 <b>Docente:</b>piscoyron
                             </span>
@@ -127,7 +124,7 @@
                                 <b>Duración:</b>21 h
                             </span>
                         </div>
-                        <div class="pre-curso-rating">
+                        <div class="mini-card-rating">
                             <span>1K subscriptores</span>
                             <span class="clasificacion">
                                 <i class="far fa-star"></i>
@@ -139,13 +136,13 @@
                         </div>
                     </div>
                     <i class="fas fa-arrow-right"></i>
-                    <div class="pre-curso">
-                        <div class="pre-curso-header">
+                    <div class="mini-card">
+                        <div class="mini-card-header">
                             <img src="https://static.platzi.com/media/achievements/badges-html-css-b0a71550-d5e7-4e27-aca2-f09f1321a517.png"
                                 alt="logo">
                             <span>HTML5 y CSS3</span>
                         </div>
-                        <div class="pre-curso-footer">
+                        <div class="mini-card-footer">
                             <span>
                                 <b>Docente:</b>piscoyron
                             </span>
@@ -153,7 +150,7 @@
                                 <b>Duración:</b>21 h
                             </span>
                         </div>
-                        <div class="pre-curso-rating">
+                        <div class="mini-card-rating">
                             <span>1K subscriptores</span>
                             <span class="clasificacion">
                                 <i class="far fa-star"></i>
@@ -165,13 +162,13 @@
                         </div>
                     </div>
                     <i class="fas fa-arrow-right"></i>
-                    <div class="pre-curso">
-                        <div class="pre-curso-header">
+                    <div class="mini-card">
+                        <div class="mini-card-header">
                             <img src="https://static.platzi.com/media/achievements/badges-html-css-b0a71550-d5e7-4e27-aca2-f09f1321a517.png"
                                 alt="logo">
                             <span>HTML5 y CSS3</span>
                         </div>
-                        <div class="pre-curso-footer">
+                        <div class="mini-card-footer">
                             <span>
                                 <b>Docente:</b>piscoyron
                             </span>
@@ -179,7 +176,7 @@
                                 <b>Duración:</b>21 h
                             </span>
                         </div>
-                        <div class="pre-curso-rating">
+                        <div class="mini-card-rating">
                             <span>1K subscriptores</span>
                             <span class="clasificacion">
                                 <i class="far fa-star"></i>
@@ -231,7 +228,7 @@
                                 <a href=""><i class="fas fa-heart"></i></a>
                                 <span>327</span>
                             </div>
-                            <div class="comments">
+                            <div class="comentarios">
                                 <i class="fas fa-comment-alt"></i>
                                 <span>327</span>
                             </div>
@@ -263,7 +260,7 @@
                                 <a href=""><i class="fas fa-heart"></i></a>
                                 <span>327</span>
                             </div>
-                            <div class="comments">
+                            <div class="comentarios">
                                 <i class="fas fa-comment-alt"></i>
                                 <span>327</span>
                             </div>
@@ -295,7 +292,7 @@
                                 <a href=""><i class="fas fa-heart"></i></a>
                                 <span>327</span>
                             </div>
-                            <div class="comments">
+                            <div class="comentarios">
                                 <i class="fas fa-comment-alt"></i>
                                 <span>327</span>
                             </div>
@@ -327,7 +324,7 @@
                                 <a href=""><i class="fas fa-heart"></i></a>
                                 <span>327</span>
                             </div>
-                            <div class="comments">
+                            <div class="comentarios">
                                 <i class="fas fa-comment-alt"></i>
                                 <span>327</span>
                             </div>
@@ -359,7 +356,7 @@
                                 <a href=""><i class="fas fa-heart"></i></a>
                                 <span>327</span>
                             </div>
-                            <div class="comments">
+                            <div class="comentarios">
                                 <i class="fas fa-comment-alt"></i>
                                 <span>327</span>
                             </div>
@@ -391,7 +388,7 @@
                                 <a href=""><i class="fas fa-heart"></i></a>
                                 <span>327</span>
                             </div>
-                            <div class="comments">
+                            <div class="comentarios">
                                 <i class="fas fa-comment-alt"></i>
                                 <span>327</span>
                             </div>
@@ -423,7 +420,7 @@
                                 <a href=""><i class="fas fa-heart"></i></a>
                                 <span>327</span>
                             </div>
-                            <div class="comments">
+                            <div class="comentarios">
                                 <i class="fas fa-comment-alt"></i>
                                 <span>327</span>
                             </div>
@@ -455,7 +452,7 @@
                                 <a href=""><i class="fas fa-heart"></i></a>
                                 <span>327</span>
                             </div>
-                            <div class="comments">
+                            <div class="comentarios">
                                 <i class="fas fa-comment-alt"></i>
                                 <span>327</span>
                             </div>
@@ -470,16 +467,16 @@
         </div>
     </div>
     <footer>
-        <a href="index.html" class="logo">
+        <a href="../index.html" class="logo">
             <span class="dot">dot</span>
             <span class="class">Class</span>
         </a>
         <div class="footer-datos">
             <div class="informacion">
                 <ul>
-                    <li><a href="html/about.html">Acerca de nosotros</a></li>
-                    <li><a href="html/contacto.html">Contacto</a></li>
-                    <li><a href="html/terminos-condiciones.html">Términos y Condiciones</a></li>
+                    <li><a href="about.html">Acerca de nosotros</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                    <li><a href="terminos-condiciones.html">Términos y Condiciones</a></li>
                 </ul>
             </div>
             <div class="redes-sociales">
