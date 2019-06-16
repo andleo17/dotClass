@@ -1,12 +1,116 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Explorar</title>
 </head>
-<body>
 
+<body>
+    <nav>
+        <div class="nav-items">
+            <a href="../index.html" class="logo">
+                <span class="dot">dot</span>
+                <span class="class">Class</span>
+            </a>
+            <ul>
+                <li><a href="explorar.html">EXPLORAR</a></li>
+                <li><a href="blog.html">BLOG</a></li>
+                <li><a href="contacto.html">CONTÁCTANOS</a></li>
+            </ul>
+        </div>
+        <div class="nav-botones">
+            <a href="notificaciones.html"><i class="fas fa-bell"></i></a>
+            <a href="iniciar_sesion.html"><i class="fas fa-user"></i></a>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="filters">
+            <div class="filtro-busqueda">
+                <span>Mostrar por:</span>
+                <select name="busqueda" id="busqueda">
+                    <option value="Categorias">Categorías</option>
+                    <option value="Docentes">Docentes</option>
+                </select>
+            </div>
+            <div class="filtro-busqueda">
+                <span>Filtros:</span>
+                <button>+ Agregar filtro</button>
+            </div>
+        </div>
+        <div class="card-list">
+            <div class="card">
+                <div class="card-header">
+                    <img src="https://static.platzi.com/media/achievements/badges-html-css-b0a71550-d5e7-4e27-aca2-f09f1321a517.png"
+                        alt="logo">
+                    <span class="titulo-curso">HTML5 y CSS3</span>
+                </div>
+                <div class="card-body">
+                    <p>
+                        Diseña tus propias páginas o sitios web y aprende los mejores frameworks de diseño.
+                        Sé un buen arquitecto fronted con este curso.
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <span>
+                        <b>Docente:</b>piscoyron
+                    </span>
+                    <span>
+                        <b>Duración:</b>21 h
+                    </span>
+                    <div class="card-rating">
+                        <span>1K subscriptores</span>
+                        <span class="clasificacion">
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <a href="../index.html" class="logo">
+            <span class="dot">dot</span>
+            <span class="class">Class</span>
+        </a>
+        <div class="footer-datos">
+            <div class="footer-informacion">
+                <ul>
+                    <li><a href="html/about.html">Acerca de nosotros</a></li>
+                    <li><a href="html/contacto.html">Contacto</a></li>
+                    <li><a href="html/terminos-condiciones.html">Términos y Condiciones</a></li>
+                </ul>
+            </div>
+            <div class="footer-informacion">
+                <ul>
+                    <li><a href=""><i class="fab fa-facebook-square"></i>Facebook</a></li>
+                    <li><a href=""><i class="fab fa-twitter-square"></i>Twitter</a></li>
+                    <li><a href=""><i class="fab fa-instagram"></i>Instagram</a></li>
+                </ul>
+            </div>
+            <form class="footer-informacion">
+                <span>¿Quieres que te avisemos cuando haya novedades?</span>
+                <div class="correo">
+                    <input type="email" placeholder="Correo electrónico">
+                    <button>OK</button>
+                </div>
+            </form>
+            <div class="datos">
+                <ul>
+                    <li>Av. San Josemaría Escrivá de Balaguer N° 855 Chiclayo - Perú</li>
+                    <li>+51 942 993 030</li>
+                    <li>contacto@dotclass.com</li>
+                </ul>
+            </div>
+        </div>
+    </footer>
 </body>
+
 </html>
