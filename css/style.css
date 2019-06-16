@@ -130,6 +130,7 @@ footer i {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
+    width: 100%;
 }
 
 .card {
@@ -189,7 +190,7 @@ footer i {
     height: 450px;
     display: flex;
     flex-direction: column;
-    flex: 1 0 560px;
+    flex: 1 0 450px;
 }
   
 .panel-header {
@@ -208,6 +209,7 @@ footer i {
     font-size: 40px;
     font-weight: 500;
     margin: 0;
+    text-align: start;
 }
   
 .progress-bar {
@@ -285,18 +287,20 @@ footer i {
 }
 
 .mini-card {
-    margin-top: 25px;
+    margin-top: 1em;
     border-radius: 25px;
     background-color: white;
     color: black;
-    width: 240px;
-    padding: 15px 20px;
+    width: 17em;
+    padding: 1em 1.1em;
+    font-size: 12px;
 }
 
 .mini-card-header {
   display: flex;
   align-items: center;
   font-weight: 500;
+  font-size: 13px;
 }
 
 .mini-card-header img {
@@ -309,7 +313,6 @@ footer i {
   margin-top: 10px;
   display: flex;
   flex-direction: column;
-  font-size: 14px;
 }
 
 .mini-card-footer b {
@@ -319,7 +322,7 @@ footer i {
 
 .mini-card-rating {
   margin-top: 5px;
-  font-size: 12px;
+  font-size: 11px;
   display: flex;
   justify-content: space-between;
   color: #004D40;
@@ -1278,185 +1281,116 @@ hr {
 
 /*------------------------------------------PERFIL------------------------------------------*/
 
-.user_img{
+.profile-container {
+    margin: 30px;
+    display: flex;
+    color: white;
+}
+
+.profile {
+    background-color: black;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.profile-header {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-photo {
   border-radius: 50%;
   width: 200px;
   height: 200px;
   align-self: center;
 }
 
-.username{
+.profile-username {
+  align-self: center;
   text-align: center;
   font-size: 20px;
 }
 
-.subs{
+.profile-subs {
   color: #929292;
-  text-align: center;
-  font-size: 13px;
-}
-
-.username, .subs{
-  margin: 0;
-}
-
-.aboutme {
-  margin: 30px;
-  display: flex;
-  color: white;
-  height: 730px;
-}
-
-.me{
-  background-color: black;
-  flex: 1 0 auto;
-  display: flex;
-  flex-direction: column;
-  padding-top: 30px;
-  width: 350px;
-  
-}
-
-.about{
-  padding: 40PX;
-  background-color: #2C3A32;
-  display: flex;
-  flex-direction: column;
-  width: 950px;
-}
-
-.about .title{
-  margin: 0;
-}
-
-.experience{
-  padding-left: 30px;
-  padding-right: 30px;
-  padding-top: 10px;
-  background-color: #004D40;
-}
-
-.curso_box{
-  background-color: #DADADA;
-  color: black;
-  padding: 20px;
-  padding-top: 10px;
-  text-align: center;   
-}
-
-.curso_row{
-  display: flex;
-  flex-direction: row;
-   
-}
-
-h3{
-  margin-block-start: 0;
-  margin-block-end: 0;
-  font-weight: lighter;
-  font-size: 25px;
-}
-
-.experience ul{
-  margin-top: 0.5em;
-}
-
-.curso p{
-  margin: 0;
-}
-
-.curso h4{
-  display: inline;
-  margin-block-start: 0;
-  margin-block-end: 0;
-  font-size: 15px;
-}
-
-hr{
-  margin: 0;
-}
-
-.curso{
-  background-color: white;
-  border-color: black;
-  border-radius: 10%;
-  width: 240px; 
-  height: 120px;
-  margin-right: 20px;
-  margin-top: 15px;
-  text-align: left;
-  display: flex;
-  flex-direction: column;
-  font-size: 13px;
-  padding: 5px;
-}
-
-.variable{
-  font-weight: bold;
-  margin-bottom: 3px;  
-}
-
-.dato{
-  margin-bottom: 6px;
-  margin-left: 17px;
-}
-
-.comments h2{
-  text-align: center;
-  font-size: 30px;
-  font-weight: lighter;
-}
-
-.comentario_box {
-  background-color: white;
-  width: 290px;
-  height: 230px;
-  margin-bottom: 25px;
-  padding: 15px;
-  border-radius: 10%;
-  border-color: black;
-}
-
-.user_comment, .head_curso{
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-}
-
-.comentarios_box {
   align-self: center;
-  display: grid;
-  grid-template-columns: repeat(4,25%);
-  margin: 70px;
-  margin-top: 30px;
+  text-align: center;
+  font-size: 13px;
 }
 
-.comments {
-  margin: 30px;
+.profile-body {
+  margin-top: 50px;
 }
 
-.comentario_box img {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+.profile-info {
+  font-weight: 500;
+  margin: 5px 0px;
 }
 
-.curso-rating {
-  font-size: 12px;
+.profile-data {
+  margin-left: 20px;
 }
 
-.comentario{
-  background-color: #DADADA;
-  height: 120px;
-  padding: 15px;
+.profile-about {
+    padding: 40px;
+    background-color: #2C3A32;
+    display: flex;
+    flex-direction: column;
+    flex: 2 1 auto;
 }
 
-.asunto, .usuario{
+.profile-about-header {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-about-header > h2 {
+  margin: 0;
   font-weight: 500;
 }
 
-.usuario{
-  margin-left: 15px;
+.profile-about-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+
+.experience {
+  padding: 20px 30px;
+  background-color: #004D40;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-about-body  h3 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin: 0 0 .5em;
+}
+
+.experience > ul {
+  margin-left: 1.5em;
+}
+
+.curso-box {
+  background-color: #DADADA;
+  color: black;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 1em;
+}
+
+.comments {
+  margin: 1em 0;
+  background-color: white;
+}
+
+.comentario{
+    flex: 0 0 20em;
+    margin: .5em 10px;
 }
 
 /*-----------------------------------------------------------------------------------------------------*/
