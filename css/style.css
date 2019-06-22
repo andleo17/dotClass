@@ -1420,3 +1420,65 @@ hr {
 }
 
 /*----------------------------------------------------------------------------------------------*/
+/*-------------------------------------------REPRODUCTOR----------------------------------------*/
+.video_box{
+  display: grid;
+  grid-template-columns: 20% 60% 20%;
+  height: 100%;
+}
+
+.curso_content, .live_chat {
+  background-color: #2C3A32;
+}
+
+.video {
+  padding: 15px;
+}
+
+.curso_content {
+  padding: 0 15px 15px 15px;
+}
+
+.curso_content h2{
+  color: white;
+  text-align: center;
+  font-weight: lighter;
+}
+
+.section_box{
+  background-color: white;
+  border-radius: 15px;
+  margin-bottom: 15px;
+}
+
+.section_body {
+  text-align: center;
+}
+
+.section_head{
+  padding-left: 15px;
+}
+
+.section {
+  height: 50px;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+}
+
+.user img {
+  height: 50px;
+  border-radius: 50%;
+}
+
+.user p{
+  font-size: 20px;
+  font-weight: lighter;
+}
+
+.video_title h1{
+  font-weight: lighter;
+}
+/*----------------------------------------------------------------------------------------------*/
