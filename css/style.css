@@ -1432,17 +1432,22 @@ hr {
 }
 
 .video {
-  padding: 15px;
+  padding: 5px 30px;
 }
 
 .curso_content {
-  padding: 0 15px 15px 15px;
+  padding: 5px 15px 15px 15px;
 }
 
 .curso_content h2{
   color: white;
   text-align: center;
   font-weight: lighter;
+  margin-block-start: 0;
+}
+
+.curso_content a{
+  margin-left: 260px;
 }
 
 .section_box{
@@ -1457,10 +1462,12 @@ hr {
 
 .section_head{
   padding-left: 15px;
+  background-color: #004D40;
+  color: white;
 }
 
 .section {
-  height: 50px;
+  height: 55px;
 }
 
 .user {
@@ -1474,11 +1481,17 @@ hr {
 }
 
 .user p{
-  font-size: 20px;
-  font-weight: lighter;
+  font-size: 23px;
+  /* font-weight: lighter; */
+  margin-left: 10px;
 }
 
 .video_title h1{
-  font-weight: lighter;
+  font-weight: 500;
+  margin-block-start: 0;
+}
+
+.video h2{
+  font-weight: 500;
 }
 /*----------------------------------------------------------------------------------------------*/
