@@ -431,6 +431,7 @@ footer i {
 .titulo-curso {
     font-size: 27px;
     font-weight: 500;
+    color: black;
 }
 
 .docente-foto {
@@ -1493,5 +1494,17 @@ hr {
 
 .video h2{
   font-weight: 500;
+}
+
+.chat_comment {
+  background-color: white;
+  height: 35px;
+  margin-top: 250%;
+  display: flex;
+  align-items: center;
+}
+
+.chat_comment label{
+  margin-left: 15px;
 }
 /*----------------------------------------------------------------------------------------------*/
