@@ -186,7 +186,6 @@ a {
   margin: 20px 120px;
   display: grid;
   grid-template-columns: repeat(4,25%);
-  /* grid-template-rows: repeat(2,50%); */
   height: 100%;
   width: auto;
   align-content: center;
