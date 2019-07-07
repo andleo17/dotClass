@@ -1145,10 +1145,12 @@ footer i {
   color: #717171;
 }
 
-.curso-seccion > span {
+.curso-seccion-titulo {
   font-size: 18px;
   font-weight: 500;
   margin-bottom: 15px;
+  display: flex;
+  align-items: center;
 }
 
 .clases {
@@ -1563,6 +1565,203 @@ hr {
 }
 
 /*----------------------------------------------------------------------------------------*/
+
+/*---------------------------AGREGAR-APORTE--------------------------------*/
+
+.formulario {
+  margin: 25px 50px;
+  display: flex;
+  flex-direction: column;
+}
+
+.formulario label {
+  font-size: 18px;
+}
+
+#txtTitulo {
+  border-radius: 25px;
+  border: none;
+  height: 25px;
+  margin: 15px;
+  padding: 5px 20px;
+}
+
+#txtContenido {
+  margin: 15px;
+  border: none;
+  border-radius: 25px;
+  padding: 15px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+#btnGuardar {
+  width: fit-content;
+  align-self: center;
+  padding: 10px 15px;
+  border: none;
+  background-color: #0A390A;
+  color: white;
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/*----------------------------------------------------------------------------*/
+
+/*-----------------------------AGREGAR-CURSO-----------------------------------*/
+
+.informacion-curso {
+  margin: 50px 20%;
+  background-color: #b1b1b1;
+  border-radius: 25px;
+  padding: 25px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.icono-curso {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 0 1 auto;
+}
+
+.fa-image {
+  border: 1px solid #363636;
+  border-radius: 50%;
+  padding: 50px;
+  font-size: 50px;
+  color: #363636;
+}
+
+.icono-curso a {
+  color: #363636;
+  margin-top: 5px;
+}
+
+.curso-titulo {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  margin: 15px 20px;
+}
+
+#txtTituloCurso {
+  height: fit-content;
+  border-radius: 25px;
+  border: 1px solid #363636;
+  padding: 10px 20px;
+  font-size: 15px;
+  margin-bottom: 20px;
+  flex: 0 1 auto;
+}
+
+#txtDescripcionCurso {
+  border-radius: 25px;
+  border: 1px solid #363636;
+  padding: 10px 20px;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 15px;
+  resize: none;
+  flex: 1 1 auto;
+}
+
+.precursos {
+  margin: 50px 20%;
+  background-color: #cacaca;
+  border-radius: 25px;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.lista-pre {
+  display: flex;
+  margin-top: 25px;
+}
+
+#agregar-pre {
+  border: 2px dashed gray;
+  height: 130px;
+  width: 17em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  font-size: 14px;
+  padding: 0px 10px;
+}
+
+#agregar-pre span {
+  margin-left: 10px;
+}
+
+.contenido-curso {
+  margin: 50px 20%;
+  background-color: #e2e2e2;
+  border-radius: 25px;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+.lista-contenido {
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+}
+
+#agregar-seccion {
+  border: 2px dashed gray;
+  height: 150px;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+#agregar-seccion span {
+  margin-left: 10px;
+}
+
+.editar {
+  font-size: 14px;
+  margin-left: 10px;
+  color: gray;
+}
+
+#agregar-clase {
+  border: 2px dashed gray;
+  height: 150px;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+#agregar-clase span {
+  margin-left: 10px;
+}
+
+.boton-container {
+  margin: 25px 20%;
+  display: flex;
+  justify-content: center;
+}
+
+.guardar-cambios {
+  background-color: white;
+  color: black;
+  border-radius: 25px;
+  border: 1px solid gray;
+  padding: 10px 20px;
+}
+
+/*------------------------------------------------------------------------------*/
 
 /*---------------------------------------NOTIFICACIONES------------------------------------*/
 
