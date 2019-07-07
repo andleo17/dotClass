@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
         integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-    <title>Agregar pregunta</title>
+    <title>Agregar curso</title>
 </head>
 
 <body>
@@ -19,9 +19,9 @@
                 <span class="class">Class</span>
             </a>
             <ul>
-                <li><a href="html/explorar.html">EXPLORAR</a></li>
-                <li><a href="html/blog.html">BLOG</a></li>
-                <li><a href="html/contacto.html">CONTÁCTANOS</a></li>
+                <li><a href="explorar.html">EXPLORAR</a></li>
+                <li><a href="blog.html">BLOG</a></li>
+                <li><a href="contacto.html">CONTÁCTANOS</a></li>
             </ul>
         </div>
         <div class="nav-botones">
@@ -30,14 +30,50 @@
         </div>
     </nav>
     <div class="container">
-        <h1>Realiza una pregunta</h1>
-        <div class="pregunta-curso">
-            <img src="https://static.platzi.com/media/learningpath/badges/Badge-desarrollo-java.png" alt="logo">
-            <h1>Java avanzado</h1>
+        <div class="informacion-curso">
+            <div class="icono-curso">
+                <i class="far fa-image"></i>
+                <a href="">Agregar ícono</a>
+            </div>
+            <div class="curso-titulo">
+                <input type="text" name="txtTituloCurso" id="txtTituloCurso" placeholder="Título del curso">
+                <textarea name="txtDescripcionCurso" id="txtDescripcionCurso"
+                    placeholder="Descripción del curso"></textarea>
+            </div>
         </div>
-        <form action="">
-            
-        </form>
+        <div class="precursos">
+            <span>Plan de estudios:</span>
+            <div class="lista-pre">
+                <a href="" id="agregar-pre">
+                    <i class="fas fa-plus"></i>
+                    <span>Agregar curso prerequisito</span>
+                </a>
+            </div>
+        </div>
+        <div class="contenido-curso">
+            <span>Contenido:</span>
+            <div class="lista-contenido">
+                <div class="curso-seccion">
+                    <div class="curso-seccion-titulo">
+                        <span>Título del curso</span>
+                        <a href="" class="editar"><i class="fas fa-pen"></i></a>
+                    </div>
+                    <div class="clases">
+                        <a href="" id="agregar-clase">
+                            <i class="fas fa-plus"></i>
+                            <span>Agregar clase</span>
+                        </a>
+                    </div>
+                </div>
+                <a href="" id="agregar-seccion">
+                    <i class="fas fa-plus"></i>
+                    <span>Agregar sección</span>
+                </a>
+            </div>
+        </div>
+        <div class="boton-container">
+            <a href="" class="guardar-cambios">Guardar cambios</a>
+        </div>
     </div>
     <footer>
         <a href="index.html" class="logo">
@@ -47,9 +83,9 @@
         <div class="footer-datos">
             <div class="footer-informacion">
                 <ul>
-                    <li><a href="html/about.html">Acerca de nosotros</a></li>
-                    <li><a href="html/contacto.html">Contacto</a></li>
-                    <li><a href="html/terminos-condiciones.html">Términos y Condiciones</a></li>
+                    <li><a href="about.html">Acerca de nosotros</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                    <li><a href="terminos-condiciones.html">Términos y Condiciones</a></li>
                 </ul>
             </div>
             <div class="footer-informacion">
