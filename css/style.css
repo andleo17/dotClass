@@ -694,11 +694,20 @@ margin: 15px 0;
     color: black;
     font-weight: 500;
 }
+
+.presentacion .title {
+  animation-delay: .3s;
+}
   
 .info-contacto {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
+    animation-delay: .8s;
+}
+
+.central-mssg {
+  animation-delay: .5s;
 }
 
 .information-box{
