@@ -1677,7 +1677,7 @@ hr {
 
 .aboutus {
   background-color: black;
-  height: auto;
+  /* height: auto; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1685,21 +1685,36 @@ hr {
   padding: 0 50px;
 }
 
+.aboutus h2 {
+  color: #0AB83E;
+  font-size: 38px;
+}
+
 .reloj, .tierra {
   display: flex;
   flex-direction: row;
   margin: 0 200px;
-  
+  align-items: center;
 }
+
+.reloj span, .tierra span {
+  color: #00FB86;
+}
+
+.reloj p, .tierra p {
+  font-size: 25px;
+  margin: 0 0 0 50px;
+}
+
 
 .clock {
   border-radius: 50%;
   background: white url('https://cssanimation.rocks/images/posts/clocks/ios_clock.svg') no-repeat center;
   background-size: 88%;
-  height: 15px;
-  padding-bottom: 200px;
+  /* height: 10px; */
+  padding-bottom: 190px;
   position: relative;
-  width: 250px;
+  width: 300px;
 }
 
 .clock.simple:after {
@@ -1787,7 +1802,7 @@ hr {
 
 .mapa{
   position: relative;
-	width:200px;
+	width:290px;
 	height: 200px;
 	background: url(https://github.com/Jeg72/Tierra-Girando/blob/master/img/mapa.png?raw=true);
 	background-size: cover;
@@ -1815,10 +1830,11 @@ hr {
 .descripcion {
   text-align: center;
   font-size: 1.3em;
+  margin: 0 0 30px 0;
 }
 
 .descripcion span {
-  color: #0AB83E;
+  color: #00FB86;
 }
 
 .aprendes h2 {
@@ -1848,19 +1864,22 @@ hr {
 .cursos .card {
   color: black;
   padding: 20px;
-  
+  margin: 50px;
 }
 
 .cursos .card-body{
   height: 60px;
   font-size: 15px;
+  width: 350px;
+  
 }
 
 .cursos {
   display: flex;
   flex-direction: row;
-  
+    
 }
+
 
 
 /*----------------------------------------------------------------------------------------------*/
