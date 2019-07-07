@@ -77,7 +77,7 @@ h1 {
     text-align: center;
 }
 
-.container {
+.container_blog {
     margin: 20px 120px;
     display: grid;
     grid-template-columns: 70% 30%;
