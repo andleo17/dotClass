@@ -303,6 +303,10 @@ footer i {
   font-size: 13px;
 }
 
+.mini-card-header span {
+  flex: 1 1 auto;
+}
+
 .mini-card-header img {
   width: 50px;
   height: 50px;
@@ -1063,12 +1067,16 @@ margin: 15px 0;
   color: #717171;
 }
 
-.curso-seccion-titulo {
+.curso-seccion-header {
   font-size: 18px;
   font-weight: 500;
   margin-bottom: 15px;
   display: flex;
   align-items: center;
+}
+
+.curso-seccion-titulo {
+  flex: 1 1 auto;
 }
 
 .clases {
@@ -1553,9 +1561,14 @@ hr {
   color: #363636;
 }
 
-.icono-curso a {
+input[type="file"] {
+  display: none;
+}
+
+.icono-curso label {
   color: #363636;
-  margin-top: 5px;
+  margin-top: 10px;
+  cursor: pointer;
 }
 
 .curso-titulo {
@@ -1570,9 +1583,11 @@ hr {
   border-radius: 25px;
   border: 1px solid #363636;
   padding: 10px 20px;
-  font-size: 15px;
+  font-size: 18px;
+  font-weight: 500;
   margin-bottom: 20px;
   flex: 0 1 auto;
+  font-family: 'Segoe UI', sans-serif;
 }
 
 #txtDescripcionCurso {
@@ -1595,21 +1610,23 @@ hr {
   justify-content: center;
 }
 
-.lista-pre {
-  display: flex;
-  margin-top: 25px;
+.fa-times {
+  align-self: flex-start;
+  cursor: pointer;
 }
 
 #agregar-pre {
   border: 2px dashed gray;
+  border-radius: 25px;
   height: 130px;
-  width: 17em;
+  width: 210px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: black;
   font-size: 14px;
   padding: 0px 10px;
+  margin-top: 1em;
 }
 
 #agregar-pre span {
@@ -1645,7 +1662,7 @@ hr {
   margin-left: 10px;
 }
 
-.editar {
+.fa-pen {
   font-size: 14px;
   margin-left: 10px;
   color: gray;
@@ -1653,12 +1670,11 @@ hr {
 
 #agregar-clase {
   border: 2px dashed gray;
-  height: 150px;
+  height: 143px;
   color: black;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 10px;
 }
 
 #agregar-clase span {
