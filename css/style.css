@@ -123,7 +123,7 @@ footer i {
 }
 
 .container {
-    flex: 1 0 auto;
+  flex: 1 0 auto;
 }
 
 .card-list {
@@ -1672,3 +1672,195 @@ hr {
 }
 
 /*------------------------------------------------------------------------------------*/
+
+/*-------------------------------------EXAMEN-----------------------------------------*/
+
+.aboutus {
+  background-color: black;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  padding: 0 50px;
+}
+
+.reloj, .tierra {
+  display: flex;
+  flex-direction: row;
+  margin: 0 200px;
+  
+}
+
+.clock {
+  border-radius: 50%;
+  background: white url('https://cssanimation.rocks/images/posts/clocks/ios_clock.svg') no-repeat center;
+  background-size: 88%;
+  height: 15px;
+  padding-bottom: 200px;
+  position: relative;
+  width: 250px;
+}
+
+.clock.simple:after {
+  background:black;
+  border-radius: 50%;
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 5%;
+  height: 5%;
+  z-index: 10;
+}
+
+.minutes-container, .hours-container, .seconds-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.hours {
+  background: #000;
+  height: 20%;
+  left: 48.75%;
+  position: absolute;
+  top: 30%;
+  transform-origin: 50% 100%;
+  width: 2.5%;
+}
+
+.minutes {
+  background: #000;
+  height: 40%;
+  left: 49%;
+  position: absolute;
+  top: 10%;
+  transform-origin: 50% 100%;
+  width: 2%;
+}
+
+.seconds {
+  background: #000;
+  height: 45%;
+  left: 49.5%;
+  position: absolute;
+  top: 14%;
+  transform-origin: 50% 80%;
+  width: 1%;
+  z-index: 8;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
+
+.hours-container {
+  animation: rotate 43200s infinite linear;
+}
+
+.minutes-container {
+  animation: rotate 3600s infinite linear;
+}
+
+.seconds-container {
+  animation: rotate 60s infinite linear;
+}
+
+.minutes-container {
+  animation: rotate 3600s infinite steps(60);
+}
+
+.seconds-container {
+  animation: rotate 60s infinite steps(60);
+}
+
+
+.tierra{
+  margin-top: 50px;
+}
+
+.mapa{
+  position: relative;
+	width:200px;
+	height: 200px;
+	background: url(https://github.com/Jeg72/Tierra-Girando/blob/master/img/mapa.png?raw=true);
+	background-size: cover;
+	border-radius: 50%;
+	box-shadow: -40px -30px 0 0 rgba(0,0,0,.15) inset;
+  animation:tierra-girando 5s infinite linear;
+  -moz-animation:tierra-girando 5s infinite linear;
+
+
+}
+
+@keyframes tierra-girando
+{
+  
+	from{
+       background-position: left center;
+	}
+
+	to { 
+		background-position: -396px center;
+
+	}
+}
+
+.descripcion {
+  text-align: center;
+  font-size: 1.3em;
+}
+
+.descripcion span {
+  color: #0AB83E;
+}
+
+.aprendes h2 {
+  text-align: center;
+}
+
+.historias {
+  display: flex;
+  flex-direction: row;
+}
+
+.historias p{
+  font-size: 15px;
+  font-style: normal;
+}
+
+.historias .card-body{
+  height: 110px;
+}
+
+.historias .card {
+  margin: 10px;
+  padding: 20px;
+  
+}
+
+.cursos .card {
+  color: black;
+  padding: 20px;
+  
+}
+
+.cursos .card-body{
+  height: 60px;
+  font-size: 15px;
+}
+
+.cursos {
+  display: flex;
+  flex-direction: row;
+  
+}
+
+
+/*----------------------------------------------------------------------------------------------*/
