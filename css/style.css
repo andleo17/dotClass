@@ -1748,8 +1748,14 @@ input[type="file"] {
 
 .card-button {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
   margin-top: 25px;
+}
+
+.card-button span {
+  font-size: 18px;
+  font-weight: bold;
 }
 
 .btnAgregarCarrito {
