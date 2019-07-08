@@ -11,7 +11,7 @@ html, body {
 
 nav {
     background-color: black;
-    display: flex;
+    display: flex !important;
     align-items: center;
     justify-content: space-between;
     flex: 0 0 70px;
@@ -48,18 +48,18 @@ nav a {
 .nav-botones {
     margin-right: 30px;
     display: flex;
-    justify-content: space-between;
-    width: 40px;
+    align-items: center;
 }
 
 .nav-botones a {
     font-size: 14px;
+    margin: 0px 10px;
 }
 
 ul {
     list-style: none;
     padding: 0px;
-    margin: 0px;
+    margin: 0px !important;
 }
 
 nav ul {
@@ -70,7 +70,11 @@ nav ul {
   
 a {
     text-decoration: none;
-    color: white;
+    color: white !important;
+}
+
+a:hover {
+  text-decoration: none !important;
 }
 
 footer {
@@ -78,7 +82,8 @@ footer {
     padding: 30px 40px 0px;
     color: white;
     font-size: 13px;
-    display: flex;
+    display: flex !important;
+    box-sizing: initial !important;
     flex: 0 0 150px;
     flex-wrap: wrap;
 }
@@ -1760,8 +1765,26 @@ input[type="file"] {
 
 /*--------------------------CATEGORIA-------------------------------*/
 
+.carrito-icono {
+  display: flex;
+  align-items: center;
+  border: 2px solid white;
+  border-radius: 10px;
+}
+
+.fa-shopping-cart {
+  padding: 0px 10px;
+}
+
+.carrito-icono span {
+  background-color: white;
+  color: black;
+  padding: 5px 15px;
+  border-radius: 0px 5px 5px 0px;
+}
+
 .categoria-container {
-  background-color: #01140B;
+  background-color: #042717;
   color: white;
   padding: 20px 20%;
   display: flex;
@@ -1811,6 +1834,7 @@ input[type="file"] {
   border: 1px solid gray;
   border-radius: 25px;
   padding: 10px 20px;
+  cursor: pointer;
 }
 
 /*------------------------------------------------------------------*/
