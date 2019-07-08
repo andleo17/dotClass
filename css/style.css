@@ -177,6 +177,10 @@ footer i {
     flex-direction: column;
 }
 
+.footer-datos a {
+  color: white;
+}
+
 .card-footer b {
     margin-right: 10px;
 }
