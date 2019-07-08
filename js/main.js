@@ -36,4 +36,22 @@ function listarCursos() {
     });
 }
 
+// barra desplegable
+function mostrar() {
+    document.getElementById("curso_content").style.display = "flex";
+    document.getElementById("video_box").style.gridTemplateColumns = "20% 60% 20%";
+    document.getElementById("mostrar_contenido").style.display = "none";
+    document.getElementById("barra_mostrar").style.display = "none";
+    document.getElementById("ocultar_contenido").style.display = "inline";
+    document.getElementById("barra_ocultar").style.display = "inline";
+}
+
+function ocultar() {
+    document.getElementById("video_box").style.gridTemplateColumns = "70% 30% ";
+    document.getElementById("curso_content").style.display = "none";
+    document.getElementById("mostrar_contenido").style.display = "inline";
+    document.getElementById("barra_mostrar").style.display = "inline";
+    document.getElementById("ocultar_contenido").style.display = "none";
+    document.getElementById("barra_ocultar").style.display = "none";
+}
 

@@ -1401,9 +1401,27 @@ hr {
 /*----------------------------------------------------------------------------------------------*/
 /*-------------------------------------------REPRODUCTOR----------------------------------------*/
 .video_box{
+  width: 100%;
   display: grid;
   grid-template-columns: 20% 60% 20%;
   /* height: 50%; */
+}
+nav {
+  width: 100%;
+}
+#barra_mostrar, #mostrar_contenido {
+  display: none;
+}
+
+
+.video i, .video label{
+  color: #0AB83E;
+}
+
+.video iframe {
+  width: 100%;
+  height:443px;
+  border: 0;
 }
 
 .curso_content, .live_chat {
@@ -1415,7 +1433,16 @@ hr {
 }
 
 .curso_content {
-  padding: 5px 15px 15px 15px;
+  padding: 20px 15px 15px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.curso_content > a {
+  position: absolute;
+  right: 15px;
 }
 
 .curso_content h2{
@@ -1425,28 +1452,23 @@ hr {
   margin-block-start: 0;
 }
 
-.curso_content a{
-  margin-left: 260px;
-}
 
 .section_box{
   background-color: white;
   border-radius: 15px;
   margin-bottom: 15px;
+  width: 100%;
 }
 
 .section_body {
   text-align: center;
+  height: 30px;
 }
 
 .section_head{
-  padding-left: 15px;
+  padding:5px 15px;
   background-color: #004D40;
   color: white;
-}
-
-.section {
-  height: 55px;
 }
 
 .user {
@@ -1476,23 +1498,37 @@ hr {
 
 .chat_comment {
   background-color: white;
-  height: 45px;
-  margin-top: 246.5%;
+  height: auto;
+  width: 93%;
+  position: absolute;
+  bottom: 0;
+  padding: 5px 10px;
   display: flex;
-  align-items: center;
+  flex-direction: row;
 }
 
 .chat_comment input{
-  margin-left: 15px;
-  height: 39px;
   border: none;
   font-family: 'Segoe UI', sans-serif;
   font-size: 16px;
+  /* width: 80%; */
+  
+}
+
+.chat_head .live{
+  position: absolute;
+  left: 0;
+}
+
+.live_chat{
+  position: relative;
+  width: 100%;
 }
 
 .fa-arrow-up{
   color: #00FB86;
-  margin-left: 80px;
+  position: absolute;
+  right: 15px;
 }
 /*----------------------------------------------------------------------------------------------*/
 
@@ -2100,39 +2136,45 @@ input[type="file"] {
   padding: 20px;
 }
 
-@media (min-width: 1361px) and (max-width: 1770px) {
-  .clock {padding-bottom: 190px;}
-  .tierra {height: 50px; margin-top: 120px; margin-bottom: 80px;}
-}
-
-@media (min-width: 1225px) and (max-width: 1360px) {
-  .clock { padding-bottom: 140px;}
-  .blog_box{ margin: 0 80px; }
-}
-
-@media (min-width: 998px) and (max-width: 1224px) {
-  .clock { padding-bottom: 120px;}
-  .blog_box{ margin: 0 60px; }
-  .container_blog { margin: 20px 30px;}
-}
-
-
-@media (min-width: 900px) and (max-width: 997px) {
-  .clock { padding-bottom: 90px;}
-  .card { flex: 0 1 200px;}
-  .historias, .cursos {  flex-direction: column;}
-  .blog_box{ margin: 0 20px; }
-  .container_blog { display: flex; flex-direction: column;}
-  .container_blog aside { margin: 50px 0;  }
-}
-@media  (max-width: 899px) {
-  
-  .historias, .cursos {  flex-direction: column;}
-  .card { flex: 0 1 200px;}
-  .clock { padding-bottom: 90px;}
-  .blog_box{ display: flex; flex-direction: column; }
-  .container_blog { display: flex; flex-direction: column;}
-  .wrapper > img {  width: 100%;   }
-  .container_blog aside { margin: 50px 0;  }
-}
 /*----------------------------------------------------------------------------------------------*/
+/*---------------------------------------------RESPONSIVE---------------------------------------*/
+  @media (min-width: 1361px) and (max-width: 1770px) {
+    .clock {padding-bottom: 190px;}
+    .tierra {height: 50px; margin-top: 120px; margin-bottom: 80px;}
+  }
+  
+  @media (min-width: 1225px) and (max-width: 1360px) {
+    .clock { padding-bottom: 140px;}
+    .blog_box{ margin: 0 80px; }
+  }
+  
+  @media (min-width: 998px) and (max-width: 1224px) {
+    .clock { padding-bottom: 120px;}
+    .blog_box{ margin: 0 60px; }
+    .container_blog { margin: 20px 30px;}
+  }
+  
+  @media (min-width: 900px) and (max-width: 997px) {
+    .clock { padding-bottom: 90px;}
+    .card { flex: 0 1 200px;}
+    .historias, .cursos {  flex-direction: column;}
+    .blog_box{ margin: 0 20px; }
+    .container_blog { display: flex; flex-direction: column;}
+    .container_blog aside { margin: 50px 0;  }
+    .section, .section_body {height: auto;}
+  }
+
+  @media  (max-width: 899px) {  
+    .historias, .cursos {  flex-direction: column;}
+    .card { flex: 0 1 200px;}
+    .clock { padding-bottom: 90px;}
+    .blog_box{ display: flex; flex-direction: column; }
+    .container_blog { display: flex; flex-direction: column;}
+    .wrapper > img {  width: 100%;   }
+    .container_blog aside { margin: 50px 0;  }
+    .section, .section_body {height: auto;}
+    .chat_comment { width: 85%;}
+    .chat_comment input { width: 85%; }
+  }
+
+  /*----------------------------------------------------------------------------------------------*/
