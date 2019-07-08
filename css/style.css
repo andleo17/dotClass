@@ -6,6 +6,7 @@ html, body {
     display: flex;
     flex-direction: column;
     height: 100%;
+    width: auto;
 }
 
 nav {
@@ -514,20 +515,21 @@ footer i {
 /*------------------------------------------------------BLOG------------------------------------------------------*/
 
 .blog_head img{
-  width: 270px;
-  height: 150px;
+  width: 100%;
 }
 
 .blog {
-  width: 270px;
+  display: flex;
+  flex-direction: column;
+  width: auto;
   background-color: white;
 }
 
 .blog, .blog_principal{
   font-size: 14.5px;
   margin-bottom: 30px;
-  margin: 20px;
-  height: 300px;
+  margin: 40px;
+  /* height: auto; */
 }
 
 .container h1{
@@ -573,7 +575,7 @@ footer i {
 .blog_principal{
   grid-column: 3/5;
   position: relative;
-  width: 587px;
+  /* width: 440px ; */
 }
 
 .blog_principal h2 {
@@ -615,13 +617,15 @@ footer i {
 .blog_body p{
   margin-block-end: 2em;
 }
+.blog_body a{
+  color: #000;
+}
 
 .blog_box{
   margin: 0 120px;
   display: grid;
   grid-template-columns: repeat(4,25%);
-  height: 90%;
-  width: 100%;
+  width: auto;
   align-content: center;
 }
 
@@ -1844,7 +1848,12 @@ input[type="file"] {
 
 /*------------------------------------------------------------------------------------*/
 
-/*-------------------------------------EXAMEN-----------------------------------------*/
+/*-------------------------------------ABOUT US-----------------------------------------*/
+
+.descripcion iframe {
+  width: 560px;
+  height: 315px;
+}
 
 .aboutus {
   background-color: black;
@@ -1854,6 +1863,7 @@ input[type="file"] {
   align-items: center;
   color: white;
   padding: 0 50px;
+  width: auto;
 }
 
 .aboutus h2 {
@@ -1999,7 +2009,7 @@ input[type="file"] {
   text-align: center;
 }
 
-.historias {
+.historias, .cursos {
   display: flex;
   flex-direction: row;
 }
@@ -2010,34 +2020,47 @@ input[type="file"] {
 }
 
 .historias .card-body{
-  height: 110px;
+  height: auto;
 }
 
 .historias .card {
   margin: 10px;
   padding: 20px;
-  
 }
 
-.cursos .card {
-  color: black;
+
+.cursos .mini-card {
+  margin: 10px;
   padding: 20px;
-  margin: 50px;
 }
 
-.cursos .card-body{
-  height: 60px;
-  font-size: 15px;
-  width: 350px;
+@media (min-width: 1361px) and (max-width: 1770px) {
+  .clock {padding-bottom: 190px;}
+  .tierra {height: 50px; margin-top: 120px; margin-bottom: 80px;}
+}
+
+@media (min-width: 1225px) and (max-width: 1360px) {
+  .clock { padding-bottom: 140px;}
+  .blog_box{ margin: 0 80px; }
+}
+
+@media (min-width: 998px) and (max-width: 1224px) {
+  .clock { padding-bottom: 120px;}
+  .blog_box{ margin: 0 60px; }
+}
+
+
+@media (min-width: 900px) and (max-width: 997px) {
+  .clock { padding-bottom: 90px;}
+  .card { flex: 0 1 200px;}
+  .historias, .cursos {  flex-direction: column;}
+  .blog_box{ margin: 0 20px; }
+}
+@media  (max-width: 899px) {
   
+  .historias, .cursos {  flex-direction: column;}
+  .card { flex: 0 1 200px;}
+  .clock { padding-bottom: 90px;}
+  .blog_box{ display: flex; flex-direction: column; }
 }
-
-.cursos {
-  display: flex;
-  flex-direction: row;
-    
-}
-
-
-
 /*----------------------------------------------------------------------------------------------*/
