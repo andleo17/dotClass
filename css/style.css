@@ -1411,8 +1411,12 @@ nav {
 }
 #barra_mostrar, #mostrar_contenido {
   display: none;
+  cursor: pointer;
 }
 
+#ocultar_contenido {
+  cursor: pointer;
+}
 
 .video i, .video label{
   color: #0AB83E;
@@ -1775,9 +1779,9 @@ input[type="file"] {
   font-size: 18px;
 }
 
-.categoria-icono {
-  width: 200px;
-  height: 200px;
+.categoria-icono img{
+  width: 300px;
+  height: 300px;
 }
 
 .floro {
