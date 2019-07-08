@@ -29,46 +29,19 @@
         <div class="nav-botones">
             <a href="carrito.html" class="carrito-icono">
                 <i class="fas fa-shopping-cart"></i>
-                <span>0</span>
+                <span id="cantidad-carrito">0</span>
             </a>
             <a href="notificaciones.html"><i class="fas fa-bell"></i></a>
             <a href="iniciar_sesion.html"><i class="fas fa-user"></i></a>
         </div>
     </nav>
     <div class="container">
-            <div class="container">
-                <h2>Cursos mas populares</h2>
-                <div class="row">
-                    <main id="items" class="col-sm-8 row"></main>
-                    <!-- Carrito -->
-                    <aside class="col-sm-4">
-                        <h2>Carrito de compras</h2>
-                        <!-- Elementos del carrito -->
-                        <ul id="carrito" class="list-group"></ul>  
-                        <hr>
-                        <!-- Precio total -->
-                        <p class="text-right">Total: <span id="total"></span></p>
-                    </aside>
-                </div>
-                <div class="form-group mt-2">
-                    <a href="" class="btn btn-primary" id="btnReiniciar"  > Nueva compra</a>
-                </div>
-                <hr>
-                <div class="foot">
-                    <div class="form-group" >
-                        <h2>Enviar su compra</h2>
-                        <label for="txtnombre">Nombres y apellidos:</label>
-                        <input type="text" id="txtnombre" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="txtemail">Correo:</label>
-                        <input type="email" id="txtemail" class="form-control">
-                    </div>
-                    <div class="form-group mt-2">
-                    <a href="" class="btn btn-primary" id="btnAvisar" > Enviar compra</a>
-                    </div>
-                </div>            
-            </div>
+        <h1 class="mt-4 mb-4">Carrito de compras</h1>
+        <div class="carrito-container">
+            <span>No se encuentran productos</span>
+            <span>:'c</span>
+        </div>
+    </div>
     <footer>
         <a href="../index.html" class="logo">
             <span class="dot">dot</span>

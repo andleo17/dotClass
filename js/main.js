@@ -22,6 +22,9 @@ var carrito = [];
 
 $(document).ready(function () {
     listarCursos();
+    leerCarrito();
+    mostrarCarrito();
+    $('#cantidad-carrito').text(carrito.length);
 });
 
 function listarCursos() {
@@ -38,7 +41,7 @@ function listarCursos() {
         curso +=        '<span><b>Duración:</b>25 h</span>';
         curso +=        '<div class="card-rating"><span>1.2K subscriptores</span><span class="clasificacion"><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i></span></div>';
         curso +=    '</div>';
-        curso +=    '<div class="card-button"><span>S/ ' + c[2] + '</span><a class="btnAgregarCarrito">Añadir a carrito</a></div></div>';
+        curso +=    '<div class="card-button"><span>S/ ' + c[2] + '</span><a class="btnAgregarCarrito" onclick="agregarACarrito(' + c[0] + ')">Añadir a carrito</a></div></div>';
         $(".card-list").append(curso);
     });
 }
@@ -62,207 +65,46 @@ function ocultar() {
     document.getElementById("barra_ocultar").style.display = "none";
 }
 
-//carrito a ver si sale
-window.onload = function () {
-    // Variables
-    let baseDeDatos = [
-        {
-            id: 1,
-            nombre: 'Frontend',
-            foto: 'https://drupal.ed.team/sites/default/files/imagenes-cdn-edteam/2019-03/Redes%20Enrutammiento.png',
-            precio: 150
-        },
-        {
-            id: 2,
-            nombre: 'Backend',
-            foto: 'https://drupal.ed.team/sites/default/files/styles/medium/public/imagenes-cdn-edteam/2019-01/Android%20Material%20Design.png?itok=cuUacCaR',
-            precio: 70
-        },
-        {
-            id: 3,
-            nombre: 'Dart',
-            foto: 'https://drupal.ed.team/sites/default/files/styles/medium/public/imagenes-cdn-edteam/2018-12/Dart.png?itok=Ul2YVOuq',
-            precio: 25
-        },
-        {
-            id: 4,
-            nombre: 'Flutter',
-            foto: 'https://drupal.ed.team/sites/default/files/styles/medium/public/imagenes-cdn-edteam/2018-12/Flutter.png?itok=MpF412ML',
-            precio: 30
-        },
-        {
-            id: 5,
-            nombre: 'DW en Java',
-            foto: 'https://drupal.ed.team/sites/default/files/styles/medium/public/courses/images/java-web.jpg',
-            precio: 30
-        },
-        {
-            id: 6,
-            nombre: 'React JS',
-            foto: 'https://drupal.ed.team/sites/default/files/imagenes-cdn-edteam/2019-04/React%20Rutas%20manejo%20de%20estados%20%281%29.png',
-            precio: 15
-        }
-    ]
-    
-    let $$items = document.querySelector('#items');
-    let carrito = [];
-    let total = 0;
-    let $carrito = document.querySelector('#carrito');
-    let $total = document.querySelector('#total');
-    
-    // Funciones
-    function listarItems () {
-        for (let info of baseDeDatos) {
-            // Estructura
-            let miNodo = document.createElement('div');
-            miNodo.classList.add('card', 'col-sm-4');
-            miNodo.classList.add('nod');
-            // Body
-            let miNodoCardBody = document.createElement('div');
-            miNodoCardBody.classList.add('card-body');
-            
-            //Imagen
-            let miNodoImagen = document.createElement('img');
-            miNodoImagen.classList.add('card-img');
-            miNodoImagen.setAttribute('src',info['foto']);
-            
-            // Titulo
-            let miNodoTitle = document.createElement('h5');
-            miNodoTitle.classList.add('card-title');
-            miNodoTitle.textContent = info['nombre'];
-            // Precio
-            let miNodoPrecio = document.createElement('p');
-            miNodoPrecio.classList.add('card-text');
-            miNodoPrecio.textContent = 'S/.' + info['precio'] ;
-            // Boton 
-            let miNodoBoton = document.createElement('button');
-            miNodoBoton.classList.add('btn', 'btn-outline-success');
-            miNodoBoton.textContent = 'Agregar al carrito';
-            miNodoBoton.setAttribute('marcador', info['id']);
-            miNodoBoton.addEventListener('click', agregarCarrito);
-            // Insertamos
-            miNodoCardBody.appendChild(miNodoTitle);
-            miNodoCardBody.appendChild(miNodoImagen);
-            miNodoCardBody.appendChild(miNodoPrecio);
-            miNodoCardBody.appendChild(miNodoBoton);
-            miNodo.appendChild(miNodoCardBody);
-            $$items.appendChild(miNodo);
-        }
-    }
-    
-    function agregarCarrito () {
-        // Anyadimos el Nodo a nuestro carrito
-        
-        carrito.push(this.getAttribute('marcador'));
-        //Añadimos al localStorage
-        localStorage.setItem( 'producto', JSON.stringify(carrito));
-        // Calculo el total
-        calcularTotal();
-        // Renderizamos el carrito 
-        mostrarCarrito();
+function agregarACarrito(id) {
+    carrito.push(listaCursos.filter(c => c[0] == id));
+    $('#cantidad-carrito').text(carrito.length);
+    localStorage.clear("carrito");
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+}
 
+function leerCarrito() {
+    if (JSON.parse(localStorage.getItem("carrito")) != null){
+        carrito = JSON.parse(localStorage.getItem("carrito"));
     }
+}
 
-    function mostrarCarrito () {
-        // Vaciamos todo el html
-        $carrito.textContent = '';
-        // Generamos los Nodos a partir de carrito
-        carrito=JSON.parse(localStorage.getItem('producto'));
-        carrito.forEach(function (item, indice) {
-            // Obtenemos el item que necesitamos de la variable base de datos
-            let miItem = baseDeDatos.filter(function(itemBaseDatos) {
-                return itemBaseDatos['id'] == item;
-            });
-            // Creamos el nodo del item del carrito
-            let miNodo = document.createElement('li');
-            miNodo.classList.add('list-group-item', 'text-left', 'd-flex');
-            miNodo.classList.add('nod');
-            miNodo.textContent = `${miItem[0]['nombre']} -S/.${miItem[0]['precio']}`;
-            // Boton de borrar
-            let miBoton = document.createElement('button');
-            miBoton.classList.add('btn', 'btn-outline-danger', 'ml-auto');
-            miBoton.textContent = 'Eliminar producto';
-            miBoton.setAttribute('posicion', indice);
-            miBoton.addEventListener('click', borrarItemCarrito);
-            // Mezclamos nodos
-            miNodo.appendChild(miBoton);
-            $carrito.appendChild(miNodo);
-            
-            
+function mostrarCarrito() {
+    if (carrito.length != 0) {
+        $(".carrito-container").html("");
+        tabla = '<table class="table table-hover">';
+        tabla +=    '<thead>';
+        tabla +=        '<tr>';
+        tabla +=            '<th scope="col">#</th>';
+        tabla +=            '<th scope="col">Curso</th>';
+        tabla +=            '<th scope="col">Docente</th>';
+        tabla +=            '<th scope="col">Precio</th>';
+        tabla +=            '<th scope="col">-</th>';
+        tabla +=        '</tr>';
+        tabla +=    '</thead>';
+        tabla +=    '<tbody>';
+        carrito.forEach(c => {
+            tabla +=    '<tr>';
+            tabla +=        '<th scope="row">' + (carrito.indexOf(c) + 1) + '</th>';
+            tabla +=        '<td>' + c[1] + '</td>';
+            tabla +=        '<td>' + c[5] + '</td>';
+            tabla +=        '<td>' + c[2] + '</td>';
+            tabla +=        '<td><button type="button" class="btn btn-danger" onclick="eliminarDeCarrito(' + c[0] + ')">X</button></td>';
+            tabla +=     '</tr>';
         });
-       
+        tabla +=    '</tbody>';
+        tabla += '</table>';
+        $(".carrito-container").css("font-size", "16px");
+        $(".carrito-container").css("font-weight", "400");
+        $(".carrito-container").append(tabla);
     }
-    
-    function borrarItemCarrito () {
-        // Obtenemos la posicion que hay en el boton pulsado
-        let posicion = this.getAttribute('posicion');
-        // Borramos la posicion que nos interesa
-        carrito.splice(posicion, 1);
-        //Actualizamos la informacion en el localstorage
-        localStorage.setItem( 'producto', JSON.stringify(carrito) );
-        // volvemos a renderizar
-        mostrarCarrito();
-        // Calculamos de nuevo el precio
-        calcularTotal();
-    }
-    
-    function calcularTotal () {
-        // Limpiamos precio anterior
-        total = 0;
-        // Recorremos el array del carrito
-        for (let etiqueta of carrito) {
-            // De cada elemento obtenemos su precio
-            let miItem = baseDeDatos.filter(function(itemBaseDatos) {
-                return itemBaseDatos['id'] == etiqueta;
-            });
-            total = total + miItem[0]['precio'];
-        }
-        // Formateamos el total para que solo tenga dos decimales
-        let totalDosDecimales = total.toFixed(2);
-        // Renderizamos el precio en el HTML
-        $total.textContent = totalDosDecimales;
-    
-    }
-
-    
-    
-    // Eventos
-    let btnReiniciar = document.getElementById('btnReiniciar');
-    btnReiniciar.onclick = function reiniciarCarrito(){
-        //Borramos los datos
-        carrito.splice(0);
-        //Actualizamos el storage
-        localStorage.setItem( 'producto', JSON.stringify(carrito));
-        // volvemos a renderizar
-        mostrarCarrito();
-        // Calculamos de nuevo el precio
-        calcularTotal();
-        
-    }
-
-    let btnAvisar = document.getElementById('btnAvisar');
-    btnAvisar.onclick = function mostrarAviso(){
-        //Obtenemos los datos del usuario
-        let nombre = document.getElementById('txtnombre').value;
-        let email = document.getElementById('txtemail').value;
-        //mandamos el mensaje solicitado
-        alert( 'Su compra ha sido registrada' + ' NOMBRE: '+ nombre + ' CORREO: ' + email + ' TOTAL DE LA COMPRA: ' + total.toFixed(2));
-        //reiniciar carrito
-        carrito.splice(0);
-        //Actualizamos el storage
-        localStorage.setItem( 'producto', JSON.stringify(carrito));
-        // volvemos a renderizar
-        mostrarCarrito();
-        // Calculamos de nuevo el precio
-        calcularTotal();
-    
-    } 
-    
-    // Inicio
-    listarItems();
-    if( carrito!=null )  {
-        mostrarCarrito();
-    }
-    calcularTotal ();
-    
-} 
+}
