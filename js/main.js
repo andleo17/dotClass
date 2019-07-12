@@ -66,16 +66,40 @@ function ocultar() {
 }
 
 function agregarACarrito(id) {
-    carrito.push(listaCursos.filter(c => c[0] == id));
+    carrito.push(listaCursos.find(c => c[0] == id));
     $('#cantidad-carrito').text(carrito.length);
-    localStorage.clear("carrito");
-    localStorage.setItem("carrito", JSON.stringify(carrito));
+    guardarCarrito();
+}
+
+function eliminarDeCarrito(index) {
+    carrito.splice(index, 1);
+    $('#cantidad-carrito').text(carrito.length);
+    guardarCarrito();
+    mostrarCarrito();
 }
 
 function leerCarrito() {
     if (JSON.parse(localStorage.getItem("carrito")) != null){
         carrito = JSON.parse(localStorage.getItem("carrito"));
     }
+}
+
+function guardarCarrito() {
+    localStorage.clear("carrito");
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+}
+
+function limpiarCarrito() {
+    carrito = [];
+    localStorage.clear("carrito");
+    mostrarCarrito();
+    $('#cantidad-carrito').text(carrito.length);
+}
+
+function calcularTotal() {
+    total = 0;
+    carrito.forEach(c => total += c[2]);
+    return total;
 }
 
 function mostrarCarrito() {
@@ -97,14 +121,56 @@ function mostrarCarrito() {
             tabla +=        '<th scope="row">' + (carrito.indexOf(c) + 1) + '</th>';
             tabla +=        '<td>' + c[1] + '</td>';
             tabla +=        '<td>' + c[5] + '</td>';
-            tabla +=        '<td>' + c[2] + '</td>';
-            tabla +=        '<td><button type="button" class="btn btn-danger" onclick="eliminarDeCarrito(' + c[0] + ')">X</button></td>';
+            tabla +=        '<td>S/ ' + c[2] + '</td>';
+            tabla +=        '<td><button type="button" class="btn btn-danger" onclick="eliminarDeCarrito(' + carrito.indexOf(c) + ')">X</button></td>';
             tabla +=     '</tr>';
         });
         tabla +=    '</tbody>';
+        tabla +=    '<tfoot>';
+        tabla +=        '<tr class="table-info font-weight-bold">';
+        tabla +=            '<td colspan="3" class="text-center">TOTAL</td>';
+        tabla +=            '<td>S/ ' + calcularTotal() + '</td>';
+        tabla +=        '</tr>';
+        tabla +=    '</tfoot>';
         tabla += '</table>';
         $(".carrito-container").css("font-size", "16px");
         $(".carrito-container").css("font-weight", "400");
         $(".carrito-container").append(tabla);
+        $(".boton-container").css("display", "flex");
+    } else {
+        $(".carrito-container").html("");
+        contenido = "<span>No se encuentran productos</span><span>:'c</span>";
+        $(".carrito-container").css("font-size", "30px");
+        $(".carrito-container").css("font-weight", "100");
+        $(".carrito-container").append(contenido);
+        $(".boton-container").css("display", "none");
     }
+}
+
+function mostrarDetalleCompra() {
+    $("#contenido-modal").html("");
+    c = '<table class="table table-sm mt-4">';
+    c +=    '<thead>';
+    c +=        '<tr>';
+    c +=            '<th>CURSO</th>';
+    c +=            '<th>PRECIO</th>';
+    c +=        '</tr>';
+    c +=    '</thead>';
+    c +=    '<tbody>';
+    carrito.forEach(p => {
+        c +=    '<tr>';
+        c +=        '<td>' + p[1] + '</td>';
+        c +=        '<td>S/ ' + p[2] + '</td>';
+        c +=    '</tr>';
+    });
+    c +=    '</tbody>';
+    c +=    '<tfoot class="font-weight-bold">';
+    c +=        '<tr>';
+    c +=            '<td>Total:</td>';
+    c +=            '<td>S/ ' + total + '</td>';
+    c +=        '</tr>'
+    c +=    '</tfoot>';
+    c += '</table>'
+
+    $("#contenido-modal").append(c);
 }
