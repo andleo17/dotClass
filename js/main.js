@@ -67,25 +67,15 @@ function ocultar() {
 
 function agregarACarrito(id) {
     carrito.push(listaCursos.find(c => c[0] == id));
-    mostrarCantidad();
+    $('#cantidad-carrito').text(carrito.length);
     guardarCarrito();
 }
 
 function eliminarDeCarrito(index) {
     carrito.splice(index, 1);
-    guardarCarrito();
-    mostrarCantidad();
-    mostrarCarrito();
-}
-
-function mostrarCantidad() {
     $('#cantidad-carrito').text(carrito.length);
-}
-
-function hallarPrecioTotal() {
-    precio = 0;
-    carrito.forEach(c => precio = precio + c[2]);
-    return precio;
+    guardarCarrito();
+    mostrarCarrito();
 }
 
 function leerCarrito() {
@@ -97,6 +87,19 @@ function leerCarrito() {
 function guardarCarrito() {
     localStorage.clear("carrito");
     localStorage.setItem("carrito", JSON.stringify(carrito));
+}
+
+function limpiarCarrito() {
+    carrito = [];
+    localStorage.clear("carrito");
+    mostrarCarrito();
+    $('#cantidad-carrito').text(carrito.length);
+}
+
+function calcularTotal() {
+    total = 0;
+    carrito.forEach(c => total += c[2]);
+    return total;
 }
 
 function mostrarCarrito() {
@@ -124,21 +127,50 @@ function mostrarCarrito() {
         });
         tabla +=    '</tbody>';
         tabla +=    '<tfoot>';
-        tabla +=        '<tr class="table-primary">';
-        tabla +=            '<td colspan="3" class="font-weight-bolder">TOTAL</td>';
-        tabla +=            '<td class="font-weight-bolder">S/ ' + hallarPrecioTotal() + '</td>';
+        tabla +=        '<tr class="table-info font-weight-bold">';
+        tabla +=            '<td colspan="3" class="text-center">TOTAL</td>';
+        tabla +=            '<td>S/ ' + calcularTotal() + '</td>';
         tabla +=        '</tr>';
         tabla +=    '</tfoot>';
         tabla += '</table>';
         $(".carrito-container").css("font-size", "16px");
         $(".carrito-container").css("font-weight", "400");
         $(".carrito-container").append(tabla);
+        $(".boton-container").css("display", "flex");
     } else {
         $(".carrito-container").html("");
         contenido = "<span>No se encuentran productos</span><span>:'c</span>";
         $(".carrito-container").css("font-size", "30px");
         $(".carrito-container").css("font-weight", "100");
         $(".carrito-container").append(contenido);
+        $(".boton-container").css("display", "none");
     }
 }
 
+function mostrarDetalleCompra() {
+    $("#contenido-modal").html("");
+    c = '<table class="table table-sm mt-4">';
+    c +=    '<thead>';
+    c +=        '<tr>';
+    c +=            '<th>CURSO</th>';
+    c +=            '<th>PRECIO</th>';
+    c +=        '</tr>';
+    c +=    '</thead>';
+    c +=    '<tbody>';
+    carrito.forEach(p => {
+        c +=    '<tr>';
+        c +=        '<td>' + p[1] + '</td>';
+        c +=        '<td>S/ ' + p[2] + '</td>';
+        c +=    '</tr>';
+    });
+    c +=    '</tbody>';
+    c +=    '<tfoot class="font-weight-bold">';
+    c +=        '<tr>';
+    c +=            '<td>Total:</td>';
+    c +=            '<td>S/ ' + total + '</td>';
+    c +=        '</tr>'
+    c +=    '</tfoot>';
+    c += '</table>'
+
+    $("#contenido-modal").append(c);
+}

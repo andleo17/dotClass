@@ -38,8 +38,41 @@
     <div class="container">
         <h1 class="mt-4 mb-4">Carrito de compras</h1>
         <div class="carrito-container">
-            <span>No se encuentran productos</span>
-            <span>:'c</span>
+        </div>
+        <div class="boton-container">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmarCompra"
+                onclick="mostrarDetalleCompra()">
+                Comprar
+            </button>
+            <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="confirmarCompra">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-tittle">Confirmar compra</h5>
+                        </div>
+                        <div class="modal-body" id="contenido-modal">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Volver</button>
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                data-target="#confirmacion" data-dismiss="modal">Confirmar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" tabindex="-2" role="dialog" aria-hidden="true" id="confirmacion">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <h5 class="text-center">Compra exitosa</h5>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary mx-auto" data-dismiss="modal"
+                                onclick="limpiarCarrito()">Aceptar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="boton-container">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
