@@ -66,10 +66,26 @@ function ocultar() {
 }
 
 function agregarACarrito(id) {
-    carrito.push(listaCursos.filter(c => c[0] == id));
+    carrito.push(listaCursos.find(c => c[0] == id));
+    mostrarCantidad();
+    guardarCarrito();
+}
+
+function eliminarDeCarrito(index) {
+    carrito.splice(index, 1);
+    guardarCarrito();
+    mostrarCantidad();
+    mostrarCarrito();
+}
+
+function mostrarCantidad() {
     $('#cantidad-carrito').text(carrito.length);
-    localStorage.clear("carrito");
-    localStorage.setItem("carrito", JSON.stringify(carrito));
+}
+
+function hallarPrecioTotal() {
+    precio = 0;
+    carrito.forEach(c => precio = precio + c[2]);
+    return precio;
 }
 
 function leerCarrito() {
@@ -78,16 +94,21 @@ function leerCarrito() {
     }
 }
 
+function guardarCarrito() {
+    localStorage.clear("carrito");
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+}
+
 function mostrarCarrito() {
     if (carrito.length != 0) {
         $(".carrito-container").html("");
-        tabla = '<table class="table table-hover">';
+        tabla = '<table class="table table-hover text-center">';
         tabla +=    '<thead>';
         tabla +=        '<tr>';
         tabla +=            '<th scope="col">#</th>';
-        tabla +=            '<th scope="col">Curso</th>';
-        tabla +=            '<th scope="col">Docente</th>';
-        tabla +=            '<th scope="col">Precio</th>';
+        tabla +=            '<th scope="col">CURSO</th>';
+        tabla +=            '<th scope="col">DOCENTE</th>';
+        tabla +=            '<th scope="col">PRECIO</th>';
         tabla +=            '<th scope="col">-</th>';
         tabla +=        '</tr>';
         tabla +=    '</thead>';
@@ -97,14 +118,27 @@ function mostrarCarrito() {
             tabla +=        '<th scope="row">' + (carrito.indexOf(c) + 1) + '</th>';
             tabla +=        '<td>' + c[1] + '</td>';
             tabla +=        '<td>' + c[5] + '</td>';
-            tabla +=        '<td>' + c[2] + '</td>';
-            tabla +=        '<td><button type="button" class="btn btn-danger" onclick="eliminarDeCarrito(' + c[0] + ')">X</button></td>';
+            tabla +=        '<td>S/ ' + c[2] + '</td>';
+            tabla +=        '<td><button type="button" class="btn btn-danger" onclick="eliminarDeCarrito(' + carrito.indexOf(c) + ')">X</button></td>';
             tabla +=     '</tr>';
         });
         tabla +=    '</tbody>';
+        tabla +=    '<tfoot>';
+        tabla +=        '<tr class="table-primary">';
+        tabla +=            '<td colspan="3" class="font-weight-bolder">TOTAL</td>';
+        tabla +=            '<td class="font-weight-bolder">S/ ' + hallarPrecioTotal() + '</td>';
+        tabla +=        '</tr>';
+        tabla +=    '</tfoot>';
         tabla += '</table>';
         $(".carrito-container").css("font-size", "16px");
         $(".carrito-container").css("font-weight", "400");
         $(".carrito-container").append(tabla);
+    } else {
+        $(".carrito-container").html("");
+        contenido = "<span>No se encuentran productos</span><span>:'c</span>";
+        $(".carrito-container").css("font-size", "30px");
+        $(".carrito-container").css("font-weight", "100");
+        $(".carrito-container").append(contenido);
     }
 }
+
