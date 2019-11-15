@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS `dotclass`.`pais` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(35) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `nombre_UNIQUE` (`nombre` ASC) VISIBLE)
+  UNIQUE INDEX `nombre_UNIQUE` (`nombre` ASC) )
 ENGINE = InnoDB;
 
 
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `dotclass`.`ciudad` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(35) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `nombre_UNIQUE` (`nombre` ASC) VISIBLE)
+  UNIQUE INDEX `nombre_UNIQUE` (`nombre` ASC) )
 ENGINE = InnoDB;
 
 
@@ -57,10 +57,10 @@ CREATE TABLE IF NOT EXISTS `dotclass`.`usuario` (
   `fecha_creacion` DATETIME NOT NULL DEFAULT NOW(),
   `estado` TINYINT NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `nickname_UNIQUE` (`nickname` ASC) VISIBLE,
-  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
-  INDEX `fk_usuario_pais1_idx` (`pais_id` ASC) VISIBLE,
-  INDEX `fk_usuario_ciudad1_idx` (`ciudad_id` ASC) VISIBLE,
+  UNIQUE INDEX `nickname_UNIQUE` (`nickname` ASC) ,
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC) ,
+  INDEX `fk_usuario_pais1_idx` (`pais_id` ASC) ,
+  INDEX `fk_usuario_ciudad1_idx` (`ciudad_id` ASC) ,
   CONSTRAINT `fk_usuario_pais1`
     FOREIGN KEY (`pais_id`)
     REFERENCES `dotclass`.`pais` (`id`)
@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `dotclass`.`categoria` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `nombre_UNIQUE` (`nombre` ASC) VISIBLE)
+  UNIQUE INDEX `nombre_UNIQUE` (`nombre` ASC) )
 ENGINE = InnoDB;
 
 
@@ -100,7 +100,7 @@ CREATE TABLE IF NOT EXISTS `dotclass`.`curso` (
   `fecha_creacion` DATETIME NOT NULL DEFAULT NOW(),
   `fecha_ultima_actualizacion` DATETIME NOT NULL DEFAULT NOW(),
   PRIMARY KEY (`id`),
-  INDEX `fk_curso_categoria1_idx` (`categoria_id` ASC) VISIBLE,
+  INDEX `fk_curso_categoria1_idx` (`categoria_id` ASC) ,
   CONSTRAINT `fk_curso_categoria1`
     FOREIGN KEY (`categoria_id`)
     REFERENCES `dotclass`.`categoria` (`id`)
@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS `dotclass`.`seccion` (
   `curso_id` INT NOT NULL,
   `titulo` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_seccion_curso1_idx` (`curso_id` ASC) VISIBLE,
+  INDEX `fk_seccion_curso1_idx` (`curso_id` ASC) ,
   CONSTRAINT `fk_seccion_curso1`
     FOREIGN KEY (`curso_id`)
     REFERENCES `dotclass`.`curso` (`id`)
@@ -138,7 +138,7 @@ CREATE TABLE IF NOT EXISTS `dotclass`.`clase` (
   `contenido_texto` LONGTEXT NULL,
   `fecha_subida` DATETIME NULL DEFAULT NOW(),
   PRIMARY KEY (`id`),
-  INDEX `fk_clase_seccion1_idx` (`seccion_id` ASC) VISIBLE,
+  INDEX `fk_clase_seccion1_idx` (`seccion_id` ASC) ,
   CONSTRAINT `fk_clase_seccion1`
     FOREIGN KEY (`seccion_id`)
     REFERENCES `dotclass`.`seccion` (`id`)
@@ -154,7 +154,7 @@ CREATE TABLE IF NOT EXISTS `dotclass`.`examen` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `curso_id` INT NOT NULL,
   PRIMARY KEY (`id`, `curso_id`),
-  INDEX `fk_examen_curso1_idx` (`curso_id` ASC) VISIBLE,
+  INDEX `fk_examen_curso1_idx` (`curso_id` ASC) ,
   CONSTRAINT `fk_examen_curso1`
     FOREIGN KEY (`curso_id`)
     REFERENCES `dotclass`.`curso` (`id`)
@@ -172,7 +172,7 @@ CREATE TABLE IF NOT EXISTS `dotclass`.`pregunta` (
   `numero` TINYINT NOT NULL,
   `titulo` VARCHAR(150) NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_pregunta_examen1_idx` (`examen_id` ASC) VISIBLE,
+  INDEX `fk_pregunta_examen1_idx` (`examen_id` ASC) ,
   CONSTRAINT `fk_pregunta_examen1`
     FOREIGN KEY (`examen_id`)
     REFERENCES `dotclass`.`examen` (`id`)
@@ -191,7 +191,7 @@ CREATE TABLE IF NOT EXISTS `dotclass`.`alternativa` (
   `contenido` VARCHAR(180) NOT NULL,
   `respuesta` TINYINT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_alternativa_pregunta1_idx` (`pregunta_id` ASC) VISIBLE,
+  INDEX `fk_alternativa_pregunta1_idx` (`pregunta_id` ASC) ,
   CONSTRAINT `fk_alternativa_pregunta1`
     FOREIGN KEY (`pregunta_id`)
     REFERENCES `dotclass`.`pregunta` (`id`)
@@ -221,7 +221,7 @@ CREATE TABLE IF NOT EXISTS `dotclass`.`comentario` (
   `numero_comentarios` INT NOT NULL DEFAULT 0,
   `pregunta` TINYINT NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
-  INDEX `fk_comentario_comentario1_idx` (`comentario_padre_id` ASC) VISIBLE,
+  INDEX `fk_comentario_comentario1_idx` (`comentario_padre_id` ASC) ,
   CONSTRAINT `fk_comentario_comentario1`
     FOREIGN KEY (`comentario_padre_id`)
     REFERENCES `dotclass`.`comentario` (`id`)
@@ -266,12 +266,12 @@ CREATE TABLE IF NOT EXISTS `dotclass`.`actividad_curso` (
   `comentario_id` INT NULL,
   `fecha` DATETIME NOT NULL DEFAULT NOW(),
   PRIMARY KEY (`usuario_id`, `clase_id`),
-  INDEX `fk_usuario_has_clase_clase1_idx` (`clase_id` ASC) VISIBLE,
-  INDEX `fk_usuario_has_clase_usuario1_idx` (`usuario_id` ASC) VISIBLE,
-  INDEX `fk_usuario_has_clase_visita1_idx` (`visita_id` ASC) VISIBLE,
-  INDEX `fk_usuario_has_clase_marcador1_idx` (`marcador_id` ASC) VISIBLE,
-  INDEX `fk_usuario_has_clase_aporte1_idx` (`aporte_id` ASC) VISIBLE,
-  INDEX `fk_usuario_has_clase_comentario1_idx` (`comentario_id` ASC) VISIBLE,
+  INDEX `fk_usuario_has_clase_clase1_idx` (`clase_id` ASC) ,
+  INDEX `fk_usuario_has_clase_usuario1_idx` (`usuario_id` ASC) ,
+  INDEX `fk_usuario_has_clase_visita1_idx` (`visita_id` ASC) ,
+  INDEX `fk_usuario_has_clase_marcador1_idx` (`marcador_id` ASC) ,
+  INDEX `fk_usuario_has_clase_aporte1_idx` (`aporte_id` ASC) ,
+  INDEX `fk_usuario_has_clase_comentario1_idx` (`comentario_id` ASC) ,
   CONSTRAINT `fk_usuario_has_clase_usuario1`
     FOREIGN KEY (`usuario_id`)
     REFERENCES `dotclass`.`usuario` (`id`)
@@ -312,8 +312,8 @@ CREATE TABLE IF NOT EXISTS `dotclass`.`seguimiento` (
   `usuario_id` INT NOT NULL,
   `curso_id` INT NOT NULL,
   PRIMARY KEY (`usuario_id`, `curso_id`),
-  INDEX `fk_usuario_has_curso1_curso1_idx` (`curso_id` ASC) VISIBLE,
-  INDEX `fk_usuario_has_curso1_usuario1_idx` (`usuario_id` ASC) VISIBLE,
+  INDEX `fk_usuario_has_curso1_curso1_idx` (`curso_id` ASC) ,
+  INDEX `fk_usuario_has_curso1_usuario1_idx` (`usuario_id` ASC) ,
   CONSTRAINT `fk_usuario_has_curso1_usuario1`
     FOREIGN KEY (`usuario_id`)
     REFERENCES `dotclass`.`usuario` (`id`)
@@ -335,8 +335,8 @@ CREATE TABLE IF NOT EXISTS `dotclass`.`actividad_examen` (
   `pregunta_id` INT NOT NULL,
   `nota` INT NOT NULL,
   PRIMARY KEY (`usuario_id`, `pregunta_id`),
-  INDEX `fk_usuario_has_pregunta_pregunta1_idx` (`pregunta_id` ASC) VISIBLE,
-  INDEX `fk_usuario_has_pregunta_usuario1_idx` (`usuario_id` ASC) VISIBLE,
+  INDEX `fk_usuario_has_pregunta_pregunta1_idx` (`pregunta_id` ASC) ,
+  INDEX `fk_usuario_has_pregunta_usuario1_idx` (`usuario_id` ASC) ,
   CONSTRAINT `fk_usuario_has_pregunta_usuario1`
     FOREIGN KEY (`usuario_id`)
     REFERENCES `dotclass`.`usuario` (`id`)
@@ -362,8 +362,8 @@ CREATE TABLE IF NOT EXISTS `dotclass`.`conocimiento` (
   `pais_id` INT NOT NULL,
   `usuario_id` INT NOT NULL,
   PRIMARY KEY (`id`, `usuario_id`),
-  INDEX `fk_conocimiento_pais1_idx` (`pais_id` ASC) VISIBLE,
-  INDEX `fk_conocimiento_usuario1_idx` (`usuario_id` ASC) VISIBLE,
+  INDEX `fk_conocimiento_pais1_idx` (`pais_id` ASC) ,
+  INDEX `fk_conocimiento_usuario1_idx` (`usuario_id` ASC) ,
   CONSTRAINT `fk_conocimiento_pais1`
     FOREIGN KEY (`pais_id`)
     REFERENCES `dotclass`.`pais` (`id`)
@@ -389,8 +389,8 @@ CREATE TABLE IF NOT EXISTS `dotclass`.`experiencia_laboral` (
   `pais_id` INT NOT NULL,
   `usuario_id` INT NOT NULL,
   PRIMARY KEY (`id`, `usuario_id`),
-  INDEX `fk_experiencia_laboral_pais1_idx` (`pais_id` ASC) VISIBLE,
-  INDEX `fk_experiencia_laboral_usuario1_idx` (`usuario_id` ASC) VISIBLE,
+  INDEX `fk_experiencia_laboral_pais1_idx` (`pais_id` ASC) ,
+  INDEX `fk_experiencia_laboral_usuario1_idx` (`usuario_id` ASC) ,
   CONSTRAINT `fk_experiencia_laboral_pais1`
     FOREIGN KEY (`pais_id`)
     REFERENCES `dotclass`.`pais` (`id`)
@@ -411,8 +411,8 @@ CREATE TABLE IF NOT EXISTS `dotclass`.`prerrequisito` (
   `curso_id` INT NOT NULL,
   `curso_prerrequisito_id` INT NOT NULL,
   PRIMARY KEY (`curso_id`, `curso_prerrequisito_id`),
-  INDEX `fk_curso_has_curso_curso2_idx` (`curso_prerrequisito_id` ASC) VISIBLE,
-  INDEX `fk_curso_has_curso_curso1_idx` (`curso_id` ASC) VISIBLE,
+  INDEX `fk_curso_has_curso_curso2_idx` (`curso_prerrequisito_id` ASC) ,
+  INDEX `fk_curso_has_curso_curso1_idx` (`curso_id` ASC) ,
   CONSTRAINT `fk_curso_has_curso_curso1`
     FOREIGN KEY (`curso_id`)
     REFERENCES `dotclass`.`curso` (`id`)
@@ -436,7 +436,7 @@ CREATE TABLE IF NOT EXISTS `dotclass`.`blog` (
   `contenido` LONGTEXT NOT NULL,
   `fecha_creacion` DATETIME NOT NULL DEFAULT NOW(),
   PRIMARY KEY (`id`),
-  INDEX `fk_blog_usuario1_idx` (`usuario_id` ASC) VISIBLE,
+  INDEX `fk_blog_usuario1_idx` (`usuario_id` ASC) ,
   CONSTRAINT `fk_blog_usuario1`
     FOREIGN KEY (`usuario_id`)
     REFERENCES `dotclass`.`usuario` (`id`)
@@ -452,7 +452,7 @@ CREATE TABLE IF NOT EXISTS `dotclass`.`tipo_suscripcion` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `nombre_UNIQUE` (`nombre` ASC) VISIBLE)
+  UNIQUE INDEX `nombre_UNIQUE` (`nombre` ASC) )
 ENGINE = InnoDB;
 
 
@@ -466,9 +466,9 @@ CREATE TABLE IF NOT EXISTS `dotclass`.`bonificacion` (
   `cantidad` DECIMAL NULL,
   `fecha` DATETIME NOT NULL DEFAULT NOW(),
   PRIMARY KEY (`usuario_emisor_id`, `usuario_receptor_id`),
-  INDEX `fk_usuario_has_usuario_usuario2_idx` (`usuario_receptor_id` ASC) VISIBLE,
-  INDEX `fk_usuario_has_usuario_usuario1_idx` (`usuario_emisor_id` ASC) VISIBLE,
-  INDEX `fk_bonificacion_tipo_suscripcion1_idx` (`tipo_suscripcion_id` ASC) VISIBLE,
+  INDEX `fk_usuario_has_usuario_usuario2_idx` (`usuario_receptor_id` ASC) ,
+  INDEX `fk_usuario_has_usuario_usuario1_idx` (`usuario_emisor_id` ASC) ,
+  INDEX `fk_bonificacion_tipo_suscripcion1_idx` (`tipo_suscripcion_id` ASC) ,
   CONSTRAINT `fk_usuario_has_usuario_usuario1`
     FOREIGN KEY (`usuario_emisor_id`)
     REFERENCES `dotclass`.`usuario` (`id`)

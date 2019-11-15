@@ -42,40 +42,8 @@
         </div>
         <div class="principal">
             <h3>Cursos más populares</h3>
-            <div class="card-list">
-                <div class="card">
-                    <div class="card-header">
-                        <img src="https://static.platzi.com/media/learningpath/badges/Badge-desarrollo-java.png"
-                            alt="logo">
-                        <a class="titulo-curso" href="html/curso.html">Java avanzado</a>
-                        <!-- <span class="titulo-curso">Java avanzado</span> -->
-                    </div>
-                    <div class="card-body">
-                        <p>
-                            En este curso aprenderás el lenguaje de
-                            programación más demandado por el sector
-                            empresarial y el mejor remunerado en la actualidad.
-                        </p>
-                    </div>
-                    <div class="card-footer">
-                        <span>
-                            <b>Docente:</b>andleo17
-                        </span>
-                        <span>
-                            <b>Duración:</b>25 h
-                        </span>
-                        <div class="card-rating">
-                            <span>1.2K subscriptores</span>
-                            <span class="clasificacion">
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                            </span>
-                        </div>
-                    </div>
-                </div>
+            <div id="lista-curso" class="card-list">
+                
                 <div class="card">
                     <div class="card-header">
                         <img src="https://static.platzi.com/media/achievements/1378-6fbee8c2-fb79-45db-bd28-d25878a0104c.png"
@@ -302,6 +270,13 @@
             </div>
         </div>
     </footer>
+    <script>
+        fetch('php/Curso.php/listar').then(d => {
+            d.text().then(data => {
+                console.log(data);
+            })
+        });
+    </script>
 </body>
 
 </html>
