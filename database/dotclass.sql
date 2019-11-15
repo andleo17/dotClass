@@ -1,492 +1,791 @@
--- MySQL Workbench Forward Engineering
+-- phpMyAdmin SQL Dump
+-- version 4.9.0.1
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 15-11-2019 a las 04:49:09
+-- Versión del servidor: 10.4.6-MariaDB
+-- Versión de PHP: 7.3.8
 
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
-
--- -----------------------------------------------------
--- Schema dotclass
--- -----------------------------------------------------
-
--- -----------------------------------------------------
--- Schema dotclass
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `dotclass` DEFAULT CHARACTER SET utf8 ;
-USE `dotclass` ;
-
--- -----------------------------------------------------
--- Table `dotclass`.`pais`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dotclass`.`pais` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(35) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `nombre_UNIQUE` (`nombre` ASC) )
-ENGINE = InnoDB;
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
 
 
--- -----------------------------------------------------
--- Table `dotclass`.`ciudad`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dotclass`.`ciudad` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(35) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `nombre_UNIQUE` (`nombre` ASC) )
-ENGINE = InnoDB;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
+--
+-- Base de datos: `dotclass`
+--
 
--- -----------------------------------------------------
--- Table `dotclass`.`usuario`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dotclass`.`usuario` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `nickname` VARCHAR(30) NOT NULL,
-  `password` VARCHAR(30) NOT NULL,
-  `nombres` VARCHAR(60) NOT NULL,
-  `apellidos` VARCHAR(60) NOT NULL,
-  `email` VARCHAR(80) NOT NULL,
-  `fecha_nacimiento` DATE NOT NULL,
-  `descripcion` TINYTEXT NULL,
-  `numero_seguidores` INT NOT NULL DEFAULT 0,
-  `pregunta_seguridad` VARCHAR(255) NOT NULL,
-  `respuesta_seguridad` VARCHAR(50) NOT NULL,
-  `foto` VARCHAR(100) NULL,
-  `pais_id` INT NOT NULL,
-  `ciudad_id` INT NOT NULL,
-  `fecha_creacion` DATETIME NOT NULL DEFAULT NOW(),
-  `estado` TINYINT NOT NULL DEFAULT 1,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `nickname_UNIQUE` (`nickname` ASC) ,
-  UNIQUE INDEX `email_UNIQUE` (`email` ASC) ,
-  INDEX `fk_usuario_pais1_idx` (`pais_id` ASC) ,
-  INDEX `fk_usuario_ciudad1_idx` (`ciudad_id` ASC) ,
-  CONSTRAINT `fk_usuario_pais1`
-    FOREIGN KEY (`pais_id`)
-    REFERENCES `dotclass`.`pais` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_usuario_ciudad1`
-    FOREIGN KEY (`ciudad_id`)
-    REFERENCES `dotclass`.`ciudad` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+-- --------------------------------------------------------
 
+--
+-- Estructura de tabla para la tabla `actividad_curso`
+--
 
--- -----------------------------------------------------
--- Table `dotclass`.`categoria`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dotclass`.`categoria` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `nombre_UNIQUE` (`nombre` ASC) )
-ENGINE = InnoDB;
+CREATE TABLE `actividad_curso` (
+  `usuario_id` int(11) NOT NULL,
+  `clase_id` int(11) NOT NULL,
+  `visita_id` int(11) DEFAULT NULL,
+  `marcador_id` int(11) DEFAULT NULL,
+  `aporte_id` int(11) DEFAULT NULL,
+  `comentario_id` int(11) DEFAULT NULL,
+  `fecha` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+-- --------------------------------------------------------
 
--- -----------------------------------------------------
--- Table `dotclass`.`curso`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dotclass`.`curso` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `categoria_id` INT NOT NULL,
-  `titulo` VARCHAR(45) NOT NULL,
-  `descripcion` MEDIUMTEXT NOT NULL,
-  `logo` VARCHAR(70) NOT NULL,
-  `duracion` INT NOT NULL DEFAULT 0,
-  `numero_subscriptores` INT NOT NULL DEFAULT 0,
-  `valoracion` INT NOT NULL DEFAULT 0,
-  `fecha_creacion` DATETIME NOT NULL DEFAULT NOW(),
-  `fecha_ultima_actualizacion` DATETIME NOT NULL DEFAULT NOW(),
-  PRIMARY KEY (`id`),
-  INDEX `fk_curso_categoria1_idx` (`categoria_id` ASC) ,
-  CONSTRAINT `fk_curso_categoria1`
-    FOREIGN KEY (`categoria_id`)
-    REFERENCES `dotclass`.`categoria` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+--
+-- Estructura de tabla para la tabla `actividad_examen`
+--
 
+CREATE TABLE `actividad_examen` (
+  `usuario_id` int(11) NOT NULL,
+  `pregunta_id` int(11) NOT NULL,
+  `nota` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
--- -----------------------------------------------------
--- Table `dotclass`.`seccion`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dotclass`.`seccion` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `curso_id` INT NOT NULL,
-  `titulo` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_seccion_curso1_idx` (`curso_id` ASC) ,
-  CONSTRAINT `fk_seccion_curso1`
-    FOREIGN KEY (`curso_id`)
-    REFERENCES `dotclass`.`curso` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+-- --------------------------------------------------------
 
+--
+-- Estructura de tabla para la tabla `alternativa`
+--
 
--- -----------------------------------------------------
--- Table `dotclass`.`clase`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dotclass`.`clase` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `seccion_id` INT NOT NULL,
-  `titulo` VARCHAR(60) NOT NULL,
-  `duracion` INT NOT NULL DEFAULT 0,
-  `contenido_video` VARCHAR(180) NULL,
-  `contenido_texto` LONGTEXT NULL,
-  `fecha_subida` DATETIME NULL DEFAULT NOW(),
-  PRIMARY KEY (`id`),
-  INDEX `fk_clase_seccion1_idx` (`seccion_id` ASC) ,
-  CONSTRAINT `fk_clase_seccion1`
-    FOREIGN KEY (`seccion_id`)
-    REFERENCES `dotclass`.`seccion` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+CREATE TABLE `alternativa` (
+  `id` int(11) NOT NULL,
+  `pregunta_id` int(11) NOT NULL,
+  `numero` int(11) NOT NULL,
+  `contenido` varchar(180) COLLATE utf8_spanish_ci NOT NULL,
+  `respuesta` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+-- --------------------------------------------------------
 
--- -----------------------------------------------------
--- Table `dotclass`.`examen`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dotclass`.`examen` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `curso_id` INT NOT NULL,
-  PRIMARY KEY (`id`, `curso_id`),
-  INDEX `fk_examen_curso1_idx` (`curso_id` ASC) ,
-  CONSTRAINT `fk_examen_curso1`
-    FOREIGN KEY (`curso_id`)
-    REFERENCES `dotclass`.`curso` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+--
+-- Estructura de tabla para la tabla `aporte`
+--
 
+CREATE TABLE `aporte` (
+  `id` int(11) NOT NULL,
+  `titulo` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
+  `contenido` longtext COLLATE utf8_spanish_ci NOT NULL,
+  `numero_likes` int(11) NOT NULL DEFAULT 0,
+  `numero_comentarios` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
--- -----------------------------------------------------
--- Table `dotclass`.`pregunta`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dotclass`.`pregunta` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `examen_id` INT NOT NULL,
-  `numero` TINYINT NOT NULL,
-  `titulo` VARCHAR(150) NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_pregunta_examen1_idx` (`examen_id` ASC) ,
-  CONSTRAINT `fk_pregunta_examen1`
-    FOREIGN KEY (`examen_id`)
-    REFERENCES `dotclass`.`examen` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+-- --------------------------------------------------------
 
+--
+-- Estructura de tabla para la tabla `blog`
+--
 
--- -----------------------------------------------------
--- Table `dotclass`.`alternativa`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dotclass`.`alternativa` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `pregunta_id` INT NOT NULL,
-  `numero` INT NOT NULL,
-  `contenido` VARCHAR(180) NOT NULL,
-  `respuesta` TINYINT NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_alternativa_pregunta1_idx` (`pregunta_id` ASC) ,
-  CONSTRAINT `fk_alternativa_pregunta1`
-    FOREIGN KEY (`pregunta_id`)
-    REFERENCES `dotclass`.`pregunta` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+CREATE TABLE `blog` (
+  `id` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `titulo` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
+  `contenido` longtext COLLATE utf8_spanish_ci NOT NULL,
+  `fecha_creacion` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+-- --------------------------------------------------------
 
--- -----------------------------------------------------
--- Table `dotclass`.`visita`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dotclass`.`visita` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `tiempo` INT NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
+--
+-- Estructura de tabla para la tabla `bonificacion`
+--
 
+CREATE TABLE `bonificacion` (
+  `usuario_emisor_id` int(11) NOT NULL,
+  `usuario_receptor_id` int(11) NOT NULL,
+  `tipo_suscripcion_id` int(11) NOT NULL,
+  `cantidad` decimal(10,0) DEFAULT NULL,
+  `fecha` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
--- -----------------------------------------------------
--- Table `dotclass`.`comentario`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dotclass`.`comentario` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `comentario_padre_id` INT NULL,
-  `contenido` VARCHAR(150) NOT NULL,
-  `numero_likes` INT NOT NULL DEFAULT 0,
-  `numero_comentarios` INT NOT NULL DEFAULT 0,
-  `pregunta` TINYINT NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id`),
-  INDEX `fk_comentario_comentario1_idx` (`comentario_padre_id` ASC) ,
-  CONSTRAINT `fk_comentario_comentario1`
-    FOREIGN KEY (`comentario_padre_id`)
-    REFERENCES `dotclass`.`comentario` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+-- --------------------------------------------------------
 
+--
+-- Estructura de tabla para la tabla `categoria`
+--
 
--- -----------------------------------------------------
--- Table `dotclass`.`marcador`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dotclass`.`marcador` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `titulo` VARCHAR(45) NOT NULL,
-  `tiempo` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
+CREATE TABLE `categoria` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(45) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `categoria`
+--
 
--- -----------------------------------------------------
--- Table `dotclass`.`aporte`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dotclass`.`aporte` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `titulo` VARCHAR(150) NOT NULL,
-  `contenido` LONGTEXT NOT NULL,
-  `numero_likes` INT NOT NULL DEFAULT 0,
-  `numero_comentarios` INT NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
+INSERT INTO `categoria` (`id`, `nombre`) VALUES
+(4, 'Arte'),
+(2, 'Ciencia'),
+(5, 'Marketing'),
+(3, 'Matemáticas'),
+(6, 'Música'),
+(1, 'Tecnología');
 
+-- --------------------------------------------------------
 
--- -----------------------------------------------------
--- Table `dotclass`.`actividad_curso`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dotclass`.`actividad_curso` (
-  `usuario_id` INT NOT NULL,
-  `clase_id` INT NOT NULL,
-  `visita_id` INT NULL,
-  `marcador_id` INT NULL,
-  `aporte_id` INT NULL,
-  `comentario_id` INT NULL,
-  `fecha` DATETIME NOT NULL DEFAULT NOW(),
-  PRIMARY KEY (`usuario_id`, `clase_id`),
-  INDEX `fk_usuario_has_clase_clase1_idx` (`clase_id` ASC) ,
-  INDEX `fk_usuario_has_clase_usuario1_idx` (`usuario_id` ASC) ,
-  INDEX `fk_usuario_has_clase_visita1_idx` (`visita_id` ASC) ,
-  INDEX `fk_usuario_has_clase_marcador1_idx` (`marcador_id` ASC) ,
-  INDEX `fk_usuario_has_clase_aporte1_idx` (`aporte_id` ASC) ,
-  INDEX `fk_usuario_has_clase_comentario1_idx` (`comentario_id` ASC) ,
-  CONSTRAINT `fk_usuario_has_clase_usuario1`
-    FOREIGN KEY (`usuario_id`)
-    REFERENCES `dotclass`.`usuario` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_usuario_has_clase_clase1`
-    FOREIGN KEY (`clase_id`)
-    REFERENCES `dotclass`.`clase` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_usuario_has_clase_visita1`
-    FOREIGN KEY (`visita_id`)
-    REFERENCES `dotclass`.`visita` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_usuario_has_clase_marcador1`
-    FOREIGN KEY (`marcador_id`)
-    REFERENCES `dotclass`.`marcador` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_usuario_has_clase_aporte1`
-    FOREIGN KEY (`aporte_id`)
-    REFERENCES `dotclass`.`aporte` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_usuario_has_clase_comentario1`
-    FOREIGN KEY (`comentario_id`)
-    REFERENCES `dotclass`.`comentario` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+--
+-- Estructura de tabla para la tabla `ciudad`
+--
 
+CREATE TABLE `ciudad` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(35) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
--- -----------------------------------------------------
--- Table `dotclass`.`seguimiento`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dotclass`.`seguimiento` (
-  `usuario_id` INT NOT NULL,
-  `curso_id` INT NOT NULL,
-  PRIMARY KEY (`usuario_id`, `curso_id`),
-  INDEX `fk_usuario_has_curso1_curso1_idx` (`curso_id` ASC) ,
-  INDEX `fk_usuario_has_curso1_usuario1_idx` (`usuario_id` ASC) ,
-  CONSTRAINT `fk_usuario_has_curso1_usuario1`
-    FOREIGN KEY (`usuario_id`)
-    REFERENCES `dotclass`.`usuario` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_usuario_has_curso1_curso1`
-    FOREIGN KEY (`curso_id`)
-    REFERENCES `dotclass`.`curso` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+--
+-- Volcado de datos para la tabla `ciudad`
+--
 
+INSERT INTO `ciudad` (`id`, `nombre`) VALUES
+(2, ''),
+(1, 'Chiclayo');
 
--- -----------------------------------------------------
--- Table `dotclass`.`actividad_examen`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dotclass`.`actividad_examen` (
-  `usuario_id` INT NOT NULL,
-  `pregunta_id` INT NOT NULL,
-  `nota` INT NOT NULL,
-  PRIMARY KEY (`usuario_id`, `pregunta_id`),
-  INDEX `fk_usuario_has_pregunta_pregunta1_idx` (`pregunta_id` ASC) ,
-  INDEX `fk_usuario_has_pregunta_usuario1_idx` (`usuario_id` ASC) ,
-  CONSTRAINT `fk_usuario_has_pregunta_usuario1`
-    FOREIGN KEY (`usuario_id`)
-    REFERENCES `dotclass`.`usuario` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_usuario_has_pregunta_pregunta1`
-    FOREIGN KEY (`pregunta_id`)
-    REFERENCES `dotclass`.`pregunta` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+-- --------------------------------------------------------
 
+--
+-- Estructura de tabla para la tabla `clase`
+--
 
--- -----------------------------------------------------
--- Table `dotclass`.`conocimiento`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dotclass`.`conocimiento` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(100) NOT NULL,
-  `grado_academico` VARCHAR(40) NULL,
-  `lugar_estudio` VARCHAR(80) NULL,
-  `anio` INT NOT NULL,
-  `pais_id` INT NOT NULL,
-  `usuario_id` INT NOT NULL,
-  PRIMARY KEY (`id`, `usuario_id`),
-  INDEX `fk_conocimiento_pais1_idx` (`pais_id` ASC) ,
-  INDEX `fk_conocimiento_usuario1_idx` (`usuario_id` ASC) ,
-  CONSTRAINT `fk_conocimiento_pais1`
-    FOREIGN KEY (`pais_id`)
-    REFERENCES `dotclass`.`pais` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_conocimiento_usuario1`
-    FOREIGN KEY (`usuario_id`)
-    REFERENCES `dotclass`.`usuario` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+CREATE TABLE `clase` (
+  `id` int(11) NOT NULL,
+  `seccion_id` int(11) NOT NULL,
+  `titulo` varchar(60) COLLATE utf8_spanish_ci NOT NULL,
+  `duracion` int(11) NOT NULL DEFAULT 0,
+  `contenido_video` varchar(180) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `contenido_texto` longtext COLLATE utf8_spanish_ci DEFAULT NULL,
+  `fecha_subida` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+-- --------------------------------------------------------
 
--- -----------------------------------------------------
--- Table `dotclass`.`experiencia_laboral`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dotclass`.`experiencia_laboral` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(150) NOT NULL,
-  `lugar` VARCHAR(80) NOT NULL,
-  `fecha_inicio` DATE NOT NULL,
-  `fecha_fin` DATE NULL,
-  `pais_id` INT NOT NULL,
-  `usuario_id` INT NOT NULL,
-  PRIMARY KEY (`id`, `usuario_id`),
-  INDEX `fk_experiencia_laboral_pais1_idx` (`pais_id` ASC) ,
-  INDEX `fk_experiencia_laboral_usuario1_idx` (`usuario_id` ASC) ,
-  CONSTRAINT `fk_experiencia_laboral_pais1`
-    FOREIGN KEY (`pais_id`)
-    REFERENCES `dotclass`.`pais` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_experiencia_laboral_usuario1`
-    FOREIGN KEY (`usuario_id`)
-    REFERENCES `dotclass`.`usuario` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+--
+-- Estructura de tabla para la tabla `comentario`
+--
 
+CREATE TABLE `comentario` (
+  `id` int(11) NOT NULL,
+  `comentario_padre_id` int(11) DEFAULT NULL,
+  `contenido` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
+  `numero_likes` int(11) NOT NULL DEFAULT 0,
+  `numero_comentarios` int(11) NOT NULL DEFAULT 0,
+  `pregunta` tinyint(4) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
--- -----------------------------------------------------
--- Table `dotclass`.`prerrequisito`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dotclass`.`prerrequisito` (
-  `curso_id` INT NOT NULL,
-  `curso_prerrequisito_id` INT NOT NULL,
-  PRIMARY KEY (`curso_id`, `curso_prerrequisito_id`),
-  INDEX `fk_curso_has_curso_curso2_idx` (`curso_prerrequisito_id` ASC) ,
-  INDEX `fk_curso_has_curso_curso1_idx` (`curso_id` ASC) ,
-  CONSTRAINT `fk_curso_has_curso_curso1`
-    FOREIGN KEY (`curso_id`)
-    REFERENCES `dotclass`.`curso` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_curso_has_curso_curso2`
-    FOREIGN KEY (`curso_prerrequisito_id`)
-    REFERENCES `dotclass`.`curso` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+-- --------------------------------------------------------
 
+--
+-- Estructura de tabla para la tabla `conocimiento`
+--
 
--- -----------------------------------------------------
--- Table `dotclass`.`blog`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dotclass`.`blog` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `usuario_id` INT NOT NULL,
-  `titulo` VARCHAR(150) NOT NULL,
-  `contenido` LONGTEXT NOT NULL,
-  `fecha_creacion` DATETIME NOT NULL DEFAULT NOW(),
-  PRIMARY KEY (`id`),
-  INDEX `fk_blog_usuario1_idx` (`usuario_id` ASC) ,
-  CONSTRAINT `fk_blog_usuario1`
-    FOREIGN KEY (`usuario_id`)
-    REFERENCES `dotclass`.`usuario` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+CREATE TABLE `conocimiento` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `grado_academico` varchar(40) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `lugar_estudio` varchar(80) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `anio` int(11) NOT NULL,
+  `pais_id` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+-- --------------------------------------------------------
 
--- -----------------------------------------------------
--- Table `dotclass`.`tipo_suscripcion`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dotclass`.`tipo_suscripcion` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `nombre_UNIQUE` (`nombre` ASC) )
-ENGINE = InnoDB;
+--
+-- Estructura de tabla para la tabla `curso`
+--
 
+CREATE TABLE `curso` (
+  `id` int(11) NOT NULL,
+  `categoria_id` int(11) NOT NULL,
+  `titulo` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
+  `descripcion` mediumtext COLLATE utf8_spanish_ci NOT NULL,
+  `logo` varchar(70) COLLATE utf8_spanish_ci NOT NULL,
+  `duracion` int(11) NOT NULL DEFAULT 0,
+  `numero_subscriptores` int(11) NOT NULL DEFAULT 0,
+  `valoracion` int(11) NOT NULL DEFAULT 0,
+  `fecha_creacion` datetime NOT NULL DEFAULT current_timestamp(),
+  `fecha_ultima_actualizacion` datetime NOT NULL DEFAULT current_timestamp(),
+  `usuario_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
--- -----------------------------------------------------
--- Table `dotclass`.`bonificacion`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dotclass`.`bonificacion` (
-  `usuario_emisor_id` INT NOT NULL,
-  `usuario_receptor_id` INT NOT NULL,
-  `tipo_suscripcion_id` INT NOT NULL,
-  `cantidad` DECIMAL NULL,
-  `fecha` DATETIME NOT NULL DEFAULT NOW(),
-  PRIMARY KEY (`usuario_emisor_id`, `usuario_receptor_id`),
-  INDEX `fk_usuario_has_usuario_usuario2_idx` (`usuario_receptor_id` ASC) ,
-  INDEX `fk_usuario_has_usuario_usuario1_idx` (`usuario_emisor_id` ASC) ,
-  INDEX `fk_bonificacion_tipo_suscripcion1_idx` (`tipo_suscripcion_id` ASC) ,
-  CONSTRAINT `fk_usuario_has_usuario_usuario1`
-    FOREIGN KEY (`usuario_emisor_id`)
-    REFERENCES `dotclass`.`usuario` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_usuario_has_usuario_usuario2`
-    FOREIGN KEY (`usuario_receptor_id`)
-    REFERENCES `dotclass`.`usuario` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_bonificacion_tipo_suscripcion1`
-    FOREIGN KEY (`tipo_suscripcion_id`)
-    REFERENCES `dotclass`.`tipo_suscripcion` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+--
+-- Volcado de datos para la tabla `curso`
+--
 
+INSERT INTO `curso` (`id`, `categoria_id`, `titulo`, `descripcion`, `logo`, `duracion`, `numero_subscriptores`, `valoracion`, `fecha_creacion`, `fecha_ultima_actualizacion`, `usuario_id`) VALUES
+(1, 1, 'Java Avanzado', 'En este curso aprenderás el lenguaje de programación más demandado por el sector empresarial y el mejor remunerado en la actualidad.\r\nAprenderemos todos juntos acerca de clases anidadas, clases abstractas, lambdas, JDBC y mucho más.', 'https://static.platzi.com/media/learningpath/badges/Badge-desarrollo-j', 25, 1200, 4, '2019-10-17 00:00:00', '2019-11-14 16:30:40', 1),
+(2, 1, 'HTML5 y CSS3', 'Diseña tus propias páginas o sitios web y aprende los mejores frameworks de diseño. Sé un buen arquitecto fronted con este curso.', 'https://static.platzi.com/media/achievements/badges-html-css-b0a71550-', 21, 1000, 5, '2019-10-17 00:00:00', '2019-11-14 16:30:40', 1),
+(3, 1, 'React', 'React es una de las librerías más utilizadas hoy para crear aplicaciones web. Aprende desde la creación y diseño de componentes hasta traer datos de un API.', 'https://static.platzi.com/media/achievements/badge-reactjs-avanzado-bc', 25, 1200, 3, '2019-10-17 00:00:00', '2019-11-14 16:30:40', 1);
 
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `examen`
+--
+
+CREATE TABLE `examen` (
+  `id` int(11) NOT NULL,
+  `curso_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `experiencia_laboral`
+--
+
+CREATE TABLE `experiencia_laboral` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
+  `lugar` varchar(80) COLLATE utf8_spanish_ci NOT NULL,
+  `fecha_inicio` date NOT NULL,
+  `fecha_fin` date DEFAULT NULL,
+  `pais_id` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `marcador`
+--
+
+CREATE TABLE `marcador` (
+  `id` int(11) NOT NULL,
+  `titulo` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
+  `tiempo` varchar(45) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pais`
+--
+
+CREATE TABLE `pais` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(35) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `pais`
+--
+
+INSERT INTO `pais` (`id`, `nombre`) VALUES
+(1, 'Perú');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pregunta`
+--
+
+CREATE TABLE `pregunta` (
+  `id` int(11) NOT NULL,
+  `examen_id` int(11) NOT NULL,
+  `numero` tinyint(4) NOT NULL,
+  `titulo` varchar(150) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `prerrequisito`
+--
+
+CREATE TABLE `prerrequisito` (
+  `curso_id` int(11) NOT NULL,
+  `curso_prerrequisito_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `seccion`
+--
+
+CREATE TABLE `seccion` (
+  `id` int(11) NOT NULL,
+  `curso_id` int(11) NOT NULL,
+  `titulo` varchar(45) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `seguimiento`
+--
+
+CREATE TABLE `seguimiento` (
+  `usuario_id` int(11) NOT NULL,
+  `curso_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipo_suscripcion`
+--
+
+CREATE TABLE `tipo_suscripcion` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(45) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuario`
+--
+
+CREATE TABLE `usuario` (
+  `id` int(11) NOT NULL,
+  `nickname` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
+  `password` varchar(42) COLLATE utf8_spanish_ci NOT NULL,
+  `nombres` varchar(60) COLLATE utf8_spanish_ci NOT NULL,
+  `apellidos` varchar(60) COLLATE utf8_spanish_ci NOT NULL,
+  `email` varchar(80) COLLATE utf8_spanish_ci NOT NULL,
+  `fecha_nacimiento` date NOT NULL,
+  `descripcion` tinytext COLLATE utf8_spanish_ci DEFAULT NULL,
+  `numero_seguidores` int(11) NOT NULL DEFAULT 0,
+  `pregunta_seguridad` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
+  `respuesta_seguridad` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `foto` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `pais_id` int(11) NOT NULL,
+  `ciudad_id` int(11) NOT NULL,
+  `fecha_creacion` datetime NOT NULL DEFAULT current_timestamp(),
+  `estado` tinyint(4) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`id`, `nickname`, `password`, `nombres`, `apellidos`, `email`, `fecha_nacimiento`, `descripcion`, `numero_seguidores`, `pregunta_seguridad`, `respuesta_seguridad`, `foto`, `pais_id`, `ciudad_id`, `fecha_creacion`, `estado`) VALUES
+(1, 'Andle17', '123456789', 'Andres', 'Baldarrago', 'ab@gmail.com', '2000-07-01', 'Me gusta jugar y enseñar.', 0, '¿Quién soy?', 'nose', NULL, 1, 1, '2019-11-14 16:42:51', 1),
+(2, 'CinthyaYomona', '123', 'Cinthya Lisseth', 'Yomona Parraguez', 'cinthya@gmail.com', '1999-05-23', 'Se suponde que me debo de bañar, que mis convers ya no aguantan más!!...Pero llegas tú !! :) <3', 0, 'Inspiraciíon?', 'Priscila', NULL, 1, 1, '2019-11-14 16:42:51', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `visita`
+--
+
+CREATE TABLE `visita` (
+  `id` int(11) NOT NULL,
+  `tiempo` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `actividad_curso`
+--
+ALTER TABLE `actividad_curso`
+  ADD PRIMARY KEY (`usuario_id`,`clase_id`),
+  ADD KEY `fk_usuario_has_clase_clase1_idx` (`clase_id`),
+  ADD KEY `fk_usuario_has_clase_usuario1_idx` (`usuario_id`),
+  ADD KEY `fk_usuario_has_clase_visita1_idx` (`visita_id`),
+  ADD KEY `fk_usuario_has_clase_marcador1_idx` (`marcador_id`),
+  ADD KEY `fk_usuario_has_clase_aporte1_idx` (`aporte_id`),
+  ADD KEY `fk_usuario_has_clase_comentario1_idx` (`comentario_id`);
+
+--
+-- Indices de la tabla `actividad_examen`
+--
+ALTER TABLE `actividad_examen`
+  ADD PRIMARY KEY (`usuario_id`,`pregunta_id`),
+  ADD KEY `fk_usuario_has_pregunta_pregunta1_idx` (`pregunta_id`),
+  ADD KEY `fk_usuario_has_pregunta_usuario1_idx` (`usuario_id`);
+
+--
+-- Indices de la tabla `alternativa`
+--
+ALTER TABLE `alternativa`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_alternativa_pregunta1_idx` (`pregunta_id`);
+
+--
+-- Indices de la tabla `aporte`
+--
+ALTER TABLE `aporte`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `blog`
+--
+ALTER TABLE `blog`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_blog_usuario1_idx` (`usuario_id`);
+
+--
+-- Indices de la tabla `bonificacion`
+--
+ALTER TABLE `bonificacion`
+  ADD PRIMARY KEY (`usuario_emisor_id`,`usuario_receptor_id`),
+  ADD KEY `fk_usuario_has_usuario_usuario2_idx` (`usuario_receptor_id`),
+  ADD KEY `fk_usuario_has_usuario_usuario1_idx` (`usuario_emisor_id`),
+  ADD KEY `fk_bonificacion_tipo_suscripcion1_idx` (`tipo_suscripcion_id`);
+
+--
+-- Indices de la tabla `categoria`
+--
+ALTER TABLE `categoria`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nombre_UNIQUE` (`nombre`);
+
+--
+-- Indices de la tabla `ciudad`
+--
+ALTER TABLE `ciudad`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nombre_UNIQUE` (`nombre`);
+
+--
+-- Indices de la tabla `clase`
+--
+ALTER TABLE `clase`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_clase_seccion1_idx` (`seccion_id`);
+
+--
+-- Indices de la tabla `comentario`
+--
+ALTER TABLE `comentario`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_comentario_comentario1_idx` (`comentario_padre_id`);
+
+--
+-- Indices de la tabla `conocimiento`
+--
+ALTER TABLE `conocimiento`
+  ADD PRIMARY KEY (`id`,`usuario_id`),
+  ADD KEY `fk_conocimiento_pais1_idx` (`pais_id`),
+  ADD KEY `fk_conocimiento_usuario1_idx` (`usuario_id`);
+
+--
+-- Indices de la tabla `curso`
+--
+ALTER TABLE `curso`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_curso_categoria1_idx` (`categoria_id`);
+
+--
+-- Indices de la tabla `examen`
+--
+ALTER TABLE `examen`
+  ADD PRIMARY KEY (`id`,`curso_id`),
+  ADD KEY `fk_examen_curso1_idx` (`curso_id`);
+
+--
+-- Indices de la tabla `experiencia_laboral`
+--
+ALTER TABLE `experiencia_laboral`
+  ADD PRIMARY KEY (`id`,`usuario_id`),
+  ADD KEY `fk_experiencia_laboral_pais1_idx` (`pais_id`),
+  ADD KEY `fk_experiencia_laboral_usuario1_idx` (`usuario_id`);
+
+--
+-- Indices de la tabla `marcador`
+--
+ALTER TABLE `marcador`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `pais`
+--
+ALTER TABLE `pais`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nombre_UNIQUE` (`nombre`);
+
+--
+-- Indices de la tabla `pregunta`
+--
+ALTER TABLE `pregunta`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_pregunta_examen1_idx` (`examen_id`);
+
+--
+-- Indices de la tabla `prerrequisito`
+--
+ALTER TABLE `prerrequisito`
+  ADD PRIMARY KEY (`curso_id`,`curso_prerrequisito_id`),
+  ADD KEY `fk_curso_has_curso_curso2_idx` (`curso_prerrequisito_id`),
+  ADD KEY `fk_curso_has_curso_curso1_idx` (`curso_id`);
+
+--
+-- Indices de la tabla `seccion`
+--
+ALTER TABLE `seccion`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_seccion_curso1_idx` (`curso_id`);
+
+--
+-- Indices de la tabla `seguimiento`
+--
+ALTER TABLE `seguimiento`
+  ADD PRIMARY KEY (`usuario_id`,`curso_id`),
+  ADD KEY `fk_usuario_has_curso1_curso1_idx` (`curso_id`),
+  ADD KEY `fk_usuario_has_curso1_usuario1_idx` (`usuario_id`);
+
+--
+-- Indices de la tabla `tipo_suscripcion`
+--
+ALTER TABLE `tipo_suscripcion`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nombre_UNIQUE` (`nombre`);
+
+--
+-- Indices de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nickname_UNIQUE` (`nickname`),
+  ADD UNIQUE KEY `email_UNIQUE` (`email`),
+  ADD KEY `fk_usuario_pais1_idx` (`pais_id`),
+  ADD KEY `fk_usuario_ciudad1_idx` (`ciudad_id`);
+
+--
+-- Indices de la tabla `visita`
+--
+ALTER TABLE `visita`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `alternativa`
+--
+ALTER TABLE `alternativa`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `aporte`
+--
+ALTER TABLE `aporte`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `blog`
+--
+ALTER TABLE `blog`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `categoria`
+--
+ALTER TABLE `categoria`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de la tabla `ciudad`
+--
+ALTER TABLE `ciudad`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `clase`
+--
+ALTER TABLE `clase`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `comentario`
+--
+ALTER TABLE `comentario`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `conocimiento`
+--
+ALTER TABLE `conocimiento`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `curso`
+--
+ALTER TABLE `curso`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `examen`
+--
+ALTER TABLE `examen`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `experiencia_laboral`
+--
+ALTER TABLE `experiencia_laboral`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `marcador`
+--
+ALTER TABLE `marcador`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `pais`
+--
+ALTER TABLE `pais`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `pregunta`
+--
+ALTER TABLE `pregunta`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `seccion`
+--
+ALTER TABLE `seccion`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `tipo_suscripcion`
+--
+ALTER TABLE `tipo_suscripcion`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `visita`
+--
+ALTER TABLE `visita`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `actividad_curso`
+--
+ALTER TABLE `actividad_curso`
+  ADD CONSTRAINT `fk_usuario_has_clase_aporte1` FOREIGN KEY (`aporte_id`) REFERENCES `aporte` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_usuario_has_clase_clase1` FOREIGN KEY (`clase_id`) REFERENCES `clase` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_usuario_has_clase_comentario1` FOREIGN KEY (`comentario_id`) REFERENCES `comentario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_usuario_has_clase_marcador1` FOREIGN KEY (`marcador_id`) REFERENCES `marcador` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_usuario_has_clase_usuario1` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_usuario_has_clase_visita1` FOREIGN KEY (`visita_id`) REFERENCES `visita` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `actividad_examen`
+--
+ALTER TABLE `actividad_examen`
+  ADD CONSTRAINT `fk_usuario_has_pregunta_pregunta1` FOREIGN KEY (`pregunta_id`) REFERENCES `pregunta` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_usuario_has_pregunta_usuario1` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `alternativa`
+--
+ALTER TABLE `alternativa`
+  ADD CONSTRAINT `fk_alternativa_pregunta1` FOREIGN KEY (`pregunta_id`) REFERENCES `pregunta` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `blog`
+--
+ALTER TABLE `blog`
+  ADD CONSTRAINT `fk_blog_usuario1` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `bonificacion`
+--
+ALTER TABLE `bonificacion`
+  ADD CONSTRAINT `fk_bonificacion_tipo_suscripcion1` FOREIGN KEY (`tipo_suscripcion_id`) REFERENCES `tipo_suscripcion` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_usuario_has_usuario_usuario1` FOREIGN KEY (`usuario_emisor_id`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_usuario_has_usuario_usuario2` FOREIGN KEY (`usuario_receptor_id`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `clase`
+--
+ALTER TABLE `clase`
+  ADD CONSTRAINT `fk_clase_seccion1` FOREIGN KEY (`seccion_id`) REFERENCES `seccion` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `comentario`
+--
+ALTER TABLE `comentario`
+  ADD CONSTRAINT `fk_comentario_comentario1` FOREIGN KEY (`comentario_padre_id`) REFERENCES `comentario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `conocimiento`
+--
+ALTER TABLE `conocimiento`
+  ADD CONSTRAINT `fk_conocimiento_pais1` FOREIGN KEY (`pais_id`) REFERENCES `pais` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_conocimiento_usuario1` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `curso`
+--
+ALTER TABLE `curso`
+  ADD CONSTRAINT `fk_curso_categoria1` FOREIGN KEY (`categoria_id`) REFERENCES `categoria` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `examen`
+--
+ALTER TABLE `examen`
+  ADD CONSTRAINT `fk_examen_curso1` FOREIGN KEY (`curso_id`) REFERENCES `curso` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `experiencia_laboral`
+--
+ALTER TABLE `experiencia_laboral`
+  ADD CONSTRAINT `fk_experiencia_laboral_pais1` FOREIGN KEY (`pais_id`) REFERENCES `pais` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_experiencia_laboral_usuario1` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `pregunta`
+--
+ALTER TABLE `pregunta`
+  ADD CONSTRAINT `fk_pregunta_examen1` FOREIGN KEY (`examen_id`) REFERENCES `examen` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `prerrequisito`
+--
+ALTER TABLE `prerrequisito`
+  ADD CONSTRAINT `fk_curso_has_curso_curso1` FOREIGN KEY (`curso_id`) REFERENCES `curso` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_curso_has_curso_curso2` FOREIGN KEY (`curso_prerrequisito_id`) REFERENCES `curso` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `seccion`
+--
+ALTER TABLE `seccion`
+  ADD CONSTRAINT `fk_seccion_curso1` FOREIGN KEY (`curso_id`) REFERENCES `curso` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `seguimiento`
+--
+ALTER TABLE `seguimiento`
+  ADD CONSTRAINT `fk_usuario_has_curso1_curso1` FOREIGN KEY (`curso_id`) REFERENCES `curso` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_usuario_has_curso1_usuario1` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  ADD CONSTRAINT `fk_usuario_ciudad1` FOREIGN KEY (`ciudad_id`) REFERENCES `ciudad` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_usuario_pais1` FOREIGN KEY (`pais_id`) REFERENCES `pais` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
