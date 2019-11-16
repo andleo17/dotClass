@@ -88,8 +88,53 @@
             }
         }
 
-        
+        public function registrar (Usuario $usuario){
+            $query = 'INSERT INTO usuario VALUES(DEFAULT,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+            $preparedStament = Conexion::conectarBD() -> prepare($query);
+            $preparedStament -> bindParam(1, $this -> nickname);
+            $preparedStament -> bindParam(2, $this -> password);
+            $preparedStament -> bindParam(3, $this -> nombres);
+            $preparedStament -> bindParam(4, $this -> email);
+            $preparedStament -> bindParam(5, $this -> fechaNacimiento);
+            $preparedStament -> bindParam(6, $this -> descripcion);
+            $preparedStament -> bindParam(7, $this -> numeroSeguidores);
+            $preparedStament -> bindParam(8, $this -> preguntaSeguridad);
+            $preparedStament -> bindParam(9, $this -> respuestaSeguridad);
+            $preparedStament -> bindParam(10, $this -> foto );
+            $preparedStament -> bindParam(11, $this -> pais -> id);
+            $preparedStament -> bindParam(12, $this -> ciudad -> id);
+            $preparedStament -> bindParam(13, $this -> fechaCreacion);
+            $preparedStament -> bindParam(14, $this -> estado);
+            $preparedStament -> execute();
+        }
 
+        public function actualizar (Usuario $usuario){
+            $query = 'UPDATE usuario SET nickname =?,password = ?,nombres = ?, apellidos = ?, email = ?, fecha_nacimiento = ?, descripcion =?, numero_seguidores = ?, pregunta_seguridad = ?, respuesta_seguridad = ?, foto = ?, pais_id = ?, ciudad_id = ?,fecha_creacion = ?, estado = ? WHERE id = ?';
+            $preparedStament = Conexion::conectarBD() -> prepare($query);
+            $preparedStament -> bindParam(1, $usuario -> nickname);
+            $preparedStament -> bindParam(2, $usuario -> password);
+            $preparedStament -> bindParam(3, $usuario -> nombres);
+            $preparedStament -> bindParam(4, $usuario -> email);
+            $preparedStament -> bindParam(5, $usuario -> fechaNacimiento);
+            $preparedStament -> bindParam(6, $usuario -> descripcion);
+            $preparedStament -> bindParam(7, $usuario -> numeroSeguidores);
+            $preparedStament -> bindParam(8, $usuario -> preguntaSeguridad);
+            $preparedStament -> bindParam(9, $usuario -> respuestaSeguridad);
+            $preparedStament -> bindParam(10, $usuario -> foto );
+            $preparedStament -> bindParam(11, $usuario -> pais -> id);
+            $preparedStament -> bindParam(12, $usuario -> ciudad);
+            $preparedStament -> bindParam(13, $usuario -> fechaCreacion);
+            $preparedStament -> bindParam(14, $usuario -> estado);
+            $preparedStament -> bindParam(15, $this -> id);
+            $preparedStament -> execute();
+        }
+
+        public static function eliminar (Usuario $usuario){
+            $query = 'DELETE FROM usuario WHERE id = ?';
+            $preparedStament = Conexion::conectarBD() -> prepare($query);
+            $preparedStament -> bindParam(1, $usuario -> id);
+            $preparedStament -> execute();            
+        }
         
 
 

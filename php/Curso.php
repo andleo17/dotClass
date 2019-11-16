@@ -65,7 +65,7 @@
             return $lista;
         }
 
-        public function insertar (){
+        public function registrar (){
             $query = 'INSERT INTO curso VALUES(DEFAULT,?,?,?,?,?,?,?,?,?,?)';
             $preparedStament = Conexion::conectarBD() -> prepare($query);
             $preparedStament -> bindParam(1, $this -> categoria -> id);
@@ -73,7 +73,7 @@
             $preparedStament -> bindParam(3, $this -> descripcion);
             $preparedStament -> bindParam(4, $this -> logo);
             $preparedStament -> bindParam(5, $this -> duracion);
-            $preparedStament -> bindParam(6, $this -> numero_subscriptores);
+            $preparedStament -> bindParam(6, $this -> numeroSubscriptores);
             $preparedStament -> bindParam(7, $this -> valoracion);
             $preparedStament -> bindParam(8, $this -> fechaCreacion);
             $preparedStament -> bindParam(9, $this -> fechaUltimaActualizacion);
@@ -82,8 +82,27 @@
         }
 
         public function actualizar (Curso $curso){
-            $query = 'UPDATE curso SET categoria_id = ?, titulo = ?, descripcion = ?, logo = ?, duracion = ?, numero_subscriptores`=[value-7],`valoracion`=[value-8],`fecha_creacion`=[value-9],`fecha_ultima_actualizacion`=[value-10],`usuario_id`=[value-11] WHERE 1';
+            $query = 'UPDATE curso SET categoria_id = ?, titulo = ?, descripcion = ?, logo = ?, duracion = ?, numero_subscriptores = ?, valoracion = ?, fecha_creacion = ?, fecha_ultima_actualizacion = ?, usuario_id = ? WHERE id = ? ';
+            $preparedStament = Conexion::conectarBD() -> prepare($query);
+            $preparedStament -> bindParam(1, $curso -> categoria -> id);
+            $preparedStament -> bindParam(2, $curso -> titulo);
+            $preparedStament -> bindParam(3, $curso -> descripcion);
+            $preparedStament -> bindParam(4, $curso -> logo);
+            $preparedStament -> bindParam(5, $curso -> duracion);
+            $preparedStament -> bindParam(6, $curso -> numeroSubscriptores);
+            $preparedStament -> bindParam(7, $curso -> valoracion);
+            $preparedStament -> bindParam(8, $curso -> fechaCreacion);
+            $preparedStament -> bindParam(9, $curso -> fechaUltimaActualizacion);
+            $preparedStament -> bindParam(10, $curso -> usuario -> id);
+            $preparedStament -> bindParam(11, $this -> id);
+            $preparedStament -> execute();
+        }
 
+        public static function eliminar (Curso $curso){
+            $query = 'DELETE FROM curso WHERE id = ?';
+            $preparedStament = Conexion::conectarBD() -> prepare($query);
+            $preparedStament -> bindParam(1, $curso -> id);
+            $preparedStament -> execute();            
         }
 
         
