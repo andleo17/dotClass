@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-11-2019 a las 04:49:09
+-- Tiempo de generación: 16-11-2019 a las 05:22:16
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.8
 
@@ -114,20 +114,22 @@ CREATE TABLE `bonificacion` (
 
 CREATE TABLE `categoria` (
   `id` int(11) NOT NULL,
-  `nombre` varchar(45) COLLATE utf8_spanish_ci NOT NULL
+  `nombre` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
+  `descripcion` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
+  `logo` varchar(100) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `categoria`
 --
 
-INSERT INTO `categoria` (`id`, `nombre`) VALUES
-(4, 'Arte'),
-(2, 'Ciencia'),
-(5, 'Marketing'),
-(3, 'Matemáticas'),
-(6, 'Música'),
-(1, 'Tecnología');
+INSERT INTO `categoria` (`id`, `nombre`, `descripcion`, `logo`) VALUES
+(1, 'Tecnología', '', 'tecnologia.webp'),
+(2, 'Ciencia', '', 'ciencia.webp'),
+(3, 'Matemáticas', '', 'matematicas.webp'),
+(4, 'Arte', '', 'arte.webp'),
+(5, 'Marketing', '', 'marketing.webp'),
+(6, 'Música', '', 'musica.webp');
 
 -- --------------------------------------------------------
 
@@ -220,9 +222,9 @@ CREATE TABLE `curso` (
 --
 
 INSERT INTO `curso` (`id`, `categoria_id`, `titulo`, `descripcion`, `logo`, `duracion`, `numero_subscriptores`, `valoracion`, `fecha_creacion`, `fecha_ultima_actualizacion`, `usuario_id`) VALUES
-(1, 1, 'Java Avanzado', 'En este curso aprenderás el lenguaje de programación más demandado por el sector empresarial y el mejor remunerado en la actualidad.\r\nAprenderemos todos juntos acerca de clases anidadas, clases abstractas, lambdas, JDBC y mucho más.', 'https://static.platzi.com/media/learningpath/badges/Badge-desarrollo-j', 25, 1200, 4, '2019-10-17 00:00:00', '2019-11-14 16:30:40', 1),
-(2, 1, 'HTML5 y CSS3', 'Diseña tus propias páginas o sitios web y aprende los mejores frameworks de diseño. Sé un buen arquitecto fronted con este curso.', 'https://static.platzi.com/media/achievements/badges-html-css-b0a71550-', 21, 1000, 5, '2019-10-17 00:00:00', '2019-11-14 16:30:40', 1),
-(3, 1, 'React', 'React es una de las librerías más utilizadas hoy para crear aplicaciones web. Aprende desde la creación y diseño de componentes hasta traer datos de un API.', 'https://static.platzi.com/media/achievements/badge-reactjs-avanzado-bc', 25, 1200, 3, '2019-10-17 00:00:00', '2019-11-14 16:30:40', 1);
+(1, 1, 'Java Avanzado', 'En este curso aprenderás el lenguaje de programación más demandado por el sector empresarial y el mejor remunerado en la actualidad.\r\nAprenderemos todos juntos acerca de clases anidadas, clases abstractas, lambdas, JDBC y mucho más.', 'Badge-desarrollo-java.webp', 25, 1200, 4, '2019-10-17 00:00:00', '2019-11-14 16:30:40', 1),
+(2, 1, 'HTML5 y CSS3', 'Diseña tus propias páginas o sitios web y aprende los mejores frameworks de diseño. Sé un buen arquitecto fronted con este curso.', 'badges-html-css.webp', 21, 1000, 5, '2019-10-17 00:00:00', '2019-11-14 16:30:40', 1),
+(3, 1, 'React', 'React es una de las librerías más utilizadas hoy para crear aplicaciones web. Aprende desde la creación y diseño de componentes hasta traer datos de un API.', 'badge-reactjs-avanzado.webp', 25, 1200, 3, '2019-10-17 00:00:00', '2019-11-14 16:30:40', 1);
 
 -- --------------------------------------------------------
 

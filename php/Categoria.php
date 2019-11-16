@@ -2,10 +2,31 @@
 
     require_once 'Conexion.php';
 
+    $peticion = $_SERVER['REQUEST_URI'];
+    $peticion = explode('/', $peticion);
+
+    if ($peticion[count($peticion) - 2] == 'Categoria.php') {
+        $peticion = end($peticion);
+
+        switch ($peticion) {
+            case '':
+                echo json_encode(Categoria ::listar());
+                break;
+
+            case 'crear':
+                break;
+
+            default:
+                break;
+        }
+    }
+
     class Categoria {
 
         public $id;
         public $nombre;
+        public $descripcion;
+        public $logo;
 
         public static function listar () {
             $lista = [];
@@ -37,6 +58,8 @@
             $categoria = new Categoria();
             $categoria -> id = $resultSet -> id;
             $categoria -> nombre = $resultSet -> nombre;
+            $categoria -> descripcion = $resultSet -> descripcion;
+            $categoria -> logo = $resultSet -> logo;
             return $categoria;
         }
 

@@ -4,6 +4,25 @@
     require_once 'Ciudad.php';
     require_once 'Pais.php';
 
+    $peticion = $_SERVER['REQUEST_URI'];
+    $peticion = explode('/', $peticion);
+
+    if ($peticion[count($peticion) - 2] == 'Usuario.php') {
+        $peticion = end($peticion);
+
+        switch ($peticion) {
+            case '':
+                echo json_encode(Usuario ::listar());
+                break;
+
+            case 'crear':
+                break;
+
+            default:
+                break;
+        }
+    }
+
     class Usuario {
         public $id;
         public $nickname;
@@ -61,8 +80,8 @@
             $usuario -> preguntaSeguridad = $resultSet -> pregunta_seguridad;
             $usuario -> respuestaSeguridad = $resultSet -> respuesta_seguridad;
             $usuario -> foto = $resultSet -> foto;
-            $usuario -> pais = Pais::buscar($resultSet -> pais_id);
-            $usuario -> ciudad = Ciudad::buscar($resultSet -> ciudad_id);
+            $usuario -> pais = Pais ::buscar($resultSet -> pais_id);
+            $usuario -> ciudad = Ciudad ::buscar($resultSet -> ciudad_id);
             $usuario -> fechaCreacion = $resultSet -> fecha_creacion;
             $usuario -> estado = $resultSet -> estado;
 

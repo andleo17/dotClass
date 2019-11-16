@@ -6,19 +6,21 @@
 
     $peticion = $_SERVER['REQUEST_URI'];
     $peticion = explode('/', $peticion);
-    $peticion = end($peticion);
 
-    switch ($peticion) {
-        case 'listar':
-            echo json_encode(Curso ::listar());
-            break;
+    if ($peticion[count($peticion) - 2] == 'Curso.php') {
+        $peticion = end($peticion);
 
-        case 'crear':
-            break;
+        switch ($peticion) {
+            case '':
+                echo json_encode(Curso ::listar());
+                break;
 
-        default:
-            echo "No te conozco";
-            break;
+            case 'crear':
+                break;
+
+            default:
+                break;
+        }
     }
 
     class Curso {
