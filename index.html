@@ -36,45 +36,16 @@
             <div class="filtro"></div>
             <div class="hero-contenido">
                 <h1 class="animate-pop-in">Aprende o comparte conocimientos</h1>
-                <span class="animate-pop-in">Demuéstrale al mundo que puedes enseñar lo que sabes y también aprender de los demás.</span>
+                <span class="animate-pop-in">Demuéstrale al mundo que puedes enseñar lo que sabes y también aprender de
+                    los demás.</span>
                 <a class="hero-button animate-pop-in" href="html/registro.html">Da tus primeros pasos</a>
             </div>
         </div>
         <div class="principal">
             <h3>Cursos más populares</h3>
-            <div id="lista-curso" class="card-list">
-                
-                <div class="card">
-                    <div class="card-header">
-                        <img src="https://static.platzi.com/media/achievements/1378-6fbee8c2-fb79-45db-bd28-d25878a0104c.png"
-                            alt="logo">
-                            <a class="titulo-curso" href="html/curso_vista_profe.html">Phyton</a>
-                    </div>
-                    <div class="card-body">
-                        <p>
-                            Aprende el lenguaje de programación más popular del mundo y sé parte de su enorme comunidad.
-                            Además comprende sus distintos usos en el mundo de la ciencia.
-                        </p>
-                    </div>
-                    <div class="card-footer">
-                        <span>
-                            <b>Docente:</b>sspacecowbboy
-                        </span>
-                        <span>
-                            <b>Duración:</b>36 h
-                        </span>
-                        <div class="card-rating">
-                            <span>1.1K subscriptores</span>
-                            <span class="clasificacion">
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                            </span>
-                        </div>
-                    </div>
-                </div>
+            <div id="lista-cursos" class="card-list">
+
+
                 <div class="card">
                     <div class="card-header">
                         <img src="https://static.platzi.com/media/achievements/badges-html-css-b0a71550-d5e7-4e27-aca2-f09f1321a517.png"
@@ -114,8 +85,8 @@
                 <div class="card">
                     <div class="card-header">
                         <a href="html/perfil.html" class="docente-foto">
-                        <img src="https://scontent.ftru2-1.fna.fbcdn.net/v/t1.0-9/53456356_2038856099502369_3592419085708689408_n.jpg?_nc_cat=108&_nc_ht=scontent.ftru2-1.fna&oh=25fd8b8d3489c07dafcd3f5fd6631b46&oe=5D61D117"
-                            alt="foto-perfil">
+                            <img src="https://scontent.ftru2-1.fna.fbcdn.net/v/t1.0-9/53456356_2038856099502369_3592419085708689408_n.jpg?_nc_cat=108&_nc_ht=scontent.ftru2-1.fna&oh=25fd8b8d3489c07dafcd3f5fd6631b46&oe=5D61D117"
+                                alt="foto-perfil">
                         </a>
                         <div class="docente-perfil">
                             <b>paolacieza09</b>
@@ -154,8 +125,8 @@
                 <div class="card">
                     <div class="card-header">
                         <a href="html/perfil.html" class="docente-foto">
-                        <img src="https://scontent.ftru2-1.fna.fbcdn.net/v/t1.0-9/53456356_2038856099502369_3592419085708689408_n.jpg?_nc_cat=108&_nc_ht=scontent.ftru2-1.fna&oh=25fd8b8d3489c07dafcd3f5fd6631b46&oe=5D61D117"
-                            alt="foto-perfil">
+                            <img src="https://scontent.ftru2-1.fna.fbcdn.net/v/t1.0-9/53456356_2038856099502369_3592419085708689408_n.jpg?_nc_cat=108&_nc_ht=scontent.ftru2-1.fna&oh=25fd8b8d3489c07dafcd3f5fd6631b46&oe=5D61D117"
+                                alt="foto-perfil">
                         </a>
                         <div class="docente-perfil">
                             <b>paolacieza09</b>
@@ -194,8 +165,8 @@
                 <div class="card">
                     <div class="card-header">
                         <a href="html/perfil.html" class="docente-foto">
-                        <img src="https://scontent.ftru2-1.fna.fbcdn.net/v/t1.0-9/53456356_2038856099502369_3592419085708689408_n.jpg?_nc_cat=108&_nc_ht=scontent.ftru2-1.fna&oh=25fd8b8d3489c07dafcd3f5fd6631b46&oe=5D61D117"
-                            alt="foto-perfil">
+                            <img src="https://scontent.ftru2-1.fna.fbcdn.net/v/t1.0-9/53456356_2038856099502369_3592419085708689408_n.jpg?_nc_cat=108&_nc_ht=scontent.ftru2-1.fna&oh=25fd8b8d3489c07dafcd3f5fd6631b46&oe=5D61D117"
+                                alt="foto-perfil">
                         </a>
                         <div class="docente-perfil">
                             <b>paolacieza09</b>
@@ -272,8 +243,42 @@
     </footer>
     <script>
         fetch('php/Curso.php/listar').then(d => {
-            d.text().then(data => {
+            d.json().then(data => {
                 console.log(data);
+                let $listaCursos = document.getElementById('lista-cursos');
+                let html = '';
+                data.forEach(c => {
+                    html += `
+                    <div class="card">
+                        <div class="card-header">
+                            <img src="uploads/logos/${c.logo}"
+                                alt="logo">
+                            <a class="titulo-curso" href="html/curso_vista_profe.html">${c.titulo}</a>
+                        </div>
+                        <div class="card-body">
+                            <p>${c.descripcion}</p>
+                        </div>
+                        <div class="card-footer">
+                            <span>
+                                <b>Docente:</b>${c.usuario.nombres} ${c.usuario.apellidos}
+                            </span>
+                            <span>
+                                <b>Duración:</b>${c.duracion} h
+                            </span>
+                            <div class="card-rating">
+                                <span>${c.numeroSubscriptores} subscriptores</span>
+                                <span class="clasificacion">
+                                    <i class="far fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>`
+                });
+                $listaCursos.innerHTML = html;
             })
         });
     </script>

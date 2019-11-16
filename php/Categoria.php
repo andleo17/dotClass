@@ -1,25 +1,43 @@
 <?php
 
-require_once 'Conexion.php';
+    require_once 'Conexion.php';
 
-class Categoria {
-    
-    private $id;
-    private $nombre;
+    class Categoria {
 
-    public static function listar() {
-        $query = 'SELECT * FROM categoria';
-        $cnx = Conexion::conectarBD();
-        $resultSet = $cnx -> query($query);
-        return $resultSet -> fetchAll(PDO::FETCH_CLASS, __CLASS__);
+        public $id;
+        public $nombre;
+
+        public static function listar () {
+            $lista = [];
+            $query = 'SELECT * FROM categoria';
+            $cnx = Conexion ::conectarBD();
+            $resulset = $cnx -> query($query);
+            while ($categoria = $resulset -> fetchObject()) {
+                $categoria = self ::mapear($categoria);
+                array_push($lista, $categoria);
+            }
+            return $lista;
+        }
+
+        public static function buscar ($id) {
+            $query = 'SELECT * FROM categoria WHERE id = :id';
+            $cnx = Conexion ::conectarBD();
+            $preparedStatement = $cnx -> prepare($query);
+            $preparedStatement -> bindParam(':id', $id);
+            $preparedStatement -> execute();
+            if ($categoria = $preparedStatement -> fetchObject()) {
+                $categoria = self ::mapear($categoria);
+                return $categoria;
+            } else {
+                return null;
+            }
+        }
+
+        private function mapear ($resultSet) {
+            $categoria = new Categoria();
+            $categoria -> id = $resultSet -> id;
+            $categoria -> nombre = $resultSet -> nombre;
+            return $categoria;
+        }
+
     }
-
-    public static function buscar($id) {
-        $query = 'SELECT * FROM categoria WHERE id = :id';
-        $cnx = Conexion::conectarBD();
-        $cnx -> prepare($query);
-        $cnx -> bindParam(':id', $id);
-        $cnx -> execute();
-        return $cnx -> fetchObject(__CLASS__);
-    }
-}

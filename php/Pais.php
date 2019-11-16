@@ -1,24 +1,42 @@
 <?php
-require_once 'Conexion.php';
+    require_once 'Conexion.php';
 
-class pais{
-    private $id;
-    private $nombre;
-    
-    public static function listar() {
-        $query = 'SELECT * FROM pais';
-        $cnx = Conexion::conectarBD();
-        $resulset = $cnx ->query($query);
-        return $resulset -> fetchAll(PDO::FETCH_CLASS,__CLASS__);
+    class Pais {
+
+        public $id;
+        public $nombre;
+
+        public static function listar () {
+            $lista = [];
+            $query = 'SELECT * FROM pais';
+            $cnx = Conexion ::conectarBD();
+            $resulset = $cnx -> query($query);
+            while ($pais = $resulset -> fetchObject()) {
+                $pais = self ::mapear($pais);
+                array_push($lista, $pais);
+            }
+            return $lista;
+        }
+
+        public static function buscar ($id) {
+            $query = 'SELECT * FROM pais WHERE id = :id';
+            $cnx = Conexion ::conectarBD();
+            $preparedStatement = $cnx -> prepare($query);
+            $preparedStatement -> bindParam(':id', $id);
+            $preparedStatement -> execute();
+            if ($pais = $preparedStatement -> fetchObject()) {
+                $pais = self ::mapear($pais);
+                return $pais;
+            } else {
+                return null;
+            }
+        }
+
+        private function mapear ($resultSet) {
+            $pais = new Pais();
+            $pais -> id = $resultSet -> id;
+            $pais -> nombre = $resultSet -> nombre;
+            return $pais;
+        }
+
     }
-
-    public static function buscar($id) {
-        $query = 'SELECT * FROM pais WHERE id = : id';
-        $cnx = Conexion::conectarBD();
-        $cnx -> prepare($query);
-        $cnx -> bindParam(':id',$id);
-        $cnx -> execute();
-        return $cnx -> fetchObject(__CLASS__);
-    }
-
-}

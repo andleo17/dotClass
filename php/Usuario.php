@@ -1,27 +1,73 @@
 <?php
 
-class Usuario {
-    private $id;
-    private $nickname;
-    private $password;
-    private $nombres;
-    private $email;
-    private $fecha_nacimiento;
-    private $descripcion;
-    private $numero_seguidores;
-    private $pregunta_seguridad;
-    private $respuesta_seguridad;
-    private $foto;
-    private $pais;
-    private $ciudad;
+    require_once 'Conexion.php';
+    require_once 'Ciudad.php';
+    require_once 'Pais.php';
 
-    public static function listar() {
-        $query = 'SELECT * FROM usuario';
-        $cnx = Conexion::conectarBD();
-        $resulset = $cnx ->query($query);
-        return $resulset -> fetchAll(PDO::FETCH_CLASS,__CLASS__);
+    class Usuario {
+        public $id;
+        public $nickname;
+        public $password;
+        public $nombres;
+        public $email;
+        public $fechaNacimiento;
+        public $descripcion;
+        public $numeroSeguidores;
+        public $preguntaSeguridad;
+        public $respuestaSeguridad;
+        public $foto;
+        public $pais;
+        public $ciudad;
+        public $fechaCreacion;
+        public $estado;
+
+        public static function listar () {
+            $lista = [];
+            $query = 'SELECT * FROM usuario';
+            $cnx = Conexion ::conectarBD();
+            $resulset = $cnx -> query($query);
+            while ($usuario = $resulset -> fetchObject()) {
+                $usuario = self ::mapear($usuario);
+                array_push($lista, $usuario);
+            }
+            return $lista;
+        }
+
+        public static function buscar ($id) {
+            $query = 'SELECT * FROM usuario WHERE id = :id';
+            $cnx = Conexion ::conectarBD();
+            $preparedStatement = $cnx -> prepare($query);
+            $preparedStatement -> bindParam(':id', $id);
+            $preparedStatement -> execute();
+            if ($usuario = $preparedStatement -> fetchObject()) {
+                $usuario = self ::mapear($usuario);
+                return $usuario;
+            } else {
+                return null;
+            }
+        }
+
+        private function mapear ($resultSet) {
+            $usuario = new Usuario();
+            $usuario -> id = $resultSet -> id;
+            $usuario -> nickname = $resultSet -> nickname;
+            $usuario -> password = $resultSet -> password;
+            $usuario -> nombres = $resultSet -> nombres;
+            $usuario -> apellidos = $resultSet -> apellidos;
+            $usuario -> email = $resultSet -> email;
+            $usuario -> fechaNacimiento = $resultSet -> fecha_nacimiento;
+            $usuario -> descripcion = $resultSet -> descripcion;
+            $usuario -> numeroSeguidores = $resultSet -> numero_seguidores;
+            $usuario -> preguntaSeguridad = $resultSet -> pregunta_seguridad;
+            $usuario -> respuestaSeguridad = $resultSet -> respuesta_seguridad;
+            $usuario -> foto = $resultSet -> foto;
+            $usuario -> pais = Pais::buscar($resultSet -> pais_id);
+            $usuario -> ciudad = Ciudad::buscar($resultSet -> ciudad_id);
+            $usuario -> fechaCreacion = $resultSet -> fecha_creacion;
+            $usuario -> estado = $resultSet -> estado;
+
+            return $usuario;
+        }
+
+
     }
-    
-
-
-}

@@ -8,8 +8,8 @@ class Conexion {
         $basedatos = "dotClass";
         $usuario = "root";
         $clave 	 = "";
-        $cadena = "$driver:host=$servidor;dbname=$basedatos";
-        $cnx = new PDO($cadena,$usuario,$clave);
+        $cadena = "$driver:host=$servidor;dbname=$basedatos;charset=UTF8;";
+        $cnx = new PDO($cadena,$usuario,$clave, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
         return $cnx;
     }
     
