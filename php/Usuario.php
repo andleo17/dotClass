@@ -40,6 +40,28 @@
         public $fechaCreacion;
         public $estado;
 
+        private function mapear ($resultSet) {
+            $usuario = new Usuario();
+            $usuario -> id = $resultSet -> id;
+            $usuario -> nickname = $resultSet -> nickname;
+            $usuario -> password = $resultSet -> password;
+            $usuario -> nombres = $resultSet -> nombres;
+            $usuario -> apellidos = $resultSet -> apellidos;
+            $usuario -> email = $resultSet -> email;
+            $usuario -> fechaNacimiento = $resultSet -> fecha_nacimiento;
+            $usuario -> descripcion = $resultSet -> descripcion;
+            $usuario -> numeroSeguidores = $resultSet -> numero_seguidores;
+            $usuario -> preguntaSeguridad = $resultSet -> pregunta_seguridad;
+            $usuario -> respuestaSeguridad = $resultSet -> respuesta_seguridad;
+            $usuario -> foto = $resultSet -> foto;
+            $usuario -> pais = Pais ::buscar($resultSet -> pais_id);
+            $usuario -> ciudad = Ciudad ::buscar($resultSet -> ciudad_id);
+            $usuario -> fechaCreacion = $resultSet -> fecha_creacion;
+            $usuario -> estado = $resultSet -> estado;
+
+            return $usuario;
+        }
+
         public static function listar () {
             $lista = [];
             $query = 'SELECT * FROM usuario';
@@ -66,27 +88,9 @@
             }
         }
 
-        private function mapear ($resultSet) {
-            $usuario = new Usuario();
-            $usuario -> id = $resultSet -> id;
-            $usuario -> nickname = $resultSet -> nickname;
-            $usuario -> password = $resultSet -> password;
-            $usuario -> nombres = $resultSet -> nombres;
-            $usuario -> apellidos = $resultSet -> apellidos;
-            $usuario -> email = $resultSet -> email;
-            $usuario -> fechaNacimiento = $resultSet -> fecha_nacimiento;
-            $usuario -> descripcion = $resultSet -> descripcion;
-            $usuario -> numeroSeguidores = $resultSet -> numero_seguidores;
-            $usuario -> preguntaSeguridad = $resultSet -> pregunta_seguridad;
-            $usuario -> respuestaSeguridad = $resultSet -> respuesta_seguridad;
-            $usuario -> foto = $resultSet -> foto;
-            $usuario -> pais = Pais ::buscar($resultSet -> pais_id);
-            $usuario -> ciudad = Ciudad ::buscar($resultSet -> ciudad_id);
-            $usuario -> fechaCreacion = $resultSet -> fecha_creacion;
-            $usuario -> estado = $resultSet -> estado;
+        
 
-            return $usuario;
-        }
+        
 
 
     }

@@ -28,6 +28,15 @@
         public $descripcion;
         public $logo;
 
+        private function mapear ($resultSet) {
+            $categoria = new Categoria();
+            $categoria -> id = $resultSet -> id;
+            $categoria -> nombre = $resultSet -> nombre;
+            $categoria -> descripcion = $resultSet -> descripcion;
+            $categoria -> logo = $resultSet -> logo;
+            return $categoria;
+        }
+
         public static function listar () {
             $lista = [];
             $query = 'SELECT * FROM categoria';
@@ -54,13 +63,8 @@
             }
         }
 
-        private function mapear ($resultSet) {
-            $categoria = new Categoria();
-            $categoria -> id = $resultSet -> id;
-            $categoria -> nombre = $resultSet -> nombre;
-            $categoria -> descripcion = $resultSet -> descripcion;
-            $categoria -> logo = $resultSet -> logo;
-            return $categoria;
-        }
+        
+
+        
 
     }

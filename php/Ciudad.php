@@ -7,6 +7,13 @@
         public $id;
         public $nombre;
 
+        private function mapear ($resultSet) {
+            $ciudad = new Ciudad();
+            $ciudad -> id = $resultSet -> id;
+            $ciudad -> nombre = $resultSet -> nombre;
+            return $ciudad;
+        }
+        
         public static function listar () {
             $lista = [];
             $query = 'SELECT * FROM ciudad';
@@ -33,11 +40,6 @@
             }
         }
 
-        private function mapear ($resultSet) {
-            $ciudad = new Ciudad();
-            $ciudad -> id = $resultSet -> id;
-            $ciudad -> nombre = $resultSet -> nombre;
-            return $ciudad;
-        }
+        
 
     }
