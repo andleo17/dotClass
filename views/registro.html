@@ -8,18 +8,18 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
         integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-    <title>Agregar curso</title>
+    <title>Registrarse</title>
 </head>
 
 <body>
     <nav>
         <div class="nav-items">
-            <a href="../index.html" class="logo">
+            <a href="index.php" class="logo">
                 <span class="dot">dot</span>
                 <span class="class">Class</span>
             </a>
             <ul>
-                <li><a href="explorar.html">EXPLORAR</a></li>
+                <li><a href="explorar.php">EXPLORAR</a></li>
                 <li><a href="blog.html">BLOG</a></li>
                 <li><a href="contacto.html">CONTÁCTANOS</a></li>
             </ul>
@@ -29,55 +29,36 @@
             <a href="iniciar_sesion.html"><i class="fas fa-user"></i></a>
         </div>
     </nav>
-    <div class="container">
-        <div class="informacion-curso">
-            <div class="icono-curso">
-                <i class="far fa-image"></i>
-                <label for="cargar-foto">Agregar ícono</label>
-                <input type="file" name="cargar-foto" id="cargar-foto"></input>
-            </div>
-            <div class="curso-titulo">
-                <input type="text" name="txtTituloCurso" id="txtTituloCurso" placeholder="Título del curso">
-                <textarea name="txtDescripcionCurso" id="txtDescripcionCurso"
-                    placeholder="Descripción del curso"></textarea>
-            </div>
-        </div>
-        <div class="precursos">
-            <span>Plan de estudios:</span>
-            <div class="lista-pre">
-                <a href="" id="agregar-pre">
-                    <i class="fas fa-plus"></i>
-                    <span>Agregar curso prerequisito</span>
-                </a>
-            </div>
-        </div>
-        <div class="contenido-curso">
-            <span>Contenido:</span>
-            <div class="lista-contenido">
-                <div class="curso-seccion">
-                    <div class="curso-seccion-titulo">
-                        <span>Título del curso</span>
-                        <a href="" class="editar"><i class="fas fa-pen"></i></a>
-                    </div>
-                    <div class="clases">
-                        <a href="" id="agregar-clase">
-                            <i class="fas fa-plus"></i>
-                            <span>Agregar clase</span>
-                        </a>
-                    </div>
+    <div class="container centrado">
+        <form>
+            <span>Regístrate</span>
+            <div class="datos-usuario">
+                <div class="inputs">
+                    <input type="text" name="usuario" id="usuario" placeholder="Usuario">
+                    <hr>
                 </div>
-                <a href="" id="agregar-seccion">
-                    <i class="fas fa-plus"></i>
-                    <span>Agregar sección</span>
-                </a>
+                <div class="inputs">
+                    <input type="email" name="email" id="email" placeholder="Correo electrónico">
+                    <hr>
+                </div>
+                <div class="inputs">
+                    <input type="password" name="password" id="password" placeholder="Contraseña">
+                    <hr>
+                </div>
+                <div class="inputs">
+                    <input type="password" name="confirm_password" id="confirm_password"
+                        placeholder="Confirmar contraseña">
+                    <hr>
+                </div>
             </div>
-        </div>
-        <div class="boton-container">
-            <a href="" class="guardar-cambios">Guardar cambios</a>
-        </div>
+            <div class="extras">
+                <a href="iniciar_sesion.html">Ya tengo una cuenta.</a>
+            </div>
+            <button class="btnSiguiente">Siguiente</button>
+        </form>
     </div>
     <footer>
-        <a href="../index.html" class="logo">
+        <a href="index.php" class="logo">
             <span class="dot">dot</span>
             <span class="class">Class</span>
         </a>

@@ -1,33 +1,3 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
-          integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-    <title>dotClass</title>
-</head>
-
-<body>
-<nav class="animate-pop-in">
-    <div class="nav-items animate-pop-in">
-        <a href="/dotclass" class="logo">
-            <span class="dot">dot</span>
-            <span class="class">Class</span>
-        </a>
-        <ul>
-            <li><a href="html/explorar.html">EXPLORAR</a></li>
-            <li><a href="html/blog.html">BLOG</a></li>
-            <li><a href="html/contacto.html">CONTÁCTANOS</a></li>
-        </ul>
-    </div>
-    <div class="nav-botones">
-        <a href="html/notificaciones.html"><i class="fas fa-bell"></i></a>
-        <a href="html/iniciar_sesion.html"><i class="fas fa-user"></i></a>
-    </div>
-</nav>
 <div class="container">
     <div class="hero">
         <div class="fondo">
@@ -38,7 +8,7 @@
             <h1 class="animate-pop-in">Aprende o comparte conocimientos</h1>
             <span class="animate-pop-in">Demuéstrale al mundo que puedes enseñar lo que sabes y también aprender de
                     los demás.</span>
-            <a class="hero-button animate-pop-in" href="html/registro.html">Da tus primeros pasos</a>
+            <a class="hero-button animate-pop-in" href="registro.html">Da tus primeros pasos</a>
         </div>
     </div>
     <div class="principal">
@@ -50,44 +20,8 @@
         <div id="lista-docentes" class="card-list"></div>
     </div>
 </div>
-<footer>
-    <a href="index.html" class="logo">
-        <span class="dot">dot</span>
-        <span class="class">Class</span>
-    </a>
-    <div class="footer-datos">
-        <div class="footer-informacion">
-            <ul>
-                <li><a href="html/about.html">Acerca de nosotros</a></li>
-                <li><a href="html/contacto.html">Contacto</a></li>
-                <li><a href="html/terminos-condiciones.html">Términos y Condiciones</a></li>
-            </ul>
-        </div>
-        <div class="footer-informacion">
-            <ul>
-                <li><a href=""><i class="fab fa-facebook-square"></i>Facebook</a></li>
-                <li><a href=""><i class="fab fa-twitter-square"></i>Twitter</a></li>
-                <li><a href=""><i class="fab fa-instagram"></i>Instagram</a></li>
-            </ul>
-        </div>
-        <form class="footer-informacion">
-            <span>¿Quieres que te avisemos cuando haya novedades?</span>
-            <div class="correo">
-                <input type="email" placeholder="Correo electrónico">
-                <button>OK</button>
-            </div>
-        </form>
-        <div class="datos">
-            <ul>
-                <li>Av. San Josemaría Escrivá de Balaguer N° 855 Chiclayo - Perú</li>
-                <li>+51 942 993 030</li>
-                <li>contacto@dotclass.com</li>
-            </ul>
-        </div>
-    </div>
-</footer>
 <script>
-    fetch('php/Curso.php/').then(d => {
+    fetch('clase/Curso/').then(d => {
         d.json().then(data => {
             let $listaCursos = document.getElementById('lista-cursos');
             let html = '';
@@ -95,9 +29,9 @@
                 html += `
                     <div class="card">
                         <div class="card-header">
-                            <img src="uploads/logos/${c.logo}"
+                            <img src="<?php echo SERVER_URL?>uploads/logos/${c.logo}"
                                 alt="logo">
-                            <a class="titulo-curso" href="html/curso_vista_profe.html">${c.titulo}</a>
+                            <a class="titulo-curso" href="curso_vista_profe.html">${c.titulo}</a>
                         </div>
                         <div class="card-body">
                             <p>${c.descripcion}</p>
@@ -125,7 +59,7 @@
             $listaCursos.innerHTML = html;
         })
     });
-    fetch('php/Usuario.php/').then(d => {
+    fetch('clase/Usuario/').then(d => {
         d.json().then(data => {
             let $listaDocentes = document.getElementById('lista-docentes');
             let html = '';
@@ -133,7 +67,7 @@
                 html += `
                     <div class="card">
                     <div class="card-header">
-                        <a href="html/perfil.html" class="docente-foto">
+                        <a href="perfil.html" class="docente-foto">
                             <img src="${docente.foto}">
                         </a>
                         <div class="docente-perfil">
@@ -148,12 +82,12 @@
                         <span>
                             <b>N° de cursos que enseña:</b>
                             15 cursos
-                            <a href="html/perfil.html" class="flecha"><i class="fas fa-chevron-right"></i></a>
+                            <a href="perfil.html" class="flecha"><i class="fas fa-chevron-right"></i></a>
                         </span>
                         <span>
                             <b>N° de cursos que aprendió:</b>
                             19 cursos
-                            <a href="html/perfil.html" class="flecha"><i class="fas fa-chevron-right"></i></a>
+                            <a href="perfil.html" class="flecha"><i class="fas fa-chevron-right"></i></a>
                         </span>
                         <span>
                             <b>Cursos destacados:</b>
@@ -172,6 +106,3 @@
     })
 
 </script>
-</body>
-
-</html>

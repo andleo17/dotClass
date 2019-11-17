@@ -2,24 +2,7 @@
 
     require_once 'Conexion.php';
 
-    $peticion = $_SERVER['REQUEST_URI'];
-    $peticion = explode('/', $peticion);
-
-    if ($peticion[count($peticion) - 2] == 'Categoria.php') {
-        $peticion = end($peticion);
-
-        switch ($peticion) {
-            case '':
-                echo json_encode(Categoria ::listar());
-                break;
-
-            case 'crear':
-                break;
-
-            default:
-                break;
-        }
-    }
+    Categoria ::ejecutar($_SERVER['REQUEST_URI']);
 
     class Categoria {
 
@@ -50,10 +33,10 @@
         }
 
         public static function buscar ($id) {
-            $query = 'SELECT * FROM categoria WHERE id = :id';
+            $query = 'SELECT * FROM categoria WHERE id = ?';
             $cnx = Conexion ::conectarBD();
             $preparedStatement = $cnx -> prepare($query);
-            $preparedStatement -> bindParam(':id', $id);
+            $preparedStatement -> bindParam(1, $id);
             $preparedStatement -> execute();
             if ($categoria = $preparedStatement -> fetchObject()) {
                 $categoria = self ::mapear($categoria);
@@ -63,8 +46,24 @@
             }
         }
 
-        
+        public static function ejecutar ($request) {
+            $peticion = explode('/', $request);
+            if ($peticion[count($peticion) - 2] == __CLASS__) {
+                $peticion = end($peticion);
+                switch ($peticion) {
+                    case '':
+                        echo json_encode(self ::listar());
+                        break;
 
-        
+                    case 'crear':
+                        echo '';
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+        }
+
 
     }

@@ -5,57 +5,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Contáctanos</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
         integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <title>Categorías</title>
 </head>
 
 <body>
     <nav>
         <div class="nav-items">
-            <a href="../index.html" class="logo">
+            <a href="index.php" class="logo">
                 <span class="dot">dot</span>
                 <span class="class">Class</span>
             </a>
             <ul>
-                <li><a href="explorar.html">EXPLORAR</a></li>
+                <li><a href="explorar.php">EXPLORAR</a></li>
                 <li><a href="blog.html">BLOG</a></li>
                 <li><a href="contacto.html">CONTÁCTANOS</a></li>
             </ul>
         </div>
         <div class="nav-botones">
+            <a class="carrito-icono" href="carrito.html">
+                <i class="fas fa-shopping-cart"></i>
+                <span id="cantidad-carrito">0</span>
+            </a>
             <a href="notificaciones.html"><i class="fas fa-bell"></i></a>
             <a href="iniciar_sesion.html"><i class="fas fa-user"></i></a>
         </div>
     </nav>
     <div class="container">
-        <div class="presentacion">
-            <h1 class="title animate-pop-in">Contáctanos</h1>
-            <p class="central-mssg animate-pop-in">Puedes darnos tu número telefónico, e-mail o chatea con nosotros.</p>
+        <div class="categoria-container">
+            <img src="https://static.platzi.com/media/achievements/1341-e95a313d-5bfe-42ae-a476-f7ae1a665bd6.png"
+                alt="icono-curso" class="categoria-icono">
+            <div class="categoria-info">
+                <span>Tecnología</span>
+                <p>Aprende el siglo XXI, la era de información y la tecnología te esperan para dejar huella o aprende
+                    por diversión.</p>
+            </div>
         </div>
-        <div class="info-contacto animate-pop-in">
-            <div class="information-box">
-                <i class="fas fa-phone"></i>
-                <h2>Llámanos</h2>
-                <span>+51 942 993 030</span>
-                <span>08:00 - 20:00, Lunes a Viernes</span>
-            </div>
-            <div class="information-box">
-                <i class="fas fa-comments"></i>
-                <h2>Chatea con nosotros</h2>
-                <span>Habla con uno de nuestro equipo</span>
-                <span>08:00 - 20:00, Lunes a Viernes</span>
-            </div>
-            <div class="information-box">
-                <i class="fas fa-envelope"></i>
-                <h2>Escríbenos</h2>
-                <span>Envíanos un email y en un máximo de 48 horas te respondemos</span>
-            </div>
+        <div class="floro">
+            <span>Escoge qué quieres aprender de nuestro catálogo</span>
+        </div>
+        <div class="card-list margin-bottom">
         </div>
     </div>
     <footer>
-        <a href="../index.html" class="logo">
+        <a href="index.php" class="logo">
             <span class="dot">dot</span>
             <span class="class">Class</span>
         </a>
@@ -90,6 +85,8 @@
             </div>
         </div>
     </footer>
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script src="../js/main.js"></script>
 </body>
 
 </html>

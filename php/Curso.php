@@ -4,24 +4,7 @@
     require_once 'Categoria.php';
     require_once 'Usuario.php';
 
-    $peticion = $_SERVER['REQUEST_URI'];
-    $peticion = explode('/', $peticion);
-
-    if ($peticion[count($peticion) - 2] == 'Curso.php') {
-        $peticion = end($peticion);
-
-        switch ($peticion) {
-            case '':
-                echo json_encode(Curso ::listar());
-                break;
-
-            case 'crear':
-                break;
-
-            default:
-                break;
-        }
-    }
+    Curso ::ejecutar($_SERVER['REQUEST_URI']);
 
     class Curso {
 
@@ -65,9 +48,9 @@
             return $lista;
         }
 
-        public function registrar (){
+        public function registrar () {
             $query = 'INSERT INTO curso VALUES(DEFAULT,?,?,?,?,?,?,?,?,?,?)';
-            $preparedStament = Conexion::conectarBD() -> prepare($query);
+            $preparedStament = Conexion ::conectarBD() -> prepare($query);
             $preparedStament -> bindParam(1, $this -> categoria -> id);
             $preparedStament -> bindParam(2, $this -> titulo);
             $preparedStament -> bindParam(3, $this -> descripcion);
@@ -81,9 +64,9 @@
             $preparedStament -> execute();
         }
 
-        public function actualizar (Curso $curso){
+        public function actualizar (Curso $curso) {
             $query = 'UPDATE curso SET categoria_id = ?, titulo = ?, descripcion = ?, logo = ?, duracion = ?, numero_subscriptores = ?, valoracion = ?, fecha_creacion = ?, fecha_ultima_actualizacion = ?, usuario_id = ? WHERE id = ? ';
-            $preparedStament = Conexion::conectarBD() -> prepare($query);
+            $preparedStament = Conexion ::conectarBD() -> prepare($query);
             $preparedStament -> bindParam(1, $curso -> categoria -> id);
             $preparedStament -> bindParam(2, $curso -> titulo);
             $preparedStament -> bindParam(3, $curso -> descripcion);
@@ -98,13 +81,30 @@
             $preparedStament -> execute();
         }
 
-        public static function eliminar (Curso $curso){
+        public static function eliminar (Curso $curso) {
             $query = 'DELETE FROM curso WHERE id = ?';
-            $preparedStament = Conexion::conectarBD() -> prepare($query);
+            $preparedStament = Conexion ::conectarBD() -> prepare($query);
             $preparedStament -> bindParam(1, $curso -> id);
-            $preparedStament -> execute();            
+            $preparedStament -> execute();
         }
 
-        
+        public static function ejecutar ($request) {
+            $peticion = explode('/', $request);
+            if ($peticion[count($peticion) - 2] == __CLASS__) {
+                $peticion = end($peticion);
+                switch ($peticion) {
+                    case '':
+                        echo json_encode(self ::listar());
+                        break;
+
+                    case 'crear':
+                        echo '';
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+        }
 
     }

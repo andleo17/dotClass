@@ -19,10 +19,10 @@
         }
 
         public static function buscar ($id) {
-            $query = 'SELECT * FROM pais WHERE id = :id';
+            $query = 'SELECT * FROM pais WHERE id = ?';
             $cnx = Conexion ::conectarBD();
             $preparedStatement = $cnx -> prepare($query);
-            $preparedStatement -> bindParam(':id', $id);
+            $preparedStatement -> bindParam(1, $id);
             $preparedStatement -> execute();
             if ($pais = $preparedStatement -> fetchObject()) {
                 $pais = self ::mapear($pais);

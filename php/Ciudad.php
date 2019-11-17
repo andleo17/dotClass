@@ -27,10 +27,10 @@
         }
 
         public static function buscar ($id) {
-            $query = 'SELECT * FROM ciudad WHERE id = :id';
+            $query = 'SELECT * FROM ciudad WHERE id = ?';
             $cnx = Conexion ::conectarBD();
             $preparedStatement = $cnx -> prepare($query);
-            $preparedStatement -> bindParam(':id', $id);
+            $preparedStatement -> bindParam(1, $id);
             $preparedStatement -> execute();
             if ($ciudad = $preparedStatement -> fetchObject()) {
                 $ciudad = self ::mapear($ciudad);

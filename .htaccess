@@ -1,0 +1,7 @@
+Options All -Indexes
+ErrorDocument 404 /dotclass/views/error/404.html
+
+RewriteEngine On
+DirectoryIndex app.php
+RewriteRule ^clase/([a-zA-Z]+)/([a-zA-Z0-9/]+)?$ php/$1.php/$2
+RewriteRule ^([a-zA-Z0-9/\-]+)$ app.php?view=$1
