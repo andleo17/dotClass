@@ -48,10 +48,6 @@ nav a {
 	color: white;
 }
 
-a:hover {
-	color: white !important;
-}
-
 .nav-botones {
 	display: flex;
 	align-items: center;
@@ -60,6 +56,23 @@ a:hover {
 .nav-botones a {
 	font-size: 14px;
 	margin: 0px 10px;
+}
+
+#btn-perfil {
+	padding: 10px 15px;
+	background-color: white;
+	color: black;
+	display: flex;
+	align-items: center;
+	border-radius: 15px;
+}
+
+#btn-perfil img {
+	margin-right: 10px;
+	border-radius: 50%;
+	width: 20px;
+	height: 20px;
+	object-fit: cover;
 }
 
 ul {

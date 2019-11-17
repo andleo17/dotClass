@@ -31,6 +31,7 @@
         }).then(res => {
             res.json().then(data => {
                 sessionStorage.setItem('usuario', JSON.stringify(data));
+                location.href = 'http://localhost/dotclass/';
             })
         });
     }

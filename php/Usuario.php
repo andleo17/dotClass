@@ -33,6 +33,8 @@
             $preparedStatement -> execute();
             if ($usuario = $preparedStatement -> fetchObject()) {
                 $usuario = self ::mapear($usuario);
+                session_start();
+                $_SESSION['usuario'] = $usuario;
                 return $usuario;
             } else {
                 return null;

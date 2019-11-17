@@ -68,7 +68,7 @@
                     <div class="card">
                     <div class="card-header">
                         <a href="perfil.html" class="docente-foto">
-                            <img src="${docente.foto}">
+                            <img src="uploads/perfiles/${docente.foto}">
                         </a>
                         <div class="docente-perfil">
                             <b>${docente.nickname}</b>
