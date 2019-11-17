@@ -76,10 +76,10 @@
         }
 
         public static function buscar ($id) {
-            $query = 'SELECT * FROM usuario WHERE id = ?';
+            $query = 'SELECT * FROM usuario WHERE id = :id OR nickname = :id';
             $cnx = Conexion ::conectarBD();
             $preparedStatement = $cnx -> prepare($query);
-            $preparedStatement -> bindParam(1, $id);
+            $preparedStatement -> bindParam(':id', $id);
             $preparedStatement -> execute();
             if ($usuario = $preparedStatement -> fetchObject()) {
                 $usuario = self ::mapear($usuario);
@@ -141,7 +141,7 @@
 
         public static function ejecutar ($request) {
             $peticion = explode('/', $request);
-            if ($peticion[count($peticion) - 2] == __CLASS__) {
+            if (in_array(__CLASS__, $peticion)) {
                 $peticion = end($peticion);
                 switch ($peticion) {
                     case '':
@@ -157,6 +157,7 @@
                         break;
 
                     default:
+                        return self ::buscar($peticion);
                         break;
                 }
             }

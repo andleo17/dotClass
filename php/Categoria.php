@@ -48,7 +48,7 @@
 
         public static function ejecutar ($request) {
             $peticion = explode('/', $request);
-            if ($peticion[count($peticion) - 2] == __CLASS__) {
+            if (in_array(__CLASS__, $peticion)) {
                 $peticion = end($peticion);
                 switch ($peticion) {
                     case '':

@@ -1,7 +1,8 @@
 <?php
     require_once 'php/Usuario.php';
+    $usuario = Usuario::ejecutar(str_replace('dotclass/perfil', 'clase/Usuario', $_SERVER['REQUEST_URI']));
 
-    $cumpleanos = new DateTime($_SESSION['usuario'] -> fechaNacimiento);
+    $cumpleanos = new DateTime($usuario -> fechaNacimiento);
     $hoy = new DateTime();
     $annos = $hoy->diff($cumpleanos);
 
@@ -11,20 +12,20 @@
             <div class="profile-container">
                 <div class="profile">
                     <div class="profile-header">
-                        <img src="../uploads/perfiles/{$_SESSION['usuario'] -> foto}" alt="user_img" class="profile-photo">
-                        <span class="profile-username">{$_SESSION['usuario'] -> nickname}</span>
-                        <span class="profile-subs">{$_SESSION['usuario'] -> numeroSeguidores} seguidores</span>
+                        <img src="../uploads/perfiles/{$usuario -> foto}" alt="user_img" class="profile-photo">
+                        <span class="profile-username">{$usuario -> nickname}</span>
+                        <span class="profile-subs">{$usuario -> numeroSeguidores} seguidores</span>
                     </div>
                     <div class="profile-body">
                         <ul>
                             <li class="profile-info">Nombre:</li>
-                            <li class="profile-data">{$_SESSION['usuario'] -> nombres} {$_SESSION['usuario'] -> apellidos}</li>
+                            <li class="profile-data">{$usuario -> nombres} {$usuario -> apellidos}</li>
                             <li class="profile-info">Edad:</li>
                             <li class="profile-data">{$annos -> y} años</li>
                             <li class="profile-info">Correo electrónico:</li>
-                            <li class="profile-data">{$_SESSION['usuario'] -> email}</li>
+                            <li class="profile-data">{$usuario -> email}</li>
                             <li class="profile-info">Lugar de procedencia:</li>
-                            <li class="profile-data">{$_SESSION['usuario'] -> ciudad -> nombre}, {$_SESSION['usuario'] -> pais -> nombre}</li>
+                            <li class="profile-data">{$usuario -> ciudad -> nombre}, {$usuario -> pais -> nombre}</li>
                             <li class="profile-info">Trayectoria académica:</li>
                             <li class="profile-data">Ingeniería de Sistemas y Computación (Maestría) - USAT, Perú - 2018
                             </li>
@@ -38,7 +39,7 @@
                 <div class="profile-about">
                     <div class="profile-about-header">
                         <h2>Sobre mí</h2>
-                        <p>"{$_SESSION['usuario'] -> descripcion}"</p>
+                        <p>"{$usuario -> descripcion}"</p>
                     </div>
                     <div class="profile-about-body">
                         <div class="experience">

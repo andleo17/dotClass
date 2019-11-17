@@ -36,7 +36,7 @@
                 echo "<a href='" . SERVER_URL . "inicio-sesion/'><i class='fas fa-user'></i></a>";
             } else {
                 echo "
-                    <a id='btn-perfil' href='" . SERVER_URL . "perfil/'>
+                    <a id='btn-perfil' href='" . SERVER_URL . "perfil/{$_SESSION['usuario'] -> nickname}'>
                         <img src='". SERVER_URL . "uploads/perfiles/{$_SESSION['usuario'] -> foto}' alt='foto'>
                         <b>{$_SESSION['usuario'] -> nombres} {$_SESSION['usuario'] -> apellidos}</b>
                     </a>";

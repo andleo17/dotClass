@@ -67,7 +67,7 @@
                 html += `
                     <div class="card">
                     <div class="card-header">
-                        <a href="perfil.html" class="docente-foto">
+                        <a href="perfil/${docente.nickname}" class="docente-foto">
                             <img src="uploads/perfiles/${docente.foto}">
                         </a>
                         <div class="docente-perfil">
