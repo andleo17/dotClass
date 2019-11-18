@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-11-2019 a las 05:40:51
+-- Tiempo de generación: 18-11-2019 a las 22:58:46
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.8
 
@@ -355,6 +355,14 @@ CREATE TABLE `seguimiento` (
   `curso_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `seguimiento`
+--
+
+INSERT INTO `seguimiento` (`usuario_id`, `curso_id`) VALUES
+(2, 1),
+(2, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -384,7 +392,7 @@ CREATE TABLE `usuario` (
   `numero_seguidores` int(11) NOT NULL DEFAULT 0,
   `pregunta_seguridad` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
   `respuesta_seguridad` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `foto` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `foto` varchar(100) COLLATE utf8_spanish_ci NOT NULL DEFAULT 'user.jpg',
   `pais_id` int(11) NOT NULL,
   `ciudad_id` int(11) NOT NULL,
   `fecha_creacion` datetime NOT NULL DEFAULT current_timestamp(),
@@ -397,8 +405,7 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`id`, `nickname`, `password`, `nombres`, `apellidos`, `email`, `fecha_nacimiento`, `descripcion`, `numero_seguidores`, `pregunta_seguridad`, `respuesta_seguridad`, `foto`, `pais_id`, `ciudad_id`, `fecha_creacion`, `estado`) VALUES
 (1, 'Andle17', '123456789', 'Andres', 'Baldarrago', 'ab@gmail.com', '2000-07-01', 'Me gusta jugar y enseñar.', 0, '¿Quién soy?', 'nose', 'Andle17.png', 1, 1, '2019-11-14 16:42:51', 1),
-(2, 'CinthyaYomona', '123', 'Cinthya Lisseth', 'Yomona Parraguez', 'cinthya@gmail.com', '1999-05-23', 'Se suponde que me debo de bañar, que mis convers ya no aguantan más!!...Pero llegas tú !! :) <3', 0, 'Inspiraciíon?', 'Priscila', '20180319_103506.jpg', 1, 1, '2019-11-14 16:42:51', 1),
-(3, 'Prueba', '123', 'Carlota', 'Benavides', 'prueba@gmail.com', '1990-12-24', 'Es calmada, cordial, agradable, tierna, leal y cariñosa y se suele olvidar las cosas de una manera muy rápida, eso la caracteriza.', 100, '¿Esta es la versión prueba?', 'SI', 'unnamed.jpg', 1, 1, '2019-11-17 23:31:14', 1);
+(2, 'CinthyaYomona', '123', 'Cinthya Lisseth', 'Yomona Parraguez', 'cinthya@gmail.com', '1999-05-23', 'Se suponde que me debo de bañar, que mis convers ya no aguantan más!!...Pero llegas tú !! :) <3', 0, 'Inspiraciíon?', 'Priscila', '20180319_103506.jpg', 1, 1, '2019-11-14 16:42:51', 1);
 
 -- --------------------------------------------------------
 
@@ -692,7 +699,7 @@ ALTER TABLE `tipo_suscripcion`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `visita`
