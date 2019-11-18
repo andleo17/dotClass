@@ -89,8 +89,12 @@
             }
         }
 
-        public function registrar (Usuario $usuario) {
-            $query = 'INSERT INTO usuario VALUES(DEFAULT,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+        public function registrar () {
+            $url_foto = basename($this -> foto['name']);
+            move_uploaded_file($this -> foto['tmp_name'], "../uploads/perfiles/$url_foto");
+            $this -> foto = $url_foto;
+
+            $query = 'INSERT INTO usuario VALUES(DEFAULT,?,?,?,?,?,?,?, DEFAULT,?,?,?,?,?, DEFAULT, DEFAULT)';
             $preparedStament = Conexion ::conectarBD() -> prepare($query);
             $preparedStament -> bindParam(1, $this -> nickname);
             $preparedStament -> bindParam(2, $this -> password);
@@ -99,14 +103,11 @@
             $preparedStament -> bindParam(5, $this -> email);
             $preparedStament -> bindParam(6, $this -> fechaNacimiento);
             $preparedStament -> bindParam(7, $this -> descripcion);
-            $preparedStament -> bindParam(8, $this -> numeroSeguidores);
-            $preparedStament -> bindParam(9, $this -> preguntaSeguridad);
-            $preparedStament -> bindParam(10, $this -> respuestaSeguridad);
-            $preparedStament -> bindParam(11, $this -> foto);
-            $preparedStament -> bindParam(12, $this -> pais -> id);
-            $preparedStament -> bindParam(13, $this -> ciudad -> id);
-            $preparedStament -> bindParam(14, $this -> fechaCreacion);
-            $preparedStament -> bindParam(15, $this -> estado);
+            $preparedStament -> bindParam(8, $this -> preguntaSeguridad);
+            $preparedStament -> bindParam(9, $this -> respuestaSeguridad);
+            $preparedStament -> bindParam(10, $this -> foto);
+            $preparedStament -> bindParam(11, $this -> pais);
+            $preparedStament -> bindParam(12, $this -> ciudad);
             $preparedStament -> execute();
         }
 
@@ -125,7 +126,7 @@
             $preparedStament -> bindParam(10, $usuario -> respuestaSeguridad);
             $preparedStament -> bindParam(11, $usuario -> foto);
             $preparedStament -> bindParam(12, $usuario -> pais -> id);
-            $preparedStament -> bindParam(13, $usuario -> ciudad);
+            $preparedStament -> bindParam(13, $usuario -> ciudad -> id);
             $preparedStament -> bindParam(14, $usuario -> fechaCreacion);
             $preparedStament -> bindParam(15, $usuario -> estado);
             $preparedStament -> bindParam(16, $this -> id);
@@ -149,11 +150,38 @@
                         break;
 
                     case 'crear':
-                        echo '';
+                        if ($_POST['password'] == $_POST['confirmarPassword']) {
+                            try {
+                                $usuario = new Usuario;
+                                $usuario -> nickname = $_POST['nickname'];
+                                $usuario -> password = $_POST['password'];
+                                $usuario -> nombres = $_POST['nombres'];
+                                $usuario -> apellidos = $_POST['apellidos'];
+                                $usuario -> email = $_POST['email'];
+                                $usuario -> fechaNacimiento = $_POST['fechaNacimiento'];
+                                $usuario -> descripcion = $_POST['descripcion'];
+                                $usuario -> preguntaSeguridad = $_POST['preguntaSeguridad'];
+                                $usuario -> respuestaSeguridad = $_POST['respuestaSeguridad'];
+                                $usuario -> foto = $_FILES['foto'];
+                                $usuario -> pais = $_POST['pais'];
+                                $usuario -> ciudad = $_POST['ciudad'];
+                                $usuario -> registrar();
+                                echo 1;
+                            } catch (PDOException $exception) {
+                                echo 'Algo sucedió mal';
+                            }
+                        } else {
+                            echo 'Contraseñas no coinciden';
+                        }
                         break;
 
                     case 'login':
                         echo json_encode(self ::iniciarSesion($_POST['nickname'], $_POST['password']));
+                        break;
+
+                    case 'cerrarSesion':
+                        session_start();
+                        session_destroy();
                         break;
 
                     default:

@@ -2,6 +2,8 @@
 
     require_once 'Conexion.php';
 
+    Ciudad ::ejecutar($_SERVER['REQUEST_URI']);
+
     class Ciudad {
 
         public $id;
@@ -13,7 +15,7 @@
             $ciudad -> nombre = $resultSet -> nombre;
             return $ciudad;
         }
-        
+
         public static function listar () {
             $lista = [];
             $query = 'SELECT * FROM ciudad';
@@ -40,6 +42,20 @@
             }
         }
 
-        
+        public static function ejecutar ($request) {
+            $peticion = explode('/', $request);
+            if (in_array(__CLASS__, $peticion)) {
+                $peticion = end($peticion);
+                switch ($peticion) {
+                    case '':
+                        echo json_encode(self ::listar());
+                        break;
+
+                    default:
+                        return self ::buscar($peticion);
+                        break;
+                }
+            }
+        }
 
     }

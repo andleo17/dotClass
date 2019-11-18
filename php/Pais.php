@@ -1,6 +1,8 @@
 <?php
     require_once 'Conexion.php';
 
+    Pais ::ejecutar($_SERVER['REQUEST_URI']);
+
     class Pais {
 
         public $id;
@@ -37,6 +39,22 @@
             $pais -> id = $resultSet -> id;
             $pais -> nombre = $resultSet -> nombre;
             return $pais;
+        }
+
+        public static function ejecutar ($request) {
+            $peticion = explode('/', $request);
+            if (in_array(__CLASS__, $peticion)) {
+                $peticion = end($peticion);
+                switch ($peticion) {
+                    case '':
+                        echo json_encode(self ::listar());
+                        break;
+
+                    default:
+                        return self ::buscar($peticion);
+                        break;
+                }
+            }
         }
 
     }

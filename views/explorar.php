@@ -1,8 +1,21 @@
-<div class="container">
-    <h1>Explora nuestro catálogo de cursos que tenemos para ti</h1>
-    <p>En dotClass queremos que nuestros usuarios aprendan lo que sea cuando deseen, es por ello que abarcamos todos
-        los temas de estudios más relevantes que puedas encontrar.</p>
-    <div id="lista-categoria" class="card-list margin-bottom"></div>
+<div class="container my-4">
+    <div class="row text-center">
+        <div class="col-12">
+            <h1>Explora nuestro catálogo de cursos que tenemos para ti</h1>
+        </div>
+        <div class="col-12">
+            <p>En dotClass queremos que nuestros usuarios aprendan lo que sea cuando deseen, es por ello que abarcamos
+                todos
+                los temas de estudios más relevantes que puedas encontrar.</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="container">
+                <div id="lista-categoria" class="row"></div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
@@ -12,15 +25,18 @@
             let html = '';
             data.forEach(categoria => {
                 html += `
-                <a href="categoria.html" class="card animate-pop-in">
-                    <div class="card-header">
-                        <img src="../assets/${categoria.logo}" alt="logo">
-                        <span class="titulo-curso">${categoria.nombre}</span>
-                    </div>
-                    <div class="card-body">
-                        <p>${categoria.descripcion}</p>
-                    </div>
-                </a>`;
+                <div class="col-lg-6 col-md-12 mb-3">
+                    <a href="categoria.html" class="card animate-pop-in">
+                        <div class="card-head">
+                            <img src="../assets/${categoria.logo}" alt="logo">
+                            <span class="ml-3">${categoria.nombre}</span>
+                        </div>
+                        <div class="card-body">
+                            <p>${categoria.descripcion}</p>
+                        </div>
+                    </a>
+                </div>
+                `;
             });
             $listaCategoria.innerHTML = html;
         })
