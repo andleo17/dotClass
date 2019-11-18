@@ -4,7 +4,7 @@
     require_once 'Pais.php';
     require_once 'Usuario.php';
 
-    Conocimiento ::ejecutar($_SERVER['REQUEST_URI']);
+    
 
     class Conocimiento {
         public $id;
@@ -19,9 +19,9 @@
             $conocimiento = new ExperienciaLaboral();
             $conocimiento -> id = $resultSet -> id;
             $conocimiento -> nombre = $resultSet -> nombre;
-            $conocimiento -> gradoAcademico = $resultSet -> gradoAcademico;
-            $conocimiento -> lugarEstudio = $resultSet -> lugarEstudio;
-            $conocimiento -> año = $resultSet -> año;
+            $conocimiento -> gradoAcademico = $resultSet -> grado_academico;
+            $conocimiento -> lugarEstudio = $resultSet -> lugar_estudio;
+            $conocimiento -> año = $resultSet -> anio;
             $conocimiento -> pais = Pais ::buscar($resultSet -> pais_id);            
             $conocimiento -> usuario = Usuario ::buscar($resultSet -> usuario_id);
             return $conocimiento;
@@ -29,9 +29,11 @@
 
         public static function listarxUsuario ($Usuario) {
             $lista = [];
-            $query = 'SELECT conocimiento.* FROM conocimiento INNER JOIN usuario ON usuario.id = experiencia_laboral.usuario_id WHERE usuario.nickname = $Usuario';
+            $query = 'SELECT conocimiento.* FROM conocimiento INNER JOIN usuario ON usuario.id = conocimiento.usuario_id WHERE usuario.nickname = ?';
             $cnx = Conexion ::conectarBD();
-            $resulset = $cnx -> prepare($query);
+            $resultSet = $cnx -> prepare($query);
+            $resultSet -> bindParam(1,$Usuario);
+            $resultSet -> execute();
             while ($conocimiento = $resultSet -> fetchObject()) {
                 $conocimiento = self :: mapear($conocimiento);
                 array_push($lista, $conocimiento);

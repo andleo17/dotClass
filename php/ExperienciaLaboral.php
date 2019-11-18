@@ -4,8 +4,6 @@
     require_once 'Pais.php';
     require_once 'Usuario.php';
 
-    ExperienciaLaboral ::ejecutar($_SERVER['REQUEST_URI']);
-
     class ExperienciaLaboral {
         public $id;
         public $nombre;
@@ -20,8 +18,8 @@
             $experienciaLaboral-> id = $resultSet -> id;
             $experienciaLaboral-> nombre = $resultSet -> nombre;
             $experienciaLaboral-> lugar = $resultSet -> lugar;
-            $experienciaLaboral-> fechaInicio = $resultSet -> fechaInicio;
-            $experienciaLaboral-> fechaFin = $resultSet -> fechaFin;
+            $experienciaLaboral-> fechaInicio = $resultSet -> fecha_inicio;
+            $experienciaLaboral-> fechaFin = $resultSet -> fecha_fin;
             $experienciaLaboral-> pais = Pais ::buscar($resultSet -> pais_id);            
             $experienciaLaboral-> usuario = Usuario ::buscar($resultSet -> usuario_id);
             return $experienciaLaboral;
@@ -29,9 +27,11 @@
 
         public static function listarxUsuario ($Usuario) {
             $lista = [];
-            $query = 'SELECT experiencia_laboral.* FROM experiencia_laboral INNER JOIN usuario ON usuario.id = experiencia_laboral.usuario_id WHERE usuario.nickname = $Usuario';
+            $query = 'SELECT experiencia_laboral.* FROM experiencia_laboral INNER JOIN usuario ON usuario.id = experiencia_laboral.usuario_id WHERE usuario.nickname = ?';
             $cnx = Conexion ::conectarBD();
-            $resulset = $cnx -> prepare($query);
+            $resultSet = $cnx -> prepare($query);
+            $resultSet -> bindParam(1, $Usuario);
+            $resultSet -> execute();
             while ($experienciaLaboral = $resultSet -> fetchObject()) {
                 $experienciaLaboral = self :: mapear($experienciaLaboral);
                 array_push($lista, $experienciaLaboral);

@@ -1,5 +1,8 @@
 <?php
     require_once 'php/Usuario.php';
+    require_once 'php/ExperienciaLaboral.php';
+    require_once 'php/Conocimiento.php';
+
     $usuario = Usuario ::ejecutar(str_replace('dotclass/perfil', 'clase/Usuario', $_SERVER['REQUEST_URI']));
 
     $cumpleanos = new DateTime($usuario -> fechaNacimiento);
@@ -25,11 +28,10 @@
                     <li class="perfil-value"><?= $usuario -> email ?></li>
                     <li class="perfil-key">Lugar de procedencia:</li>
                     <li class="perfil-value"><?= "{$usuario -> ciudad -> nombre}, {$usuario -> pais -> nombre}" ?></li>
-                    <li class="perfil-key">Trayectoria académica:</li>
-                    <li class="perfil-value">Ingeniería de Sistemas y Computación (Maestría) - USAT, Perú - 2018
-                    </li>
-                    <li class="perfil-value">Teatro - Escuela de Bellas Artes - 2014</li>
-                    <li class="perfil-value">Ingeniería Industrial - PUCP, Lima - 2000</li>
+                    <li class="perfil-key" >Trayectoria académica:</li>
+                    <?php foreach(Conocimiento :: listarxUsuario($usuario -> nickname) as $trayectoria)  {?>
+                        <li class="perfil-value"><?= "{$trayectoria -> nombre }, {$trayectoria -> gradoAcademico} , {$trayectoria -> lugarEstudio }, ({$trayectoria -> año}), {$trayectoria -> pais -> nombre} " ?></li>
+                    <?php } ?>
                 </ul>
             </div>
         </div>
@@ -43,9 +45,9 @@
                     <div class="perfil-detalle-body col-12 mt-3">
                         <h3>Experiencia laboral</h3>
                         <ul id="experiencia-laboral">
-                            <li>Musical "High School Musical" (2017), New York.</li>
-                            <li>Cabinas "Mi Paolita" (2000-2004), Perú.</li>
-                            <li>Asesora de tesis en la USAT (2014-2016), Perú.</li>
+                            <?php foreach(ExperienciaLaboral::listarxUsuario($usuario -> nickname) as $experiencia) {?>
+                                <li><?= "{$experiencia -> nombre} , {$experiencia -> lugar}, {$experiencia -> fechaInicio} ,{$experiencia -> fechaFin} , {$experiencia -> pais -> nombre}" ?></li>
+                            <?php }?>
                         </ul>
                     </div>
                     <div class="perfil-detalle-body col-12 mt-4">
@@ -59,7 +61,7 @@
                                                  alt="logo">
                                             <span class="ml-3">Fundamentos de programación</span>
                                         </a>
-                                        <div class="card-footer d-flex flex-column">
+                                        <div class="card-footer d-flex flex-column"
                                             <span>
                                                 <b>Docente:</b>sspacecowbboy
                                             </span>
