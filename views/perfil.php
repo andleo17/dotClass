@@ -2,6 +2,7 @@
     require_once 'php/Usuario.php';
     require_once 'php/ExperienciaLaboral.php';
     require_once 'php/Conocimiento.php';
+    require_once 'php/config.php';
 
     $usuario = Usuario ::ejecutar(str_replace('dotclass/perfil', 'clase/Usuario', $_SERVER['REQUEST_URI']));
 
@@ -53,23 +54,24 @@
                     <div class="perfil-detalle-body col-12 mt-4">
                         <h3>Cursos que sigo</h3>
                         <div class="container-fluid">
-                            <div id="cursos-seguidos" class="row">
+                            <div class="row">
+                            <?php foreach(Usuario ::listarSeguimiento($usuario) as $curso) {?>
                                 <div class="col-3">
                                     <div class="mini card">
-                                        <a href="" class="card-head">
-                                            <img src="https://static.platzi.com/media/achievements/1050-bfb74f83-8e2e-4ff7-a66d-77d2c0067908.png"
+                                        <a href="../curso/<?= $curso -> id ?>" class="card-head">
+                                            <img src="<?= SERVER_URL ?>uploads/logos/<?=$curso -> logo ?>"
                                                  alt="logo">
-                                            <span class="ml-3">Fundamentos de programación</span>
+                                            <span class="ml-3"><?= $curso -> titulo ?></span>
                                         </a>
-                                        <div class="card-footer d-flex flex-column"
+                                        <div class="card-footer d-flex flex-column">
                                             <span>
-                                                <b>Docente:</b>sspacecowbboy
+                                                <b>Docente:</b><?= $curso -> usuario -> nickname ?>
                                             </span>
                                             <span>
-                                                <b>Duración:</b>21 h
+                                                <b>Duración:</b><?= $curso -> duracion ?> h
                                             </span>
                                             <div class="card-rating">
-                                                <span>1K subscriptores</span>
+                                                <span><?= $curso -> numeroSubscriptores ?>K subscriptores</span>
                                                 <span class="clasificacion">
                                                     <i class="far fa-star"></i>
                                                     <i class="far fa-star"></i>
@@ -81,29 +83,31 @@
                                         </div>
                                     </div>
                                 </div>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>
                     <div class="perfil-detalle-body col-12 mt-4">
                         <h3>Cosas que enseño</h3>
                         <div class="container-fluid">
-                            <div id="cursos-usuario" class="row">
+                            <div class="row">
+                            <?php foreach(Usuario ::listarEnseñanza($usuario) as $curso) {?>
                                 <div class="col-3">
                                     <div class="mini card">
-                                        <a href="" class="card-head">
-                                            <img src="https://static.platzi.com/media/achievements/1050-bfb74f83-8e2e-4ff7-a66d-77d2c0067908.png"
-                                                 alt="logo">
-                                            <span class="ml-3">Fundamentos de programación</span>
+                                        <a href="../curso/<?= $curso -> id ?>" class="card-head">                                           
+                                            <img src="<?= SERVER_URL ?>uploads/logos/<?=$curso -> logo ?>"
+                                                 alt="logo">                                            
+                                            <span class="ml-3"><?=$curso -> titulo ?></span>
                                         </a>
                                         <div class="card-footer d-flex flex-column">
                                             <span>
-                                                <b>Docente:</b>sspacecowbboy
+                                                <b>Docente:</b><?= $curso -> usuario -> nickname ?>
                                             </span>
                                             <span>
-                                                <b>Duración:</b>21 h
+                                                <b>Duración:</b><?= $curso -> duracion ?> h
                                             </span>
                                             <div class="card-rating">
-                                                <span>1K subscriptores</span>
+                                                <span><?= $curso -> numeroSubscriptores ?>K subscriptores</span>
                                                 <span class="clasificacion">
                                                     <i class="far fa-star"></i>
                                                     <i class="far fa-star"></i>
@@ -115,6 +119,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>

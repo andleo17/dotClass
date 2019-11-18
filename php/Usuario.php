@@ -3,6 +3,7 @@
     require_once 'Conexion.php';
     require_once 'Ciudad.php';
     require_once 'Pais.php';
+    require_once 'Curso.php';
 
     Usuario ::ejecutar($_SERVER['REQUEST_URI']);
 
@@ -67,8 +68,8 @@
             $lista = [];
             $query = 'SELECT * FROM usuario';
             $cnx = Conexion ::conectarBD();
-            $resulset = $cnx -> query($query);
-            while ($usuario = $resulset -> fetchObject()) {
+            $resultSet = $cnx -> query($query);
+            while ($usuario = $resultSet -> fetchObject()) {
                 $usuario = self ::mapear($usuario);
                 array_push($lista, $usuario);
             }
@@ -90,9 +91,12 @@
         }
 
         public function registrar () {
-            $url_foto = basename($this -> foto['name']);
-            move_uploaded_file($this -> foto['tmp_name'], "../uploads/perfiles/$url_foto");
-            $this -> foto = $url_foto;
+            if (basename($this -> foto['name']) == ''){
+                $url_foto = 'user.jpg';
+            } else {
+                $url_foto = basename($this -> foto['name']); 
+                move_uploaded_file($this -> foto['tmp_name'], "../uploads/perfiles/$url_foto");              
+            };            
 
             $query = 'INSERT INTO usuario VALUES(DEFAULT,?,?,?,?,?,?,?, DEFAULT,?,?,?,?,?, DEFAULT, DEFAULT)';
             $preparedStament = Conexion ::conectarBD() -> prepare($query);
@@ -138,6 +142,34 @@
             $preparedStament = Conexion ::conectarBD() -> prepare($query);
             $preparedStament -> bindParam(1, $usuario -> id);
             $preparedStament -> execute();
+        }
+
+        public static function listarSeguimiento (Usuario $usuario) {
+            $lista = [];
+            $query = 'SELECT curso_id FROM seguimiento WHERE usuario_id = ?';
+            $cnx = Conexion ::conectarBD();
+            $preparedStatement = $cnx -> prepare($query);
+            $preparedStatement -> bindParam(1, $usuario -> id);
+            $preparedStatement -> execute();
+            while ($curso = $preparedStatement -> fetchObject()) {
+                $curso = Curso ::buscar($curso -> curso_id);
+                array_push($lista, $curso);
+            }
+            return $lista;
+        }
+
+        public static function listarEnseñanza (Usuario $usuario) {
+            $lista = [];
+            $query = 'SELECT id FROM curso WHERE usuario_id = ?';
+            $cnx = Conexion ::conectarBD();
+            $preparedStatement = $cnx -> prepare($query);
+            $preparedStatement -> bindParam(1, $usuario -> id);
+            $preparedStatement -> execute();
+            while ($curso = $preparedStatement -> fetchObject()) {
+                $curso = Curso ::buscar($curso -> id);
+                array_push($lista, $curso);
+            }
+            return $lista;
         }
 
         public static function ejecutar ($request) {

@@ -36,6 +36,20 @@
             return $curso;
         }
 
+        public static function buscar($id) {
+            $query = 'SELECT * FROM curso WHERE id = ?';
+            $cnx = Conexion ::conectarBD();
+            $preparedStatement = $cnx -> prepare($query);
+            $preparedStatement -> bindParam(1, $id);
+            $preparedStatement -> execute();
+            if ($curso = $preparedStatement -> fetchObject()) {
+                $curso = self ::mapear($curso);
+                return $curso;
+            } else {
+                return null;
+            }
+        }
+
         public static function listar () {
             $lista = [];
             $query = 'SELECT * FROM curso';
