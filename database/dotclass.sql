@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-11-2019 a las 05:22:16
+-- Tiempo de generación: 18-11-2019 a las 05:40:51
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.8
 
@@ -147,8 +147,8 @@ CREATE TABLE `ciudad` (
 --
 
 INSERT INTO `ciudad` (`id`, `nombre`) VALUES
-(2, ''),
-(1, 'Chiclayo');
+(1, 'Chiclayo'),
+(2, 'Lima');
 
 -- --------------------------------------------------------
 
@@ -181,6 +181,14 @@ CREATE TABLE `comentario` (
   `pregunta` tinyint(4) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `comentario`
+--
+
+INSERT INTO `comentario` (`id`, `comentario_padre_id`, `contenido`, `numero_likes`, `numero_comentarios`, `pregunta`) VALUES
+(1, 1, '¿Cómo puedo crear una clase abstracta con implementación?', 30, 0, 0),
+(2, 2, '¿Cómo puedo crear una clase abstracta con implementación?', 50, 0, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -196,6 +204,15 @@ CREATE TABLE `conocimiento` (
   `pais_id` int(11) NOT NULL,
   `usuario_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `conocimiento`
+--
+
+INSERT INTO `conocimiento` (`id`, `nombre`, `grado_academico`, `lugar_estudio`, `anio`, `pais_id`, `usuario_id`) VALUES
+(1, 'Ingeniería de Sistemas y Computación', 'Maestría', 'USAT', 2019, 1, 2),
+(2, 'Teatro', NULL, 'Escuela de Bellas Artes', 2014, 1, 2),
+(3, 'Ingeniería Industrial', 'Licenciado', 'PUCP', 2000, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -252,6 +269,14 @@ CREATE TABLE `experiencia_laboral` (
   `pais_id` int(11) NOT NULL,
   `usuario_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `experiencia_laboral`
+--
+
+INSERT INTO `experiencia_laboral` (`id`, `nombre`, `lugar`, `fecha_inicio`, `fecha_fin`, `pais_id`, `usuario_id`) VALUES
+(1, 'Musical \"High School Musical\" ', 'New York', '0000-00-00', '0000-00-00', 1, 2),
+(2, 'Cabinas \"Mi Paolita\" ', 'Perú', '0000-00-00', '0000-00-00', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -371,8 +396,9 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `nickname`, `password`, `nombres`, `apellidos`, `email`, `fecha_nacimiento`, `descripcion`, `numero_seguidores`, `pregunta_seguridad`, `respuesta_seguridad`, `foto`, `pais_id`, `ciudad_id`, `fecha_creacion`, `estado`) VALUES
-(1, 'Andle17', '123456789', 'Andres', 'Baldarrago', 'ab@gmail.com', '2000-07-01', 'Me gusta jugar y enseñar.', 0, '¿Quién soy?', 'nose', NULL, 1, 1, '2019-11-14 16:42:51', 1),
-(2, 'CinthyaYomona', '123', 'Cinthya Lisseth', 'Yomona Parraguez', 'cinthya@gmail.com', '1999-05-23', 'Se suponde que me debo de bañar, que mis convers ya no aguantan más!!...Pero llegas tú !! :) <3', 0, 'Inspiraciíon?', 'Priscila', NULL, 1, 1, '2019-11-14 16:42:51', 1);
+(1, 'Andle17', '123456789', 'Andres', 'Baldarrago', 'ab@gmail.com', '2000-07-01', 'Me gusta jugar y enseñar.', 0, '¿Quién soy?', 'nose', 'Andle17.png', 1, 1, '2019-11-14 16:42:51', 1),
+(2, 'CinthyaYomona', '123', 'Cinthya Lisseth', 'Yomona Parraguez', 'cinthya@gmail.com', '1999-05-23', 'Se suponde que me debo de bañar, que mis convers ya no aguantan más!!...Pero llegas tú !! :) <3', 0, 'Inspiraciíon?', 'Priscila', '20180319_103506.jpg', 1, 1, '2019-11-14 16:42:51', 1),
+(3, 'Prueba', '123', 'Carlota', 'Benavides', 'prueba@gmail.com', '1990-12-24', 'Es calmada, cordial, agradable, tierna, leal y cariñosa y se suele olvidar las cosas de una manera muy rápida, eso la caracteriza.', 100, '¿Esta es la versión prueba?', 'SI', 'unnamed.jpg', 1, 1, '2019-11-17 23:31:14', 1);
 
 -- --------------------------------------------------------
 
@@ -606,13 +632,13 @@ ALTER TABLE `clase`
 -- AUTO_INCREMENT de la tabla `comentario`
 --
 ALTER TABLE `comentario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `conocimiento`
 --
 ALTER TABLE `conocimiento`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `curso`
@@ -630,7 +656,7 @@ ALTER TABLE `examen`
 -- AUTO_INCREMENT de la tabla `experiencia_laboral`
 --
 ALTER TABLE `experiencia_laboral`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `marcador`
@@ -666,7 +692,7 @@ ALTER TABLE `tipo_suscripcion`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `visita`
