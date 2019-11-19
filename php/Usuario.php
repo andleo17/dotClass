@@ -104,6 +104,8 @@
                 move_uploaded_file($this -> foto['tmp_name'], "../uploads/perfiles/$url_foto");
             };
 
+            $this -> foto = $url_foto;
+
             $query = 'INSERT INTO usuario VALUES(DEFAULT,?,?,?,?,?,?,?, DEFAULT,?,?,?,?,?, DEFAULT, DEFAULT)';
             $preparedStament = Conexion ::conectarBD() -> prepare($query);
             $preparedStament -> bindParam(1, $this -> nickname);

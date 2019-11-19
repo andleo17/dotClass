@@ -10,7 +10,7 @@
 
         public static function listar () {
             $lista = [];
-            $query = 'SELECT * FROM pais';
+            $query = 'SELECT * FROM pais ORDER BY 2 ASC';
             $cnx = Conexion ::conectarBD();
             $resulset = $cnx -> query($query);
             while ($pais = $resulset -> fetchObject()) {
