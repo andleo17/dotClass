@@ -89,7 +89,7 @@
                                         <span><b>Docente:</b><?= $prerequisito -> usuario -> nickname ?></span>
                                         <span><b>Duración:</b><?= $prerequisito -> duracion ?> h</span>
                                         <div class="card-rating">
-                                            <span><?= $prerequisito -> subscriptores ?> subscriptores</span>
+                                            <span><?= $prerequisito -> numeroSubscriptores ?> subscriptores</span>
                                             <span class="clasificacion">
                                                 <i class="far fa-star"></i>
                                                 <i class="far fa-star"></i>

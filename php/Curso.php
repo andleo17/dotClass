@@ -75,7 +75,7 @@
             $preparedStatement -> bindParam(1, $id);
             $preparedStatement -> execute();
             while ($curso = $preparedStatement -> fetchObject()) {
-                $curso = self :: buscar($curso);
+                $curso = self :: buscar($curso -> curso_prerrequisito_id);
                 array_push($lista, $curso);
             }
             return $lista;
