@@ -34,7 +34,7 @@
             let $listaCursos = document.getElementById('lista-cursos');
             let html = '';
             data.forEach(c => {
-                html += `
+                html += `                
                     <div class="mt-3 col">
                         <div class="card">
                             <a href="curso/${c.id}" class="card-head">

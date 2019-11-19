@@ -30,7 +30,8 @@
                     <li class="perfil-key">Lugar de procedencia:</li>
                     <li class="perfil-value"><?= "{$usuario -> ciudad -> nombre}, {$usuario -> pais -> nombre}" ?></li>
                     <li class="perfil-key" >Trayectoria académica:</li>
-                    <?php foreach(Conocimiento :: listarxUsuario($usuario -> nickname) as $trayectoria)  {?>
+                    <?php 
+                        foreach(Conocimiento :: listarxUsuario($usuario -> nickname) as $trayectoria)  {?>
                         <li class="perfil-value"><?= "{$trayectoria -> nombre }, {$trayectoria -> gradoAcademico} , {$trayectoria -> lugarEstudio }, ({$trayectoria -> año}), {$trayectoria -> pais -> nombre} " ?></li>
                     <?php } ?>
                 </ul>

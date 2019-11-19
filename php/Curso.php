@@ -62,6 +62,20 @@
             return $lista;
         }
 
+        public static function listarDetallesUsuario ($id) {
+            $query = 'SELECT usuario.* FROM curso WHERE id = ?';
+            $cnx = Conexion ::conectarBD();
+            $preparedStatement = $cnx -> prepare($query);
+            $preparedStatement -> bindParam(1, $curso -> id);
+            $preparedStatement -> execute();
+            if ($curso = $preparedStatement -> fetchObject()) {
+                $curso = self ::mapear($curso);
+                return $curso;
+            } else {
+                return null;
+            }
+        }
+
         public function registrar () {
             $query = 'INSERT INTO curso VALUES(DEFAULT,?,?,?,?,?,?,?,?,?,?)';
             $preparedStament = Conexion ::conectarBD() -> prepare($query);
@@ -110,11 +124,9 @@
                     case '':
                         echo json_encode(self ::listar());
                         break;
-
                     case 'crear':
                         echo '';
                         break;
-
                     default:
                         break;
                 }

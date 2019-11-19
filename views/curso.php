@@ -1,11 +1,15 @@
+<?php
+    require_once 'php/Curso.php';
+?>
+
 <div class="container-fluid">
     <div class="row text-white">
         <div class="col-6 p-0">
-            <div class="card panel-container rounded-0 border-0 p-5">
+            <div class="card panel-container rounded-0 border-0 p-5" id = "detalles-curso">
+            <?php foreach(Curso::buscar($idCurso -> id) as $detalle) {?>
                 <div class="card-head">
-                    <img src="https://static.platzi.com/media/learningpath/badges/Badge-desarrollo-java.png"
-                         alt="logo">
-                    <h1 class="ml-3">Java avanzado</h1>
+                    <img src="<?= SERVER_URL ?>uploads/logos/<?=$detalle -> logo ?>" alt="logo">
+                    <h1 class="ml-3"><?= $detalle -> titulo?></h1>
                     <div class="bar">
                         <div class="bar-progress"></div>
                         <div class="full-progress"></div>
@@ -13,22 +17,14 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <p>
-                        En este curso aprenderás el lenguaje de programación más demandado por el sector empresarial
-                        y
-                        el mejor remunerado en la actualidad.
-                        <br>
-                        Aprenderemos todos juntos acerca de clases anidadas, clases abstractas, lambdas, JDBC y
-                        mucho
-                        más.
-                    </p>
+                    <p><?= $detalle -> descripcion?></p>
                 </div>
                 <div class="card-footer">
                     <span>
-                        <b>Duración:</b>25 h
+                        <b>Duración:</b><?= $detalle -> duracion?> h
                     </span>
                     <div class="card-rating">
-                        <span>1.2K subscriptores</span>
+                        <span><?= $detalle -> numeroSubscriptores?> subscriptores</span>
                         <span class="clasificacion">
                             <i class="far fa-star"></i>
                             <i class="far fa-star"></i>
@@ -38,15 +34,17 @@
                         </span>
                     </div>
                 </div>
+        <?php } ?>
             </div>
         </div>
         <div class="col-6 p-0">
             <div class="card panel-container rounded-0 border-0 p-5">
+            <?php foreach(Curso::listarDetallesUsuario ($idCurso -> id) as $detalleUser) {?>
                 <a href="" class="card-head">
                     <img src="https://www.famousbirthdays.com/headshots/pasha-harulia-6.jpg" alt="foto-perfil">
                     <div class="ml-3 docente-perfil text-white">
-                        <b>pashaharu</b>
-                        <span>15.2K seguidores</span>
+                        <b><?=  $detalleUser -> nickname?></b>
+                        <span><?=  $detalleUser -> numeroSeguidores?> seguidores</span>
                     </div>
                     <div class="live">
                         <i class="fas fa-circle"></i>
@@ -54,7 +52,7 @@
                     </div>
                 </a>
                 <div class="card-body docente-descripcion text-white">
-                    <p>Me agrada compartir con los demás lo que sé. También jugar a videojuegos en mi PC.</p>
+                    <p><?=  $detalleUser -> descripcion?></p>
                 </div>
                 <div class="card-footer d-flex flex-column">
                     <span>
@@ -76,6 +74,7 @@
                         </span>
                     </span>
                 </div>
+                <?php } ?>
             </div>
         </div>
         <div class="col-12 p-0">

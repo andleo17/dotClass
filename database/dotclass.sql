@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-11-2019 a las 22:58:46
+-- Tiempo de generación: 19-11-2019 a las 00:48:46
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.8
 
@@ -381,7 +381,7 @@ CREATE TABLE `tipo_suscripcion` (
 --
 
 CREATE TABLE `usuario` (
-  `id` int(11) NOT NULL,
+  `id` int(3) NOT NULL,
   `nickname` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   `password` varchar(42) COLLATE utf8_spanish_ci NOT NULL,
   `nombres` varchar(60) COLLATE utf8_spanish_ci NOT NULL,
@@ -405,7 +405,8 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`id`, `nickname`, `password`, `nombres`, `apellidos`, `email`, `fecha_nacimiento`, `descripcion`, `numero_seguidores`, `pregunta_seguridad`, `respuesta_seguridad`, `foto`, `pais_id`, `ciudad_id`, `fecha_creacion`, `estado`) VALUES
 (1, 'Andle17', '123456789', 'Andres', 'Baldarrago', 'ab@gmail.com', '2000-07-01', 'Me gusta jugar y enseñar.', 0, '¿Quién soy?', 'nose', 'Andle17.png', 1, 1, '2019-11-14 16:42:51', 1),
-(2, 'CinthyaYomona', '123', 'Cinthya Lisseth', 'Yomona Parraguez', 'cinthya@gmail.com', '1999-05-23', 'Se suponde que me debo de bañar, que mis convers ya no aguantan más!!...Pero llegas tú !! :) <3', 0, 'Inspiraciíon?', 'Priscila', '20180319_103506.jpg', 1, 1, '2019-11-14 16:42:51', 1);
+(2, 'CinthyaYomona', '123', 'Cinthya Lisseth', 'Yomona Parraguez', 'cinthya@gmail.com', '1999-05-23', 'Se suponde que me debo de bañar, que mis convers ya no aguantan más!!...Pero llegas tú !! :) <3', 0, 'Inspiraciíon?', 'Priscila', '20180319_103506.jpg', 1, 1, '2019-11-14 16:42:51', 1),
+(4, 'Priscila', '123', 'Priscila Susana', 'Yomona Parraguez', 'cinthyayomonaparraguez@gmail.com', '2005-06-11', 'Soy una mujer oriunda de la ciudad de La Plata. Soy de estatura media y su cabello es castaño oscuro. ', 0, 'Prueba', 'SI', '51 954 513 403 20191005_082814.jpg', 1, 1, '2019-11-18 17:13:53', 1);
 
 -- --------------------------------------------------------
 
@@ -699,7 +700,7 @@ ALTER TABLE `tipo_suscripcion`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `visita`
