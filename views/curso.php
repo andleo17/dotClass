@@ -112,50 +112,57 @@
     </div>
     <div class="card mt-5 rounded-0">
         <div class="card-header pb-0">
-            <ul class="nav nav-tabs card-header-tabs">
+            <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link active" href="curso.html">Contenido</a>
+                    <a id="contenido-tab" class="nav-link active" href="#contenido" data-toggle="tab">Contenido</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="curso-preguntas.html">Preguntas</a>
+                    <a id="preguntas-tab" class="nav-link" href="#preguntas" data-toggle="tab">Preguntas</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="curso-aportes.html">Aportes</a>
+                    <a id="aportes-tab" class="nav-link" href="#aportes" data-toggle="tab">Aportes</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="curso-marcadores.html">Marcadores</a>
+                    <a id="marcadores-tab" class="nav-link" href="#marcadores" data-toggle="tab">Marcadores</a>
                 </li>
             </ul>
         </div>
-        <div class="card-body container-fluid px-5">
-            <?php foreach ($curso -> contenido as $seccion) { ?>
-                <div class="border border-secondary px-4 py-3 mb-4 row">
-                    <div class="col-12 text-dark">
-                        <h5 class="mb-4"><?= $seccion -> titulo ?></h5>
-                    </div>
-                    <?php foreach ($seccion -> clases as $clase) { ?>
-                        <div class="col-3 mb-3">
-                            <div class="card border border-secondary rounded-top">
-                                <div class="card-header bg-success"></div>
-                                <a href="" class="card-body d-flex flex-column">
-                                    <span class="mb-4"><?= $clase -> titulo ?></span>
-                                    <span class="mt-auto"><b>Duración:</b> <?= $clase -> duracion ?></span>
-                                </a>
+        <div class="tab-content">
+            <div class="card-body container-fluid px-5">
+                <div id="contenido" class="tab-pane fade show active">
+                    <?php foreach ($curso -> contenido as $seccion) { ?>
+                        <div class="border border-secondary px-4 py-3 mb-4 row">
+                            <div class="col-12 text-dark">
+                                <h5 class="mb-4"><?= $seccion -> titulo ?></h5>
                             </div>
+                            <?php foreach ($seccion -> clases as $clase) { ?>
+                                <div class="col-3 mb-3">
+                                    <div class="card border border-secondary rounded-top">
+                                        <div class="card-header bg-success"></div>
+                                        <a href="" class="card-body d-flex flex-column">
+                                            <span class="mb-4"><?= $clase -> titulo ?></span>
+                                            <span class="mt-auto"><b>Duración:</b> <?= $clase -> duracion ?></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            <?php } ?>
                         </div>
                     <?php } ?>
-                </div>
-            <?php } ?>
-            <div class="row">
-                <div class="col-12">
-                    <div class="curso-examen">
-                        <div>
-                            <b>Examen final</b>
-                            <span>Demuestra que has aprendido <i>Java avanzado</i></span>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="curso-examen">
+                                <div>
+                                    <b>Examen final</b>
+                                    <span>Demuestra que has aprendido <i>Java avanzado</i></span>
+                                </div>
+                                <a href="examen.html">Dar examen</a>
+                            </div>
                         </div>
-                        <a href="examen.html">Dar examen</a>
                     </div>
                 </div>
+                <div id="preguntas" class="tab-pane fade"></div>
+                <div id="aportes" class="tab-pane fade"></div>
+                <div id="marcadores" class="tab-pane fade"></div>
             </div>
         </div>
     </div>
