@@ -3,6 +3,7 @@
     require_once 'Conexion.php';
     require_once 'Categoria.php';
     require_once 'Usuario.php';
+    require_once 'Seccion.php';
 
     Curso ::ejecutar($_SERVER['REQUEST_URI']);
 
@@ -19,6 +20,8 @@
         public $fechaCreacion;
         public $fechaUltimaActualizacion;
         public $usuario;
+        public $contenido;
+        public $prerequisitos;
 
         private function mapear ($resultSet) {
             $curso = new Curso();
@@ -33,6 +36,8 @@
             $curso -> fechaCreacion = $resultSet -> fecha_creacion;
             $curso -> fechaUltimaActualizacion = $resultSet -> fecha_ultima_actualizacion;
             $curso -> usuario = Usuario ::buscar($resultSet -> usuario_id);
+            $curso -> contenido = Seccion::listar($resultSet -> id);
+            $curso -> prerequisitos = Curso::listarPrerequisitos($resultSet -> id);
             return $curso;
         }
 
@@ -57,6 +62,20 @@
             $resultSet = $cnx -> query($query);
             while ($curso = $resultSet -> fetchObject()) {
                 $curso = self :: mapear($curso);
+                array_push($lista, $curso);
+            }
+            return $lista;
+        }
+
+        public static function listarPrerequisitos($id) {
+            $lista = [];
+            $query = 'SELECT curso_prerrequisito_id FROM prerrequisito WHERE curso_id = ?';
+            $cnx = Conexion ::conectarBD();
+            $preparedStatement = $cnx -> prepare($query);
+            $preparedStatement -> bindParam(1, $id);
+            $preparedStatement -> execute();
+            while ($curso = $preparedStatement -> fetchObject()) {
+                $curso = self :: buscar($curso);
                 array_push($lista, $curso);
             }
             return $lista;

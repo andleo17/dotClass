@@ -77,29 +77,31 @@
                 <h2>Plan de estudio para empezar este curso</h2>
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-xl-2 col-lg-4 col-md-6 mt-3">
-                            <div class="mini card text-dark">
-                                <a href="" class="card-head">
-                                    <img src="https://static.platzi.com/media/achievements/badges-html-css-b0a71550-d5e7-4e27-aca2-f09f1321a517.png"
-                                         alt="logo">
-                                    <span class="ml-3">HTML5 y CSS3</span>
-                                </a>
-                                <div class="card-footer d-flex flex-column">
-                                    <span><b>Docente:</b>piscoyron</span>
-                                    <span><b>Duración:</b>21 h</span>
-                                    <div class="card-rating">
-                                        <span>1K subscriptores</span>
-                                        <span class="clasificacion">
-                                            <i class="far fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                        </span>
+                        <?php foreach ($curso -> prerequisitos as $prerequisito) { ?>
+                            <div class="col-xl-2 col-lg-4 col-md-6 mt-3">
+                                <div class="mini card text-dark">
+                                    <a href="../curso/<?= $prerequisito -> id ?>" class="card-head">
+                                        <img src="<?= SERVER_URL ?>uploads/logos/<?= $prerequisito -> logo ?>"
+                                             alt="logo">
+                                        <span class="ml-3"><?= $prerequisito -> titulo ?></span>
+                                    </a>
+                                    <div class="card-footer d-flex flex-column">
+                                        <span><b>Docente:</b><?= $prerequisito -> usuario -> nickname ?></span>
+                                        <span><b>Duración:</b><?= $prerequisito -> duracion ?> h</span>
+                                        <div class="card-rating">
+                                            <span><?= $prerequisito -> subscriptores ?> subscriptores</span>
+                                            <span class="clasificacion">
+                                                <i class="far fa-star"></i>
+                                                <i class="far fa-star"></i>
+                                                <i class="far fa-star"></i>
+                                                <i class="far fa-star"></i>
+                                                <i class="far fa-star"></i>
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        <?php } ?>
                         <div class="col mt-3 d-flex align-items-center">
                             <i class="fas fa-arrow-right"></i>
                         </div>
@@ -125,316 +127,35 @@
                 </li>
             </ul>
         </div>
-        <div class="card-body">
-            <div class="curso-seccion">
-                <div class="curso-seccion-header">
-                    <div class="curso-seccion-titulo">
-                        <span>Introducción al curso</span>
+        <div class="card-body container-fluid px-5">
+            <?php foreach ($curso -> contenido as $seccion) { ?>
+                <div class="border border-secondary px-4 py-3 mb-4 row">
+                    <div class="col-12 text-dark">
+                        <h5 class="mb-4"><?= $seccion -> titulo ?></h5>
+                    </div>
+                    <?php foreach ($seccion -> clases as $clase) { ?>
+                        <div class="col-3 mb-3">
+                            <div class="card border border-secondary rounded-top">
+                                <div class="card-header bg-success"></div>
+                                <a href="" class="card-body d-flex flex-column">
+                                    <span class="mb-4"><?= $clase -> titulo ?></span>
+                                    <span class="mt-auto"><b>Duración:</b> <?= $clase -> duracion ?></span>
+                                </a>
+                            </div>
+                        </div>
+                    <?php } ?>
+                </div>
+            <?php } ?>
+            <div class="row">
+                <div class="col-12">
+                    <div class="curso-examen">
+                        <div>
+                            <b>Examen final</b>
+                            <span>Demuestra que has aprendido <i>Java avanzado</i></span>
+                        </div>
+                        <a href="examen.html">Dar examen</a>
                     </div>
                 </div>
-                <div class="clases">
-                    <a class="clase" href="reproductor.html">
-                        <div class="clase-estado"></div>
-                        <div class="clase-contenido">
-                            <span class="clase-titulo">Bienvenida al curso</span>
-                            <span class="clase-duracion">Duración: <b>10m 34s</b></span>
-                        </div>
-                    </a>
-                    <a class="clase" href="reproductor.html">
-                        <div class="clase-estado"></div>
-                        <div class="clase-contenido">
-                            <span class="clase-titulo">Primeros pasos</span>
-                            <span class="clase-duracion">Duración: <b>10m 34s</b></span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="curso-seccion">
-                <div class="curso-seccion-header">
-                    <div class="curso-seccion-titulo">
-                        <span>Clases avanzadas</span>
-                    </div>
-                </div>
-                <div class="clases">
-                    <a class="clase" href="reproductor.html">
-                        <div class="clase-estado"></div>
-                        <div class="clase-contenido">
-                            <span class="clase-titulo">Clases abstractas</span>
-                            <span class="clase-duracion">Duración: <b>10m 34s</b></span>
-                        </div>
-                    </a>
-                    <a class="clase" href="reproductor.html">
-                        <div class="clase-estado"></div>
-                        <div class="clase-contenido">
-                            <span class="clase-titulo">Implementando clases abstractas al proyecto</span>
-                            <span class="clase-duracion">Duración: <b>10m 34s</b></span>
-                        </div>
-                    </a>
-                    <a class="clase" href="reproductor.html">
-                        <div class="clase-estado"></div>
-                        <div class="clase-contenido">
-                            <span class="clase-titulo">Ejercicio práctico </span>
-                            <span class="clase-duracion">Duración: <b>10m 34s</b></span>
-                        </div>
-                    </a>
-                    <a class="clase" href="reproductor.html">
-                        <div class="clase-estado"></div>
-                        <div class="clase-contenido">
-                            <span class="clase-titulo">Implementando métodos abstractos en Java</span>
-                            <span class="clase-duracion">Duración: <b>10m 34s</b></span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="curso-seccion">
-                <div class="curso-seccion-header">
-                    <div class="curso-seccion-titulo">
-                        <span>JavaDocs</span>
-                    </div>
-                </div>
-                <div class="clases">
-                    <a class="clase" href="reproductor.html">
-                        <div class="clase-estado"></div>
-                        <div class="clase-contenido">
-                            <span class="clase-titulo">Qué es JavaDocs</span>
-                            <span class="clase-duracion">Duración: <b>10m 34s</b></span>
-                        </div>
-                    </a>
-                    <a class="clase" href="reproductor.html">
-                        <div class="clase-estado"></div>
-                        <div class="clase-contenido">
-                            <span class="clase-titulo">Implementando JavaDocs al proyecto</span>
-                            <span class="clase-duracion">Duración: <b>10m 34s</b></span>
-                        </div>
-                    </a>
-                    <a class="clase" href="reproductor.html">
-                        <div class="clase-estado"></div>
-                        <div class="clase-contenido">
-                            <span class="clase-titulo">Javadocs tags para herencia e interfaces</span>
-                            <span class="clase-duracion">Duración: <b>10m 34s</b></span>
-                        </div>
-                    </a>
-                    <a class="clase" href="reproductor.html">
-                        <div class="clase-estado"></div>
-                        <div class="clase-contenido">
-                            <span class="clase-titulo">Generando JavaDocs</span>
-                            <span class="clase-duracion">Duración: <b>10m 34s</b></span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="curso-seccion">
-                <div class="curso-seccion-header">
-                    <div class="curso-seccion-titulo">
-                        <span>Clases anidadas</span>
-                    </div>
-                </div>
-                <div class="clases">
-                    <a class="clase" href="reproductor.html">
-                        <div class="clase-estado"></div>
-                        <div class="clase-contenido">
-                            <span class="clase-titulo">Clases anidadas y tipos</span>
-                            <span class="clase-duracion">Duración: <b>10m 34s</b></span>
-                        </div>
-                    </a>
-                    <a class="clase" href="reproductor.html">
-                        <div class="clase-estado"></div>
-                        <div class="clase-contenido">
-                            <span class="clase-titulo">Implementando una clase anidada al proyecto</span>
-                            <span class="clase-duracion">Duración: <b>10m 34s</b></span>
-                        </div>
-                    </a>
-                    <a class="clase" href="reproductor.html">
-                        <div class="clase-estado"></div>
-                        <div class="clase-contenido">
-                            <span class="clase-titulo">Instanciando clases estáticas anidadas</span>
-                            <span class="clase-duracion">Duración: <b>10m 34s</b></span>
-                        </div>
-                    </a>
-                    <a class="clase" href="reproductor.html">
-                        <div class="clase-estado"></div>
-                        <div class="clase-contenido">
-                            <span class="clase-titulo">Enumeraciones</span>
-                            <span class="clase-duracion">Duración: <b>10m 34s</b></span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="curso-seccion">
-                <div class="curso-seccion-header">
-                    <div class="curso-seccion-titulo">
-                        <span>Interfaces avanzadas</span>
-                    </div>
-                </div>
-                <div class="clases">
-                    <a class="clase" href="reproductor.html">
-                        <div class="clase-estado"></div>
-                        <div class="clase-contenido">
-                            <span class="clase-titulo">Métodos con implementación métodos default y private</span>
-                            <span class="clase-duracion">Duración: <b>10m 34s</b></span>
-                        </div>
-                    </a>
-                    <a class="clase" href="reproductor.html">
-                        <div class="clase-estado"></div>
-                        <div class="clase-contenido">
-                            <span class="clase-titulo">Creando Interfaz DAO con métodos default y private</span>
-                            <span class="clase-duracion">Duración: <b>10m 34s</b></span>
-                        </div>
-                    </a>
-                    <a class="clase" href="reproductor.html">
-                        <div class="clase-estado"></div>
-                        <div class="clase-contenido">
-                            <span class="clase-titulo">Diferencias entre Interfaces y Clases abstractas</span>
-                            <span class="clase-duracion">Duración: <b>10m 34s</b></span>
-                        </div>
-                    </a>
-                    <a class="clase" href="reproductor.html">
-                        <div class="clase-estado"></div>
-                        <div class="clase-contenido">
-                            <span class="clase-titulo">Herencia en interfaces</span>
-                            <span class="clase-duracion">Duración: <b>10m 34s</b></span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="curso-seccion">
-                <div class="curso-seccion-header">
-                    <div class="curso-seccion-titulo">
-                        <span>JDBC</span>
-                    </div>
-                </div>
-                <div class="clases">
-                    <a class="clase" href="reproductor.html">
-                        <div class="clase-estado"></div>
-                        <div class="clase-contenido">
-                            <span class="clase-titulo">Definición y composición del API</span>
-                            <span class="clase-duracion">Duración: <b>10m 34s</b></span>
-                        </div>
-                    </a>
-                    <a class="clase" href="reproductor.html">
-                        <div class="clase-estado"></div>
-                        <div class="clase-contenido">
-                            <span class="clase-titulo">Ejercicio: JDBC API</span>
-                            <span class="clase-duracion">Duración: <b>10m 34s</b></span>
-                        </div>
-                    </a>
-                    <a class="clase" href="reproductor.html">
-                        <div class="clase-estado"></div>
-                        <div class="clase-contenido">
-                                <span class="clase-titulo">Creando la base de datos y conectando el proyecto con
-                                    MySQL</span>
-                            <span class="clase-duracion">Duración: <b>10m 34s</b></span>
-                        </div>
-                    </a>
-                    <a class="clase" href="reproductor.html">
-                        <div class="clase-estado"></div>
-                        <div class="clase-contenido">
-                                <span class="clase-titulo">Generando conexión a la base de datos y creando clase de
-                                    constantes</span>
-                            <span class="clase-duracion">Duración: <b>10m 34s</b></span>
-                        </div>
-                    </a>
-                    <a class="clase" href="reproductor.html">
-                        <div class="clase-estado"></div>
-                        <div class="clase-contenido">
-                            <span class="clase-titulo">Sentencia SELECT en Java</span>
-                            <span class="clase-duracion">Duración: <b>10m 34s</b></span>
-                        </div>
-                    </a>
-                    <a class="clase" href="reproductor.html">
-                        <div class="clase-estado"></div>
-                        <div class="clase-contenido">
-                            <span class="clase-titulo">Sentencia SELECT con parámetros</span>
-                            <span class="clase-duracion">Duración: <b>10m 34s</b></span>
-                        </div>
-                    </a>
-                    <a class="clase" href="reproductor.html">
-                        <div class="clase-estado"></div>
-                        <div class="clase-contenido">
-                            <span class="clase-titulo">Sentencia INSERT en Java</span>
-                            <span class="clase-duracion">Duración: <b>10m 34s</b></span>
-                        </div>
-                    </a>
-                    <a class="clase" href="reproductor.html">
-                        <div class="clase-estado"></div>
-                        <div class="clase-contenido">
-                            <span class="clase-titulo">Reto: Reporte por fecha</span>
-                            <span class="clase-duracion">Duración: <b>10m 34s</b></span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="curso-seccion">
-                <div class="curso-seccion-header">
-                    <div class="curso-seccion-titulo">
-                        <span>Lambdas</span>
-                    </div>
-                </div>
-                <div class="clases">
-                    <a class="clase" href="reproductor.html">
-                        <div class="clase-estado"></div>
-                        <div class="clase-contenido">
-                            <span class="clase-titulo">Interfaces funcionales</span>
-                            <span class="clase-duracion">Duración: <b>10m 34s</b></span>
-                        </div>
-                    </a>
-                    <a class="clase" href="reproductor.html">
-                        <div class="clase-estado"></div>
-                        <div class="clase-contenido">
-                            <span class="clase-titulo">Programación funcional</span>
-                            <span class="clase-duracion">Duración: <b>10m 34s</b></span>
-                        </div>
-                    </a>
-                    <a class="clase" href="reproductor.html">
-                        <div class="clase-estado"></div>
-                        <div class="clase-contenido">
-                            <span class="clase-titulo">Lambdas</span>
-                            <span class="clase-duracion">Duración: <b>10m 34s</b></span>
-                        </div>
-                    </a>
-                    <a class="clase" href="reproductor.html">
-                        <div class="clase-estado"></div>
-                        <div class="clase-contenido">
-                            <span class="clase-titulo">Ejercicio: Lambdas</span>
-                            <span class="clase-duracion">Duración: <b>10m 34s</b></span>
-                        </div>
-                    </a>
-                    <a class="clase" href="reproductor.html">
-                        <div class="clase-estado"></div>
-                        <div class="clase-contenido">
-                            <span class="clase-titulo">Lambdas como variables y recursividad</span>
-                            <span class="clase-duracion">Duración: <b>10m 34s</b></span>
-                        </div>
-                    </a>
-                    <a class="clase" href="reproductor.html">
-                        <div class="clase-estado"></div>
-                        <div class="clase-contenido">
-                            <span class="clase-titulo">Stream y Filter</span>
-                            <span class="clase-duracion">Duración: <b>10m 34s</b></span>
-                        </div>
-                    </a>
-                    <a class="clase" href="reproductor.html">
-                        <div class="clase-estado"></div>
-                        <div class="clase-contenido">
-                            <span class="clase-titulo">Predicate y consumer</span>
-                            <span class="clase-duracion">Duración: <b>10m 34s</b></span>
-                        </div>
-                    </a>
-                    <a class="clase" href="reproductor.html">
-                        <div class="clase-estado"></div>
-                        <div class="clase-contenido">
-                            <span class="clase-titulo">Conclusión del curso del curso</span>
-                            <span class="clase-duracion">Duración: <b>10m 34s</b></span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="curso-examen">
-                <div>
-                    <b>Examen final</b>
-                    <span>Demuestra que has aprendido <i>Java avanzado</i></span>
-                </div>
-                <a href="examen.html">Dar examen</a>
             </div>
         </div>
     </div>
