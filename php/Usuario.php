@@ -4,6 +4,8 @@
     require_once 'Ciudad.php';
     require_once 'Pais.php';
     require_once 'Curso.php';
+    require_once 'Conocimiento.php';
+    require_once 'ExperienciaLaboral.php';
 
     Usuario ::ejecutar($_SERVER['REQUEST_URI']);
 
@@ -24,6 +26,8 @@
         public $ciudad;
         public $fechaCreacion;
         public $estado;
+        public $conocimientos;
+        public $experienciaLaboral;
 
         public static function iniciarSesion ($nickname, $password) {
             $query = 'SELECT * FROM usuario WHERE nickname = ? AND password = ?;';
@@ -60,6 +64,8 @@
             $usuario -> ciudad = Ciudad ::buscar($resultSet -> ciudad_id);
             $usuario -> fechaCreacion = $resultSet -> fecha_creacion;
             $usuario -> estado = $resultSet -> estado;
+            $usuario -> conocimientos = Conocimiento ::listar($usuario -> id);
+            $usuario -> experienciaLaboral = ExperienciaLaboral ::listar($usuario -> id);
 
             return $usuario;
         }
@@ -91,12 +97,12 @@
         }
 
         public function registrar () {
-            if (basename($this -> foto['name']) == ''){
+            if (basename($this -> foto['name']) == '') {
                 $url_foto = 'user.jpg';
             } else {
-                $url_foto = basename($this -> foto['name']); 
-                move_uploaded_file($this -> foto['tmp_name'], "../uploads/perfiles/$url_foto");              
-            };            
+                $url_foto = basename($this -> foto['name']);
+                move_uploaded_file($this -> foto['tmp_name'], "../uploads/perfiles/$url_foto");
+            };
 
             $query = 'INSERT INTO usuario VALUES(DEFAULT,?,?,?,?,?,?,?, DEFAULT,?,?,?,?,?, DEFAULT, DEFAULT)';
             $preparedStament = Conexion ::conectarBD() -> prepare($query);

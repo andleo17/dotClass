@@ -1,15 +1,15 @@
 <?php
-    require_once 'php/Curso.php';
+    $curso = explode('/', $_SERVER['REQUEST_URI']);
+    $curso = end($curso);
+    $curso = Curso ::buscar($curso);
 ?>
-
 <div class="container-fluid">
     <div class="row text-white">
-        <div class="col-6 p-0">
-            <div class="card panel-container rounded-0 border-0 p-5" id = "detalles-curso">
-            <?php foreach(Curso::buscar($idCurso -> id) as $detalle) {?>
+        <div class="col-lg-6 col-md-12 p-0">
+            <div class="card panel-container rounded-0 border-0 p-5">
                 <div class="card-head">
-                    <img src="<?= SERVER_URL ?>uploads/logos/<?=$detalle -> logo ?>" alt="logo">
-                    <h1 class="ml-3"><?= $detalle -> titulo?></h1>
+                    <img src="<?= SERVER_URL ?>uploads/logos/<?= $curso -> logo ?>" alt="logo">
+                    <h1 class="ml-3"><?= $curso -> titulo ?></h1>
                     <div class="bar">
                         <div class="bar-progress"></div>
                         <div class="full-progress"></div>
@@ -17,14 +17,12 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <p><?= $detalle -> descripcion?></p>
+                    <p><?= $curso -> descripcion ?></p>
                 </div>
                 <div class="card-footer">
-                    <span>
-                        <b>Duración:</b><?= $detalle -> duracion?> h
-                    </span>
+                    <span><b>Duración:</b> <?= $curso -> duracion ?> h</span>
                     <div class="card-rating">
-                        <span><?= $detalle -> numeroSubscriptores?> subscriptores</span>
+                        <span><?= $curso -> numeroSubscriptores ?> subscriptores</span>
                         <span class="clasificacion">
                             <i class="far fa-star"></i>
                             <i class="far fa-star"></i>
@@ -34,17 +32,15 @@
                         </span>
                     </div>
                 </div>
-        <?php } ?>
             </div>
         </div>
-        <div class="col-6 p-0">
+        <div class="col-lg-6 col-md-12 p-0">
             <div class="card panel-container rounded-0 border-0 p-5">
-            <?php foreach(Curso::listarDetallesUsuario ($idCurso -> id) as $detalleUser) {?>
-                <a href="" class="card-head">
-                    <img src="https://www.famousbirthdays.com/headshots/pasha-harulia-6.jpg" alt="foto-perfil">
+                <a href="../perfil/<?= $curso -> usuario -> nickname ?>" class="card-head">
+                    <img src="../uploads/perfiles/<?= $curso -> usuario -> foto ?>" alt="foto-perfil">
                     <div class="ml-3 docente-perfil text-white">
-                        <b><?=  $detalleUser -> nickname?></b>
-                        <span><?=  $detalleUser -> numeroSeguidores?> seguidores</span>
+                        <b><?= $curso -> usuario -> nickname ?></b>
+                        <span><?= $curso -> usuario -> numeroSeguidores ?> seguidores</span>
                     </div>
                     <div class="live">
                         <i class="fas fa-circle"></i>
@@ -52,7 +48,7 @@
                     </div>
                 </a>
                 <div class="card-body docente-descripcion text-white">
-                    <p><?=  $detalleUser -> descripcion?></p>
+                    <p>"<?= $curso -> usuario -> descripcion ?>"</p>
                 </div>
                 <div class="card-footer d-flex flex-column">
                     <span>
@@ -74,7 +70,6 @@
                         </span>
                     </span>
                 </div>
-                <?php } ?>
             </div>
         </div>
         <div class="col-12 p-0">
@@ -82,7 +77,7 @@
                 <h2>Plan de estudio para empezar este curso</h2>
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-2 mt-3">
+                        <div class="col-xl-2 col-lg-4 col-md-6 mt-3">
                             <div class="mini card text-dark">
                                 <a href="" class="card-head">
                                     <img src="https://static.platzi.com/media/achievements/badges-html-css-b0a71550-d5e7-4e27-aca2-f09f1321a517.png"
@@ -113,14 +108,24 @@
             </div>
         </div>
     </div>
-    <div class="menu-curso">
-        <div class="menu">
-            <a href="curso.html" id="menu-contenido">Contenido</a>
-            <a href="curso-preguntas.html" id="menu-preguntas">Preguntas</a>
-            <a href="curso-aportes.html" id="menu-aportes">Aportes</a>
-            <a href="curso-marcadores.html" id="menu-marcadores">Marcadores</a>
+    <div class="card mt-5 rounded-0">
+        <div class="card-header pb-0">
+            <ul class="nav nav-tabs card-header-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" href="curso.html">Contenido</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="curso-preguntas.html">Preguntas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="curso-aportes.html">Aportes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="curso-marcadores.html">Marcadores</a>
+                </li>
+            </ul>
         </div>
-        <div class="contenido">
+        <div class="card-body">
             <div class="curso-seccion">
                 <div class="curso-seccion-header">
                     <div class="curso-seccion-titulo">

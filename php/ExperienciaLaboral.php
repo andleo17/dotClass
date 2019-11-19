@@ -21,16 +21,15 @@
             $experienciaLaboral-> fechaInicio = $resultSet -> fecha_inicio;
             $experienciaLaboral-> fechaFin = $resultSet -> fecha_fin;
             $experienciaLaboral-> pais = Pais ::buscar($resultSet -> pais_id);            
-            $experienciaLaboral-> usuario = Usuario ::buscar($resultSet -> usuario_id);
+            $experienciaLaboral-> usuario = $resultSet -> usuario_id;
             return $experienciaLaboral;
         }        
 
-        public static function listarxUsuario ($Usuario) {
+        public static function listar ($usuario) {
             $lista = [];
-            $query = 'SELECT experiencia_laboral.* FROM experiencia_laboral INNER JOIN usuario ON usuario.id = experiencia_laboral.usuario_id WHERE usuario.nickname = ?';
-            $cnx = Conexion ::conectarBD();
-            $resultSet = $cnx -> prepare($query);
-            $resultSet -> bindParam(1, $Usuario);
+            $query = 'SELECT * FROM experiencia_laboral WHERE usuario_id = ?';
+            $resultSet = Conexion ::conectarBD() -> prepare($query);
+            $resultSet -> bindParam(1, $usuario);
             $resultSet -> execute();
             while ($experienciaLaboral = $resultSet -> fetchObject()) {
                 $experienciaLaboral = self :: mapear($experienciaLaboral);
@@ -52,15 +51,14 @@
         }
 
         public function actualizar (ExperienciaLaboral $experienciaLaboral) {
-            $query = 'UPDATE experiencia_laboral SET nombre = ?, lugar = ?, fecha_inicio = ?, fecha_fin = ?, pais_id =?, usuario_id = ? WHERE ?';
+            $query = 'UPDATE experiencia_laboral SET nombre = ?, lugar = ?, fecha_inicio = ?, fecha_fin = ?, pais_id =? WHERE id = ?';
             $preparedStament = Conexion ::conectarBD() -> prepare($query);
             $preparedStament -> bindParam(1, $experienciaLaboral -> nombre);
             $preparedStament -> bindParam(2, $experienciaLaboral -> lugar);
             $preparedStament -> bindParam(3, $experienciaLaboral -> fechaInicio);
             $preparedStament -> bindParam(4, $experienciaLaboral -> fechaFin);
             $preparedStament -> bindParam(5, $experienciaLaboral -> pais -> id);
-            $preparedStament -> bindParam(6, $experienciaLaboral -> usuario -> id);
-            $preparedStament -> bindParam(7, $this -> id);
+            $preparedStament -> bindParam(6, $this -> id);
             $preparedStament -> execute();
         }
 

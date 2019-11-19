@@ -44,14 +44,22 @@
                            placeholder="Respuesta de seguridad" required>
                 </div>
                 <div class="form-group">
+                    <select class="form-control" name="pais" id="pais">
+                        <?php foreach (Pais ::listar() as $pais) { ?>
+                            <option value="<?= $pais -> id ?>>"><?= $pais -> nombre ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select class="form-control" name="ciudad" id="ciudad">
+                        <?php foreach (Ciudad ::listar() as $ciudad) { ?>
+                            <option value="<?= $ciudad -> id ?>>"><?= $ciudad -> nombre ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label class="btn btn-primary" for="foto">Foto de perfil</label>
                     <input type="file" name="foto" id="foto">
-                </div>
-                <div class="form-group">
-                    <select class="form-control" name="pais" id="pais"></select>
-                </div>
-                <div class="form-group">
-                    <select class="form-control" name="ciudad" id="ciudad"></select>
                 </div>
                 <div id="errores"></div>
                 <div class="d-flex flex-column mt-5">
@@ -84,40 +92,5 @@
             })
         });
     };
-
-    listarCiudades();
-    listarPaises();
-
-    function listarPaises() {
-        fetch('../clase/Pais/')
-            .then(res => {
-                res.json().then(data => {
-                    let $pais = document.getElementById('pais');
-                    let html = '';
-                    data.forEach(pais => {
-                        html += `
-                            <option value="${pais.id}">${pais.nombre}</option>
-                        `;
-                    });
-                    $pais.innerHTML = html;
-                })
-            });
-    }
-
-    function listarCiudades() {
-        fetch('../clase/Ciudad/')
-            .then(res => {
-                res.json().then(data => {
-                    let $ciudad = document.getElementById('ciudad');
-                    let html = '';
-                    data.forEach(ciudad => {
-                        html += `
-                            <option value="${ciudad.id}">${ciudad.nombre}</option>
-                        `;
-                    });
-                    $ciudad.innerHTML = html;
-                })
-            });
-    }
 
 </script>

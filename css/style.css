@@ -1830,10 +1830,6 @@ input[type='file'] {
 		padding-bottom: 90px;
 	}
 
-	.card {
-		flex: 0 1 200px;
-	}
-
 	.historias,
 	.cursos {
 		flex-direction: column;
@@ -1862,10 +1858,6 @@ input[type='file'] {
 	.historias,
 	.cursos {
 		flex-direction: column;
-	}
-
-	.card {
-		flex: 0 1 200px;
 	}
 
 	.clock {

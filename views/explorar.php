@@ -12,7 +12,21 @@
     <div class="row">
         <div class="col">
             <div class="container">
-                <div id="lista-categoria" class="row"></div>
+                <div class="row">
+                    <?php foreach (Categoria::listar() as $categoria) { ?>
+                        <div class="col-lg-6 col-md-12 mb-3">
+                            <a href="categoria.html" class="card animate-pop-in">
+                                <div class="card-head">
+                                    <img src="../assets/<?= $categoria -> logo ?>" alt="logo">
+                                    <span class="ml-3"><?= $categoria -> nombre ?></span>
+                                </div>
+                                <div class="card-body">
+                                    <p><?= $categoria -> descripcion ?></p>
+                                </div>
+                            </a>
+                        </div>
+                    <?php } ?>
+                </div>
             </div>
         </div>
     </div>
@@ -25,17 +39,7 @@
             let html = '';
             data.forEach(categoria => {
                 html += `
-                <div class="col-lg-6 col-md-12 mb-3">
-                    <a href="categoria.html" class="card animate-pop-in">
-                        <div class="card-head">
-                            <img src="../assets/${categoria.logo}" alt="logo">
-                            <span class="ml-3">${categoria.nombre}</span>
-                        </div>
-                        <div class="card-body">
-                            <p>${categoria.descripcion}</p>
-                        </div>
-                    </a>
-                </div>
+
                 `;
             });
             $listaCategoria.innerHTML = html;

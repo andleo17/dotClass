@@ -4,14 +4,13 @@
     require_once 'Pais.php';
     require_once 'Usuario.php';
 
-    
-
     class Conocimiento {
+
         public $id;
         public $nombre;
         public $gradoAcademico;
         public $lugarEstudio;
-        public $año;
+        public $anio;
         public $pais;
         public $usuario;
 
@@ -23,16 +22,15 @@
             $conocimiento -> lugarEstudio = $resultSet -> lugar_estudio;
             $conocimiento -> año = $resultSet -> anio;
             $conocimiento -> pais = Pais ::buscar($resultSet -> pais_id);            
-            $conocimiento -> usuario = Usuario ::buscar($resultSet -> usuario_id);
+            $conocimiento -> usuario = $resultSet -> usuario_id;
             return $conocimiento;
         }        
 
-        public static function listarxUsuario ($Usuario) {
+        public static function listar ($usuario) {
             $lista = [];
-            $query = 'SELECT conocimiento.* FROM conocimiento INNER JOIN usuario ON usuario.id = conocimiento.usuario_id WHERE usuario.nickname = ?';
-            $cnx = Conexion ::conectarBD();
-            $resultSet = $cnx -> prepare($query);
-            $resultSet -> bindParam(1,$Usuario);
+            $query = 'SELECT * FROM conocimiento WHERE usuario_id = ?';
+            $resultSet = Conexion ::conectarBD() -> prepare($query);
+            $resultSet -> bindParam(1,$usuario);
             $resultSet -> execute();
             while ($conocimiento = $resultSet -> fetchObject()) {
                 $conocimiento = self :: mapear($conocimiento);
@@ -47,26 +45,25 @@
             $preparedStament -> bindParam(1, $this -> nombre);
             $preparedStament -> bindParam(2, $this -> gradoAcademico);
             $preparedStament -> bindParam(3, $this -> lugarEstudio);
-            $preparedStament -> bindParam(4, $this -> año);
+            $preparedStament -> bindParam(4, $this -> anio);
             $preparedStament -> bindParam(5, $this -> pais -> id);
-            $preparedStament -> bindParam(6, $this -> usuario -> id);
+            $preparedStament -> bindParam(6, $this -> usuario);
             $preparedStament -> execute();
         }
 
-        public function actualizar (ExperienciaLaboral $experienciaLaboral) {
-            $query = 'UPDATE conocimiento SET nombre = ?, grado_academico = ?, lugar_estudio = ?, anio = ?, pais_id =?, usuario_id = ? WHERE ?';
+        public function actualizar (Conocimiento $conocimiento) {
+            $query = 'UPDATE conocimiento SET nombre = ?, grado_academico = ?, lugar_estudio = ?, anio = ?, pais_id =? WHERE id = ?';
             $preparedStament = Conexion ::conectarBD() -> prepare($query);
             $preparedStament -> bindParam(1, $conocimiento -> nombre);
             $preparedStament -> bindParam(2, $conocimiento -> gradoAcademico);
             $preparedStament -> bindParam(3, $conocimiento -> lugarEstudio);
-            $preparedStament -> bindParam(4, $conocimiento -> año);
+            $preparedStament -> bindParam(4, $conocimiento -> anio);
             $preparedStament -> bindParam(5, $conocimiento -> pais -> id);
-            $preparedStament -> bindParam(6, $conocimiento -> usuario -> id);
-            $preparedStament -> bindParam(7, $this -> id);
+            $preparedStament -> bindParam(6, $this -> id);
             $preparedStament -> execute();
         }
 
-        public static function eliminar (ExperienciaLaboral $conocimiento) {
+        public static function eliminar (Conocimiento $conocimiento) {
             $query = 'DELETE FROM conocimiento WHERE id = ?';
             $preparedStament = Conexion ::conectarBD() -> prepare($query);
             $preparedStament -> bindParam(1, $conocimiento  -> id);
