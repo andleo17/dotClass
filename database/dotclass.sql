@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-11-2019 a las 00:48:46
+-- Tiempo de generación: 19-11-2019 a las 22:31:41
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.8
 
@@ -147,8 +147,7 @@ CREATE TABLE `ciudad` (
 --
 
 INSERT INTO `ciudad` (`id`, `nombre`) VALUES
-(1, 'Chiclayo'),
-(2, 'Lima');
+(1, 'Chiclayo');
 
 -- --------------------------------------------------------
 
@@ -166,6 +165,46 @@ CREATE TABLE `clase` (
   `fecha_subida` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `clase`
+--
+
+INSERT INTO `clase` (`id`, `seccion_id`, `titulo`, `duracion`, `contenido_video`, `contenido_texto`, `fecha_subida`) VALUES
+(1, 1, 'Bienvenida al curso', 11, NULL, NULL, '2019-11-19 11:11:30'),
+(2, 1, 'Primeros pasos', 11, NULL, NULL, '2019-11-19 11:11:30'),
+(3, 2, 'Clases abstractas', 25, NULL, NULL, '2019-11-19 11:16:28'),
+(4, 2, 'Implementando clases abstractas al proyecto', 32, NULL, NULL, '2019-11-19 11:16:28'),
+(5, 2, 'Ejercicio práctico', 14, NULL, NULL, '2019-11-19 11:16:28'),
+(6, 2, 'Implementando métodos abstractos en Java', 32, NULL, NULL, '2019-11-19 11:16:28'),
+(7, 3, 'Qué es JavaDocs', 4, NULL, NULL, '2019-11-19 11:30:17'),
+(8, 3, 'Implementando JavaDocs al proyecto', 18, NULL, NULL, '2019-11-19 11:30:17'),
+(9, 3, 'Javadocs tags para herencia e interfaces', 16, NULL, NULL, '2019-11-19 11:30:17'),
+(10, 3, 'Generando JavaDocs', 34, NULL, NULL, '2019-11-19 11:30:17'),
+(11, 4, 'Clases anidadas y tipos', 50, NULL, NULL, '2019-11-19 11:34:35'),
+(12, 4, 'Implementando una clase anidada al proyecto', 69, NULL, NULL, '2019-11-19 11:34:35'),
+(13, 4, 'Instanciando clases estáticas anidadas', 24, NULL, NULL, '2019-11-19 11:34:35'),
+(14, 4, 'Enumeraciones', 8, NULL, NULL, '2019-11-19 11:34:35'),
+(15, 5, 'Métodos con implementación métodos default y private', 14, NULL, NULL, '2019-11-19 11:36:15'),
+(16, 5, 'Creando Interfaz DAO con métodos default y private', 37, NULL, NULL, '2019-11-19 11:36:15'),
+(17, 5, 'Diferencias entre Interfaces y Clases abstractas', 9, NULL, NULL, '2019-11-19 11:36:15'),
+(18, 5, 'Herencia en interfaces', 6, NULL, NULL, '2019-11-19 11:36:15'),
+(19, 6, 'Definición y composición del API', 12, NULL, NULL, '2019-11-19 11:38:39'),
+(20, 6, 'Ejercicio: JDBC API', 3, NULL, NULL, '2019-11-19 11:38:39'),
+(21, 6, 'Creando la base de datos y conectando el proyecto con MySQL', 24, NULL, NULL, '2019-11-19 11:38:39'),
+(22, 6, 'Generando conexión a la base de datos y creando clase de con', 16, NULL, NULL, '2019-11-19 11:38:39'),
+(23, 6, 'Sentencia SELECT en Java', 7, NULL, NULL, '2019-11-19 11:38:39'),
+(24, 6, 'Sentencia SELECT con parámetros', 4, NULL, NULL, '2019-11-19 11:38:39'),
+(25, 6, 'Sentencia INSERT en Java', 6, NULL, NULL, '2019-11-19 11:38:39'),
+(26, 6, 'Reto: Reporte por fecha', 1, NULL, NULL, '2019-11-19 11:38:39'),
+(27, 7, 'Interfaces funcionales', 4, NULL, NULL, '2019-11-19 11:42:44'),
+(28, 7, 'Programación funcional', 14, NULL, NULL, '2019-11-19 11:42:44'),
+(29, 7, 'Lambdas', 19, NULL, NULL, '2019-11-19 11:42:44'),
+(30, 7, 'Ejercicio: Lambdas', 1, NULL, NULL, '2019-11-19 11:42:44'),
+(31, 7, 'Lambdas como variables y recursividad', 18, NULL, NULL, '2019-11-19 11:42:44'),
+(32, 7, 'Stream y Filter', 20, NULL, NULL, '2019-11-19 11:42:44'),
+(33, 7, 'Predicate y consumer', 16, NULL, NULL, '2019-11-19 11:42:44'),
+(34, 7, 'Conclusión del curso del curso', 4, NULL, NULL, '2019-11-19 11:42:44');
+
 -- --------------------------------------------------------
 
 --
@@ -180,14 +219,6 @@ CREATE TABLE `comentario` (
   `numero_comentarios` int(11) NOT NULL DEFAULT 0,
   `pregunta` tinyint(4) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Volcado de datos para la tabla `comentario`
---
-
-INSERT INTO `comentario` (`id`, `comentario_padre_id`, `contenido`, `numero_likes`, `numero_comentarios`, `pregunta`) VALUES
-(1, 1, '¿Cómo puedo crear una clase abstracta con implementación?', 30, 0, 0),
-(2, 2, '¿Cómo puedo crear una clase abstracta con implementación?', 50, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -204,15 +235,6 @@ CREATE TABLE `conocimiento` (
   `pais_id` int(11) NOT NULL,
   `usuario_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Volcado de datos para la tabla `conocimiento`
---
-
-INSERT INTO `conocimiento` (`id`, `nombre`, `grado_academico`, `lugar_estudio`, `anio`, `pais_id`, `usuario_id`) VALUES
-(1, 'Ingeniería de Sistemas y Computación', 'Maestría', 'USAT', 2019, 1, 2),
-(2, 'Teatro', NULL, 'Escuela de Bellas Artes', 2014, 1, 2),
-(3, 'Ingeniería Industrial', 'Licenciado', 'PUCP', 2000, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -270,14 +292,6 @@ CREATE TABLE `experiencia_laboral` (
   `usuario_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
---
--- Volcado de datos para la tabla `experiencia_laboral`
---
-
-INSERT INTO `experiencia_laboral` (`id`, `nombre`, `lugar`, `fecha_inicio`, `fecha_fin`, `pais_id`, `usuario_id`) VALUES
-(1, 'Musical \"High School Musical\" ', 'New York', '0000-00-00', '0000-00-00', 1, 2),
-(2, 'Cabinas \"Mi Paolita\" ', 'Perú', '0000-00-00', '0000-00-00', 1, 2);
-
 -- --------------------------------------------------------
 
 --
@@ -332,6 +346,13 @@ CREATE TABLE `prerrequisito` (
   `curso_prerrequisito_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `prerrequisito`
+--
+
+INSERT INTO `prerrequisito` (`curso_id`, `curso_prerrequisito_id`) VALUES
+(3, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -344,6 +365,19 @@ CREATE TABLE `seccion` (
   `titulo` varchar(45) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `seccion`
+--
+
+INSERT INTO `seccion` (`id`, `curso_id`, `titulo`) VALUES
+(1, 1, 'Introducción al curso'),
+(2, 1, 'Clases avanzadas'),
+(3, 1, 'JavaDocs'),
+(4, 1, 'Clases anidadas'),
+(5, 1, 'Interfaces avanzadas'),
+(6, 1, 'JDBC'),
+(7, 1, 'Lambdas');
+
 -- --------------------------------------------------------
 
 --
@@ -354,14 +388,6 @@ CREATE TABLE `seguimiento` (
   `usuario_id` int(11) NOT NULL,
   `curso_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Volcado de datos para la tabla `seguimiento`
---
-
-INSERT INTO `seguimiento` (`usuario_id`, `curso_id`) VALUES
-(2, 1),
-(2, 2);
 
 -- --------------------------------------------------------
 
@@ -381,7 +407,7 @@ CREATE TABLE `tipo_suscripcion` (
 --
 
 CREATE TABLE `usuario` (
-  `id` int(3) NOT NULL,
+  `id` int(11) NOT NULL,
   `nickname` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   `password` varchar(42) COLLATE utf8_spanish_ci NOT NULL,
   `nombres` varchar(60) COLLATE utf8_spanish_ci NOT NULL,
@@ -392,7 +418,7 @@ CREATE TABLE `usuario` (
   `numero_seguidores` int(11) NOT NULL DEFAULT 0,
   `pregunta_seguridad` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
   `respuesta_seguridad` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `foto` varchar(100) COLLATE utf8_spanish_ci NOT NULL DEFAULT 'user.jpg',
+  `foto` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `pais_id` int(11) NOT NULL,
   `ciudad_id` int(11) NOT NULL,
   `fecha_creacion` datetime NOT NULL DEFAULT current_timestamp(),
@@ -405,8 +431,7 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`id`, `nickname`, `password`, `nombres`, `apellidos`, `email`, `fecha_nacimiento`, `descripcion`, `numero_seguidores`, `pregunta_seguridad`, `respuesta_seguridad`, `foto`, `pais_id`, `ciudad_id`, `fecha_creacion`, `estado`) VALUES
 (1, 'Andle17', '123456789', 'Andres', 'Baldarrago', 'ab@gmail.com', '2000-07-01', 'Me gusta jugar y enseñar.', 0, '¿Quién soy?', 'nose', 'Andle17.png', 1, 1, '2019-11-14 16:42:51', 1),
-(2, 'CinthyaYomona', '123', 'Cinthya Lisseth', 'Yomona Parraguez', 'cinthya@gmail.com', '1999-05-23', 'Se suponde que me debo de bañar, que mis convers ya no aguantan más!!...Pero llegas tú !! :) <3', 0, 'Inspiraciíon?', 'Priscila', '20180319_103506.jpg', 1, 1, '2019-11-14 16:42:51', 1),
-(4, 'Priscila', '123', 'Priscila Susana', 'Yomona Parraguez', 'cinthyayomonaparraguez@gmail.com', '2005-06-11', 'Soy una mujer oriunda de la ciudad de La Plata. Soy de estatura media y su cabello es castaño oscuro. ', 0, 'Prueba', 'SI', '51 954 513 403 20191005_082814.jpg', 1, 1, '2019-11-18 17:13:53', 1);
+(2, 'CinthyaYomona', '123', 'Cinthya Lisseth', 'Yomona Parraguez', 'cinthya@gmail.com', '1999-05-23', 'Se suponde que me debo de bañar, que mis convers ya no aguantan más!!...Pero llegas tú !! :) <3', 0, 'Inspiraciíon?', 'Priscila', '20180319_103506.jpg', 1, 1, '2019-11-14 16:42:51', 1);
 
 -- --------------------------------------------------------
 
@@ -634,19 +659,19 @@ ALTER TABLE `ciudad`
 -- AUTO_INCREMENT de la tabla `clase`
 --
 ALTER TABLE `clase`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT de la tabla `comentario`
 --
 ALTER TABLE `comentario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `conocimiento`
 --
 ALTER TABLE `conocimiento`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `curso`
@@ -664,7 +689,7 @@ ALTER TABLE `examen`
 -- AUTO_INCREMENT de la tabla `experiencia_laboral`
 --
 ALTER TABLE `experiencia_laboral`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `marcador`
@@ -688,7 +713,7 @@ ALTER TABLE `pregunta`
 -- AUTO_INCREMENT de la tabla `seccion`
 --
 ALTER TABLE `seccion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_suscripcion`
@@ -700,7 +725,7 @@ ALTER TABLE `tipo_suscripcion`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `visita`
