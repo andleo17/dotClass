@@ -826,65 +826,6 @@ aside hr {
 	background-color: white;
 }
 
-.curso-seccion {
-	border: 1px solid #707070;
-	margin-bottom: 10px;
-	padding: 15px 30px;
-	display: flex;
-	flex-direction: column;
-	flex: 0 1 auto;
-	color: #717171;
-}
-
-.curso-seccion-header {
-	font-size: 18px;
-	font-weight: 500;
-	margin-bottom: 15px;
-	display: flex;
-	align-items: center;
-}
-
-.curso-seccion-titulo {
-	flex: 1 1 auto;
-}
-
-.clases {
-	display: grid;
-	grid-template-columns: repeat(4, 1fr);
-	grid-gap: 20px;
-}
-
-.clase {
-	border: 1px solid #707070;
-	border-radius: 0px 0px 25px 25px;
-	color: #717171;
-}
-
-.clase-estado {
-	background-color: #237723;
-	height: 10px;
-}
-
-.clase-contenido {
-	padding: 15px 25px;
-}
-
-.clase-titulo {
-	font-size: 16px;
-	font-weight: 500;
-	height: 80px;
-	display: flex;
-	align-items: flex-start;
-}
-
-.clase-duracion {
-	font-size: 14px;
-}
-
-.clase-duracion b {
-	font-weight: 500;
-}
-
 .curso-examen {
 	padding: 20px 40px;
 	background-color: #01140b;

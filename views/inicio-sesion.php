@@ -11,7 +11,7 @@
                             </div>
                         </div>
                         <input class="form-control" type="text" name="nickname" id="nickname" placeholder="Usuario"
-                               required>
+                               required autofocus>
                         <hr>
                     </div>
                 </div>

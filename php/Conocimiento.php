@@ -15,7 +15,7 @@
         public $usuario;
 
         private function mapear ($resultSet) {
-            $conocimiento = new ExperienciaLaboral();
+            $conocimiento = new Conocimiento();
             $conocimiento -> id = $resultSet -> id;
             $conocimiento -> nombre = $resultSet -> nombre;
             $conocimiento -> gradoAcademico = $resultSet -> grado_academico;
