@@ -406,7 +406,7 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` (`id`, `nickname`, `password`, `nombres`, `apellidos`, `email`, `fecha_nacimiento`, `descripcion`, `numero_seguidores`, `pregunta_seguridad`, `respuesta_seguridad`, `foto`, `pais_id`, `ciudad_id`, `fecha_creacion`, `estado`) VALUES
 (1, 'Andle17', '123456789', 'Andres', 'Baldarrago', 'ab@gmail.com', '2000-07-01', 'Me gusta jugar y enseñar.', 0, '¿Quién soy?', 'nose', 'Andle17.png', 1, 1, '2019-11-14 16:42:51', 1),
 (2, 'CinthyaYomona', '123', 'Cinthya Lisseth', 'Yomona Parraguez', 'cinthya@gmail.com', '1999-05-23', 'Se suponde que me debo de bañar, que mis convers ya no aguantan más!!...Pero llegas tú !! :) <3', 0, 'Inspiraciíon?', 'Priscila', '20180319_103506.jpg', 1, 1, '2019-11-14 16:42:51', 1),
-(4, 'Priscila', '123', 'Priscila Susana', 'Yomona Parraguez', 'cinthyayomonaparraguez@gmail.com', '2005-06-11', 'Soy una mujer oriunda de la ciudad de La Plata. Soy de estatura media y su cabello es castaño oscuro. ', 0, 'Prueba', 'SI', '51 954 513 403 20191005_082814.jpg', 1, 1, '2019-11-18 17:13:53', 1);
+(3, 'Priscila', '123', 'Priscila Susana', 'Yomona Parraguez', 'cinthyayomonaparraguez@gmail.com', '2005-06-11', 'Soy una mujer oriunda de la ciudad de La Plata. Soy de estatura media y su cabello es castaño oscuro. ', 0, 'Prueba', 'SI', '51 954 513 403 20191005_082814.jpg', 1, 1, '2019-11-18 17:13:53', 1);
 
 -- --------------------------------------------------------
 

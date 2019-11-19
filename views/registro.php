@@ -3,64 +3,7 @@
         <div class="col">
             <form id="registro" class="my-5" enctype="multipart/form-data">
                 <h1 class="text-center mb-4">Regístrate</h1>
-                <div class="form-group mt-5">
-                    <input class="form-control" type="text" name="nickname" id="nickname" placeholder="Usuario"
-                           required>
-                </div>
-                <div class="form-group">
-                    <input class="form-control" type="password" name="password" id="password"
-                           placeholder="Contraseña" required>
-                </div>
-                <div class="form-group">
-                    <input class="form-control" type="password" name="confirmarPassword" id="confirmarPassword"
-                           placeholder="Confirmar contraseña" required>
-                </div>
-                <div class="form-group">
-                    <input class="form-control" type="text" name="nombres" id="nombres"
-                           placeholder="Nombres" required>
-                </div>
-                <div class="form-group">
-                    <input class="form-control" type="text" name="apellidos" id="apellidos"
-                           placeholder="Apellidos" required>
-                </div>
-                <div class="form-group">
-                    <input class="form-control" type="email" name="email" id="email"
-                           placeholder="E-mail" required>
-                </div>
-                <div class="form-group">
-                    <input class="form-control" type="date" name="fechaNacimiento" id="fechaNacimiento"
-                           placeholder="Fecha de nacimiento" required>
-                </div>
-                <div class="form-group">
-                    <textarea class="form-control" name="descripcion" id="descripcion"
-                              placeholder="Descripcion"></textarea>
-                </div>
-                <div class="form-group">
-                    <input class="form-control" type="text" name="preguntaSeguridad" id="preguntaSeguridad"
-                           placeholder="Pregunta de seguridad" required>
-                </div>
-                <div class="form-group">
-                    <input class="form-control" type="text" name="respuestaSeguridad" id="respuestaSeguridad"
-                           placeholder="Respuesta de seguridad" required>
-                </div>
-                <div class="form-group">
-                    <select class="form-control" name="pais" id="pais">
-                        <?php foreach (Pais ::listar() as $pais) { ?>
-                            <option value="<?= $pais -> id ?>>"><?= $pais -> nombre ?></option>
-                        <?php } ?>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <select class="form-control" name="ciudad" id="ciudad">
-                        <?php foreach (Ciudad ::listar() as $ciudad) { ?>
-                            <option value="<?= $ciudad -> id ?>>"><?= $ciudad -> nombre ?></option>
-                        <?php } ?>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="btn btn-primary" for="foto">Foto de perfil</label>
-                    <input type="file" name="foto" id="foto">
-                </div><div class="row">
+                <div class="row">
                     <div class="col">
                         <input class="form-control" type="text" name="nickname" id="nickname" placeholder="Usuario"
                             required>
