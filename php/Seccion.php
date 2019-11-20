@@ -5,14 +5,14 @@
     class Seccion {
 
         public $id;
-        public $clases;
+        public $curso;
         public $titulo;
 
-        public static function listar ($curso) {
+        public static function buscar ($id) {
             $lista = [];
             $query = 'SELECT * FROM seccion WHERE curso_id = ?';
             $resultSet = Conexion ::conectarBD() -> prepare($query);
-            $resultSet -> bindParam(1, $curso);
+            $resultSet -> bindParam(1, $id);
             $resultSet -> execute();
             while ($seccion = $resultSet -> fetchObject()) {
                 $seccion = self :: mapear($seccion);
@@ -21,10 +21,14 @@
             return $lista;
         }
 
+        public static function listarClases ($id) {
+            return Clase ::buscar($id);
+        }
+
         private function mapear ($resultSet) {
             $seccion = new Seccion();
             $seccion -> id = $resultSet -> id;
-            $seccion -> clases = Clase::listar($resultSet -> id);
+            $seccion -> curso = $resultSet -> curso_id;
             $seccion -> titulo = $resultSet -> titulo;
             return $seccion;
         }

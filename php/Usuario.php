@@ -26,8 +26,6 @@
         public $ciudad;
         public $fechaCreacion;
         public $estado;
-        public $conocimientos;
-        public $experienciaLaboral;
 
         public static function iniciarSesion ($nickname, $password) {
             $query = 'SELECT * FROM usuario WHERE nickname = ? AND password = ?;';
@@ -64,8 +62,6 @@
             $usuario -> ciudad = Ciudad ::buscar($resultSet -> ciudad_id);
             $usuario -> fechaCreacion = $resultSet -> fecha_creacion;
             $usuario -> estado = $resultSet -> estado;
-            $usuario -> conocimientos = Conocimiento ::listar($usuario -> id);
-            $usuario -> experienciaLaboral = ExperienciaLaboral ::listar($usuario -> id);
 
             return $usuario;
         }
@@ -155,8 +151,7 @@
         public static function listarSeguimiento (Usuario $usuario) {
             $lista = [];
             $query = 'SELECT curso_id FROM seguimiento WHERE usuario_id = ?';
-            $cnx = Conexion ::conectarBD();
-            $preparedStatement = $cnx -> prepare($query);
+            $preparedStatement = Conexion ::conectarBD() -> prepare($query);
             $preparedStatement -> bindParam(1, $usuario -> id);
             $preparedStatement -> execute();
             while ($curso = $preparedStatement -> fetchObject()) {
@@ -169,8 +164,7 @@
         public static function listarEnseñanza (Usuario $usuario) {
             $lista = [];
             $query = 'SELECT id FROM curso WHERE usuario_id = ?';
-            $cnx = Conexion ::conectarBD();
-            $preparedStatement = $cnx -> prepare($query);
+            $preparedStatement = Conexion ::conectarBD() -> prepare($query);
             $preparedStatement -> bindParam(1, $usuario -> id);
             $preparedStatement -> execute();
             while ($curso = $preparedStatement -> fetchObject()) {

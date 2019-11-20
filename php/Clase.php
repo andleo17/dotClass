@@ -11,11 +11,11 @@
         public $texto;
         public $fechaSubida;
 
-        public static function listar ($seccion) {
+        public static function buscar ($id) {
             $lista = [];
             $query = 'SELECT * FROM clase WHERE seccion_id = ?';
             $resultSet = Conexion ::conectarBD() -> prepare($query);
-            $resultSet -> bindParam(1, $seccion);
+            $resultSet -> bindParam(1, $id);
             $resultSet -> execute();
             while ($clase = $resultSet -> fetchObject()) {
                 $clase = self :: mapear($clase);

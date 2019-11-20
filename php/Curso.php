@@ -20,8 +20,6 @@
         public $fechaCreacion;
         public $fechaUltimaActualizacion;
         public $usuario;
-        public $contenido;
-        public $prerequisitos;
 
         private function mapear ($resultSet) {
             $curso = new Curso();
@@ -36,15 +34,12 @@
             $curso -> fechaCreacion = $resultSet -> fecha_creacion;
             $curso -> fechaUltimaActualizacion = $resultSet -> fecha_ultima_actualizacion;
             $curso -> usuario = Usuario ::buscar($resultSet -> usuario_id);
-            $curso -> contenido = Seccion::listar($resultSet -> id);
-            $curso -> prerequisitos = Curso::listarPrerequisitos($resultSet -> id);
             return $curso;
         }
 
         public static function buscar($id) {
             $query = 'SELECT * FROM curso WHERE id = ?';
-            $cnx = Conexion ::conectarBD();
-            $preparedStatement = $cnx -> prepare($query);
+            $preparedStatement = Conexion ::conectarBD() -> prepare($query);
             $preparedStatement -> bindParam(1, $id);
             $preparedStatement -> execute();
             if ($curso = $preparedStatement -> fetchObject()) {
@@ -55,11 +50,14 @@
             }
         }
 
+        public static function buscarContenido($id) {
+            return Seccion::buscar($id);
+        }
+
         public static function listar () {
             $lista = [];
             $query = 'SELECT * FROM curso';
-            $cnx = Conexion ::conectarBD();
-            $resultSet = $cnx -> query($query);
+            $resultSet = Conexion ::conectarBD() -> query($query);
             while ($curso = $resultSet -> fetchObject()) {
                 $curso = self :: mapear($curso);
                 array_push($lista, $curso);
@@ -70,8 +68,7 @@
         public static function listarPrerequisitos($id) {
             $lista = [];
             $query = 'SELECT curso_prerrequisito_id FROM prerrequisito WHERE curso_id = ?';
-            $cnx = Conexion ::conectarBD();
-            $preparedStatement = $cnx -> prepare($query);
+            $preparedStatement = Conexion ::conectarBD() -> prepare($query);
             $preparedStatement -> bindParam(1, $id);
             $preparedStatement -> execute();
             while ($curso = $preparedStatement -> fetchObject()) {
@@ -79,20 +76,6 @@
                 array_push($lista, $curso);
             }
             return $lista;
-        }
-
-        public static function listarDetallesUsuario ($id) {
-            $query = 'SELECT usuario.* FROM curso WHERE id = ?';
-            $cnx = Conexion ::conectarBD();
-            $preparedStatement = $cnx -> prepare($query);
-            $preparedStatement -> bindParam(1, $curso -> id);
-            $preparedStatement -> execute();
-            if ($curso = $preparedStatement -> fetchObject()) {
-                $curso = self ::mapear($curso);
-                return $curso;
-            } else {
-                return null;
-            }
         }
 
         public function registrar () {

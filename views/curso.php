@@ -77,7 +77,7 @@
                 <h2>Plan de estudio para empezar este curso</h2>
                 <div class="container-fluid">
                     <div class="row">
-                        <?php foreach ($curso -> prerequisitos as $prerequisito) { ?>
+                        <?php foreach (Curso::listarPrerequisitos($curso -> id) as $prerequisito) { ?>
                             <div class="col-xl-2 col-lg-4 col-md-6 mt-3">
                                 <div class="mini card text-dark">
                                     <a href="../curso/<?= $prerequisito -> id ?>" class="card-head">
@@ -130,12 +130,12 @@
         <div class="tab-content">
             <div class="card-body container-fluid px-5">
                 <div id="contenido" class="tab-pane fade show active">
-                    <?php foreach ($curso -> contenido as $seccion) { ?>
+                    <?php foreach (Curso::buscarContenido($curso -> id) as $seccion) { ?>
                         <div class="border border-secondary px-4 py-3 mb-4 row">
                             <div class="col-12 text-dark">
                                 <h5 class="mb-4"><?= $seccion -> titulo ?></h5>
                             </div>
-                            <?php foreach ($seccion -> clases as $clase) { ?>
+                            <?php foreach (Seccion::listarClases($seccion -> id) as $clase) { ?>
                                 <div class="col-3 mb-3">
                                     <div class="card border border-secondary rounded-top">
                                         <div class="card-header bg-success"></div>

@@ -33,7 +33,7 @@
                     <li class="perfil-value"><?= "{$usuario -> ciudad -> nombre}, {$usuario -> pais -> nombre}" ?></li>
                     <li class="perfil-key" >Trayectoria académica:</li>
                     <?php 
-                        foreach($usuario -> conocimientos as $trayectoria)  {?>
+                        foreach(Conocimiento::listar($usuario -> id) as $trayectoria)  {?>
                         <li class="perfil-value"><?= "{$trayectoria -> nombre }, {$trayectoria -> gradoAcademico} , {$trayectoria -> lugarEstudio }, ({$trayectoria -> año}), {$trayectoria -> pais -> nombre} " ?></li>
                     <?php } ?>
                 </ul>
@@ -49,7 +49,7 @@
                     <div class="perfil-detalle-body col-12 mt-3">
                         <h3>Experiencia laboral</h3>
                         <ul id="experiencia-laboral">
-                            <?php foreach($usuario -> experienciaLaboral as $experiencia) {?>
+                            <?php foreach(ExperienciaLaboral::listar($usuario -> id) as $experiencia) {?>
                                 <li><?= "{$experiencia -> nombre} , {$experiencia -> lugar}, {$experiencia -> fechaInicio} ,{$experiencia -> fechaFin} , {$experiencia -> pais -> nombre}" ?></li>
                             <?php }?>
                         </ul>

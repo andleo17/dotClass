@@ -7,7 +7,7 @@
         <h1 class="animate-pop-in">Aprende o comparte conocimientos</h1>
         <span class="animate-pop-in">Demuéstrale al mundo que puedes enseñar lo que sabes y también aprender de
                     los demás.</span>
-        <a class="hero-button animate-pop-in" href="registro.html">Da tus primeros pasos</a>
+        <a class="hero-button animate-pop-in" href="registro/">Da tus primeros pasos</a>
     </div>
 </div>
 <div class="container-fluid">
