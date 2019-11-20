@@ -6,7 +6,7 @@
 
     $usuario = explode('/', $_SERVER['REQUEST_URI']);
     $usuario = end($usuario);
-    $usuario = Usuario ::buscar($usuario);
+    $usuario = Usuario ::buscar(null, $usuario);
 
     $cumpleanos = new DateTime($usuario -> fechaNacimiento);
     $hoy = new DateTime();

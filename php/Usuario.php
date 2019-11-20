@@ -29,8 +29,7 @@
 
         public static function iniciarSesion ($nickname, $password) {
             $query = 'SELECT * FROM usuario WHERE nickname = ? AND password = ?;';
-            $cnx = Conexion ::conectarBD();
-            $preparedStatement = $cnx -> prepare($query);
+            $preparedStatement = Conexion ::conectarBD() -> prepare($query);
             $preparedStatement -> bindParam(1, $nickname);
             $preparedStatement -> bindParam(2, $password);
             $preparedStatement -> execute();
@@ -78,11 +77,11 @@
             return $lista;
         }
 
-        public static function buscar ($id) {
-            $query = 'SELECT * FROM usuario WHERE id = :id OR nickname = :id';
-            $cnx = Conexion ::conectarBD();
-            $preparedStatement = $cnx -> prepare($query);
-            $preparedStatement -> bindParam(':id', $id);
+        public static function buscar ($id = NULL, $nickname = NULL) {
+            $query = 'SELECT * FROM usuario WHERE id = ? OR nickname = ?';
+            $preparedStatement = Conexion ::conectarBD() -> prepare($query);
+            $preparedStatement -> bindParam(1, $id);
+            $preparedStatement -> bindParam(2, $nickname);
             $preparedStatement -> execute();
             if ($usuario = $preparedStatement -> fetchObject()) {
                 $usuario = self ::mapear($usuario);
@@ -219,7 +218,7 @@
                         break;
 
                     default:
-                        return self ::buscar($peticion);
+                        return self ::buscar(NULL, $peticion);
                         break;
                 }
             }

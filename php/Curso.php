@@ -4,6 +4,7 @@
     require_once 'Categoria.php';
     require_once 'Usuario.php';
     require_once 'Seccion.php';
+    require_once 'Examen.php';
 
     Curso ::ejecutar($_SERVER['REQUEST_URI']);
 
@@ -37,7 +38,7 @@
             return $curso;
         }
 
-        public static function buscar($id) {
+        public static function buscar ($id) {
             $query = 'SELECT * FROM curso WHERE id = ?';
             $preparedStatement = Conexion ::conectarBD() -> prepare($query);
             $preparedStatement -> bindParam(1, $id);
@@ -50,8 +51,12 @@
             }
         }
 
-        public static function buscarContenido($id) {
-            return Seccion::buscar($id);
+        public static function buscarContenido ($id) {
+            return Seccion ::buscar($id);
+        }
+
+        public static function buscarExamen ($id) {
+            return Examen ::buscar($id);
         }
 
         public static function listar () {
@@ -65,7 +70,7 @@
             return $lista;
         }
 
-        public static function listarPrerequisitos($id) {
+        public static function listarPrerequisitos ($id) {
             $lista = [];
             $query = 'SELECT curso_prerrequisito_id FROM prerrequisito WHERE curso_id = ?';
             $preparedStatement = Conexion ::conectarBD() -> prepare($query);

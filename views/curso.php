@@ -10,17 +10,19 @@
                 <div class="card-head">
                     <img src="<?= SERVER_URL ?>uploads/logos/<?= $curso -> logo ?>" alt="logo">
                     <h1 class="ml-3"><?= $curso -> titulo ?></h1>
-                    <div class="bar">
-                        <div class="bar-progress"></div>
-                        <div class="full-progress"></div>
-                        <span>75%</span>
-                    </div>
+                    <?php if (isset($_SESSION['usuario'])) { ?>
+                        <div class="bar">
+                            <div class="bar-progress"></div>
+                            <div class="full-progress"></div>
+                            <span>75%</span>
+                        </div>
+                    <?php } ?>
                 </div>
                 <div class="card-body">
                     <p><?= $curso -> descripcion ?></p>
                 </div>
                 <div class="card-footer">
-                    <span><b>Duración:</b> <?= $curso -> duracion ?> h</span>
+                    <span><b>Duración:</b> <?= $curso -> duracion ?></span>
                     <div class="card-rating">
                         <span><?= $curso -> numeroSubscriptores ?> subscriptores</span>
                         <span class="clasificacion">
@@ -77,7 +79,7 @@
                 <h2>Plan de estudio para empezar este curso</h2>
                 <div class="container-fluid">
                     <div class="row">
-                        <?php foreach (Curso::listarPrerequisitos($curso -> id) as $prerequisito) { ?>
+                        <?php foreach (Curso ::listarPrerequisitos($curso -> id) as $prerequisito) { ?>
                             <div class="col-xl-2 col-lg-4 col-md-6 mt-3">
                                 <div class="mini card text-dark">
                                     <a href="../curso/<?= $prerequisito -> id ?>" class="card-head">
@@ -130,12 +132,12 @@
         <div class="tab-content">
             <div class="card-body container-fluid px-5">
                 <div id="contenido" class="tab-pane fade show active">
-                    <?php foreach (Curso::buscarContenido($curso -> id) as $seccion) { ?>
+                    <?php foreach (Curso ::buscarContenido($curso -> id) as $seccion) { ?>
                         <div class="border border-secondary px-4 py-3 mb-4 row">
                             <div class="col-12 text-dark">
                                 <h5 class="mb-4"><?= $seccion -> titulo ?></h5>
                             </div>
-                            <?php foreach (Seccion::listarClases($seccion -> id) as $clase) { ?>
+                            <?php foreach (Seccion ::listarClases($seccion -> id) as $clase) { ?>
                                 <div class="col-3 mb-3">
                                     <div class="card border border-secondary rounded-top">
                                         <div class="card-header bg-success"></div>
@@ -148,17 +150,19 @@
                             <?php } ?>
                         </div>
                     <?php } ?>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="curso-examen">
-                                <div>
-                                    <b>Examen final</b>
-                                    <span>Demuestra que has aprendido <i>Java avanzado</i></span>
+                    <?php if ($examen = Curso ::buscarExamen($curso -> id)) { ?>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="curso-examen">
+                                    <div>
+                                        <b>Examen final</b>
+                                        <span>Demuestra que has aprendido <b><?= $curso -> titulo ?></b></span>
+                                    </div>
+                                    <a href="examen.html">Dar examen</a>
                                 </div>
-                                <a href="examen.html">Dar examen</a>
                             </div>
                         </div>
-                    </div>
+                    <?php } ?>
                 </div>
                 <div id="preguntas" class="tab-pane fade"></div>
                 <div id="aportes" class="tab-pane fade"></div>
