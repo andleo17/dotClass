@@ -1,5 +1,3 @@
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 
 CREATE TABLE pais (
@@ -120,7 +118,7 @@ CREATE TABLE curso (
     id              SERIAL              PRIMARY KEY,
     categoria_id    INT                 NOT NULL REFERENCES categoria,
     titulo          VARCHAR(45)         NOT NULL,
-    descripcion     VARCHAR             NOT NULL,
+    descripcion     TEXT                NOT NULL,
     logo            VARCHAR(70)         NOT NULL,
     duracion        TIME                NOT NULL DEFAULT '00:00:00',
     numero_subscriptores INT            NOT NULL DEFAULT 0,
@@ -253,5 +251,7 @@ CREATE TABLE seguimiento (
     usuario_id      INT                 NOT NULL REFERENCES usuario,
     curso_id        INT                 NOT NULL REFERENCES curso
 );
+
+UPDATE curso SET duracion = (SELECT SUM(duracion) FROM clase INNER JOIN seccion s on clase.seccion_id = s.id WHERE curso_id = curso.id) WHERE id = 1;
 
 COMMIT;

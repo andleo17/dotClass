@@ -1,5 +1,6 @@
 <?php
     require_once 'Conexion.php';
+    require_once 'Util.php';
 
     class Clase {
 
@@ -29,7 +30,7 @@
             $clase -> id = $resultSet -> id;
             $clase -> seccion = $resultSet -> seccion_id;
             $clase -> titulo = $resultSet -> titulo;
-            $clase -> duracion = $resultSet -> duracion;
+            $clase -> duracion = Util::convertirTiempo($resultSet -> duracion);
             $clase -> video = $resultSet -> contenido_video;
             $clase -> texto = $resultSet -> contenido_texto;
             $clase -> fechaSubida = $resultSet -> fecha_subida;

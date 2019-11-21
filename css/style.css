@@ -111,7 +111,7 @@ footer ::before {
 	color: inherit;
 }
 
-.card a:hover {
+.card a:hover, a.card:hover {
 	text-decoration: none;
 	color: inherit;
 }
@@ -137,15 +137,6 @@ footer ::before {
 
 .card-footer b {
 	margin-right: 10px;
-}
-
-.card-rating {
-	margin-top: 15px;
-	color: #004d40;
-	font-weight: 500;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
 }
 
 .panel-container {
@@ -202,10 +193,6 @@ footer ::before {
 
 .fa-comment-alt {
 	color: #073b23;
-}
-
-.clasificacion {
-	display: block;
 }
 
 #hero {
@@ -536,54 +523,16 @@ aside hr {
 	color: #004d40;
 }
 
-.presentacion {
-	text-align: center;
-	color: black;
-	font-weight: 500;
-}
-
 .presentacion .title {
 	animation-delay: 0.3s;
 }
 
 .info-contacto {
-	display: flex;
-	justify-content: space-around;
-	flex-wrap: wrap;
-	animation-delay: 0.8s;
+	font-size: 3rem;
 }
 
 .central-mssg {
 	animation-delay: 0.5s;
-}
-
-.information-box {
-	margin-top: 20px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	color: black;
-	background-color: white;
-	padding: 50px 10px 10px;
-	width: 300px;
-	height: 400px;
-}
-
-.information-box h2 {
-	margin: 15px 0px;
-}
-
-.information-box span {
-	text-align: center;
-	margin-bottom: 20px;
-	font-size: 16px;
-}
-
-.fa-comments,
-.fa-phone,
-.fa-envelope {
-	font-size: 50px;
-	margin-top: 6rem;
 }
 
 .live {
@@ -1374,16 +1323,6 @@ input[type='file'] {
 .categoria-icono img {
 	width: 300px;
 	height: 300px;
-}
-
-.floro {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	margin: 20px 0px;
-	font-size: 30px;
-	font-weight: 500;
-	color: gray;
 }
 
 .card-button {

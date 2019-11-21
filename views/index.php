@@ -31,15 +31,16 @@
                                         <b>Docente:</b>
                                         <a href="perfil/<?= $curso -> usuario -> nickname ?>"><?= $curso -> usuario -> nickname ?></a>
                                     </span>
-                                    <span><b>Duración:</b><?= $curso -> duracion ?> h</span>
-                                    <div class="card-rating">
+                                    <span><b>Duración:</b><?= $curso -> duracion ?></span>
+                                    <div class="mt-2 d-flex justify-content-between font-weight-bold">
                                         <span><?= $curso -> numeroSubscriptores ?> subscriptores</span>
-                                        <span class="clasificacion">
-                                            <i class="far fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                            <i class="far fa-star"></i>
+                                        <span class="text-warning">
+                                            <?php for ($i = 0; $i < $curso -> valoracion; $i++) { ?>
+                                                <i class="fa fa-star"></i>
+                                            <?php } ?>
+                                            <?php for ($i = 0; $i < 5 - $curso -> valoracion; $i++) { ?>
+                                                <i class="far fa-star"></i>
+                                            <?php } ?>
                                         </span>
                                     </div>
                                 </div>

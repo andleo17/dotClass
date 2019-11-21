@@ -31,11 +31,11 @@
                     <li class="perfil-value"><?= $usuario -> email ?></li>
                     <li class="perfil-key">Lugar de procedencia:</li>
                     <li class="perfil-value"><?= "{$usuario -> ciudad -> nombre}, {$usuario -> pais -> nombre}" ?></li>
-                    <li class="perfil-key" >Trayectoria académica:</li>
-                    <?php 
-                        foreach(Conocimiento::listar($usuario -> id) as $trayectoria)  {?>
-                        <li class="perfil-value"><?= "{$trayectoria -> nombre }, {$trayectoria -> gradoAcademico} , {$trayectoria -> lugarEstudio }, ({$trayectoria -> año}), {$trayectoria -> pais -> nombre} " ?></li>
-                    <?php } ?>
+                    <li class="perfil-key">Trayectoria académica:</li>
+                    <?php
+                        foreach (Conocimiento ::listar($usuario -> id) as $trayectoria) { ?>
+                            <li class="perfil-value"><?= "{$trayectoria -> nombre }, {$trayectoria -> gradoAcademico} , {$trayectoria -> lugarEstudio }, ({$trayectoria -> año}), {$trayectoria -> pais -> nombre} " ?></li>
+                        <?php } ?>
                 </ul>
             </div>
         </div>
@@ -49,43 +49,44 @@
                     <div class="perfil-detalle-body col-12 mt-3">
                         <h3>Experiencia laboral</h3>
                         <ul id="experiencia-laboral">
-                            <?php foreach(ExperienciaLaboral::listar($usuario -> id) as $experiencia) {?>
+                            <?php foreach (ExperienciaLaboral ::listar($usuario -> id) as $experiencia) { ?>
                                 <li><?= "{$experiencia -> nombre} , {$experiencia -> lugar}, {$experiencia -> fechaInicio} ,{$experiencia -> fechaFin} , {$experiencia -> pais -> nombre}" ?></li>
-                            <?php }?>
+                            <?php } ?>
                         </ul>
                     </div>
                     <div class="perfil-detalle-body col-12 mt-4">
                         <h3>Cursos que sigo</h3>
                         <div class="container-fluid">
                             <div class="row">
-                            <?php foreach(Usuario ::listarSeguimiento($usuario) as $curso) {?>
-                                <div class="col-3">
-                                    <div class="mini card">
-                                        <a href="../curso/<?= $curso -> id ?>" class="card-head">
-                                            <img src="<?= SERVER_URL ?>uploads/logos/<?=$curso -> logo ?>"
-                                                 alt="logo">
-                                            <span class="ml-3"><?= $curso -> titulo ?></span>
-                                        </a>
-                                        <div class="card-footer d-flex flex-column">
+                                <?php foreach (Usuario ::listarSeguimiento($usuario) as $curso) { ?>
+                                    <div class="col-3">
+                                        <div class="mini card">
+                                            <a href="../curso/<?= $curso -> id ?>" class="card-head">
+                                                <img src="<?= SERVER_URL ?>uploads/logos/<?= $curso -> logo ?>"
+                                                     alt="logo">
+                                                <span class="ml-3"><?= $curso -> titulo ?></span>
+                                            </a>
+                                            <div class="card-footer d-flex flex-column">
                                             <span>
                                                 <b>Docente:</b><?= $curso -> usuario -> nickname ?>
                                             </span>
-                                            <span>
+                                                <span>
                                                 <b>Duración:</b><?= $curso -> duracion ?> h
                                             </span>
-                                            <div class="card-rating">
-                                                <span><?= $curso -> numeroSubscriptores ?>K subscriptores</span>
-                                                <span class="clasificacion">
-                                                    <i class="far fa-star"></i>
-                                                    <i class="far fa-star"></i>
-                                                    <i class="far fa-star"></i>
-                                                    <i class="far fa-star"></i>
-                                                    <i class="far fa-star"></i>
-                                                </span>
+                                                <div class="mt-auto d-flex justify-content-between font-weight-bold">
+                                                    <span><?= $curso -> numeroSubscriptores ?> subscriptores</span>
+                                                    <span class="text-warning">
+                                                        <?php for ($i = 0; $i < $curso -> valoracion; $i++) { ?>
+                                                            <i class="fa fa-star"></i>
+                                                        <?php } ?>
+                                                        <?php for ($i = 0; $i < 5 - $curso -> valoracion; $i++) { ?>
+                                                            <i class="far fa-star"></i>
+                                                        <?php } ?>
+                                                    </span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
                                 <?php } ?>
                             </div>
                         </div>
@@ -94,34 +95,31 @@
                         <h3>Cosas que enseño</h3>
                         <div class="container-fluid">
                             <div class="row">
-                            <?php foreach(Usuario ::listarEnseñanza($usuario) as $curso) {?>
-                                <div class="col-3">
-                                    <div class="mini card">
-                                        <a href="../curso/<?= $curso -> id ?>" class="card-head">                                           
-                                            <img src="<?= SERVER_URL ?>uploads/logos/<?=$curso -> logo ?>"
-                                                 alt="logo">                                            
-                                            <span class="ml-3"><?=$curso -> titulo ?></span>
-                                        </a>
-                                        <div class="card-footer d-flex flex-column">
-                                            <span>
-                                                <b>Docente:</b><?= $curso -> usuario -> nickname ?>
-                                            </span>
-                                            <span>
-                                                <b>Duración:</b><?= $curso -> duracion ?> h
-                                            </span>
-                                            <div class="card-rating">
-                                                <span><?= $curso -> numeroSubscriptores ?>K subscriptores</span>
-                                                <span class="clasificacion">
-                                                    <i class="far fa-star"></i>
-                                                    <i class="far fa-star"></i>
-                                                    <i class="far fa-star"></i>
-                                                    <i class="far fa-star"></i>
-                                                    <i class="far fa-star"></i>
-                                                </span>
+                                <?php foreach (Usuario ::listarEnseñanza($usuario -> id) as $curso) { ?>
+                                    <div class="col-3">
+                                        <div class="mini card">
+                                            <a href="../curso/<?= $curso -> id ?>" class="card-head">
+                                                <img src="<?= SERVER_URL ?>uploads/logos/<?= $curso -> logo ?>"
+                                                     alt="logo">
+                                                <span class="ml-3"><?= $curso -> titulo ?></span>
+                                            </a>
+                                            <div class="card-footer d-flex flex-column">
+                                                <span><b>Docente:</b><?= $curso -> usuario -> nickname ?></span>
+                                                <span><b>Duración:</b><?= $curso -> duracion ?></span>
+                                                <div class="mt-2 d-flex justify-content-between font-weight-bold">
+                                                    <span><?= $curso -> numeroSubscriptores ?> subscriptores</span>
+                                                    <span class="text-warning">
+                                                        <?php for ($i = 0; $i < $curso -> valoracion; $i++) { ?>
+                                                            <i class="fa fa-star"></i>
+                                                        <?php } ?>
+                                                        <?php for ($i = 0; $i < 5 - $curso -> valoracion; $i++) { ?>
+                                                            <i class="far fa-star"></i>
+                                                        <?php } ?>
+                                                    </span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
                                 <?php } ?>
                             </div>
                         </div>

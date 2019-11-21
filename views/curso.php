@@ -2,6 +2,8 @@
     $curso = explode('/', $_SERVER['REQUEST_URI']);
     $curso = end($curso);
     $curso = Curso ::buscar($curso);
+    $cursosUsuario = Usuario::listarEnseñanza($curso -> usuario -> id);
+    $cursosPrerequisitos = Curso ::listarPrerequisitos($curso -> id);
 ?>
 <div class="container-fluid">
     <div class="row text-white">
@@ -23,14 +25,15 @@
                 </div>
                 <div class="card-footer">
                     <span><b>Duración:</b> <?= $curso -> duracion ?></span>
-                    <div class="card-rating">
+                    <div class="mt-2 d-flex justify-content-between font-weight-bold">
                         <span><?= $curso -> numeroSubscriptores ?> subscriptores</span>
-                        <span class="clasificacion">
-                            <i class="far fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <i class="far fa-star"></i>
+                        <span class="text-warning">
+                            <?php for ($i = 0; $i < $curso -> valoracion; $i++) { ?>
+                                <i class="fa fa-star"></i>
+                            <?php } ?>
+                            <?php for ($i = 0; $i < 5 - $curso -> valoracion; $i++) { ?>
+                                <i class="far fa-star"></i>
+                            <?php } ?>
                         </span>
                     </div>
                 </div>
@@ -53,22 +56,18 @@
                     <p>"<?= $curso -> usuario -> descripcion ?>"</p>
                 </div>
                 <div class="card-footer d-flex flex-column">
-                    <span>
-                        <b>N° de cursos que enseña:</b>
-                        15 cursos
-                        <a href="perfil.html" class="flecha"><i class="fas fa-chevron-right"></i></a>
-                    </span>
-                    <span>
-                        <b>N° de cursos que aprendió:</b>
-                        19 cursos
-                        <a href="perfil.html" class="flecha"><i class="fas fa-chevron-right"></i></a>
-                    </span>
+                    <span><b>N° de cursos que enseña:</b><?= count($cursosUsuario) ?> cursos</span>
+                    <span><b>N° de cursos que aprendió:</b>19 cursos</span>
                     <span>
                         <b>Cursos destacados:</b>
-                        <span class="docente-cursos">
-                            <a href="curso.html">Java desde cero</a>,
-                            <a href="curso.html">Programación Orientada a Objetos (POO)</a>,
-                            <a href="curso.html">CSS Grid Layout</a>
+                        <span>
+                            <?php
+                                for ($i = 0; $i < count($cursosUsuario); $i++) {
+                                    $c = $cursosUsuario[$i];
+                                    $cursosUsuario[$i] = "<a href='../curso/{$c -> id}'>{$c -> titulo}</a>";
+                                }
+                                echo implode(', ', $cursosUsuario);
+                            ?>
                         </span>
                     </span>
                 </div>
@@ -79,7 +78,7 @@
                 <h2>Plan de estudio para empezar este curso</h2>
                 <div class="container-fluid">
                     <div class="row">
-                        <?php foreach (Curso ::listarPrerequisitos($curso -> id) as $prerequisito) { ?>
+                        <?php foreach ($cursosPrerequisitos as $key => $prerequisito) { ?>
                             <div class="col-xl-2 col-lg-4 col-md-6 mt-3">
                                 <div class="mini card text-dark">
                                     <a href="../curso/<?= $prerequisito -> id ?>" class="card-head">
@@ -89,24 +88,27 @@
                                     </a>
                                     <div class="card-footer d-flex flex-column">
                                         <span><b>Docente:</b><?= $prerequisito -> usuario -> nickname ?></span>
-                                        <span><b>Duración:</b><?= $prerequisito -> duracion ?> h</span>
-                                        <div class="card-rating">
-                                            <span><?= $prerequisito -> numeroSubscriptores ?> subscriptores</span>
-                                            <span class="clasificacion">
-                                                <i class="far fa-star"></i>
-                                                <i class="far fa-star"></i>
-                                                <i class="far fa-star"></i>
-                                                <i class="far fa-star"></i>
-                                                <i class="far fa-star"></i>
+                                        <span><b>Duración:</b><?= $prerequisito -> duracion ?></span>
+                                        <div class="mt-2 d-flex justify-content-between font-weight-bold">
+                                            <span><?= $curso -> numeroSubscriptores ?> subscriptores</span>
+                                            <span class="text-warning">
+                                                <?php for ($i = 0; $i < $curso -> valoracion; $i++) { ?>
+                                                    <i class="fa fa-star"></i>
+                                                <?php } ?>
+                                                <?php for ($i = 0; $i < 5 - $curso -> valoracion; $i++) { ?>
+                                                    <i class="far fa-star"></i>
+                                                <?php } ?>
                                             </span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <?php if($key != count($cursosPrerequisitos) - 1) { ?>
+                                <div class="col mt-3 d-flex align-items-center">
+                                    <i class="fas fa-arrow-right"></i>
+                                </div>
+                            <?php } ?>
                         <?php } ?>
-                        <div class="col mt-3 d-flex align-items-center">
-                            <i class="fas fa-arrow-right"></i>
-                        </div>
                     </div>
                 </div>
             </div>
