@@ -38,7 +38,7 @@ CREATE TABLE marcador (
 CREATE TABLE categoria (
     id              SERIAL              PRIMARY KEY ,
     nombre          VARCHAR(45)         NOT NULL,
-    descripcion     VARCHAR(150)        NOT NULL,
+    descripcion     TEXT                NOT NULL,
     logo            VARCHAR(100)        NOT NULL
 );
 
@@ -63,7 +63,7 @@ CREATE TABLE usuario (
     apellidos       VARCHAR(60)         NOT NULL,
     email           VARCHAR(80)         NOT NULL UNIQUE,
     fecha_nacimiento DATE NOT           NULL,
-    descripcion     VARCHAR             NULL,
+    descripcion     TEXT                NULL,
     numero_seguidores INT               NOT NULL DEFAULT 0,
     pregunta_seguridad VARCHAR(255)     NOT NULL,
     respuesta_seguridad VARCHAR(50)     NOT NULL,
