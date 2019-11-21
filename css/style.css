@@ -779,36 +779,7 @@ aside hr {
 	padding: 20px 40px;
 	background-color: #01140b;
 	color: white;
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-}
-
-.curso-examen div {
-	display: flex;
-	flex: 1 1 auto;
-	flex-wrap: wrap;
-}
-
-.curso-examen b {
-	flex: 1 1 100%;
-	font-weight: 500;
-	font-size: 20px;
-}
-
-.curso-examen span {
-	font-size: 17px;
-	flex: 1 1 auto;
-}
-
-.curso-examen a {
-	padding: 10px 15px;
-	color: black;
-	text-decoration: none;
-	background-color: white;
-	font-size: 18px;
-	font-weight: 500;
-	border-radius: 25px;
+	font-size: 1.05rem;
 }
 
 #inicio-sesion {
@@ -1301,28 +1272,16 @@ input[type='file'] {
 	font-weight: bold;
 }
 
-.categoria-container {
-	background-color: #042717;
+.categoria-header {
+	background-color: #01140b;
 	color: white;
-	padding: 20px 20%;
-	display: flex;
+	font-size: 1rem;
 }
 
-.categoria-info {
-	margin-left: 20px;
-}
-
-.categoria-info span {
-	font-size: 40px;
-}
-
-.categoria-info p {
-	font-size: 18px;
-}
-
-.categoria-icono img {
-	width: 300px;
-	height: 300px;
+.categoria-header img {
+	width: 10em;
+	height: 10em;
+	border-radius: 50%;
 }
 
 .card-button {

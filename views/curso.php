@@ -3,7 +3,6 @@
     $curso = end($curso);
     $curso = Curso ::buscar($curso);
     $cursosUsuario = Usuario::listarEnseñanza($curso -> usuario -> id);
-    $cursosPrerequisitos = Curso ::listarPrerequisitos($curso -> id);
 ?>
 <div class="container-fluid">
     <div class="row text-white">
@@ -47,10 +46,10 @@
                         <b><?= $curso -> usuario -> nickname ?></b>
                         <span><?= $curso -> usuario -> numeroSeguidores ?> seguidores</span>
                     </div>
-                    <div class="live">
-                        <i class="fas fa-circle"></i>
-                        <span>LIVE</span>
-                    </div>
+<!--                    <div class="live">-->
+<!--                        <i class="fas fa-circle"></i>-->
+<!--                        <span>LIVE</span>-->
+<!--                    </div>-->
                 </a>
                 <div class="card-body docente-descripcion text-white">
                     <p>"<?= $curso -> usuario -> descripcion ?>"</p>
@@ -73,46 +72,48 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 p-0">
-            <div class="plan-estudio">
-                <h2>Plan de estudio para empezar este curso</h2>
-                <div class="container-fluid">
-                    <div class="row">
-                        <?php foreach ($cursosPrerequisitos as $key => $prerequisito) { ?>
-                            <div class="col-xl-2 col-lg-4 col-md-6 mt-3">
-                                <div class="mini card text-dark">
-                                    <a href="../curso/<?= $prerequisito -> id ?>" class="card-head">
-                                        <img src="<?= SERVER_URL ?>uploads/logos/<?= $prerequisito -> logo ?>"
-                                             alt="logo">
-                                        <span class="ml-3"><?= $prerequisito -> titulo ?></span>
-                                    </a>
-                                    <div class="card-footer d-flex flex-column">
-                                        <span><b>Docente:</b><?= $prerequisito -> usuario -> nickname ?></span>
-                                        <span><b>Duración:</b><?= $prerequisito -> duracion ?></span>
-                                        <div class="mt-2 d-flex justify-content-between font-weight-bold">
-                                            <span><?= $curso -> numeroSubscriptores ?> subscriptores</span>
-                                            <span class="text-warning">
-                                                <?php for ($i = 0; $i < $curso -> valoracion; $i++) { ?>
-                                                    <i class="fa fa-star"></i>
-                                                <?php } ?>
-                                                <?php for ($i = 0; $i < 5 - $curso -> valoracion; $i++) { ?>
-                                                    <i class="far fa-star"></i>
-                                                <?php } ?>
-                                            </span>
+        <?php if ($cursosPrerequisitos = Curso ::listarPrerequisitos($curso -> id)) { ?>
+            <div class="col-12 p-0">
+                <div class="plan-estudio">
+                    <h2>Plan de estudio para empezar este curso</h2>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <?php foreach ($cursosPrerequisitos as $key => $prerequisito) { ?>
+                                <div class="col-xl-2 col-lg-4 col-md-6 mt-3">
+                                    <div class="mini card text-dark">
+                                        <a href="../curso/<?= $prerequisito -> id ?>" class="card-head">
+                                            <img src="<?= SERVER_URL ?>uploads/logos/<?= $prerequisito -> logo ?>"
+                                                 alt="logo">
+                                            <span class="ml-3"><?= $prerequisito -> titulo ?></span>
+                                        </a>
+                                        <div class="card-footer d-flex flex-column">
+                                            <span><b>Docente:</b><?= $prerequisito -> usuario -> nickname ?></span>
+                                            <span><b>Duración:</b><?= $prerequisito -> duracion ?></span>
+                                            <div class="mt-2 d-flex justify-content-between font-weight-bold">
+                                                <span><?= $curso -> numeroSubscriptores ?> subscriptores</span>
+                                                <span class="text-warning">
+                                                    <?php for ($i = 0; $i < $curso -> valoracion; $i++) { ?>
+                                                        <i class="fa fa-star"></i>
+                                                    <?php } ?>
+                                                    <?php for ($i = 0; $i < 5 - $curso -> valoracion; $i++) { ?>
+                                                        <i class="far fa-star"></i>
+                                                    <?php } ?>
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <?php if($key != count($cursosPrerequisitos) - 1) { ?>
-                                <div class="col mt-3 d-flex align-items-center">
-                                    <i class="fas fa-arrow-right"></i>
-                                </div>
+                                <?php if($key != count($cursosPrerequisitos) - 1) { ?>
+                                    <div class="col mt-3 d-flex align-items-center">
+                                        <i class="fas fa-arrow-right"></i>
+                                    </div>
+                                <?php } ?>
                             <?php } ?>
-                        <?php } ?>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        <?php } ?>
     </div>
     <div class="card mt-5 rounded-0">
         <div class="card-header pb-0">
@@ -154,13 +155,13 @@
                     <?php } ?>
                     <?php if ($examen = Curso ::buscarExamen($curso -> id)) { ?>
                         <div class="row">
-                            <div class="col-12">
-                                <div class="curso-examen">
-                                    <div>
+                            <div class="col-12 p-0">
+                                <div class="curso-examen d-flex justify-content-between align-items-center">
+                                    <div class="d-flex flex-column">
                                         <b>Examen final</b>
                                         <span>Demuestra que has aprendido <b><?= $curso -> titulo ?></b></span>
                                     </div>
-                                    <a href="examen.html">Dar examen</a>
+                                    <a class="btn btn-light text-body" href="examen.html">Dar examen</a>
                                 </div>
                             </div>
                         </div>

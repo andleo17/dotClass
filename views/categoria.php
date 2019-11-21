@@ -9,26 +9,28 @@
 ?>
 
 <div class="container-fluid">
-    <div class="row">
-        <div class="offset-3 col-6 d-flex">
-            <img src="<?= SERVER_URL . "assets/{$categoria -> logo}" ?>" alt="icono-curso" class="categoria-icono">
-            <div>
-                <span><?= $categoria -> nombre ?></span>
-                <p><?= $categoria -> descripcion ?></p>
+    <div class="row categoria-header">
+        <div class="offset-3 col-6">
+            <div class="d-flex align-items-center p-4">
+                <img src="<?= SERVER_URL . "assets/{$categoria -> logo}" ?>" alt="icono-curso">
+                <div class="ml-3">
+                    <h1 class="mb-4"><?= $categoria -> nombre ?></h1>
+                    <p><?= $categoria -> descripcion ?></p>
+                </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row my-5">
         <div class="col-12 text-center">
-            <h1>Escoge qué quieres aprender de nuestro catálogo</h1>
+            <h3>Escoge qué quieres aprender de nuestro catálogo</h3>
         </div>
-        <div class="col">
+        <div class="col mt-3">
             <div class="container">
                 <div class="row">
-                    <?php foreach (Categoria::listarCursos($categoria -> id) as $curso) { ?>
+                    <?php foreach (Categoria ::listarCursos($categoria -> id) as $curso) { ?>
                         <div class="mt-3 col-xl-4 col-lg-6 col-md-12">
                             <div class="card">
-                                <a href="curso/<?= $curso -> id ?>" class="card-head">
+                                <a href="../curso/<?= $curso -> id ?>" class="card-head">
                                     <img src="<?= SERVER_URL ?>uploads/logos/<?= $curso -> logo ?>" alt="logo">
                                     <span class="ml-3"><?= $curso -> titulo ?></span>
                                 </a>

@@ -56,7 +56,9 @@
             <h3>Docentes más populares</h3>
             <div class="container-fluid">
                 <div class="row">
-                    <?php foreach (Usuario ::listar() as $usuario) { ?>
+                    <?php foreach (Usuario ::listar() as $usuario) {
+                        $cursosUsuario = Usuario ::listarEnseñanza($usuario -> id);
+                        ?>
                         <div class="mt-3 col-xl-4 col-lg-6 col-md-12">
                             <div class="card">
                                 <a href="perfil/<?= $usuario -> nickname ?>" class="card-head">
@@ -70,11 +72,9 @@
                                     <p>"<?= $usuario -> descripcion ?>"</p>
                                 </div>
                                 <div class="card-footer d-flex flex-column">
-                                    <span>
-                                        <b>N° de cursos que enseña:</b>
-                                        15 cursos
-                                        <a href="perfil.html" class="flecha"><i class="fas fa-chevron-right"></i></a>
-                                    </span>
+                                    <span><b>N° de cursos que enseña:</b><?= count($cursosUsuario) ?> cursos<a
+                                                href="perfil.html" class="flecha"><i
+                                                    class="fas fa-chevron-right"></i></a></span>
                                     <span>
                                         <b>N° de cursos que aprendió:</b>
                                         19 cursos
@@ -82,11 +82,13 @@
                                     </span>
                                     <span>
                                         <b>Cursos destacados:</b>
-                                        <span>
-                                            <a href="html/curso-largo-java.html">Java desde cero</a>,
-                                            <a href="html/curso-largo-poo.html">Programación Orientada a Objetos (POO)</a>,
-                                            <a href="html/css-grid.html">CSS Grid Layout</a>
-                                        </span>
+                                        <?php
+                                            for ($i = 0; $i < count($cursosUsuario); $i++) {
+                                                $c = $cursosUsuario[$i];
+                                                $cursosUsuario[$i] = "<a href='../curso/{$c -> id}'>{$c -> titulo}</a>";
+                                            }
+                                            echo implode(', ', $cursosUsuario);
+                                        ?>
                                     </span>
                                 </div>
                             </div>
