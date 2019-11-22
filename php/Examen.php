@@ -1,10 +1,12 @@
 <?php
     require_once 'Conexion.php';
+    require_once 'Pregunta.php';
 
     class Examen {
 
         public $id;
         public $curso;
+        public $mensaje;
 
         public static function buscar($id) {
             $query = 'SELECT * FROM examen WHERE curso_id = ?';
@@ -19,10 +21,15 @@
             }
         }
 
+        public static function listarPreguntas($id) {
+            return Pregunta::listar($id);
+        }
+
         private function mapear ($resultSet) {
             $examen = new Examen();
             $examen -> id = $resultSet -> id;
             $examen -> curso = $resultSet -> curso_id;
+            $examen -> mensaje = $resultSet -> mensaje;
             return $examen;
         }
         

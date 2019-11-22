@@ -144,7 +144,8 @@ CREATE TABLE clase
 CREATE TABLE examen
 (
     id       SERIAL PRIMARY KEY,
-    curso_id INT NOT NULL REFERENCES curso
+    curso_id INT  NOT NULL REFERENCES curso,
+    mensaje  TEXT NOT NULL
 );
 
 CREATE TABLE pregunta
@@ -293,6 +294,34 @@ VALUES (DEFAULT, 1, 'Bienvenida al curso', '00:11:57', NULL, NULL, '2019-11-19 1
 
 INSERT INTO prerrequisito
 VALUES (3, 2);
+
+INSERT INTO examen
+VALUES (DEFAULT, 1,
+        '¡Felicidades! Si has llegado hasta este punto significa que has aprendido algo nuevo y quieres demostrar que entendiste todo.');
+
+INSERT INTO pregunta
+VALUES (DEFAULT, 1, 1, '¿Qué es Java?'),
+       (DEFAULT, 1, 2, '¿Qué es una clase anidada?'),
+       (DEFAULT, 1, 3, '¿Es válida esta sintaxis? <pre>var usuario = new Usuario();<pre>'),
+       (DEFAULT, 1, 4, '¿Qué es JDBC?');
+
+INSERT INTO alternativa
+VALUES (DEFAULT, 1, 1, 'Es un framework', FALSE),
+       (DEFAULT, 1, 2, 'Es un lenguaje de programación', TRUE),
+       (DEFAULT, 1, 3, 'Es un lenguaje de etiquetas', FALSE),
+       (DEFAULT, 1, 4, 'Es un café', FALSE),
+       (DEFAULT, 2, 1, 'Es un curso', FALSE),
+       (DEFAULT, 2, 2, 'Es un clase dentro de otra', TRUE),
+       (DEFAULT, 2, 3, 'Es un método que se llama cuando se crea un objeto', FALSE),
+       (DEFAULT, 2, 4, 'Es una metodología de programación', FALSE),
+       (DEFAULT, 3, 1, 'Es un archivo', FALSE),
+       (DEFAULT, 3, 2, 'Es una libreria que permite la conexión a base de datos en Java', TRUE),
+       (DEFAULT, 3, 3, 'Es un método para imprimir reportes', FALSE),
+       (DEFAULT, 3, 4, 'Todas las anteriores', FALSE),
+       (DEFAULT, 4, 1, 'Sí, Java es igual a Javascript', FALSE),
+       (DEFAULT, 4, 2, 'Sí, a partir de Java 12 se implementó la sintaxis "dinámica"', TRUE),
+       (DEFAULT, 4, 3, 'No, Java no es Javascript', FALSE),
+       (DEFAULT, 4, 4, 'No lo sé', FALSE);
 
 CREATE OR REPLACE FUNCTION fn_tg_actualizarDuracion() RETURNS TRIGGER AS
 $$

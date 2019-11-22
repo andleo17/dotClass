@@ -1,8 +1,13 @@
 <?php
     $curso = explode('/', $_SERVER['REQUEST_URI']);
-    $curso = end($curso);
-    $curso = Curso ::buscar($curso);
-    $cursosUsuario = Usuario::listarEnseñanza($curso -> usuario -> id);
+    if (end($curso) == 'examen') {
+        $curso = Curso ::buscar($curso[3]);
+        include 'views/examen.php';
+        return;
+    } else {
+        $curso = Curso ::buscar(end($curso));
+        $cursosUsuario = Usuario::listarEnseñanza($curso -> usuario -> id);
+    }
 ?>
 <div class="container-fluid">
     <div class="row text-white">
@@ -161,7 +166,7 @@
                                         <b>Examen final</b>
                                         <span>Demuestra que has aprendido <b><?= $curso -> titulo ?></b></span>
                                     </div>
-                                    <a class="btn btn-light text-body" href="examen.html">Dar examen</a>
+                                    <a class="btn btn-light text-body" href="<?= $_SERVER['REQUEST_URI'] ?>/examen">Dar examen</a>
                                 </div>
                             </div>
                         </div>

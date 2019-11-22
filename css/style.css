@@ -116,6 +116,10 @@ footer ::before {
 	color: inherit;
 }
 
+.bordes-arriba {
+	border-radius: 25px 25px 0 0 !important;
+}
+
 .card-head {
 	display: flex;
 	align-items: center;
@@ -193,6 +197,16 @@ footer ::before {
 
 .fa-comment-alt {
 	color: #073b23;
+}
+
+pre {
+	display: inline !important;
+	background-color: #2f3136;
+	color: #b9bbbe !important;
+	border: 1px solid #202225;
+	padding: 5px 10px;
+	border-radius: 5px;
+	margin-left: 10px;
 }
 
 #hero {
@@ -1358,82 +1372,6 @@ input[type='file'] {
 
 .cerrar:hover {
 	cursor: pointer;
-}
-
-.msj-examen {
-	margin: 25px 100px;
-	font-size: 20px;
-}
-
-.examen {
-	margin: 0px 100px 50px;
-	background-color: white;
-	padding: 15px 50px;
-	display: flex;
-	flex-direction: column;
-}
-
-.pregunta-examen {
-	background-color: #dadada;
-	border-radius: 25px;
-	display: flex;
-	flex-direction: column;
-	margin: 15px 0px;
-}
-
-.pregunta-examen-header {
-	border-radius: 25px 25px 0px 0px;
-	display: flex;
-	align-items: center;
-	background-color: #c2c2c2;
-}
-
-.pregunta-examen-numero {
-	font-size: 25px;
-	font-weight: 500;
-	padding: 10px 20px;
-	border-radius: 25px 0px;
-	border-right: 1px solid gray;
-	border-bottom: 1px solid gray;
-}
-
-.pregunta-examen-titulo {
-	font-size: 18px;
-	margin: 5px 15px;
-}
-
-.pregunta-examen-body {
-	padding: 20px 60px;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	flex: 1 1 200px;
-}
-
-.alternativa {
-	background-color: white;
-	padding: 10px;
-	border-radius: 25px;
-	display: flex;
-	border: 1px solid gray;
-}
-
-.alternativa-letra {
-	width: 20px;
-	font-weight: 500;
-	margin-right: 15px;
-}
-
-.finalizar-examen {
-	margin: 25px 100px 50px;
-	display: flex;
-	flex: 1 1 auto;
-	justify-content: center;
-}
-
-.finalizar-examen a {
-	background-color: #0a390a;
-	padding: 15px 30px;
 }
 
 .descripcion iframe {

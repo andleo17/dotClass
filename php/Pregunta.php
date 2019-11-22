@@ -1,5 +1,6 @@
 <?php
     require_once 'Conexion.php';
+    require_once 'Alternativa.php';
 
     class Pregunta {
 
@@ -21,15 +22,21 @@
             }
         }
 
-        public static function listar() {
+        public static function listar($id) {
             $lista = [];
-            $query = 'SELECT * FROM pregunta';
-            $resultSet = Conexion ::conectarBD() -> query($query);
-            while ($pregunta = $resultSet -> fetchObject()) {
+            $query = 'SELECT * FROM pregunta WHERE examen_id = ?';
+            $preparedStatement = Conexion ::conectarBD() -> prepare($query);
+            $preparedStatement -> bindParam(1, $id);
+            $preparedStatement -> execute();
+            while ($pregunta = $preparedStatement -> fetchObject()) {
                 $pregunta = self :: mapear($pregunta);
                 array_push($lista, $pregunta);
             }
             return $lista;
+        }
+
+        public static function listarAlternativas($id) {
+            return Alternativa::listar($id);
         }
 
         private function mapear ($resultSet) {

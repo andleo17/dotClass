@@ -4,7 +4,7 @@
     class Alternativa {
 
         public $id;
-        public $alternativa;
+        public $pregunta;
         public $numero;
         public $contenido;
         public $respuesta;
@@ -22,11 +22,13 @@
             }
         }
 
-        public static function listar() {
+        public static function listar($id) {
             $lista = [];
-            $query = 'SELECT * FROM alternativa';
-            $resultSet = Conexion ::conectarBD() -> query($query);
-            while ($alternativa = $resultSet -> fetchObject()) {
+            $query = 'SELECT * FROM alternativa WHERE pregunta_id = ?';
+            $preparedStatement = Conexion ::conectarBD() -> prepare($query);
+            $preparedStatement -> bindParam(1, $id);
+            $preparedStatement -> execute();
+            while ($alternativa = $preparedStatement -> fetchObject()) {
                 $alternativa = self :: mapear($alternativa);
                 array_push($lista, $alternativa);
             }
@@ -36,7 +38,7 @@
         private function mapear ($resultSet) {
             $alternativa = new Alternativa();
             $alternativa -> id = $resultSet -> id;
-            $alternativa -> pregunta = $resultSet -> pregunta;
+            $alternativa -> pregunta = $resultSet -> pregunta_id;
             $alternativa -> numero = $resultSet -> numero;
             $alternativa -> contenido = $resultSet -> contenido;
             $alternativa -> respuesta = $resultSet -> respuesta;
