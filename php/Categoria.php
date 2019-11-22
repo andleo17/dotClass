@@ -1,6 +1,7 @@
 <?php
 
     require_once 'Conexion.php';
+    require_once 'Curso.php';
 
     Categoria ::ejecutar($_SERVER['REQUEST_URI']);
 
@@ -15,7 +16,7 @@
             $categoria = new Categoria();
             $categoria -> id = $resultSet -> id;
             $categoria -> nombre = $resultSet -> nombre;
-            $categoria -> descripcion = $resultSet -> descripcion;
+            $categoria -> descripcion = nl2br($resultSet -> descripcion);
             $categoria -> logo = $resultSet -> logo;
             return $categoria;
         }
@@ -30,6 +31,10 @@
                 array_push($lista, $categoria);
             }
             return $lista;
+        }
+
+        public static function listarCursos ($id) {
+            return Curso ::listarCategoria($id);
         }
 
         public static function buscar ($id) {

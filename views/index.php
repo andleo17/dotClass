@@ -31,15 +31,16 @@
                                         <b>Docente:</b>
                                         <a href="perfil/<?= $curso -> usuario -> nickname ?>"><?= $curso -> usuario -> nickname ?></a>
                                     </span>
-                                    <span><b>Duración:</b><?= $curso -> duracion ?> h</span>
-                                    <div class="card-rating">
+                                    <span><b>Duración:</b><?= $curso -> duracion ?></span>
+                                    <div class="mt-2 d-flex justify-content-between font-weight-bold">
                                         <span><?= $curso -> numeroSubscriptores ?> subscriptores</span>
-                                        <span class="clasificacion">
-                                            <i class="far fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                            <i class="far fa-star"></i>
+                                        <span class="text-warning">
+                                            <?php for ($i = 0; $i < $curso -> valoracion; $i++) { ?>
+                                                <i class="fa fa-star"></i>
+                                            <?php } ?>
+                                            <?php for ($i = 0; $i < 5 - $curso -> valoracion; $i++) { ?>
+                                                <i class="far fa-star"></i>
+                                            <?php } ?>
                                         </span>
                                     </div>
                                 </div>
@@ -55,7 +56,9 @@
             <h3>Docentes más populares</h3>
             <div class="container-fluid">
                 <div class="row">
-                    <?php foreach (Usuario ::listar() as $usuario) { ?>
+                    <?php foreach (Usuario ::listar() as $usuario) {
+                        $cursosUsuario = Usuario ::listarEnseñanza($usuario -> id);
+                        ?>
                         <div class="mt-3 col-xl-4 col-lg-6 col-md-12">
                             <div class="card">
                                 <a href="perfil/<?= $usuario -> nickname ?>" class="card-head">
@@ -69,11 +72,9 @@
                                     <p>"<?= $usuario -> descripcion ?>"</p>
                                 </div>
                                 <div class="card-footer d-flex flex-column">
-                                    <span>
-                                        <b>N° de cursos que enseña:</b>
-                                        15 cursos
-                                        <a href="perfil.html" class="flecha"><i class="fas fa-chevron-right"></i></a>
-                                    </span>
+                                    <span><b>N° de cursos que enseña:</b><?= count($cursosUsuario) ?> cursos<a
+                                                href="perfil.html" class="flecha"><i
+                                                    class="fas fa-chevron-right"></i></a></span>
                                     <span>
                                         <b>N° de cursos que aprendió:</b>
                                         19 cursos
@@ -81,11 +82,13 @@
                                     </span>
                                     <span>
                                         <b>Cursos destacados:</b>
-                                        <span>
-                                            <a href="html/curso-largo-java.html">Java desde cero</a>,
-                                            <a href="html/curso-largo-poo.html">Programación Orientada a Objetos (POO)</a>,
-                                            <a href="html/css-grid.html">CSS Grid Layout</a>
-                                        </span>
+                                        <?php
+                                            for ($i = 0; $i < count($cursosUsuario); $i++) {
+                                                $c = $cursosUsuario[$i];
+                                                $cursosUsuario[$i] = "<a href='../curso/{$c -> id}'>{$c -> titulo}</a>";
+                                            }
+                                            echo implode(', ', $cursosUsuario);
+                                        ?>
                                     </span>
                                 </div>
                             </div>

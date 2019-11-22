@@ -6,6 +6,7 @@
     require_once 'Curso.php';
     require_once 'Conocimiento.php';
     require_once 'ExperienciaLaboral.php';
+    require_once 'Util.php';
 
     Usuario ::ejecutar($_SERVER['REQUEST_URI']);
 
@@ -29,8 +30,7 @@
 
         public static function iniciarSesion ($nickname, $password) {
             $query = 'SELECT * FROM usuario WHERE nickname = ? AND password = ?;';
-            $cnx = Conexion ::conectarBD();
-            $preparedStatement = $cnx -> prepare($query);
+            $preparedStatement = Conexion ::conectarBD() -> prepare($query);
             $preparedStatement -> bindParam(1, $nickname);
             $preparedStatement -> bindParam(2, $password);
             $preparedStatement -> execute();
@@ -53,8 +53,8 @@
             $usuario -> apellidos = $resultSet -> apellidos;
             $usuario -> email = $resultSet -> email;
             $usuario -> fechaNacimiento = $resultSet -> fecha_nacimiento;
-            $usuario -> descripcion = $resultSet -> descripcion;
-            $usuario -> numeroSeguidores = $resultSet -> numero_seguidores;
+            $usuario -> descripcion = nl2br($resultSet -> descripcion);
+            $usuario -> numeroSeguidores = Util::convertirCantidades($resultSet -> numero_seguidores);
             $usuario -> preguntaSeguridad = $resultSet -> pregunta_seguridad;
             $usuario -> respuestaSeguridad = $resultSet -> respuesta_seguridad;
             $usuario -> foto = $resultSet -> foto;
@@ -78,11 +78,11 @@
             return $lista;
         }
 
-        public static function buscar ($id) {
-            $query = 'SELECT * FROM usuario WHERE id = :id OR nickname = :id';
-            $cnx = Conexion ::conectarBD();
-            $preparedStatement = $cnx -> prepare($query);
-            $preparedStatement -> bindParam(':id', $id);
+        public static function buscar ($id = NULL, $nickname = NULL) {
+            $query = 'SELECT * FROM usuario WHERE id = ? OR nickname = ?';
+            $preparedStatement = Conexion ::conectarBD() -> prepare($query);
+            $preparedStatement -> bindParam(1, $id);
+            $preparedStatement -> bindParam(2, $nickname);
             $preparedStatement -> execute();
             if ($usuario = $preparedStatement -> fetchObject()) {
                 $usuario = self ::mapear($usuario);
@@ -161,11 +161,11 @@
             return $lista;
         }
 
-        public static function listarEnseñanza (Usuario $usuario) {
+        public static function listarEnseñanza ($id) {
             $lista = [];
             $query = 'SELECT id FROM curso WHERE usuario_id = ?';
             $preparedStatement = Conexion ::conectarBD() -> prepare($query);
-            $preparedStatement -> bindParam(1, $usuario -> id);
+            $preparedStatement -> bindParam(1, $id);
             $preparedStatement -> execute();
             while ($curso = $preparedStatement -> fetchObject()) {
                 $curso = Curso ::buscar($curso -> id);
@@ -219,7 +219,7 @@
                         break;
 
                     default:
-                        return self ::buscar($peticion);
+                        return self ::buscar(NULL, $peticion);
                         break;
                 }
             }

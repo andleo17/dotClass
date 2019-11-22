@@ -15,7 +15,7 @@
                 <div class="row">
                     <?php foreach (Categoria::listar() as $categoria) { ?>
                         <div class="col-lg-6 col-md-12 mb-3">
-                            <a href="categoria.html" class="card animate-pop-in">
+                            <a href="../categoria/<?= $categoria -> id ?>" class="card animate-pop-in text-dark">
                                 <div class="card-head">
                                     <img src="../assets/<?= $categoria -> logo ?>" alt="logo">
                                     <span class="ml-3"><?= $categoria -> nombre ?></span>
@@ -31,18 +31,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    fetch('../clase/Categoria/').then(res => {
-        res.json().then(data => {
-            let $listaCategoria = document.getElementById('lista-categoria');
-            let html = '';
-            data.forEach(categoria => {
-                html += `
-
-                `;
-            });
-            $listaCategoria.innerHTML = html;
-        })
-    });
-</script>

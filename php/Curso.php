@@ -4,6 +4,8 @@
     require_once 'Categoria.php';
     require_once 'Usuario.php';
     require_once 'Seccion.php';
+    require_once 'Examen.php';
+    require_once 'Util.php';
 
     Curso ::ejecutar($_SERVER['REQUEST_URI']);
 
@@ -26,10 +28,10 @@
             $curso -> id = $resultSet -> id;
             $curso -> categoria = Categoria ::buscar($resultSet -> categoria_id);
             $curso -> titulo = $resultSet -> titulo;
-            $curso -> descripcion = $resultSet -> descripcion;
+            $curso -> descripcion = nl2br($resultSet -> descripcion);
             $curso -> logo = $resultSet -> logo;
-            $curso -> duracion = $resultSet -> duracion;
-            $curso -> numeroSubscriptores = $resultSet -> numero_subscriptores;
+            $curso -> duracion = Util::convertirTiempo($resultSet -> duracion);
+            $curso -> numeroSubscriptores = Util::convertirCantidades($resultSet -> numero_subscriptores);
             $curso -> valoracion = $resultSet -> valoracion;
             $curso -> fechaCreacion = $resultSet -> fecha_creacion;
             $curso -> fechaUltimaActualizacion = $resultSet -> fecha_ultima_actualizacion;
@@ -37,7 +39,7 @@
             return $curso;
         }
 
-        public static function buscar($id) {
+        public static function buscar ($id) {
             $query = 'SELECT * FROM curso WHERE id = ?';
             $preparedStatement = Conexion ::conectarBD() -> prepare($query);
             $preparedStatement -> bindParam(1, $id);
@@ -50,8 +52,25 @@
             }
         }
 
-        public static function buscarContenido($id) {
-            return Seccion::buscar($id);
+        public static function listarCategoria($id) {
+            $lista = [];
+            $query = 'SELECT * FROM curso WHERE categoria_id = ?';
+            $resultSet = Conexion ::conectarBD() -> prepare($query);
+            $resultSet -> bindParam(1, $id);
+            $resultSet -> execute();
+            while ($curso = $resultSet -> fetchObject()) {
+                $curso = self :: mapear($curso);
+                array_push($lista, $curso);
+            }
+            return $lista;
+        }
+
+        public static function buscarContenido ($id) {
+            return Seccion ::buscar($id);
+        }
+
+        public static function buscarExamen ($id) {
+            return Examen ::buscar($id);
         }
 
         public static function listar () {
@@ -65,7 +84,7 @@
             return $lista;
         }
 
-        public static function listarPrerequisitos($id) {
+        public static function listarPrerequisitos ($id) {
             $lista = [];
             $query = 'SELECT curso_prerrequisito_id FROM prerrequisito WHERE curso_id = ?';
             $preparedStatement = Conexion ::conectarBD() -> prepare($query);
