@@ -431,7 +431,7 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`id`, `nickname`, `password`, `nombres`, `apellidos`, `email`, `fecha_nacimiento`, `descripcion`, `numero_seguidores`, `pregunta_seguridad`, `respuesta_seguridad`, `foto`, `pais_id`, `ciudad_id`, `fecha_creacion`, `estado`) VALUES
 (1, 'Andle17', '123456789', 'Andres', 'Baldarrago', 'ab@gmail.com', '2000-07-01', 'Me gusta jugar y enseñar.', 0, '¿Quién soy?', 'nose', 'Andle17.png', 1, 1, '2019-11-14 16:42:51', 1),
-(2, 'CinthyaYomona', '123', 'Cinthya Lisseth', 'Yomona Parraguez', 'cinthya@gmail.com', '1999-05-23', 'Se suponde que me debo de bañar, que mis convers ya no aguantan más!!...Pero llegas tú !! :) <3', 0, 'Inspiraciíon?', 'Priscila', '20180319_103506.jpg', 1, 1, '2019-11-14 16:42:51', 1);
+(2, 'CinthyaYomona', '123', 'Cinthya Lisseth', 'Yomona Parraguez', 'cinthya@gmail.com', '1999-05-23', 'Se supone que me debo de bañar, que mis convers ya no aguantan más!!...Pero llegas tú !! :) <3', 0, 'Inspiración?', 'Priscila', '20180319_103506.jpg', 1, 1, '2019-11-14 16:42:51', 1);
 
 -- --------------------------------------------------------
 
@@ -725,7 +725,7 @@ ALTER TABLE `tipo_suscripcion`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `visita`
