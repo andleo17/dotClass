@@ -203,6 +203,7 @@ CREATE TABLE seguimiento
 (
     usuario_id INT NOT NULL REFERENCES usuario,
     curso_id   INT NOT NULL REFERENCES curso
+    PRIMARY KEY (usuario_id,curso_id )
 );
 
 INSERT INTO pais
@@ -323,24 +324,38 @@ VALUES (DEFAULT, 1, 1, 'Es un framework', FALSE),
        (DEFAULT, 4, 3, 'No, Java no es Javascript', FALSE),
        (DEFAULT, 4, 4, 'No lo sé', FALSE);
 
+ CREATE OR REPLACE FUNCTION fn_porcentajeCurso_Usuario(id_curso integer, id_usuario integer) RETURNS NUMERIC AS
+ $$
+ DECLARE
+ 	porc numeric;
+ BEGIN
+ 	SELECT	ROUND (((EXTRACT(HOUR FROM SUM(vis.tiempo)) * 3600 + EXTRACT(MINUTE FROM SUM(vis.tiempo)) * 60 + EXTRACT(SECOND FROM SUM(vis.tiempo)))/(EXTRACT(HOUR FROM cur.duracion) * 3600 + EXTRACT(MINUTE FROM cur.duracion) * 60 + EXTRACT(SECOND FROM cur.duracion)))*100)	INTO porc		
+	FROM	usuario usu INNER JOIN seguimiento seg ON usu.id = seg.usuario_id
+			INNER JOIN curso cur ON seg.curso_id = cur.id
+			INNER JOIN seccion sec ON cur.id = sec.curso_id
+			INNER JOIN clase cla ON sec.id = cla.seccion_id
+			INNER JOIN actividad_curso atc on cla.id = atc.clase_id
+			INNER JOIN visita vis ON atc.visita_id = vis.id
+	WHERE	usu.id = id_usuario AND cur.id = id_curso
+	GROUP BY cur.id;
+	RETURN porc;
+ END;
+ $$ LANGUAGE 'plpgsql';
+ 
+SELECT fn_porcentajeCurso_Usuario(?,?);
+
 CREATE OR REPLACE FUNCTION fn_tg_actualizarDuracion() RETURNS TRIGGER AS
 $$
 DECLARE
     _curso_id INT;
     _duracion TIME;
 BEGIN
-    SELECT curso.id
-    INTO _curso_id
-    FROM curso
-             INNER JOIN seccion s2 ON curso.id = s2.curso_id
-    WHERE s2.id = new.seccion_id
-       OR s2.id = old.seccion_id;
+    SELECT curso.id INTO _curso_id
+    FROM curso INNER JOIN seccion s2 ON curso.id = s2.curso_id
+    WHERE s2.id = new.seccion_id  OR s2.id = old.seccion_id;
 
-    SELECT SUM(c.duracion)::TIME
-    INTO _duracion
-    FROM curso
-             INNER JOIN seccion s ON curso.id = s.curso_id
-             INNER JOIN clase c on s.id = c.seccion_id
+    SELECT SUM(c.duracion)::TIME  INTO _duracion
+    FROM curso INNER JOIN seccion s ON curso.id = s.curso_id INNER JOIN clase c on s.id = c.seccion_id
     WHERE curso.id = _curso_id;
 
     UPDATE curso SET duracion = _duracion WHERE id = _curso_id;
@@ -348,10 +363,48 @@ BEGIN
 END;
 $$ LANGUAGE 'plpgsql';
 
-CREATE TRIGGER tg_actualizarDuracion
-    AFTER INSERT OR UPDATE OR DELETE
-    ON clase
-    FOR EACH ROW
+CREATE TRIGGER tg_actualizarDuracion AFTER INSERT OR UPDATE OR DELETE
+    ON clase  FOR EACH ROW
 EXECUTE PROCEDURE fn_tg_actualizarDuracion();
+
+CREATE OR REPLACE FUNCTION fn_tg_actualizarSusbcriptores() RETURNS TRIGGER AS
+$$
+DECLARE
+    _id_curso INT;
+    _cant INT;
+BEGIN
+    SELECT curso_id INTO _id_curso
+    FROM seguimiento
+    WHERE seguimiento.curso_id = new.curso_id OR seguimiento.curso_id = old.curso_id;
+
+    SELECT COUNT(usuario_id) INTO _cant
+    FROM seguimiento
+    WHERE seguimiento.curso_id = _id_curso;
+
+    UPDATE curso SET numero_subscriptores = _cant WHERE id = _id_curso;
+    RETURN new;
+END;
+$$ LANGUAGE 'plpgsql';
+
+CREATE TRIGGER tg_actualizarSusbcriptores AFTER INSERT OR UPDATE OR DELETE
+    ON seguimiento FOR EACH ROW
+EXECUTE PROCEDURE fn_tg_actualizarSusbcriptores();
+
+CREATE OR REPLACE FUNCTION fn_tg_actualizarNumeroComentarios() RETURNS TRIGGER AS
+$$
+DECLARE
+    _id_comentario INT;
+BEGIN
+	SELECT comentario.comentario_padre_id INTO _id_comentario
+    FROM comentario
+    WHERE comentario.id = new.id;
+	
+	UPDATE comentario SET numero_comentarios = numero_comentarios + 1 WHERE id = _id_comentario; 
+END;
+$$ LANGUAGE 'plpgsql';
+
+CREATE TRIGGER tg_actualizarNumeroComentarios AFTER INSERT
+    ON comentario FOR EACH ROW
+EXECUTE PROCEDURE fn_tg_actualizarNumeroComentarios();
 
 COMMIT;
