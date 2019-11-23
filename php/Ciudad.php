@@ -18,7 +18,7 @@
 
         public static function listar () {
             $lista = [];
-            $query = 'SELECT * FROM ciudad';
+            $query = 'SELECT * FROM ciudad ORDER BY 2 ASC';
             $cnx = Conexion ::conectarBD();
             $resulset = $cnx -> query($query);
             while ($ciudad = $resulset -> fetchObject()) {

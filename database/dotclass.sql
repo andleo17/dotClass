@@ -202,7 +202,7 @@ CREATE TABLE prerrequisito
 CREATE TABLE seguimiento
 (
     usuario_id INT NOT NULL REFERENCES usuario,
-    curso_id   INT NOT NULL REFERENCES curso
+    curso_id   INT NOT NULL REFERENCES curso,
     PRIMARY KEY (usuario_id,curso_id )
 );
 

@@ -14,7 +14,7 @@
     $dictadosUsuario = Usuario ::listarEnseñanza($usuario -> id);
 
     $annos = (new DateTime()) -> diff(new DateTime($usuario -> fechaNacimiento));
-?>
+?>>
 
 <div class="container-fluid">
     <div id="perfil" class="row">

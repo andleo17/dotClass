@@ -68,7 +68,7 @@
 
         public static function listar () {
             $lista = [];
-            $query = 'SELECT * FROM usuario';
+            $query = 'SELECT * FROM usuario ORDER BY 1 ASC';
             $cnx = Conexion ::conectarBD();
             $resultSet = $cnx -> query($query);
             while ($usuario = $resultSet -> fetchObject()) {
@@ -219,7 +219,7 @@
                         break;
 
                     default:
-                        return self ::buscar(NULL, $peticion);
+                        echo json_encode(self :: buscar($peticion, NULL));
                         break;
                 }
             }

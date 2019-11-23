@@ -75,7 +75,7 @@
 
         public static function listar () {
             $lista = [];
-            $query = 'SELECT * FROM curso';
+            $query = 'SELECT * FROM curso ORDER BY 2 ASC';
             $resultSet = Conexion ::conectarBD() -> query($query);
             while ($curso = $resultSet -> fetchObject()) {
                 $curso = self :: mapear($curso);
@@ -149,6 +149,7 @@
                         echo '';
                         break;
                     default:
+                        echo json_encode(self :: buscar($peticion));
                         break;
                 }
             }
