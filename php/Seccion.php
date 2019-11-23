@@ -8,7 +8,20 @@
         public $curso;
         public $titulo;
 
-        public static function buscar ($id) {
+        public static function buscar($id) {
+            $query = 'SELECT * FROM seccion WHERE id = ?';
+            $preparedStatement = Conexion ::conectarBD() -> prepare($query);
+            $preparedStatement -> bindParam(1, $id);
+            $preparedStatement -> execute();
+            if ($seccion = $preparedStatement -> fetchObject()) {
+                $seccion = self ::mapear($seccion);
+                return $seccion;
+            } else {
+                return null;
+            }
+        }
+
+        public static function buscarSecciones ($id) {
             $lista = [];
             $query = 'SELECT * FROM seccion WHERE curso_id = ?';
             $resultSet = Conexion ::conectarBD() -> prepare($query);
@@ -22,7 +35,7 @@
         }
 
         public static function listarClases ($id) {
-            return Clase ::buscar($id);
+            return Clase ::buscarClases($id);
         }
 
         private function mapear ($resultSet) {

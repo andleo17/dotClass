@@ -10,6 +10,7 @@
         public $numeroLikes;
         public $numeroComentarios;
         public $esPregunta;
+        public $estaResuelto;
 
         public static function buscar($id) {
             $query = 'SELECT * FROM comentario WHERE id = ?';
@@ -43,6 +44,7 @@
             $comentario -> numeroLikes = $resultSet -> numero_likes;
             $comentario -> numeroComentarios = $resultSet -> numero_comentarios;
             $comentario -> esPregunta = $resultSet -> pregunta;
+            $comentario -> estaResuelto = $resultSet -> resuelto;
             return $comentario;
         }
 
