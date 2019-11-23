@@ -197,15 +197,19 @@
                 </div>
                 <div class="form-group">
                 <label for="cbopais">País</label>
-                    <select class="form-control" name="cbopais" id="cbopais" >
-                        <option ></option>
+                    <select class="form-control name="cboPais" id="cboPais" >
+                        <?php foreach (Pais ::listar() as $pais) { ?>
+                            <option value="<?= $pais -> id ?>"><?= $pais -> nombre ?></option>
+                        <?php } ?>
                     </select>
                 </div>
                 <div class="form-group">
                 <label for="cbociudad">Ciudad</label>
-                    <select class="form-control" name="cbociudad" id="cbociudad">
-                        <option ></option>
-                    </select> 
+                    <select class="form-control name="cboCiudad" id="cboCiudad >
+                        <?php foreach (Ciudad ::listar() as $ciu) { ?>
+                            <option value="<?= $ciu -> id ?>"><?= $ciu -> nombre ?></option>
+                        <?php } ?>
+                    </select>
                 </div>          
             </form>
 	      </div>
@@ -236,7 +240,7 @@
                 </div>
                 <div class="form-group">
 				    <label for="txtLogoCU">Logo</label>
-				    <input type="text" class="form-control" name="txtLogo" id="txtLogo" >
+				    <input type="text" class="form-control" name="txtLogoCU" id="txtLogoCU" >
                 </div>
                 <div class="form-group">
 				    <label for="txtAutor">Autor</label>
@@ -245,7 +249,9 @@
                 <div class="form-group">
                 <label for="cboCategoria">Categoria</label>
                     <select class="form-control name="cboCategoria" id="cboCategoria"" >
-                        <option></option>
+                        <?php foreach (Categoria ::listar() as $cat) { ?>
+                            <option value="<?= $cat -> id ?>"><?= $cat -> nombre ?></option>
+                        <?php } ?>
                     </select>
                 </div>                        
             </form>
@@ -279,8 +285,8 @@
             document.getElementById("txtApellido").value = data.apellidos
             document.getElementById("txtFecha").value = data.fechaNacimiento
             document.getElementById("txtCorreo").value = data.email
-            document.getElementById("cbopais").value = data.pais
-            document.getElementById("cbociudad").value = data.ciudad
+            document.getElementById("cboPais").value = data.pais.id
+            document.getElementById("cboCiudad").value = data.ciudad.id
         }))
     };
 </script>
@@ -290,8 +296,9 @@
         fetch('../clase/Curso/' + id).then(res => res.json().then(data => {
             document.getElementById("txtTitulo").value = data.titulo
             document.getElementById("txtDescripcionCU").value = data.descripcion
-            document.getElementById("cboCategoria").value = data.categoria 
-            document.getElementById("txtAutor").value = data.usuario
+            document.getElementById("txtLogoCU").value = data.logo
+            document.getElementById("cboCategoria").value = data.categoria.id
+            document.getElementById("txtAutor").value = data.usuario.nickname
         }))
     };
 </script>

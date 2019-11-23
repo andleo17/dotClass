@@ -949,22 +949,6 @@ iframe.video {
 	font-size: 18px;
 }
 
-#txtTitulo {
-	border-radius: 25px;
-	border: none;
-	height: 25px;
-	margin: 15px;
-	padding: 5px 20px;
-}
-
-#txtContenido {
-	margin: 15px;
-	border: none;
-	border-radius: 25px;
-	padding: 15px;
-	font-family: 'Segoe UI', sans-serif;
-}
-
 #btnGuardar {
 	width: fit-content;
 	align-self: center;

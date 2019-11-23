@@ -28,7 +28,6 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">        
-    <?php if (!isset($_SESSION['usuario'])) { ?>
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo SERVER_URL ?>explorar/">EXPLORAR</a>
@@ -39,23 +38,12 @@
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo SERVER_URL ?>contacto/">CONTÁCTANOS</a>
             </li>
+            <?php if (isset($_SESSION['usuario']) && $_SESSION['usuario'] -> nickname == 'ADMIN') { ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo SERVER_URL ?>administrador/">CONFIGURACIÓN</a>
+                </li>
+            <?php } ?>
         </ul>
-        <?php } else { ?>
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="<?php echo SERVER_URL ?>explorar/">EXPLORAR</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<?php echo SERVER_URL ?>blog/">BLOG</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<?php echo SERVER_URL ?>contacto/">CONTÁCTANOS</a>
-            </li>            
-            <li class="nav-item">
-                <a class="nav-link" href="<?php echo SERVER_URL ?>administrador/">CONFIGURACIÓN</a>
-            </li>
-        </ul>
-        <?php } ?>
         
         <div class="navbar-nav nav-botones my-2 my-lg-0">
             <a class="nav-link" href="<?php echo SERVER_URL ?>notificaciones/"><i class="fas fa-bell"></i></a>

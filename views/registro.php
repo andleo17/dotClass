@@ -56,14 +56,14 @@
                     <div class="col">
                         <select class="form-control" name="pais" id="pais">
                             <?php foreach (Pais ::listar() as $pais) { ?>
-                                <option value="<?= $pais -> id ?>>"><?= $pais -> nombre ?></option>
+                                <option value="<?= $pais -> id ?>"><?= $pais -> nombre ?></option>
                             <?php } ?>
                         </select>
                     </div>
                     <div class="col">
                         <select class="form-control" name="ciudad" id="ciudad">
                             <?php foreach (Ciudad ::listar() as $ciudad) { ?>
-                                <option value="<?= $ciudad -> id ?>>"><?= $ciudad -> nombre ?></option>
+                                <option value="<?= $ciudad -> id ?>"><?= $ciudad -> nombre ?></option>
                             <?php } ?>
                         </select>
                     </div>
@@ -92,6 +92,7 @@
         }).then(res => {
             res.text().then(data => {
                 if (data) {
+                    console.log(data)
                     if (data == 1) {
                         location.href = 'http://localhost/dotclass/inicio-sesion/';
                     }
