@@ -4,10 +4,10 @@
         $curso = Curso ::buscar($curso[3]);
         include 'views/examen.php';
         return;
-    } else {
-        $curso = Curso ::buscar(end($curso));
-        $cursosUsuario = Usuario::listarEnseñanza($curso -> usuario -> id);
     }
+
+    $curso = Curso ::buscar(end($curso));
+    $cursosUsuario = Usuario ::listarEnseñanza($curso -> usuario -> id);
 ?>
 <div class="container-fluid">
     <div class="row text-white">
@@ -51,10 +51,10 @@
                         <b><?= $curso -> usuario -> nickname ?></b>
                         <span><?= $curso -> usuario -> numeroSeguidores ?> seguidores</span>
                     </div>
-<!--                    <div class="live">-->
-<!--                        <i class="fas fa-circle"></i>-->
-<!--                        <span>LIVE</span>-->
-<!--                    </div>-->
+                    <!--                    <div class="live">-->
+                    <!--                        <i class="fas fa-circle"></i>-->
+                    <!--                        <span>LIVE</span>-->
+                    <!--                    </div>-->
                 </a>
                 <div class="card-body docente-descripcion text-white">
                     <p>"<?= $curso -> usuario -> descripcion ?>"</p>
@@ -108,7 +108,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <?php if($key != count($cursosPrerequisitos) - 1) { ?>
+                                <?php if ($key != count($cursosPrerequisitos) - 1) { ?>
                                     <div class="col mt-3 d-flex align-items-center">
                                         <i class="fas fa-arrow-right"></i>
                                     </div>
@@ -120,7 +120,7 @@
             </div>
         <?php } ?>
     </div>
-    <div class="card mt-5 rounded-0">
+    <div class="card my-5 rounded-0">
         <div class="card-header pb-0">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
@@ -137,45 +137,32 @@
                 </li>
             </ul>
         </div>
-        <div class="tab-content">
-            <div class="card-body container-fluid px-5">
-                <div id="contenido" class="tab-pane fade show active">
-                    <?php foreach (Curso ::buscarContenido($curso -> id) as $seccion) { ?>
-                        <div class="border border-secondary px-4 py-3 mb-4 row">
-                            <div class="col-12 text-dark">
-                                <h5 class="mb-4"><?= $seccion -> titulo ?></h5>
-                            </div>
-                            <?php foreach (Seccion ::listarClases($seccion -> id) as $clase) { ?>
-                                <div class="col-3 mb-3">
-                                    <div class="card border border-secondary rounded-top">
-                                        <div class="card-header bg-success"></div>
-                                        <a href="" class="card-body d-flex flex-column">
-                                            <span class="mb-4"><?= $clase -> titulo ?></span>
-                                            <span class="mt-auto"><b>Duración:</b> <?= $clase -> duracion ?></span>
-                                        </a>
-                                    </div>
-                                </div>
-                            <?php } ?>
-                        </div>
-                    <?php } ?>
-                    <?php if ($examen = Curso ::buscarExamen($curso -> id)) { ?>
-                        <div class="row">
-                            <div class="col-12 p-0">
-                                <div class="curso-examen d-flex justify-content-between align-items-center">
-                                    <div class="d-flex flex-column">
-                                        <b>Examen final</b>
-                                        <span>Demuestra que has aprendido <b><?= $curso -> titulo ?></b></span>
-                                    </div>
-                                    <a class="btn btn-light text-body" href="<?= $_SERVER['REQUEST_URI'] ?>/examen">Dar examen</a>
-                                </div>
-                            </div>
-                        </div>
-                    <?php } ?>
-                </div>
-                <div id="preguntas" class="tab-pane fade"></div>
-                <div id="aportes" class="tab-pane fade"></div>
-                <div id="marcadores" class="tab-pane fade"></div>
+        <div class="tab-content px-5 py-4">
+            <div id="contenido" class="tab-pane fade show active">
+                <?php include_once 'views/curso-contenido.php' ?>
             </div>
+            <div id="preguntas" class="tab-pane fade"></div>
+            <div id="aportes" class="tab-pane fade"></div>
+            <div id="marcadores" class="tab-pane fade"></div>
         </div>
     </div>
 </div>
+<script>
+    window.onload = function () {
+        var observer = new MutationObserver(function (mutations) {
+            let elemento = mutations[1];
+            if (elemento && !document.getElementById(elemento.target.id).innerHTML) {
+                fetch(`../views/curso-${elemento.target.id}.php?id=<?= $curso -> id ?>`)
+                    .then(res => res.text()
+                        .then(data => {
+                            document.getElementById(elemento.target.id).innerHTML = data;
+                        }))
+            }
+        });
+        observer.observe(document.getElementById('contenido'), {attributes: true});
+        observer.observe(document.getElementById('preguntas'), {attributes: true});
+        observer.observe(document.getElementById('aportes'), {attributes: true});
+        observer.observe(document.getElementById('marcadores'), {attributes: true});
+    };
+
+</script>

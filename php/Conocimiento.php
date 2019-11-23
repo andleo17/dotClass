@@ -20,7 +20,7 @@
             $conocimiento -> nombre = $resultSet -> nombre;
             $conocimiento -> gradoAcademico = $resultSet -> grado_academico;
             $conocimiento -> lugarEstudio = $resultSet -> lugar_estudio;
-            $conocimiento -> año = $resultSet -> anio;
+            $conocimiento -> anio = $resultSet -> anio;
             $conocimiento -> pais = Pais ::buscar($resultSet -> pais_id);            
             $conocimiento -> usuario = $resultSet -> usuario_id;
             return $conocimiento;

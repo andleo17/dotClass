@@ -5,14 +5,14 @@
     require_once 'php/config.php';
 
     $usuario = explode('/', $_SERVER['REQUEST_URI']);
-    $usuario = end($usuario);
-    $usuario = Usuario ::buscar(null, $usuario);
+    if (end($usuario) == 'editar') {
+        $usuario = Usuario::buscar(null, $usuario[3]);
+        include 'views/configuracion-usuario.php';
+        return;
+    }
 
-    $trayectoriaUsuario = Conocimiento ::listar($usuario -> id);
-    $experienciaUsuario = ExperienciaLaboral ::listar($usuario -> id);
-    $seguidosUsuario = Usuario ::listarSeguimiento($usuario);
+    $usuario = Usuario ::buscar(null, end($usuario));
     $dictadosUsuario = Usuario ::listarEnseñanza($usuario -> id);
-
     $annos = (new DateTime()) -> diff(new DateTime($usuario -> fechaNacimiento));
 ?>
 
@@ -34,7 +34,7 @@
                     <li class="perfil-value"><?= $usuario -> email ?></li>
                     <li class="perfil-key">Lugar de procedencia:</li>
                     <li class="perfil-value"><?= "{$usuario -> ciudad -> nombre}, {$usuario -> pais -> nombre}" ?></li>
-                    <?php if ($trayectoriaUsuario != []) { ?>
+                    <?php if ($trayectoriaUsuario = Conocimiento ::listar($usuario -> id)) { ?>
                         <li class="perfil-key">Trayectoria académica:</li>
                         <?php foreach ($trayectoriaUsuario as $trayectoria) { ?>
                             <li class="perfil-value"><?= "{$trayectoria -> nombre }, {$trayectoria -> gradoAcademico} , {$trayectoria -> lugarEstudio }, ({$trayectoria -> año}), {$trayectoria -> pais -> nombre} " ?></li>
@@ -52,7 +52,7 @@
             </div>
             <div class="container-fluid">
                 <div class="row">
-                    <?php if ($experienciaUsuario != []) { ?>
+                    <?php if ($experienciaUsuario = ExperienciaLaboral ::listar($usuario -> id)) { ?>
                         <div class="perfil-detalle-body col-12 mt-3">
                             <h3>Experiencia laboral</h3>
                             <ul id="experiencia-laboral">
@@ -62,7 +62,7 @@
                             </ul>
                         </div>
                     <?php } ?>
-                    <?php if ($seguidosUsuario != []) { ?>
+                    <?php if ($seguidosUsuario = Usuario ::listarSeguimiento($usuario)) { ?>
                         <div class="perfil-detalle-body col-12 mt-4">
                             <h3>Cursos que sigo</h3>
                             <div class="container-fluid">

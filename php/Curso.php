@@ -66,7 +66,7 @@
         }
 
         public static function buscarContenido ($id) {
-            return Seccion ::buscar($id);
+            return Seccion ::buscarSecciones($id);
         }
 
         public static function buscarExamen ($id) {

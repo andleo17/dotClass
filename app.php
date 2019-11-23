@@ -53,7 +53,7 @@
                             <span class='sr-only'>Toggle Dropdown</span>
                         </button>
                         <div class='dropdown-menu dropdown-menu-right'>
-                            <a class='dropdown-item' href='#'>Configuración</a>
+                            <a class='dropdown-item' href='<?= SERVER_URL . 'perfil/' . $_SESSION['usuario'] -> nickname . '/editar' ?>'>Configuración</a>
                             <a class='dropdown-item' href='#'>Gestionar cursos</a>
                             <div class='dropdown-divider'></div>
                             <button id='cerrar-sesion' class='dropdown-item text-danger'>Cerrar sesión</button>
