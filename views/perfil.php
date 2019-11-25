@@ -14,7 +14,7 @@
     $usuario = Usuario ::buscar(null, end($usuario));
     $dictadosUsuario = Usuario ::listarEnseñanza($usuario -> id);
     $annos = (new DateTime()) -> diff(new DateTime($usuario -> fechaNacimiento));
-?>>
+?>
 
 <div class="container-fluid">
     <div id="perfil" class="row">
@@ -37,7 +37,7 @@
                     <?php if ($trayectoriaUsuario = Conocimiento ::listar($usuario -> id)) { ?>
                         <li class="perfil-key">Trayectoria académica:</li>
                         <?php foreach ($trayectoriaUsuario as $trayectoria) { ?>
-                            <li class="perfil-value"><?= "{$trayectoria -> nombre }, {$trayectoria -> gradoAcademico} , {$trayectoria -> lugarEstudio }, ({$trayectoria -> año}), {$trayectoria -> pais -> nombre} " ?></li>
+                            <li class="perfil-value"><?= "{$trayectoria -> nombre }, {$trayectoria -> gradoAcademico} , {$trayectoria -> lugarEstudio }, ({$trayectoria -> anio}), {$trayectoria -> pais -> nombre} " ?></li>
                         <?php }
                     } ?>
                 </ul>

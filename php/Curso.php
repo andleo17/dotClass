@@ -75,11 +75,24 @@
 
         public static function listar () {
             $lista = [];
-            $query = 'SELECT * FROM curso ORDER BY 2 ASC';
+            $query = 'SELECT * FROM curso';
             $resultSet = Conexion ::conectarBD() -> query($query);
             while ($curso = $resultSet -> fetchObject()) {
                 $curso = self :: mapear($curso);
                 array_push($lista, $curso);
+            }
+            return $lista;
+        }
+
+        public static function listarPopulares($cantidad) {
+            $lista = [];
+            $query = 'SELECT * FROM curso ORDER BY valoracion DESC LIMIT ?';
+            $preparedStatement = Conexion ::conectarBD() -> prepare($query);
+            $preparedStatement -> bindParam(1, $cantidad);
+            $preparedStatement -> execute();
+            while ($usuario = $preparedStatement -> fetchObject()) {
+                $usuario = self ::mapear($usuario);
+                array_push($lista, $usuario);
             }
             return $lista;
         }

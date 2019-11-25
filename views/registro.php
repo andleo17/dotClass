@@ -92,7 +92,6 @@
         }).then(res => {
             res.text().then(data => {
                 if (data) {
-                    console.log(data)
                     if (data == 1) {
                         location.href = 'http://localhost/dotclass/inicio-sesion/';
                     }

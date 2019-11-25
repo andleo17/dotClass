@@ -45,20 +45,20 @@
             $preparedStament -> bindParam(2, $this -> lugar);
             $preparedStament -> bindParam(3, $this -> fechaInicio);
             $preparedStament -> bindParam(4, $this -> fechaFin);
-            $preparedStament -> bindParam(5, $this -> pais -> id);
+            $preparedStament -> bindParam(5, $this -> pais);
             $preparedStament -> bindParam(6, $this -> usuario -> id);
             $preparedStament -> execute();
         }
 
-        public function actualizar (ExperienciaLaboral $experienciaLaboral) {
+        public static function actualizar (ExperienciaLaboral $experienciaLaboral) {
             $query = 'UPDATE experiencia_laboral SET nombre = ?, lugar = ?, fecha_inicio = ?, fecha_fin = ?, pais_id =? WHERE id = ?';
             $preparedStament = Conexion ::conectarBD() -> prepare($query);
             $preparedStament -> bindParam(1, $experienciaLaboral -> nombre);
             $preparedStament -> bindParam(2, $experienciaLaboral -> lugar);
             $preparedStament -> bindParam(3, $experienciaLaboral -> fechaInicio);
             $preparedStament -> bindParam(4, $experienciaLaboral -> fechaFin);
-            $preparedStament -> bindParam(5, $experienciaLaboral -> pais -> id);
-            $preparedStament -> bindParam(6, $this -> id);
+            $preparedStament -> bindParam(5, $experienciaLaboral -> pais);
+            $preparedStament -> bindParam(6, $experienciaLaboral -> id);
             $preparedStament -> execute();
         }
 

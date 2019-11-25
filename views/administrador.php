@@ -10,8 +10,8 @@
     
 ?>
 
-<div class="container">
-    <div class="card mt-5 rounded-0">
+<div class="container my-5">
+    <div class="card rounded-0">
         <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
                 <a class="nav-link active" href="#categoria" role="tab" data-toggle="tab">Categoría</a>
