@@ -28,7 +28,7 @@
 
         public static function listar ($usuario) {
             $lista = [];
-            $query = 'SELECT * FROM conocimiento WHERE usuario_id = ?';
+            $query = 'SELECT * FROM conocimiento WHERE usuario_id = ? ORDER BY id';
             $resultSet = Conexion ::conectarBD() -> prepare($query);
             $resultSet -> bindParam(1,$usuario);
             $resultSet -> execute();

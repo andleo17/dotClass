@@ -23,7 +23,7 @@
 
         public static function buscarSecciones ($id) {
             $lista = [];
-            $query = 'SELECT * FROM seccion WHERE curso_id = ?';
+            $query = 'SELECT * FROM seccion WHERE curso_id = ? ORDER BY id';
             $resultSet = Conexion ::conectarBD() -> prepare($query);
             $resultSet -> bindParam(1, $id);
             $resultSet -> execute();

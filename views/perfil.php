@@ -6,7 +6,11 @@
 
     $usuario = explode('/', $_SERVER['REQUEST_URI']);
     if (end($usuario) == 'editar') {
-        $usuario = Usuario::buscar(null, $usuario[3]);
+        if ($usuario[3] == $_SESSION['usuario'] -> nickname) {
+            $usuario = Usuario::buscar(null, $usuario[3]);
+        } else {
+            header("Location: ../../perfil/{$_SESSION['usuario'] -> nickname}/editar ");
+        }
         include 'views/configuracion-usuario.php';
         return;
     }
