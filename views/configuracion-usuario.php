@@ -43,15 +43,18 @@
                         </div>
                         <div class="form-group">
                             <label for="txtEmail">E-mail</label>
-                            <input class="form-control" id="txtEmail" type="email" value="<?= $usuario -> email ?>" name="email">
+                            <input class="form-control" id="txtEmail" type="email" value="<?= $usuario -> email ?>"
+                                   name="email">
                         </div>
                         <div class="form-group">
                             <label for="txtFechaNacimiento">Fecha de nacimiento</label>
-                            <input class="form-control" id="txtFechaNacimiento" type="date" value="<?= $usuario -> fechaNacimiento ?>" name="fechaNacimiento">
+                            <input class="form-control" id="txtFechaNacimiento" type="date"
+                                   value="<?= $usuario -> fechaNacimiento ?>" name="fechaNacimiento">
                         </div>
                         <div class="form-group">
                             <label for="txtDescripcion">Descripcion</label>
-                            <textarea class="form-control" id="txtDescripcion" name="descripcion"><?= $usuario -> descripcion ?></textarea>
+                            <textarea class="form-control" id="txtDescripcion"
+                                      name="descripcion"><?= $usuario -> descripcion ?></textarea>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-6">
@@ -102,7 +105,7 @@
                                     laboral</a>
                             </li>
                         </ul>
-                        <div class="tab-content" id="myTabContent">
+                        <div class="tab-content">
                             <div class="tab-pane fade show active" id="trayectoria">
                                 <div class="form-row my-4">
                                     <div class="col-12">
@@ -130,7 +133,8 @@
                                                     <div class="form-group col-6">
                                                         <label for="cboPaisConocimiento[<?= $conocimiento -> id ?>]">Pais</label>
                                                         <select class="form-control"
-                                                                id="cboPaisConocimiento[<?= $conocimiento -> id ?>]" name="paisConocimiento[<?= $conocimiento -> id ?>]">
+                                                                id="cboPaisConocimiento[<?= $conocimiento -> id ?>]"
+                                                                name="paisConocimiento[<?= $conocimiento -> id ?>]">
                                                             <?php foreach ($paises as $pais) { ?>
                                                                 <option value="<?= $pais -> id ?>" <?= $pais -> id == $conocimiento -> pais -> id ? 'selected' : '' ?>><?= $pais -> nombre ?></option>
                                                             <?php } ?>
@@ -157,6 +161,12 @@
                                             </div>
                                         </div>
                                     <?php } ?>
+                                </div>
+                                <div class="col-12 p-0 my-4">
+                                    <button id="agregar-trayectoria" class="agregar-config" type="button">Agregar
+                                        trayectoria
+                                        académica
+                                    </button>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="experiencia">
@@ -185,7 +195,8 @@
                                                     <div class="form-group col-6">
                                                         <label for="cboPaisExp[<?= $experiencia -> id ?>]">Pais</label>
                                                         <select class="form-control"
-                                                                id="cboPaisExp[<?= $experiencia -> id ?>]" name="paisExp[<?= $experiencia -> id ?>]">
+                                                                id="cboPaisExp[<?= $experiencia -> id ?>]"
+                                                                name="paisExp[<?= $experiencia -> id ?>]">
                                                             <?php foreach ($paises as $pais) { ?>
                                                                 <option value="<?= $pais -> id ?>" <?= $pais -> id == $experiencia -> pais -> id ? 'selected' : '' ?>><?= $pais -> nombre ?></option>
                                                             <?php } ?>
@@ -213,6 +224,11 @@
                                             </div>
                                         </div>
                                     <?php } ?>
+                                </div>
+                                <div class="col-12 p-0 my-4">
+                                    <button id="agregar-experiencia" class="agregar-config" type="button">Agregar
+                                        experiencia laboral
+                                    </button>
                                 </div>
                             </div>
                         </div>
