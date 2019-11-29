@@ -37,7 +37,7 @@
                     <?php if ($trayectoriaUsuario = Conocimiento ::listar($usuario -> id)) { ?>
                         <li class="perfil-key">Trayectoria académica:</li>
                         <?php foreach ($trayectoriaUsuario as $trayectoria) { ?>
-                            <li class="perfil-value"><?= "{$trayectoria -> nombre }, {$trayectoria -> gradoAcademico} , {$trayectoria -> lugarEstudio }, ({$trayectoria -> año}), {$trayectoria -> pais -> nombre} " ?></li>
+                            <li class="perfil-value"><?= "{$trayectoria -> nombre }, {$trayectoria -> gradoAcademico} , {$trayectoria -> lugarEstudio }, ({$trayectoria -> anio}), {$trayectoria -> pais -> nombre} " ?></li>
                         <?php }
                     } ?>
                 </ul>
