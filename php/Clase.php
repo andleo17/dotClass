@@ -30,7 +30,7 @@
 
         public static function buscarClases ($id) {
             $lista = [];
-            $query = 'SELECT * FROM clase WHERE seccion_id = ?';
+            $query = 'SELECT * FROM clase WHERE seccion_id = ? ORDER BY id';
             $resultSet = Conexion ::conectarBD() -> prepare($query);
             $resultSet -> bindParam(1, $id);
             $resultSet -> execute();

@@ -7,7 +7,7 @@
         <h1 class="animate-pop-in">Aprende o comparte conocimientos</h1>
         <span class="animate-pop-in">Demuéstrale al mundo que puedes enseñar lo que sabes y también aprender de
                     los demás.</span>
-        <a class="hero-button animate-pop-in" href="registro/">Da tus primeros pasos</a>
+        <a class="mt-3 btn btn-success verde-oscuro" href="registro/">Da tus primeros pasos</a>
     </div>
 </div>
 <div class="container-fluid">
@@ -16,7 +16,7 @@
             <h3>Cursos más populares</h3>
             <div class="container-fluid">
                 <div class="row">
-                    <?php foreach (Curso ::listar() as $curso) { ?>
+                    <?php foreach (Curso ::listarPopulares(3) as $curso) { ?>
                         <div class="mt-3 col-xl-4 col-lg-6 col-md-12">
                             <div class="card">
                                 <a href="curso/<?= $curso -> id ?>" class="card-head">
@@ -56,7 +56,7 @@
             <h3>Docentes más populares</h3>
             <div class="container-fluid">
                 <div class="row">
-                    <?php foreach (Usuario ::listar() as $usuario) {
+                    <?php foreach (Usuario ::listarPopulares(3) as $usuario) {
                         $cursosUsuario = Usuario ::listarEnseñanza($usuario -> id);
                         ?>
                         <div class="mt-3 col-xl-4 col-lg-6 col-md-12">

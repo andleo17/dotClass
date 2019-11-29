@@ -1,10 +1,14 @@
+<?php
+    $paises = Pais ::listar();
+    $ciudades = Ciudad ::listar();
+?>
 <div class="container my-5">
     <div class="row">
         <div class="col-12 mb-3">
             <h1>Edita tu perfil</h1>
         </div>
         <div class="col">
-            <form>
+            <form id="formulario" enctype="multipart/form-data">
                 <div class="form-row">
                     <div class="col d-flex align-items-center justify-content-center">
                         <div class="form-group mt-3">
@@ -23,27 +27,66 @@
                         <div class="form-group">
                             <label for="txtNickname">Nickname</label>
                             <input class="form-control" id="txtNickname" type="text"
-                                   value="<?= $usuario -> nickname ?>">
+                                   value="<?= $usuario -> nickname ?>" name="nickname">
                         </div>
                         <div class="form-row">
                             <div class="form-group col-6">
                                 <label for="txtNombres">Nombres</label>
                                 <input class="form-control" id="txtNombres" type="text"
-                                       value="<?= $usuario -> nombres ?>">
+                                       value="<?= $usuario -> nombres ?>" name="nombres">
                             </div>
                             <div class="form-group col-6">
                                 <label for="txtApellidos">Apellidos</label>
                                 <input class="form-control" id="txtApellidos" type="text"
-                                       value="<?= $usuario -> apellidos ?>">
+                                       value="<?= $usuario -> apellidos ?>" name="apellidos">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="txtEmail">E-mail</label>
-                            <input class="form-control" id="txtEmail" type="email" value="<?= $usuario -> email ?>">
+                            <input class="form-control" id="txtEmail" type="email" value="<?= $usuario -> email ?>" name="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="txtFechaNacimiento">Fecha de nacimiento</label>
+                            <input class="form-control" id="txtFechaNacimiento" type="date" value="<?= $usuario -> fechaNacimiento ?>" name="fechaNacimiento">
                         </div>
                         <div class="form-group">
                             <label for="txtDescripcion">Descripcion</label>
-                            <textarea class="form-control" id="txtDescripcion"><?= $usuario -> descripcion ?></textarea>
+                            <textarea class="form-control" id="txtDescripcion" name="descripcion"><?= $usuario -> descripcion ?></textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-6">
+                                <label for="txtPregunta">Pregunta de seguridad</label>
+                                <input class="form-control" id="txtPregunta" type="text"
+                                       value="<?= $usuario -> preguntaSeguridad ?>" name="preguntaSeguridad">
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="txtRespuesta">Respuesta de seguridad</label>
+                                <input class="form-control" id="txtRespuesta" type="text"
+                                       value="<?= $usuario -> respuestaSeguridad ?>" name="respuestaSeguridad">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-6">
+                                <label for="cboPais">País</label>
+                                <select class="form-control" id="cboPais" name="pais">
+                                    <?php foreach ($paises as $pais) { ?>
+                                        <option value="<?= $pais -> id ?>" <?= $pais -> id == $usuario -> pais -> id ? 'selected' : '' ?>><?= $pais -> nombre ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="cboCiudad">Ciudad</label>
+                                <select class="form-control" id="cboCiudad" name="ciudad">
+                                    <?php foreach ($ciudades as $ciudad) { ?>
+                                        <option value="<?= $ciudad -> id ?>" <?= $ciudad -> id == $usuario -> ciudad -> id ? 'selected' : '' ?>><?= $ciudad -> nombre ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtPassword">Contraseña</label>
+                            <input class="form-control" id="txtPassword" type="password"
+                                   value="<?= $usuario -> password ?>" name="password">
                         </div>
                     </div>
                 </div>
@@ -72,7 +115,7 @@
                                                     <label for="txtNombreConocimiento[<?= $conocimiento -> id ?>]">Nombre</label>
                                                     <input class="form-control" type="text"
                                                            id="txtNombreConocimiento[<?= $conocimiento -> id ?>]"
-                                                           name="txtNombreConocimiento[<?= $conocimiento -> id ?>]"
+                                                           name="nombreConocimiento[<?= $conocimiento -> id ?>]"
                                                            value="<?= $conocimiento -> nombre ?>">
                                                 </div>
                                                 <div class="form-row">
@@ -81,15 +124,15 @@
                                                             de estudio</label>
                                                         <input class="form-control" type="text"
                                                                id="txtLugarEstudio[<?= $conocimiento -> id ?>]"
-                                                               name="txtLugarEstudio[<?= $conocimiento -> id ?>]"
+                                                               name="lugarEstudio[<?= $conocimiento -> id ?>]"
                                                                value="<?= $conocimiento -> lugarEstudio ?>">
                                                     </div>
                                                     <div class="form-group col-6">
                                                         <label for="cboPaisConocimiento[<?= $conocimiento -> id ?>]">Pais</label>
                                                         <select class="form-control"
-                                                                id="cboPaisConocimiento[<?= $conocimiento -> id ?>]">
-                                                            <?php foreach (Pais ::listar() as $pais) { ?>
-                                                                <option value="cboPaisConocimiento[<?= $pais -> id ?>]" <?= $pais -> id == $conocimiento -> pais -> id ? 'selected' : '' ?>><?= $pais -> nombre ?></option>
+                                                                id="cboPaisConocimiento[<?= $conocimiento -> id ?>]" name="paisConocimiento[<?= $conocimiento -> id ?>]">
+                                                            <?php foreach ($paises as $pais) { ?>
+                                                                <option value="<?= $pais -> id ?>" <?= $pais -> id == $conocimiento -> pais -> id ? 'selected' : '' ?>><?= $pais -> nombre ?></option>
                                                             <?php } ?>
                                                         </select>
                                                     </div>
@@ -100,14 +143,14 @@
                                                             de conocimiento</label>
                                                         <input class="form-control" type="text"
                                                                id="txtGradoConocimiento[<?= $conocimiento -> id ?>]"
-                                                               name="txtGradoConocimiento[<?= $conocimiento -> id ?>]"
+                                                               name="gradoConocimiento[<?= $conocimiento -> id ?>]"
                                                                value="<?= $conocimiento -> gradoAcademico ?>">
                                                     </div>
                                                     <div class="form-group col-6">
-                                                        <label for="txtAnio[<?= $conocimiento -> id ?>]">Año</label>
+                                                        <label for="txtAnioConocimiento[<?= $conocimiento -> id ?>]">Año</label>
                                                         <input class="form-control" type="number"
-                                                               id="txtAnio[<?= $conocimiento -> id ?>]"
-                                                               name="txtAnio[<?= $conocimiento -> id ?>]"
+                                                               id="txtAnioConocimiento[<?= $conocimiento -> id ?>]"
+                                                               name="anioConocimiento[<?= $conocimiento -> id ?>]"
                                                                value="<?= $conocimiento -> anio ?>">
                                                     </div>
                                                 </div>
@@ -128,7 +171,7 @@
                                                     <label for="txtNombreExp[<?= $experiencia -> id ?>]">Nombre</label>
                                                     <input class="form-control" type="text"
                                                            id="txtNombreExp[<?= $experiencia -> id ?>]"
-                                                           name="txtNombreExp[<?= $experiencia -> id ?>]"
+                                                           name="nombreExp[<?= $experiencia -> id ?>]"
                                                            value="<?= $experiencia -> nombre ?>">
                                                 </div>
                                                 <div class="form-row">
@@ -136,15 +179,15 @@
                                                         <label for="txtLugarExp[<?= $experiencia -> id ?>]">Lugar</label>
                                                         <input class="form-control" type="text"
                                                                id="txtLugarExp[<?= $experiencia -> id ?>]"
-                                                               name="txtLugarExp[<?= $experiencia -> id ?>]"
+                                                               name="lugarExp[<?= $experiencia -> id ?>]"
                                                                value="<?= $experiencia -> lugar ?>">
                                                     </div>
                                                     <div class="form-group col-6">
                                                         <label for="cboPaisExp[<?= $experiencia -> id ?>]">Pais</label>
                                                         <select class="form-control"
-                                                                id="cboPaisExp[<?= $experiencia -> id ?>]">
-                                                            <?php foreach (Pais ::listar() as $pais) { ?>
-                                                                <option value="cboPaisExp[<?= $pais -> id ?>]" <?= $pais -> id == $experiencia -> pais -> id ? 'selected' : '' ?>><?= $pais -> nombre ?></option>
+                                                                id="cboPaisExp[<?= $experiencia -> id ?>]" name="paisExp[<?= $experiencia -> id ?>]">
+                                                            <?php foreach ($paises as $pais) { ?>
+                                                                <option value="<?= $pais -> id ?>" <?= $pais -> id == $experiencia -> pais -> id ? 'selected' : '' ?>><?= $pais -> nombre ?></option>
                                                             <?php } ?>
                                                         </select>
                                                     </div>
@@ -155,7 +198,7 @@
                                                             inicio</label>
                                                         <input class="form-control" type="date"
                                                                id="txtFechaInicioExp[<?= $experiencia -> id ?>]"
-                                                               name="txtFechaInicioExp[<?= $experiencia -> id ?>]"
+                                                               name="fechaInicioExp[<?= $experiencia -> id ?>]"
                                                                value="<?= $experiencia -> fechaInicio ?>">
                                                     </div>
                                                     <div class="form-group col-6">
@@ -163,7 +206,7 @@
                                                             fin</label>
                                                         <input class="form-control" type="date"
                                                                id="txtFechaFinExp[<?= $experiencia -> id ?>]"
-                                                               name="txtFechaFinExp[<?= $experiencia -> id ?>]"
+                                                               name="fechaFinExp[<?= $experiencia -> id ?>]"
                                                                value="<?= $experiencia -> fechaFin ?>">
                                                     </div>
                                                 </div>
@@ -184,3 +227,17 @@
         </div>
     </div>
 </div>
+<script>
+    let $formulario = document.getElementById('formulario');
+    $formulario.onsubmit = e => {
+        e.preventDefault();
+        fetch('../../clase/Usuario/editar', {
+            method: 'POST',
+            body: new FormData($formulario)
+        }).then(res => res.text().then(data => {
+            if (data == 1) {
+                window.location = 'http://localhost/dotclass/';
+            }
+        }))
+    }
+</script>

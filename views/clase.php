@@ -37,10 +37,10 @@
                 </ul>
             </div>
             <div class="p-3 w-100">
-                <div class="card-head">
+                <a href="<?= SERVER_URL . "perfil/{$curso -> usuario -> nickname}" ?>" class="card-head">
                     <img src="../uploads/perfiles/<?= $curso -> usuario -> foto ?>" alt="foto">
                     <span class="ml-3"><?= $curso -> usuario -> nickname ?></span>
-                </div>
+                </a>
                 <h1><?= $clase -> titulo ?></h1>
                 <iframe class="video" id="vid" src="https://www.youtube.com/embed/cR7erYmO0m8"
                         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"

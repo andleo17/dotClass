@@ -6,7 +6,11 @@
 
     $usuario = explode('/', $_SERVER['REQUEST_URI']);
     if (end($usuario) == 'editar') {
-        $usuario = Usuario::buscar(null, $usuario[3]);
+        if ($usuario[3] == $_SESSION['usuario'] -> nickname) {
+            $usuario = Usuario::buscar(null, $usuario[3]);
+        } else {
+            header("Location: ../../perfil/{$_SESSION['usuario'] -> nickname}/editar ");
+        }
         include 'views/configuracion-usuario.php';
         return;
     }
@@ -14,7 +18,7 @@
     $usuario = Usuario ::buscar(null, end($usuario));
     $dictadosUsuario = Usuario ::listarEnseñanza($usuario -> id);
     $annos = (new DateTime()) -> diff(new DateTime($usuario -> fechaNacimiento));
-?>>
+?>
 
 <div class="container-fluid">
     <div id="perfil" class="row">

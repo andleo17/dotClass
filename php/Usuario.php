@@ -54,7 +54,7 @@
             $usuario -> email = $resultSet -> email;
             $usuario -> fechaNacimiento = $resultSet -> fecha_nacimiento;
             $usuario -> descripcion = nl2br($resultSet -> descripcion);
-            $usuario -> numeroSeguidores = Util::convertirCantidades($resultSet -> numero_seguidores);
+            $usuario -> numeroSeguidores = Util ::convertirCantidades($resultSet -> numero_seguidores);
             $usuario -> preguntaSeguridad = $resultSet -> pregunta_seguridad;
             $usuario -> respuestaSeguridad = $resultSet -> respuesta_seguridad;
             $usuario -> foto = $resultSet -> foto;
@@ -68,10 +68,23 @@
 
         public static function listar () {
             $lista = [];
-            $query = 'SELECT * FROM usuario ORDER BY 1 ASC';
+            $query = 'SELECT * FROM usuario WHERE nickname <> \'ADMIN\'';
             $cnx = Conexion ::conectarBD();
             $resultSet = $cnx -> query($query);
             while ($usuario = $resultSet -> fetchObject()) {
+                $usuario = self ::mapear($usuario);
+                array_push($lista, $usuario);
+            }
+            return $lista;
+        }
+
+        public static function listarPopulares ($cantidad) {
+            $lista = [];
+            $query = 'SELECT * FROM usuario WHERE nickname <> \'ADMIN\' ORDER BY numero_seguidores DESC LIMIT ?';
+            $preparedStatement = Conexion ::conectarBD() -> prepare($query);
+            $preparedStatement -> bindParam(1, $cantidad);
+            $preparedStatement -> execute();
+            while ($usuario = $preparedStatement -> fetchObject()) {
                 $usuario = self ::mapear($usuario);
                 array_push($lista, $usuario);
             }
@@ -119,8 +132,8 @@
             $preparedStament -> execute();
         }
 
-        public function actualizar (Usuario $usuario) {
-            $query = 'UPDATE usuario SET nickname =?,password = ?,nombres = ?, apellidos = ?, email = ?, fecha_nacimiento = ?, descripcion =?, numero_seguidores = ?, pregunta_seguridad = ?, respuesta_seguridad = ?, foto = ?, pais_id = ?, ciudad_id = ?,fecha_creacion = ?, estado = ? WHERE id = ?';
+        public static function actualizar (Usuario $usuario) {
+            $query = 'UPDATE usuario SET nickname =?,password = ?,nombres = ?, apellidos = ?, email = ?, fecha_nacimiento = ?, descripcion =?, pregunta_seguridad = ?, respuesta_seguridad = ?, foto = ?, pais_id = ?, ciudad_id = ?, estado = ? WHERE id = ?';
             $preparedStament = Conexion ::conectarBD() -> prepare($query);
             $preparedStament -> bindParam(1, $usuario -> nickname);
             $preparedStament -> bindParam(2, $usuario -> password);
@@ -129,15 +142,13 @@
             $preparedStament -> bindParam(5, $usuario -> email);
             $preparedStament -> bindParam(6, $usuario -> fechaNacimiento);
             $preparedStament -> bindParam(7, $usuario -> descripcion);
-            $preparedStament -> bindParam(8, $usuario -> numeroSeguidores);
-            $preparedStament -> bindParam(9, $usuario -> preguntaSeguridad);
-            $preparedStament -> bindParam(10, $usuario -> respuestaSeguridad);
-            $preparedStament -> bindParam(11, $usuario -> foto);
-            $preparedStament -> bindParam(12, $usuario -> pais -> id);
-            $preparedStament -> bindParam(13, $usuario -> ciudad -> id);
-            $preparedStament -> bindParam(14, $usuario -> fechaCreacion);
-            $preparedStament -> bindParam(15, $usuario -> estado);
-            $preparedStament -> bindParam(16, $this -> id);
+            $preparedStament -> bindParam(8, $usuario -> preguntaSeguridad);
+            $preparedStament -> bindParam(9, $usuario -> respuestaSeguridad);
+            $preparedStament -> bindParam(10, $usuario -> foto);
+            $preparedStament -> bindParam(11, $usuario -> pais);
+            $preparedStament -> bindParam(12, $usuario -> ciudad);
+            $preparedStament -> bindParam(13, $usuario -> estado);
+            $preparedStament -> bindParam(14, $usuario -> id);
             $preparedStament -> execute();
         }
 
@@ -216,6 +227,51 @@
                     case 'cerrarSesion':
                         session_start();
                         session_destroy();
+                        break;
+
+                    case 'editar':
+                        session_start();
+                        $usuario = new Usuario;
+                        $usuario -> id = $_SESSION['usuario'] -> id;
+                        $usuario -> nickname = $_POST['nickname'];
+                        $usuario -> password = $_POST['password'];
+                        $usuario -> nombres = $_POST['nombres'];
+                        $usuario -> apellidos = $_POST['apellidos'];
+                        $usuario -> email = $_POST['email'];
+                        $usuario -> fechaNacimiento = $_POST['fechaNacimiento'];
+                        $usuario -> descripcion = $_POST['descripcion'];
+                        $usuario -> preguntaSeguridad = $_POST['preguntaSeguridad'];
+                        $usuario -> respuestaSeguridad = $_POST['respuestaSeguridad'];
+                        $usuario -> foto = 'Andle17.png';
+                        $usuario -> pais = $_POST['pais'];
+                        $usuario -> ciudad = $_POST['ciudad'];
+                        $usuario -> estado = true;
+                        self::actualizar($usuario);
+
+                        foreach ($_POST['nombreConocimiento'] as $id => $nombre) {
+                            $conocimiento = new Conocimiento();
+                            $conocimiento -> id = $id;
+                            $conocimiento -> nombre = $nombre;
+                            $conocimiento -> gradoAcademico = $_POST['gradoConocimiento'][$id];
+                            $conocimiento -> lugarEstudio = $_POST['lugarEstudio'][$id];
+                            $conocimiento -> anio = $_POST['anioConocimiento'][$id];
+                            $conocimiento -> pais = $_POST['paisConocimiento'][$id];
+                            $conocimiento::actualizar($conocimiento);
+                        }
+
+                        foreach ($_POST['nombreExp'] as $id => $nombre) {
+                            $experiencia = new ExperienciaLaboral();
+                            $experiencia -> id = $id;
+                            $experiencia -> nombre = $nombre;
+                            $experiencia -> lugar = $_POST['lugarExp'][$id];
+                            $experiencia -> fechaInicio = $_POST['fechaInicioExp'][$id];
+                            $experiencia -> fechaFin = $_POST['fechaFinExp'][$id];
+                            $experiencia -> pais = $_POST['paisExp'][$id];
+                            $experiencia::actualizar($experiencia);
+                        }
+
+                        $_SESSION['usuario'] = self::buscar($usuario -> id);
+                        echo 1;
                         break;
 
                     default:

@@ -28,7 +28,7 @@
 
         public static function listar ($usuario) {
             $lista = [];
-            $query = 'SELECT * FROM conocimiento WHERE usuario_id = ?';
+            $query = 'SELECT * FROM conocimiento WHERE usuario_id = ? ORDER BY id';
             $resultSet = Conexion ::conectarBD() -> prepare($query);
             $resultSet -> bindParam(1,$usuario);
             $resultSet -> execute();
@@ -51,15 +51,15 @@
             $preparedStament -> execute();
         }
 
-        public function actualizar (Conocimiento $conocimiento) {
+        public static function actualizar (Conocimiento $conocimiento) {
             $query = 'UPDATE conocimiento SET nombre = ?, grado_academico = ?, lugar_estudio = ?, anio = ?, pais_id =? WHERE id = ?';
             $preparedStament = Conexion ::conectarBD() -> prepare($query);
             $preparedStament -> bindParam(1, $conocimiento -> nombre);
             $preparedStament -> bindParam(2, $conocimiento -> gradoAcademico);
             $preparedStament -> bindParam(3, $conocimiento -> lugarEstudio);
             $preparedStament -> bindParam(4, $conocimiento -> anio);
-            $preparedStament -> bindParam(5, $conocimiento -> pais -> id);
-            $preparedStament -> bindParam(6, $this -> id);
+            $preparedStament -> bindParam(5, $conocimiento -> pais);
+            $preparedStament -> bindParam(6, $conocimiento -> id);
             $preparedStament -> execute();
         }
 
