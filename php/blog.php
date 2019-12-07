@@ -10,6 +10,8 @@
         public $titulo;
         public $contenido;
         public $fechaCreacion;
+        public $numeroSeguidores;
+        public $numeroComentarios;
 
         private function mapear ($resulset) {
             $blog = new Blog();
@@ -18,6 +20,8 @@
             $blog -> titulo = $resulset -> titulo;
             $blog -> contenido = $resulset -> contenido;
             $blog -> fechaCreacion = $resulset -> fecha_creacion;
+            $blog -> numeroSeguidores = $resulset -> numero_seguidores;
+            $blog -> numeroComentarios = $resulset -> numero_comentarios;
 
             return $blog;
         }

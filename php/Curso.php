@@ -84,6 +84,19 @@
             return $lista;
         }
 
+        public static function listarCursosUsuario($usuario) {
+            $lista = [];
+            $query = 'SELECT * FROM curso WHERE usuario_id = ?';
+            $resultSet = Conexion ::conectarBD() -> prepare($query);
+            $resultSet -> bindParam(1, $usuario);
+            $resultSet -> execute();
+            while ($curso = $resultSet -> fetchObject()) {
+                $curso = self :: mapear($curso);
+                array_push($lista, $curso);
+            }
+            return $lista;
+        }
+
         public static function listarPopulares($cantidad) {
             $lista = [];
             $query = 'SELECT * FROM curso ORDER BY valoracion DESC LIMIT ?';

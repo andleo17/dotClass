@@ -1,3 +1,6 @@
+<?php
+    require_once 'php/blog.php';
+?>
 <div class="container my-4">
     <div class="row">
         <div class="col">                        
@@ -9,21 +12,20 @@
         </div>     
     </div>
     
-    <div class="row mb-2">        
+    <div class="row mb-2">
+        <?php foreach (Blog::listar() as $blog) { ?>
         <div class="col-md-6">
             <div class="card flex-md-row mb-4 box-shadow h-md-250">
                 <div class="card-body d-flex flex-column align-items-start">
-                    <strong class="d-inline-block mb-2 text-primary">Nuevo</strong>
-                    <h3 class="mb-0">
-                        <a class="text-dark" href="#">Creando Oportunidades</a>
-                    </h3>
-                    <div class="mb-1 text-muted">Nov 12</div>
-                    <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
+                    <strong class="d-inline-block mb-2 text-danger">Nuevo</strong>
+                    <h3 class="mb-0"><a class="text-dark" href="#"><?= $blog -> titulo ?></a></h3>
+                    <div class="mb-1 text-muted"><?= $blog -> fechaCreacion ?></div>
+                    <p class="card-text mb-auto"><?= substr($blog -> contenido, 0, 90) . '...' ?></p>
                     <div class="blog_foot">
                         <i class="fas fa-heart"></i>
-                        <label class="likes">609</label>
+                        <label class="likes"><?= $blog -> numeroSeguidores ?></label>
                         <i class="fas fa-comment-alt"></i>
-                        <label class="comments">120</label>
+                        <label class="comments"><?= $blog -> numeroComentarios ?></label>
                         <span>COMPARTIR</span>
                     </div>
                     <a href="#">Continue reading</a>
@@ -31,6 +33,8 @@
                 <img class="card-img-right flex-auto d-none d-md-block" data-src="holder.js/200x250?theme=thumb" alt="Thumbnail [200x250]" style="width: 200px; height: 250px;" src="https://josefacchin.com/wp-content/uploads/2017/08/como-crear-un-canal-de-youtube.png" data-holder-rendered="true">
             </div>
         </div>
+        <?php } ?>                       
+        
         <div class="col-md-6">
             <div class="card flex-md-row mb-4 box-shadow h-md-250">
                 <div class="card-body d-flex flex-column align-items-start">

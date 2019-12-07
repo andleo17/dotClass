@@ -16,6 +16,7 @@
                 <div class="card-head">
                     <img src="<?= SERVER_URL ?>uploads/logos/<?= $curso -> logo ?>" alt="logo">
                     <h1 class="ml-3"><?= $curso -> titulo ?></h1>
+                    <div class="d-flex flex-column">
                     <?php if (isset($_SESSION['usuario'])) { ?>
                         <div class="bar">
                             <div class="bar-progress"></div>
@@ -23,6 +24,8 @@
                             <span>75%</span>
                         </div>
                     <?php } ?>
+                        <button type="button" class="btn btn-success"> + Seguir</button>
+                    </div>
                 </div>
                 <div class="card-body">
                     <p><?= $curso -> descripcion ?></p>

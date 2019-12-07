@@ -98,7 +98,8 @@ CREATE TABLE blog
     contenido               TEXT            NOT NULL,
     fecha_creacion          TIMESTAMP       NOT NULL DEFAULT CURRENT_TIMESTAMP,
     numero_seguidores       INT             NOT NULL DEFAULT 0,
-    numero_comentarios      INT             NOT NULL DEFAULT 0
+    numero_comentarios      INT             NOT NULL DEFAULT 0,
+    logo                    VARCHAR(100)    NOT NULL
 );
 
 CREATE TABLE bonificacion
@@ -191,9 +192,11 @@ CREATE TABLE actividad_curso
 
 CREATE TABLE actividad_examen
 (
-    usuario_id  INT NOT NULL REFERENCES usuario,
-    pregunta_id INT NOT NULL REFERENCES pregunta,
-    nota        INT NOT NULL
+    usuario_id      INT         NOT NULL REFERENCES usuario,
+    alternativa_id  INT         NOT NULL REFERENCES alternativa,
+    numero_intento  INT         NOT NULL DEFAULT 1,
+    correcta        BOOLEAN     NULL,
+    CONSTRAINT pk_actividad_examen PRIMARY KEY(usuario_id,alternativa_id,numero_intento)
 );
 
 CREATE TABLE prerrequisito
@@ -329,8 +332,7 @@ VALUES (DEFAULT, 1, 1, 'Es un framework', FALSE),
        (DEFAULT, 4, 4, 'No lo sé', FALSE);
 
 INSERT INTO blog
-	VALUES (1, 2, 'Se temía que Google y Apple se comieran a la banca pero de momento solo se están apoyando en ella', 'Llevamos muchos años oyendo hablar de que tanto Apple como Google quieren convertirse en bancos. Tienen cientos de millones de clientes que interactuan diariamente y forma muy frecuente con ellos con los productos y experiencias que ofrecen. Si a esto le sumamos que son empresas que tienen mucho dinero en caja, la conclusión parecía obvia. Sin embargo, y de momento, ninguna de ambas compañías se ha convertido en banco. De hecho, para algunos productos financieros que sí ofrecen lo que han hecho es apoyarse en alguno ya existente. ¿Por qué?', current_date,2,5),
-	VALUES (2, 2, 'Se temía que Google y Apple se comieran a la banca pero de momento solo se están apoyando en ella', 'Llevamos muchos años oyendo hablar de que tanto Apple como Google quieren convertirse en bancos. Tienen cientos de millones de clientes que interactuan diariamente y forma muy frecuente con ellos con los productos y experiencias que ofrecen. Si a esto le sumamos que son empresas que tienen mucho dinero en caja, la conclusión parecía obvia. Sin embargo, y de momento, ninguna de ambas compañías se ha convertido en banco. De hecho, para algunos productos financieros que sí ofrecen lo que han hecho es apoyarse en alguno ya existente. ¿Por qué?', current_date,3,4);
+	VALUES (1, 2, 'Se temía que Google y Apple se comieran a la banca pero de momento solo se están apoyando en ella', 'Llevamos muchos años oyendo hablar de que tanto Apple como Google quieren convertirse en bancos. Tienen cientos de millones de clientes que interactuan diariamente y forma muy frecuente con ellos con los productos y experiencias que ofrecen. Si a esto le sumamos que son empresas que tienen mucho dinero en caja, la conclusión parecía obvia. Sin embargo, y de momento, ninguna de ambas compañías se ha convertido en banco. De hecho, para algunos productos financieros que sí ofrecen lo que han hecho es apoyarse en alguno ya existente. ¿Por qué?', current_date,2,5);
 
 
  CREATE OR REPLACE FUNCTION fn_porcentajeCurso_Usuario(id_curso integer, id_usuario integer) RETURNS NUMERIC AS
@@ -391,7 +393,11 @@ BEGIN
     WHERE seguimiento.curso_id = _id_curso;
 
     UPDATE curso SET numero_subscriptores = _cant WHERE id = _id_curso;
-    RETURN new;
+    IF tg_op = 'INSERT' THEN
+        RETURN new;
+    ELSE
+        RETURN old;
+    END IF;
 END;
 $$ LANGUAGE 'plpgsql';
 
@@ -417,3 +423,5 @@ CREATE TRIGGER tg_actualizarNumeroComentarios AFTER INSERT
 EXECUTE PROCEDURE fn_tg_actualizarNumeroComentarios();
 
 COMMIT;
+
+
