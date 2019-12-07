@@ -40,23 +40,25 @@
 
         public function registrar () {
             $query = 'INSERT INTO experiencia_laboral VALUES(DEFAULT,?,?,?,?,?,?)';
+            $fechaFin = $this -> fechaFin == '' ? null : $this -> fechaFin;
             $preparedStament = Conexion ::conectarBD() -> prepare($query);
             $preparedStament -> bindParam(1, $this -> nombre);
             $preparedStament -> bindParam(2, $this -> lugar);
             $preparedStament -> bindParam(3, $this -> fechaInicio);
-            $preparedStament -> bindParam(4, $this -> fechaFin);
+            $preparedStament -> bindParam(4, $fechaFin);
             $preparedStament -> bindParam(5, $this -> pais);
-            $preparedStament -> bindParam(6, $this -> usuario -> id);
+            $preparedStament -> bindParam(6, $this -> usuario);
             $preparedStament -> execute();
         }
 
         public static function actualizar (ExperienciaLaboral $experienciaLaboral) {
             $query = 'UPDATE experiencia_laboral SET nombre = ?, lugar = ?, fecha_inicio = ?, fecha_fin = ?, pais_id =? WHERE id = ?';
             $preparedStament = Conexion ::conectarBD() -> prepare($query);
+            $fechaFin = $experienciaLaboral -> fechaFin == '' ? null : $experienciaLaboral -> fechaFin;
             $preparedStament -> bindParam(1, $experienciaLaboral -> nombre);
             $preparedStament -> bindParam(2, $experienciaLaboral -> lugar);
             $preparedStament -> bindParam(3, $experienciaLaboral -> fechaInicio);
-            $preparedStament -> bindParam(4, $experienciaLaboral -> fechaFin);
+            $preparedStament -> bindParam(4, $fechaFin);
             $preparedStament -> bindParam(5, $experienciaLaboral -> pais);
             $preparedStament -> bindParam(6, $experienciaLaboral -> id);
             $preparedStament -> execute();

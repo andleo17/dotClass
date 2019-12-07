@@ -132,7 +132,15 @@
             $preparedStament -> execute();
         }
 
-        public static function actualizar (Usuario $usuario) {
+        public function actualizar (Usuario $usuario) {
+            if (basename($usuario -> foto['name']) != '') {
+                $url_foto = basename($usuario -> foto['name']);
+                move_uploaded_file($usuario -> foto['tmp_name'], "../uploads/perfiles/$url_foto");
+                $usuario -> foto = $url_foto;
+            } else {
+                $usuario -> foto = $this -> foto;
+            }
+
             $query = 'UPDATE usuario SET nickname =?,password = ?,nombres = ?, apellidos = ?, email = ?, fecha_nacimiento = ?, descripcion =?, pregunta_seguridad = ?, respuesta_seguridad = ?, foto = ?, pais_id = ?, ciudad_id = ?, estado = ? WHERE id = ?';
             $preparedStament = Conexion ::conectarBD() -> prepare($query);
             $preparedStament -> bindParam(1, $usuario -> nickname);
@@ -211,6 +219,32 @@
                                 $usuario -> pais = $_POST['pais'];
                                 $usuario -> ciudad = $_POST['ciudad'];
                                 $usuario -> registrar();
+                                $usuario = self::buscar(null, $usuario -> nickname);
+
+                                foreach ($_POST['nombreConocimiento'] as $id => $nombre) {
+                                    $conocimiento = new Conocimiento();
+                                    $conocimiento -> id = $id;
+                                    $conocimiento -> nombre = $nombre;
+                                    $conocimiento -> gradoAcademico = $_POST['gradoConocimiento'][$id];
+                                    $conocimiento -> lugarEstudio = $_POST['lugarEstudio'][$id];
+                                    $conocimiento -> anio = $_POST['anioConocimiento'][$id];
+                                    $conocimiento -> pais = $_POST['paisConocimiento'][$id];
+                                    $conocimiento -> usuario = $usuario -> id;
+                                    $conocimiento -> registrar();
+                                }
+
+                                foreach ($_POST['nombreExp'] as $id => $nombre) {
+                                    $experiencia = new ExperienciaLaboral();
+                                    $experiencia -> id = $id;
+                                    $experiencia -> nombre = $nombre;
+                                    $experiencia -> lugar = $_POST['lugarExp'][$id];
+                                    $experiencia -> fechaInicio = $_POST['fechaInicioExp'][$id];
+                                    $experiencia -> fechaFin = $_POST['fechaFinExp'][$id];
+                                    $experiencia -> pais = $_POST['paisExp'][$id];
+                                    $experiencia -> usuario = $usuario -> id;
+                                    $experiencia -> registrar();
+                                }
+
                                 echo 1;
                             } catch (PDOException $exception) {
                                 echo 'Algo sucedió mal';
@@ -242,11 +276,11 @@
                         $usuario -> descripcion = $_POST['descripcion'];
                         $usuario -> preguntaSeguridad = $_POST['preguntaSeguridad'];
                         $usuario -> respuestaSeguridad = $_POST['respuestaSeguridad'];
-                        $usuario -> foto = 'Andle17.png';
+                        $usuario -> foto = $_FILES['foto'];
                         $usuario -> pais = $_POST['pais'];
                         $usuario -> ciudad = $_POST['ciudad'];
                         $usuario -> estado = true;
-                        self::actualizar($usuario);
+                        $_SESSION['usuario'] -> actualizar($usuario);
 
                         foreach ($_POST['nombreConocimiento'] as $id => $nombre) {
                             $conocimiento = new Conocimiento();
@@ -256,7 +290,12 @@
                             $conocimiento -> lugarEstudio = $_POST['lugarEstudio'][$id];
                             $conocimiento -> anio = $_POST['anioConocimiento'][$id];
                             $conocimiento -> pais = $_POST['paisConocimiento'][$id];
-                            $conocimiento::actualizar($conocimiento);
+                            if ($id >= 0) {
+                                $conocimiento ::actualizar($conocimiento);
+                            } else {
+                                $conocimiento -> usuario = $_SESSION['usuario'] -> id;
+                                $conocimiento -> registrar();
+                            }
                         }
 
                         foreach ($_POST['nombreExp'] as $id => $nombre) {
@@ -267,10 +306,15 @@
                             $experiencia -> fechaInicio = $_POST['fechaInicioExp'][$id];
                             $experiencia -> fechaFin = $_POST['fechaFinExp'][$id];
                             $experiencia -> pais = $_POST['paisExp'][$id];
-                            $experiencia::actualizar($experiencia);
+                            if ($id >= 0) {
+                                $experiencia ::actualizar($experiencia);
+                            } else {
+                                $experiencia -> usuario = $_SESSION['usuario'] -> id;
+                                $experiencia -> registrar();
+                            }
                         }
 
-                        $_SESSION['usuario'] = self::buscar($usuario -> id);
+                        $_SESSION['usuario'] = self ::buscar($usuario -> id);
                         echo 1;
                         break;
 
