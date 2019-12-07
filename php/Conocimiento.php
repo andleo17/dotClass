@@ -46,7 +46,7 @@
             $preparedStament -> bindParam(2, $this -> gradoAcademico);
             $preparedStament -> bindParam(3, $this -> lugarEstudio);
             $preparedStament -> bindParam(4, $this -> anio);
-            $preparedStament -> bindParam(5, $this -> pais -> id);
+            $preparedStament -> bindParam(5, $this -> pais);
             $preparedStament -> bindParam(6, $this -> usuario);
             $preparedStament -> execute();
         }

@@ -13,7 +13,8 @@
                     <div class="col d-flex align-items-center justify-content-center">
                         <div class="form-group mt-3">
                             <label class="position-relative" for="btnSubirFoto">
-                                <img class="rounded-circle"
+                                <img id="imagen-usuario"
+                                     class="rounded-circle"
                                      src="<?= SERVER_URL . "uploads/perfiles/{$usuario -> foto}" ?>"
                                      alt="">
                                 <span id="editar-hover">
@@ -107,7 +108,7 @@
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane fade show active" id="trayectoria">
-                                <div class="form-row my-4">
+                                <div id="conocimientos" class="form-row my-4">
                                     <div class="col-12">
                                         <h2 class="text-center">Trayectoria académica</h2>
                                     </div>
@@ -167,7 +168,7 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="experiencia">
-                                <div class="form-row my-4">
+                                <div id="experiencias" class="form-row my-4">
                                     <div class="col-12">
                                         <h2 class="text-center">Experiencia laboral</h2>
                                     </div>
@@ -255,6 +256,138 @@
     }
 </script>
 <script>
-    let numeroConocimiento = document.getElementByClassname('AddConocimiento').length;
-    
+    let btnAgregarConocimientos = document.getElementById('agregar-trayectoria');
+    let btnAgregarExperiencias = document.getElementById('agregar-experiencia');
+    let i = -1;
+    let j = -1;
+    btnAgregarConocimientos.onclick = e => {
+        let $conocimientos = document.getElementById('conocimientos');
+        let $div = document.createElement('div');
+        $div.classList.add('col-12', 'my-2');
+        $div.innerHTML = `
+            <div class="card p-4">
+                <div class="form-group">
+                    <label for="txtNombreConocimiento[${i}]">Nombre</label>
+                    <input class="form-control" type="text"
+                           id="txtNombreConocimiento[${i}]"
+                           name="nombreConocimiento[${i}]"
+                           value="">
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-6">
+                        <label for="txtLugarEstudio[${i}]">Lugar
+                            de estudio</label>
+                        <input class="form-control" type="text"
+                               id="txtLugarEstudio[${i}]"
+                               name="lugarEstudio[${i}]"
+                               value="">
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="cboPaisConocimiento[${i}]">Pais</label>
+                        <select class="form-control"
+                                id="cboPaisConocimiento[${i}]"
+                                name="paisConocimiento[${i}]">
+                            <?php foreach ($paises as $pais) { ?>
+                                <option value="<?= $pais -> id ?>"><?= $pais -> nombre ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-6">
+                        <label for="txtGradoConocimiento[${i}]">Grado
+                            de conocimiento</label>
+                        <input class="form-control" type="text"
+                               id="txtGradoConocimiento[${i}]"
+                               name="gradoConocimiento[${i}]"
+                               value="">
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="txtAnioConocimiento[${i}]">Año</label>
+                        <input class="form-control" type="number"
+                               id="txtAnioConocimiento[${i}]"
+                               name="anioConocimiento[${i}]"
+                               value="">
+                    </div>
+                </div>
+            </div>
+        `;
+        $conocimientos.append($div);
+        i--;
+    };
+
+    btnAgregarExperiencias.onclick = e => {
+        let $experiencias = document.getElementById('experiencias');
+        let $div = document.createElement('div');
+        $div.classList.add('col-12', 'my-2');
+        $div.innerHTML = `
+            <div class="card p-4">
+                <div class="form-group">
+                    <label for="txtNombreExp[${j}]">Nombre</label>
+                    <input class="form-control" type="text"
+                           id="txtNombreExp[${j}]"
+                           name="nombreExp[${j}]"
+                           value="">
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-6">
+                        <label for="txtLugarExp[${j}]">Lugar</label>
+                        <input class="form-control" type="text"
+                               id="txtLugarExp[${j}]"
+                               name="lugarExp[${j}]"
+                               value="">
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="cboPaisExp[${j}]">Pais</label>
+                        <select class="form-control"
+                                id="cboPaisExp[${j}]"
+                                name="paisExp[${j}]">
+                            <?php foreach ($paises as $pais) { ?>
+                                <option value="<?= $pais -> id ?>"><?= $pais -> nombre ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-6">
+                        <label for="txtFechaInicioExp[${j}]">Fecha
+                            inicio</label>
+                        <input class="form-control" type="date"
+                               id="txtFechaInicioExp[${j}]"
+                               name="fechaInicioExp[${j}]"
+                               value="">
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="txtFechaFinExp[${j}]">Fecha
+                            fin</label>
+                        <input class="form-control" type="date"
+                               id="txtFechaFinExp[${j}]"
+                               name="fechaFinExp[${j}]"
+                               value="">
+                    </div>
+                </div>
+            </div>
+            `;
+        $experiencias.append($div);
+        j--;
+    }
+</script>
+<script>
+    function readFile(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = e => {
+                let $imagenUsuario = document.getElementById('imagen-usuario');
+                $imagenUsuario.src = e.target.result;
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    var fileUpload = document.getElementById('btnSubirFoto');
+    fileUpload.onchange = e => {
+        readFile(e.target);
+    }
 </script>
