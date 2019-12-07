@@ -373,6 +373,16 @@ pre {
 	opacity: 0;
 }
 
+.blog_item_date {
+	position: absolute;
+	bottom: -20px;
+	left: 15px;
+	color: #fff;
+	background-color: #ff7e5f;
+	padding: 8px 15px;
+	border-radius: 5px;
+}
+
 @keyframes pop-in {
 	0% {
 		opacity: 0;

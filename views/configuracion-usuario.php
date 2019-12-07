@@ -112,7 +112,7 @@
                                         <h2 class="text-center">Trayectoria académica</h2>
                                     </div>
                                     <?php foreach (Conocimiento ::listar($usuario -> id) as $conocimiento) { ?>
-                                        <div class="col-12 my-2">
+                                        <div class="col-12 my-2 AddConocimiento" >
                                             <div class="card p-4">
                                                 <div class="form-group">
                                                     <label for="txtNombreConocimiento[<?= $conocimiento -> id ?>]">Nombre</label>
@@ -163,10 +163,7 @@
                                     <?php } ?>
                                 </div>
                                 <div class="col-12 p-0 my-4">
-                                    <button id="agregar-trayectoria" class="agregar-config" type="button">Agregar
-                                        trayectoria
-                                        académica
-                                    </button>
+                                    <button id="agregar-trayectoria" class="agregar-config" type="button">Agregar</button>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="experiencia">
@@ -256,4 +253,8 @@
             }
         }))
     }
+</script>
+<script>
+    let numeroConocimiento = document.getElementByClassname('AddConocimiento').length;
+    
 </script>

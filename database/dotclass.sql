@@ -92,11 +92,13 @@ CREATE TABLE experiencia_laboral
 
 CREATE TABLE blog
 (
-    id             SERIAL PRIMARY KEY,
-    usuario_id     INT          NOT NULL REFERENCES usuario,
-    titulo         VARCHAR(150) NOT NULL,
-    contenido      TEXT         NOT NULL,
-    fecha_creacion TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP
+    id                      SERIAL          PRIMARY KEY,
+    usuario_id              INT             NOT NULL REFERENCES usuario,
+    titulo                  VARCHAR(150)    NOT NULL,
+    contenido               TEXT            NOT NULL,
+    fecha_creacion          TIMESTAMP       NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    numero_seguidores       INT             NOT NULL DEFAULT 0,
+    numero_comentarios      INT             NOT NULL DEFAULT 0
 );
 
 CREATE TABLE bonificacion
@@ -325,6 +327,11 @@ VALUES (DEFAULT, 1, 1, 'Es un framework', FALSE),
        (DEFAULT, 4, 2, 'Sí, a partir de Java 12 se implementó la sintaxis "dinámica"', TRUE),
        (DEFAULT, 4, 3, 'No, Java no es Javascript', FALSE),
        (DEFAULT, 4, 4, 'No lo sé', FALSE);
+
+INSERT INTO blog
+	VALUES (1, 2, 'Se temía que Google y Apple se comieran a la banca pero de momento solo se están apoyando en ella', 'Llevamos muchos años oyendo hablar de que tanto Apple como Google quieren convertirse en bancos. Tienen cientos de millones de clientes que interactuan diariamente y forma muy frecuente con ellos con los productos y experiencias que ofrecen. Si a esto le sumamos que son empresas que tienen mucho dinero en caja, la conclusión parecía obvia. Sin embargo, y de momento, ninguna de ambas compañías se ha convertido en banco. De hecho, para algunos productos financieros que sí ofrecen lo que han hecho es apoyarse en alguno ya existente. ¿Por qué?', current_date,2,5),
+	VALUES (2, 2, 'Se temía que Google y Apple se comieran a la banca pero de momento solo se están apoyando en ella', 'Llevamos muchos años oyendo hablar de que tanto Apple como Google quieren convertirse en bancos. Tienen cientos de millones de clientes que interactuan diariamente y forma muy frecuente con ellos con los productos y experiencias que ofrecen. Si a esto le sumamos que son empresas que tienen mucho dinero en caja, la conclusión parecía obvia. Sin embargo, y de momento, ninguna de ambas compañías se ha convertido en banco. De hecho, para algunos productos financieros que sí ofrecen lo que han hecho es apoyarse en alguno ya existente. ¿Por qué?', current_date,3,4);
+
 
  CREATE OR REPLACE FUNCTION fn_porcentajeCurso_Usuario(id_curso integer, id_usuario integer) RETURNS NUMERIC AS
  $$
