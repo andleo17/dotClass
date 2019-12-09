@@ -7,7 +7,7 @@ class Conexion {
         $servidor = "localhost";
         $basedatos = "dotclass";
         $usuario = "postgres";
-        $clave 	 = "12345";
+        $clave 	 = "123456789";
         $puerto = "5432";
         $cadena = "$driver:host=$servidor;port=$puerto;dbname=$basedatos;";
         $cnx = new PDO($cadena,$usuario,$clave);

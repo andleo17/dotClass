@@ -378,7 +378,7 @@ pre {
 	bottom: -20px;
 	left: 15px;
 	color: #fff;
-	background-color: #ff7e5f;
+	background-color: #000000 !important;
 	padding: 8px 15px;
 	border-radius: 5px;
 }
