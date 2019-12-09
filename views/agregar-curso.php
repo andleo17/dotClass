@@ -70,7 +70,7 @@
                                         <input class="form-control" type="text" name="nombreSeccion" id="nombreSeccion" placeholder="Introduce un título para la sección" required>
                                     </div>
                                     
-                                    <div class="col-3 m-3">
+                                    <div class="col-3 my-3">
                                         <div class="card border border-secondary rounded-top">
                                             <div class="card-header bg-success"></div>
                                             <div class ="p-4">
@@ -79,11 +79,11 @@
                                         </div>                         
                                     </div>
                                     <div class="col-3 p-0 m-3">
-                                        <button id="agregar-requisito" class="agregar-config" type="button">Agregar</button>
+                                        <button id="agregar-clase" class="agregar-config" type="button">Agregar</button>
                                     </div>
                                 </div>
                                 <div class="col-12 m-3">
-                                    <button id="agregar-requisito" class="agregar-config" type="button">Agregar</button>
+                                    <button id="agregar-seccion" class="agregar-config" type="button">Agregar</button>
                                 </div>
                             </div>
                             <div id="preguntas" class="tab-pane fade"></div>

@@ -1,10 +1,11 @@
 <?php
+    $cursoP = Curso :: listarPrerequisitos($cursos -> id); 
     $cursos = Curso ::listar();
 ?>
 <div class="container my-5">
     <div class="row">
         <div class="col-12">
-            <h1><?= $curso -> titulo ?></h1>
+            <h1>Título</h1>
         </div>
         <div class="col mt-5">
             <form id="formulario" enctype="multipart/form-data">
@@ -15,9 +16,10 @@
                         <input type="file" name="cargar-foto" id="cargar-foto"></input>
                     </div>
                     <div class="curso-titulo">
-                        <input type="text" name="txtTituloCurso" id="txtTituloCurso" placeholder="Título del curso">
-                        <textarea name="txtDescripcionCurso" id="txtDescripcionCurso"
-                            placeholder="Descripción del curso"></textarea>
+                        <input type="text" name="TituloCurso" id="txtTituloCurso" 
+                            value="<?= $curso -> titulo ?>" placeholder="Título del curso" >
+                        <textarea name="DescripcionCurso" id="txtDescripcionCurso"
+                            value="<?= $curso -> descripcion ?>"placeholder="Descripción del curso"></textarea>
                     </div>
                 </div>                
                 <div class="form-row mt-5">
@@ -37,30 +39,7 @@
                             </select>
                         </div>                         
                     </div>
-                    <div class="col-3 p-0 m-3">
-                        <div class="card p-4">
-                            <label for="cboPreRequisito[<?= $cursos -> id ?>]">Curso Pre-Requisito: </label>
-                            <select class="form-control"
-                                    id="cboPreRequisito[<?= $cursos -> id ?>]"
-                                    name="PreRequisitoCurso[<?= $cursos -> id ?>]">
-                                <?php foreach ($cursos as $cur) { ?>
-                                    <option value="<?= $cur -> id ?>" > <?= $cur -> titulo ?> </option>                                                            
-                                 <?php } ?>
-                            </select>
-                        </div>                         
-                    </div>
-                    <div class="col-3 p-0 m-3">
-                        <div class="card p-4">
-                            <label for="cboPreRequisito[<?= $cursos -> id ?>]">Curso Pre-Requisito: </label>
-                            <select class="form-control"
-                                    id="cboPreRequisito[<?= $cursos -> id ?>]"
-                                    name="PreRequisitoCurso[<?= $cursos -> id ?>]">
-                                <?php foreach ($cursos as $cur) { ?>
-                                    <option value="<?= $cur -> id ?>" > <?= $cur -> titulo ?> </option>                                                            
-                                 <?php } ?>
-                            </select>
-                        </div>                         
-                    </div>
+                    
                 </div>
                 <div class="form-row mt-5">
                     <div class="col-12 ">

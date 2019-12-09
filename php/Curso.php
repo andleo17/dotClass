@@ -174,6 +174,49 @@
                     case 'crear':
                         echo '';
                         break;
+                    case 'editar':
+                        session_start();
+                        $curso = new Curso();
+                        $curso -> id = $_POST['idCurso'];
+                        $curso -> categoria = $_POST[''];
+                        $curso -> titulo = $_POST[''];
+                        $curso -> descripcion = $_POST[''];
+                        $curso -> logo = $_POST[''];
+                        $curso -> duracion = $_POST[''];
+                        $curso -> numeroSubscriptores = $_POST[''];
+                        $curso -> valoracion = $_POST[''];
+                        $curso -> fechaCreacion = $_POST[''];
+                        $curso -> fechaUltimaActualizacion = $_POST[''];
+                        $curso -> usuario = $_SESSION['usuario'] -> id;
+                        $curso ::actualizar($curso);
+
+                        foreach ($_POST['nombreSeccion'] as $id => $nombre) {
+                            $seccion = new Seccion();
+                            $seccion -> id = $id;
+                            $seccion -> nombre = $nombre;                            
+                            if ($id >= 0) {
+                                $seccion ::actualizar($seccion);
+                            } else {
+                                $seccion -> curso = $_POST['cursoSeccion']-> id;
+                                $seccion -> registrar();
+                            }
+                        }
+
+                        foreach ($_POST['nombreSeccion'] as $id => $nombre) {
+                            $clase = new Clase();
+                            $clase -> id = $id;
+                            $clase -> nombre = $nombre;                            
+                            if ($id >= 0) {
+                                $clase ::actualizar($clase);
+                            } else {
+                                $clase -> curso = $_POST['cursoSeccion']-> id;
+                                $clase -> registrar();
+                            }
+                        }
+
+                        $_SESSION['usuario'] = self ::buscar($usuario -> id);
+                        echo 1;
+                        break;
                     default:
                         echo json_encode(self :: buscar($peticion));
                         break;

@@ -3,7 +3,7 @@
     require_once 'php/ExperienciaLaboral.php';
     require_once 'php/Conocimiento.php';
     require_once 'php/config.php';
-
+   
     $curso = Curso :: listarCursosUsuario($_SESSION['usuario'] -> id);    
 ?>
 
