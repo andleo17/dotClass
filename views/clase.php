@@ -42,7 +42,7 @@
                     <span class="ml-3"><?= $curso -> usuario -> nickname ?></span>
                 </a>
                 <h1><?= $clase -> titulo ?></h1>
-                <iframe class="video" id="vid" src="https://www.youtube.com/embed/cR7erYmO0m8"
+                <iframe class="video" id="vid" src="https://www.youtube.com/embed/<?= $clase -> video ?>/"
                         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen></iframe>
                 <h2>Descripción</h2>

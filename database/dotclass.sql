@@ -264,10 +264,10 @@ VALUES (DEFAULT, 1, 'Introducción al curso'),
        (DEFAULT, 1, 'Lambdas');
 
 INSERT INTO clase
-VALUES (DEFAULT, 1, 'Bienvenida al curso', '00:11:57', NULL, NULL, '2019-11-19 11:11:30', NULL),
-       (DEFAULT, 1, 'Primeros pasos', '00:11:21', NULL, NULL, '2019-11-19 11:11:30', NULL),
-       (DEFAULT, 2, 'Clases abstractas', '00:25:23', NULL, NULL, '2019-11-19 11:16:28', NULL),
-       (DEFAULT, 2, 'Implementando clases abstractas al proyecto', '00:00:32', NULL, NULL, '2019-11-19 11:16:28', NULL),
+VALUES (DEFAULT, 1, 'Bienvenida al curso', '00:11:57', 'coK4jM5wvko', NULL, '2019-11-19 11:11:30', NULL),
+       (DEFAULT, 1, 'Primeros pasos', '00:11:21', 'F0ILFYl8YgI', NULL, '2019-11-19 11:11:30', NULL),
+       (DEFAULT, 2, 'Clases abstractas', '00:25:23', 'ztpYmmecfQs', NULL, '2019-11-19 11:16:28', NULL),
+       (DEFAULT, 2, 'Implementando clases abstractas al proyecto', '00:00:32', 'LDZUBY0mxv8', NULL, '2019-11-19 11:16:28', NULL),
        (DEFAULT, 2, 'Ejercicio práctico', '00:14:01', NULL, NULL, '2019-11-19 11:16:28', NULL),
        (DEFAULT, 2, 'Implementando métodos abstractos en Java', '00:32:00', NULL, NULL, '2019-11-19 11:16:28', NULL),
        (DEFAULT, 3, 'Qué es JavaDocs', '00:04:54', NULL, NULL, '2019-11-19 11:30:17', NULL),
