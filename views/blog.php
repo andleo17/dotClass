@@ -30,7 +30,7 @@
                         <label class="comments"><?= $blog -> numeroComentarios ?></label>
                         <span>Compartir</span>
                     </div>
-                    <a href="#">Continuar Lectura ...</a>
+                    <a href="<?php echo SERVER_URL ?>/blog_content/">Continuar Lectura ...</a>
                 </div>
                 <img class="card-img-right flex-auto d-none d-lg-block mb-0" style="width: 200px; " src="<?= $blog -> logo ?>" >
             </div>
@@ -46,7 +46,7 @@
             <div class="blog ">
                 <div class="blog_head position-relative">
                     <img class="card-img-top rounded-0 " src="<?= $blog -> logo ?>" alt="">
-                    <a href="#" class="blog_item_date" >
+                    <a href="<?php echo SERVER_URL ?>/blog_content/" class="blog_item_date" >
                         <h3><?= date("d", strtotime($blog -> fechaCreacion)) ?></h3>
                         <p><?= date("M", strtotime($blog -> fechaCreacion)) ?></p>
                     </a>

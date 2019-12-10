@@ -49,7 +49,7 @@
     <?php if (count($curso) == 0) { ?>
         <div style="height: 200px;"> 
             <div class="alert alert-danger" role="alert">
-                <h4 class="alert-heading">Usted no a registrado cursos!!</h4>
+                <h4 class="alert-heading">Usted no tiene cursos registrados!!</h4>
                 <hr>
                 <p class="mb-0"><strong>Recuerde :</strong> El conocimiento es poder, por eso le invitamos a que comparta su conocimiento con las personas</p>
             </div>
