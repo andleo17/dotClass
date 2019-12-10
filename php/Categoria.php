@@ -21,6 +21,30 @@
             return $categoria;
         }
 
+        public function registrar () {
+            $query = 'INSERT INTO categoria VALUES(DEFAULT,?,?,?)';
+            $preparedStament = Conexion ::conectarBD() -> prepare($query);
+            $preparedStament -> bindParam(1, $this -> nombre);
+            $preparedStament -> bindParam(2, $this -> descripcion);
+            $preparedStament -> bindParam(3, $this -> logo);
+            $preparedStament -> execute();
+        }
+
+
+        public static function eliminar ($id) {
+            $query = 'DELETE FROM categoria WHERE id = ?';
+            $cnx = Conexion ::conectarBD();
+            $preparedStatement = $cnx -> prepare($query);
+            $preparedStatement -> bindParam(1, $id);
+            $preparedStatement -> execute();
+            if ($categoria = $preparedStatement -> fetchObject()) {
+                $categoria = self ::mapear($categoria);
+                return $categoria;
+            } else {
+                return null;
+            }
+        }
+
         public static function listar () {
             $lista = [];
             $query = 'SELECT * FROM categoria';
@@ -61,9 +85,25 @@
                         break;
 
                     case 'crear':
-                        echo '';
+                        try {
+                            $categoria = new Categoria;
+                            $categoria -> nombre = $_POST['txtnombre'];
+                            $categoria -> descripcion = $_POST['txtdescripcion'];
+                            $categoria -> logo = $_POST['txtlogo'];
+                            $categoria -> registrar();
+                            echo 1;
+                        } catch (PDOException $exception) {
+                            echo 'Algo sucedió mal';
+                        }                        
                         break;
-
+                    case 'eliminar':
+                        try {
+                            echo json_encode(self :: eliminar($_POST['id']));
+                            echo 1;
+                        } catch (PDOException $exception) {
+                            echo 'Algo sucedió mal';
+                        } 
+                        break;
                     default:
                         echo json_encode(self :: buscar($peticion));
                         break;
