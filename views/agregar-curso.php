@@ -88,12 +88,11 @@
                                         </div>
                                     </div>
                                     <div class="col-3 p-0 m-3">
-                                        <button id="agregar-requisito" class="agregar-config" type="button">Agregar
-                                        </button>
+                                        <button id="agregar-clase" class="agregar-config" type="button">Agregar</button>
                                     </div>
                                 </div>
                                 <div class="col-12 m-3">
-                                    <button id="agregar-requisito" class="agregar-config" type="button">Agregar</button>
+                                    <button id="agregar-seccion" class="agregar-config" type="button">Agregar</button>
                                 </div>
                             </div>
                             <div id="preguntas" class="tab-pane fade"></div>

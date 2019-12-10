@@ -3,7 +3,7 @@
     require_once 'php/ExperienciaLaboral.php';
     require_once 'php/Conocimiento.php';
     require_once 'php/config.php';
-
+   
     $curso = Curso :: listarCursosUsuario($_SESSION['usuario'] -> id);    
 ?>
 
@@ -34,7 +34,7 @@
                 <td class="col-2"><?= "{$cur -> logo}"?></td>
                 <td class="col-1"><?= "{$cur -> usuario -> nickname}" ?></td>
                 <td class="col-2">
-                    <a role="button" class='btn btn-success' href="<?= SERVER_URL ?>administrar-curso/">Ver</a>
+                    <a role="button" class='btn btn-success' href="<?= SERVER_URL . 'administrar-curso/' . $cur -> id ?>">Ver</a>
                     <button class='btn btn-danger' type='button'>X</button>
                 </td>
             </tr>                                  

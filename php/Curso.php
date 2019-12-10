@@ -173,7 +173,7 @@
                         break;
                     case 'crear':
                         echo '';
-                        break;
+                        break;                    
                     default:
                         echo json_encode(self :: buscar($peticion));
                         break;

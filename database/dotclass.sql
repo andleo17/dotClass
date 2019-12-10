@@ -376,6 +376,30 @@ BEGIN
 END;
 $$ LANGUAGE 'plpgsql';
 
+INSERT INTO blog VALUES (1, 1, 3, 'La importancia de la ciberseguridad, también en el hogar', 'Como ya se ha comentado en recientes artículos, las nuevas tecnologías, a parte de hacer más cómoda la vida de muchas personas, también han favorecido la aparición de nuevos riesgos. El caso que nos ocupa es, una vez más, la ciberseguridad. Los riesgos informáticos a los que se ven sometidas las PYMEs aconsejan la contratación de un seguro de ciberseguridad. Pero, ¿qué pasa con la seguridad informática en los hogares? De la misma manera que los ordenadores son vitales para las empresas, hoy en día también lo son para una gran cantidad de familias: pago de facturas, contratación de servicios, compras online, etc. Por ello, con el objetivo de poder estar bien protegidos, hay que conocer a qué amenazas podemos tener que hacer frente. A continuación, se presenta una lista de 7 problemas informáticos cuyo conocimiento puede ayudar a prevenirlos.', current_date, 2, 5,'https://vilmanunez.com/wp-content/uploads/2019/02/editor-de-videos.png');
+INSERT INTO blog VALUES (2, 2, 3,'La importancia de la ciberseguridad, también en el hogar', 'Como ya se ha comentado en recientes artículos, las nuevas tecnologías, a parte de hacer más cómoda la vida de muchas personas, también han favorecido la aparición de nuevos riesgos. El caso que nos ocupa es, una vez más, la ciberseguridad. Los riesgos informáticos a los que se ven sometidas las PYMEs aconsejan la contratación de un seguro de ciberseguridad. Pero, ¿qué pasa con la seguridad informática en los hogares? De la misma manera que los ordenadores son vitales para las empresas, hoy en día también lo son para una gran cantidad de familias: pago de facturas, contratación de servicios, compras online, etc. Por ello, con el objetivo de poder estar bien protegidos, hay que conocer a qué amenazas podemos tener que hacer frente. A continuación, se presenta una lista de 7 problemas informáticos cuyo conocimiento puede ayudar a prevenirlos.', current_date, 2, 5,'https://josefacchin.com/wp-content/uploads/2017/08/como-crear-un-canal-de-youtube.png');
+INSERT INTO blog VALUES (3, 1, 3, 'La importancia de la ciberseguridad, también en el hogar', 'Como ya se ha comentado en recientes artículos, las nuevas tecnologías, a parte de hacer más cómoda la vida de muchas personas, también han favorecido la aparición de nuevos riesgos. El caso que nos ocupa es, una vez más, la ciberseguridad. Los riesgos informáticos a los que se ven sometidas las PYMEs aconsejan la contratación de un seguro de ciberseguridad. Pero, ¿qué pasa con la seguridad informática en los hogares? De la misma manera que los ordenadores son vitales para las empresas, hoy en día también lo son para una gran cantidad de familias: pago de facturas, contratación de servicios, compras online, etc. Por ello, con el objetivo de poder estar bien protegidos, hay que conocer a qué amenazas podemos tener que hacer frente. A continuación, se presenta una lista de 7 problemas informáticos cuyo conocimiento puede ayudar a prevenirlos.', '02-05-2019', 2, 5,'https://vilmanunez.com/wp-content/uploads/2019/02/editor-de-videos.png');
+INSERT INTO blog VALUES (4, 2, 3,'La importancia de la ciberseguridad, también en el hogar', 'Como ya se ha comentado en recientes artículos, las nuevas tecnologías, a parte de hacer más cómoda la vida de muchas personas, también han favorecido la aparición de nuevos riesgos. El caso que nos ocupa es, una vez más, la ciberseguridad. Los riesgos informáticos a los que se ven sometidas las PYMEs aconsejan la contratación de un seguro de ciberseguridad. Pero, ¿qué pasa con la seguridad informática en los hogares? De la misma manera que los ordenadores son vitales para las empresas, hoy en día también lo son para una gran cantidad de familias: pago de facturas, contratación de servicios, compras online, etc. Por ello, con el objetivo de poder estar bien protegidos, hay que conocer a qué amenazas podemos tener que hacer frente. A continuación, se presenta una lista de 7 problemas informáticos cuyo conocimiento puede ayudar a prevenirlos.','02-05-2019', 2, 5,'https://josefacchin.com/wp-content/uploads/2017/08/como-crear-un-canal-de-youtube.png');
+
+ 
+ CREATE OR REPLACE FUNCTION fn_porcentajeCurso_Usuario(id_curso integer, id_usuario integer) RETURNS NUMERIC AS
+ $$
+ DECLARE
+ 	porc numeric;
+ BEGIN
+ 	SELECT	ROUND (((EXTRACT(HOUR FROM SUM(vis.tiempo)) * 3600 + EXTRACT(MINUTE FROM SUM(vis.tiempo)) * 60 + EXTRACT(SECOND FROM SUM(vis.tiempo)))/(EXTRACT(HOUR FROM cur.duracion) * 3600 + EXTRACT(MINUTE FROM cur.duracion) * 60 + EXTRACT(SECOND FROM cur.duracion)))*100)	INTO porc		
+	FROM	usuario usu INNER JOIN seguimiento seg ON usu.id = seg.usuario_id
+			INNER JOIN curso cur ON seg.curso_id = cur.id
+			INNER JOIN seccion sec ON cur.id = sec.curso_id
+			INNER JOIN clase cla ON sec.id = cla.seccion_id
+			INNER JOIN actividad_curso atc on cla.id = atc.clase_id
+			INNER JOIN visita vis ON atc.visita_id = vis.id
+	WHERE	usu.id = id_usuario AND cur.id = id_curso
+	GROUP BY cur.id;
+	RETURN porc;
+ END;
+ $$ LANGUAGE 'plpgsql';
+ 
 CREATE OR REPLACE FUNCTION fn_tg_actualizarDuracion() RETURNS TRIGGER AS
 $$
 DECLARE
