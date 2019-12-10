@@ -4,7 +4,8 @@
     require_once 'php/Conocimiento.php';
     require_once 'php/config.php';
    
-    $curso = Curso :: listarCursosUsuario($_SESSION['usuario'] -> id);    
+    $curso = Curso :: listarCursosUsuario($_SESSION['usuario'] -> id);
+    $cursosUsuario = Usuario ::listarEnseñanza($curso -> usuario -> id);   
 ?>
 
 <div class="container my-4">
@@ -13,6 +14,8 @@
             <a role="button" class="btn btn-success" href="<?= SERVER_URL ?>agregar-curso/">Agregar</a>
         </div>
     </div>
+
+    <?php if (count($cursosUsuario) > 0) { ?>
     <table class="table">
         <thead class="thead-dark">
             <tr class="d-flex">                                                                                                              
@@ -41,6 +44,7 @@
             <?php }
         } ?> 
         </tbody>
-    </table>    
+    </table>
+    <?php } ?>   
 
 </div>
