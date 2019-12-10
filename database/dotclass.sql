@@ -92,15 +92,15 @@ CREATE TABLE experiencia_laboral
 
 CREATE TABLE blog
 (
-    id                      SERIAL          PRIMARY KEY,
-    usuario_id              INT             NOT NULL REFERENCES usuario,
-    categoria_id            INT             NOT NULL REFERENCES categoria,
-    titulo                  VARCHAR(150)    NOT NULL,
-    contenido               TEXT            NOT NULL,
-    fecha_creacion          TIMESTAMP       NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    numero_seguidores       INT             NOT NULL DEFAULT 0,
-    numero_comentarios      INT             NOT NULL DEFAULT 0,
-    logo                    VARCHAR(100)    NOT NULL
+    id                 SERIAL PRIMARY KEY,
+    usuario_id         INT          NOT NULL REFERENCES usuario,
+    categoria_id       INT          NOT NULL REFERENCES categoria,
+    titulo             VARCHAR(150) NOT NULL,
+    contenido          TEXT         NOT NULL,
+    fecha_creacion     TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    numero_seguidores  INT          NOT NULL DEFAULT 0,
+    numero_comentarios INT          NOT NULL DEFAULT 0,
+    logo               VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE bonificacion
@@ -193,11 +193,11 @@ CREATE TABLE actividad_curso
 
 CREATE TABLE actividad_examen
 (
-    usuario_id      INT         NOT NULL REFERENCES usuario,
-    alternativa_id  INT         NOT NULL REFERENCES alternativa,
-    numero_intento  INT         NOT NULL DEFAULT 1,
-    correcta        BOOLEAN     NULL,
-    CONSTRAINT pk_actividad_examen PRIMARY KEY(usuario_id,alternativa_id,numero_intento)
+    usuario_id     INT     NOT NULL REFERENCES usuario,
+    alternativa_id INT     NOT NULL REFERENCES alternativa,
+    numero_intento INT     NOT NULL DEFAULT 1,
+    correcta       BOOLEAN NULL,
+    CONSTRAINT pk_actividad_examen PRIMARY KEY (usuario_id, alternativa_id, numero_intento)
 );
 
 CREATE TABLE prerrequisito
@@ -210,7 +210,7 @@ CREATE TABLE seguimiento
 (
     usuario_id INT NOT NULL REFERENCES usuario,
     curso_id   INT NOT NULL REFERENCES curso,
-    PRIMARY KEY (usuario_id,curso_id )
+    PRIMARY KEY (usuario_id, curso_id)
 );
 
 INSERT INTO pais
@@ -332,36 +332,68 @@ VALUES (DEFAULT, 1, 1, 'Es un framework', FALSE),
        (DEFAULT, 4, 3, 'No, Java no es Javascript', FALSE),
        (DEFAULT, 4, 4, 'No lo sé', FALSE);
 
- CREATE OR REPLACE FUNCTION fn_porcentajeCurso_Usuario(id_curso integer, id_usuario integer) RETURNS NUMERIC AS
- $$
- DECLARE
- 	porc numeric;
- BEGIN
- 	SELECT	ROUND (((EXTRACT(HOUR FROM SUM(vis.tiempo)) * 3600 + EXTRACT(MINUTE FROM SUM(vis.tiempo)) * 60 + EXTRACT(SECOND FROM SUM(vis.tiempo)))/(EXTRACT(HOUR FROM cur.duracion) * 3600 + EXTRACT(MINUTE FROM cur.duracion) * 60 + EXTRACT(SECOND FROM cur.duracion)))*100)	INTO porc		
-	FROM	usuario usu INNER JOIN seguimiento seg ON usu.id = seg.usuario_id
-			INNER JOIN curso cur ON seg.curso_id = cur.id
-			INNER JOIN seccion sec ON cur.id = sec.curso_id
-			INNER JOIN clase cla ON sec.id = cla.seccion_id
-			INNER JOIN actividad_curso atc on cla.id = atc.clase_id
-			INNER JOIN visita vis ON atc.visita_id = vis.id
-	WHERE	usu.id = id_usuario AND cur.id = id_curso
-	GROUP BY cur.id;
-	RETURN porc;
- END;
- $$ LANGUAGE 'plpgsql';
- 
+INSERT INTO blog
+VALUES (DEFAULT, 1, 3,
+        'La importancia de la ciberseguridad, también en el hogar',
+        'Como ya se ha comentado en recientes artículos, las nuevas tecnologías, a parte de hacer más cómoda la vida de muchas personas, también han favorecido la aparición de nuevos riesgos. El caso que nos ocupa es, una vez más, la ciberseguridad. Los riesgos informáticos a los que se ven sometidas las PYMEs aconsejan la contratación de un seguro de ciberseguridad. Pero, ¿qué pasa con la seguridad informática en los hogares? De la misma manera que los ordenadores son vitales para las empresas, hoy en día también lo son para una gran cantidad de familias: pago de facturas, contratación de servicios, compras online, etc. Por ello, con el objetivo de poder estar bien protegidos, hay que conocer a qué amenazas podemos tener que hacer frente. A continuación, se presenta una lista de 7 problemas informáticos cuyo conocimiento puede ayudar a prevenirlos.',
+        DEFAULT, DEFAULT, DEFAULT, 'https://vilmanunez.com/wp-content/uploads/2019/02/editor-de-videos.png'),
+       (DEFAULT, 2, 3,
+        'La importancia de la ciberseguridad, también en el hogar',
+        'Como ya se ha comentado en recientes artículos, las nuevas tecnologías, a parte de hacer más cómoda la vida de muchas personas, también han favorecido la aparición de nuevos riesgos. El caso que nos ocupa es, una vez más, la ciberseguridad. Los riesgos informáticos a los que se ven sometidas las PYMEs aconsejan la contratación de un seguro de ciberseguridad. Pero, ¿qué pasa con la seguridad informática en los hogares? De la misma manera que los ordenadores son vitales para las empresas, hoy en día también lo son para una gran cantidad de familias: pago de facturas, contratación de servicios, compras online, etc. Por ello, con el objetivo de poder estar bien protegidos, hay que conocer a qué amenazas podemos tener que hacer frente. A continuación, se presenta una lista de 7 problemas informáticos cuyo conocimiento puede ayudar a prevenirlos.',
+        DEFAULT, DEFAULT, DEFAULT,
+        'https://josefacchin.com/wp-content/uploads/2017/08/como-crear-un-canal-de-youtube.png'),
+       (DEFAULT, 1, 3,
+        'La importancia de la ciberseguridad, también en el hogar',
+        'Como ya se ha comentado en recientes artículos, las nuevas tecnologías, a parte de hacer más cómoda la vida de muchas personas, también han favorecido la aparición de nuevos riesgos. El caso que nos ocupa es, una vez más, la ciberseguridad. Los riesgos informáticos a los que se ven sometidas las PYMEs aconsejan la contratación de un seguro de ciberseguridad. Pero, ¿qué pasa con la seguridad informática en los hogares? De la misma manera que los ordenadores son vitales para las empresas, hoy en día también lo son para una gran cantidad de familias: pago de facturas, contratación de servicios, compras online, etc. Por ello, con el objetivo de poder estar bien protegidos, hay que conocer a qué amenazas podemos tener que hacer frente. A continuación, se presenta una lista de 7 problemas informáticos cuyo conocimiento puede ayudar a prevenirlos.',
+        '02-05-2019', DEFAULT, DEFAULT, 'https://vilmanunez.com/wp-content/uploads/2019/02/editor-de-videos.png'),
+       (DEFAULT, 2, 3,
+        'La importancia de la ciberseguridad, también en el hogar',
+        'Como ya se ha comentado en recientes artículos, las nuevas tecnologías, a parte de hacer más cómoda la vida de muchas personas, también han favorecido la aparición de nuevos riesgos. El caso que nos ocupa es, una vez más, la ciberseguridad. Los riesgos informáticos a los que se ven sometidas las PYMEs aconsejan la contratación de un seguro de ciberseguridad. Pero, ¿qué pasa con la seguridad informática en los hogares? De la misma manera que los ordenadores son vitales para las empresas, hoy en día también lo son para una gran cantidad de familias: pago de facturas, contratación de servicios, compras online, etc. Por ello, con el objetivo de poder estar bien protegidos, hay que conocer a qué amenazas podemos tener que hacer frente. A continuación, se presenta una lista de 7 problemas informáticos cuyo conocimiento puede ayudar a prevenirlos.',
+        '02-05-2019', DEFAULT, DEFAULT,
+        'https://josefacchin.com/wp-content/uploads/2017/08/como-crear-un-canal-de-youtube.png');
+
+CREATE OR REPLACE FUNCTION fn_porcentajeCurso_Usuario(id_curso integer, id_usuario integer) RETURNS NUMERIC AS
+$$
+DECLARE
+    porc numeric;
+BEGIN
+    SELECT ROUND(((EXTRACT(HOUR FROM SUM(vis.tiempo)) * 3600 + EXTRACT(MINUTE FROM SUM(vis.tiempo)) * 60 +
+                   EXTRACT(SECOND FROM SUM(vis.tiempo))) /
+                  (EXTRACT(HOUR FROM cur.duracion) * 3600 + EXTRACT(MINUTE FROM cur.duracion) * 60 +
+                   EXTRACT(SECOND FROM cur.duracion))) * 100)
+    INTO porc
+    FROM usuario usu
+             INNER JOIN seguimiento seg ON usu.id = seg.usuario_id
+             INNER JOIN curso cur ON seg.curso_id = cur.id
+             INNER JOIN seccion sec ON cur.id = sec.curso_id
+             INNER JOIN clase cla ON sec.id = cla.seccion_id
+             INNER JOIN actividad_curso atc on cla.id = atc.clase_id
+             INNER JOIN visita vis ON atc.visita_id = vis.id
+    WHERE usu.id = id_usuario
+      AND cur.id = id_curso
+    GROUP BY cur.id;
+    RETURN porc;
+END;
+$$ LANGUAGE 'plpgsql';
+
 CREATE OR REPLACE FUNCTION fn_tg_actualizarDuracion() RETURNS TRIGGER AS
 $$
 DECLARE
     _curso_id INT;
     _duracion TIME;
 BEGIN
-    SELECT curso.id INTO _curso_id
-    FROM curso INNER JOIN seccion s2 ON curso.id = s2.curso_id
-    WHERE s2.id = new.seccion_id  OR s2.id = old.seccion_id;
+    SELECT curso.id
+    INTO _curso_id
+    FROM curso
+             INNER JOIN seccion s2 ON curso.id = s2.curso_id
+    WHERE s2.id = new.seccion_id
+       OR s2.id = old.seccion_id;
 
-    SELECT SUM(c.duracion)::TIME  INTO _duracion
-    FROM curso INNER JOIN seccion s ON curso.id = s.curso_id INNER JOIN clase c on s.id = c.seccion_id
+    SELECT SUM(c.duracion)::TIME
+    INTO _duracion
+    FROM curso
+             INNER JOIN seccion s ON curso.id = s.curso_id
+             INNER JOIN clase c on s.id = c.seccion_id
     WHERE curso.id = _curso_id;
 
     UPDATE curso SET duracion = _duracion WHERE id = _curso_id;
@@ -369,21 +401,26 @@ BEGIN
 END;
 $$ LANGUAGE 'plpgsql';
 
-CREATE TRIGGER tg_actualizarDuracion AFTER INSERT OR UPDATE OR DELETE
-    ON clase  FOR EACH ROW
+CREATE TRIGGER tg_actualizarDuracion
+    AFTER INSERT OR UPDATE OR DELETE
+    ON clase
+    FOR EACH ROW
 EXECUTE PROCEDURE fn_tg_actualizarDuracion();
 
 CREATE OR REPLACE FUNCTION fn_tg_actualizarSusbcriptores() RETURNS TRIGGER AS
 $$
 DECLARE
     _id_curso INT;
-    _cant INT;
+    _cant     INT;
 BEGIN
-    SELECT curso_id INTO _id_curso
+    SELECT curso_id
+    INTO _id_curso
     FROM seguimiento
-    WHERE seguimiento.curso_id = new.curso_id OR seguimiento.curso_id = old.curso_id;
+    WHERE seguimiento.curso_id = new.curso_id
+       OR seguimiento.curso_id = old.curso_id;
 
-    SELECT COUNT(usuario_id) INTO _cant
+    SELECT COUNT(usuario_id)
+    INTO _cant
     FROM seguimiento
     WHERE seguimiento.curso_id = _id_curso;
 
@@ -396,8 +433,10 @@ BEGIN
 END;
 $$ LANGUAGE 'plpgsql';
 
-CREATE TRIGGER tg_actualizarSusbcriptores AFTER INSERT OR UPDATE OR DELETE
-    ON seguimiento FOR EACH ROW
+CREATE TRIGGER tg_actualizarSusbcriptores
+    AFTER INSERT OR UPDATE OR DELETE
+    ON seguimiento
+    FOR EACH ROW
 EXECUTE PROCEDURE fn_tg_actualizarSusbcriptores();
 
 CREATE OR REPLACE FUNCTION fn_tg_actualizarNumeroComentarios() RETURNS TRIGGER AS
@@ -405,16 +444,19 @@ $$
 DECLARE
     _id_comentario INT;
 BEGIN
-	SELECT comentario.comentario_padre_id INTO _id_comentario
+    SELECT comentario.comentario_padre_id
+    INTO _id_comentario
     FROM comentario
     WHERE comentario.id = new.id;
-	
-	UPDATE comentario SET numero_comentarios = numero_comentarios + 1 WHERE id = _id_comentario; 
+
+    UPDATE comentario SET numero_comentarios = numero_comentarios + 1 WHERE id = _id_comentario;
 END;
 $$ LANGUAGE 'plpgsql';
 
-CREATE TRIGGER tg_actualizarNumeroComentarios AFTER INSERT
-    ON comentario FOR EACH ROW
+CREATE TRIGGER tg_actualizarNumeroComentarios
+    AFTER INSERT
+    ON comentario
+    FOR EACH ROW
 EXECUTE PROCEDURE fn_tg_actualizarNumeroComentarios();
 
 COMMIT;
