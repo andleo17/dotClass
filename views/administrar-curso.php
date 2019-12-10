@@ -1,25 +1,33 @@
-<?php
-    $cursoP = Curso :: listarPrerequisitos($cursos -> id); 
+<?php    
+    
+    $curso = explode('/', $_SERVER['REQUEST_URI']);
+    if (end($curso) == 'editar') {
+        $curso = Curso ::buscar($curso[3]);
+        include 'views/administrar-curso.php';
+        return;
+    }
+    $curso = Curso ::buscar(end($curso));
     $cursos = Curso ::listar();
 ?>
+
 <div class="container my-5">
     <div class="row">
         <div class="col-12">
-            <h1>Título</h1>
+            <h1>Modificar Curso</h1>
         </div>
         <div class="col mt-5">
             <form id="formulario" enctype="multipart/form-data">
                 <div class="form-row">
-                    <div class="icono-curso">
-                        <i class="far fa-image"></i>
-                        <label for="cargar-foto">Agregar ícono</label>
-                        <input type="file" name="cargar-foto" id="cargar-foto"></input>
+                    <div class="icono-curso">                        
+                        <img src="<?= SERVER_URL ?>uploads/logos/<?= $curso -> logo ?>"
+                                                 alt="logo">
+                        <input type="file" name="cargar-foto" id="cargar-foto"><?= $curso -> logo ?></input>
                     </div>
                     <div class="curso-titulo">
                         <input type="text" name="TituloCurso" id="txtTituloCurso" 
-                            value="<?= $curso -> titulo ?>" placeholder="Título del curso" >
+                            value="<?= $curso -> titulo ?>" >
                         <textarea name="DescripcionCurso" id="txtDescripcionCurso"
-                            value="<?= $curso -> descripcion ?>"placeholder="Descripción del curso"></textarea>
+                            placeholder="Descripción del curso"><?= $curso -> descripcion ?></textarea>
                     </div>
                 </div>                
                 <div class="form-row mt-5">
@@ -27,19 +35,20 @@
                         <h4>Plan de estudios:</h4>
                         <hr>
                     </div>
+                    <?php if ($cursosPrerequisitos = Curso ::listarPrerequisitos($curso -> id)) { ?>
                     <div class="col-3 p-0 m-3">
                         <div class="card p-4">
                             <label for="cboPreRequisito[<?= $cursos -> id ?>]">Curso Pre-Requisito: </label>
                             <select class="form-control"
                                     id="cboPreRequisito[<?= $cursos -> id ?>]"
                                     name="PreRequisitoCurso[<?= $cursos -> id ?>]">
-                                <?php foreach ($cursos as $cur) { ?>
+                                <?php foreach ($cursosPrerequisitos as $cur) { ?>
                                     <option value="<?= $cur -> id ?>" > <?= $cur -> titulo ?> </option>                                                            
                                  <?php } ?>
                             </select>
                         </div>                         
                     </div>
-                    
+                    <?php } ?>
                 </div>
                 <div class="form-row mt-5">
                     <div class="col-12 ">
@@ -195,7 +204,3 @@
         </div>
     </div>
 </div>
-
-
-
-    
