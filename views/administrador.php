@@ -10,7 +10,10 @@
     
 ?>
 
-<div class="container my-5">
+<div class="container-fluid my-4">
+    <div class="col-12">
+        <div id="felicidades" class="m-3"></div>
+    </div> 
     <div class="card rounded-0">
         <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
@@ -25,8 +28,14 @@
             </li>
         </ul>
         <div class="tab-content">
-                <div role="tabpanel" class="tab-pane fade show active" id="categoria">                    
-                    <div>
+                <div role="tabpanel" class="tab-pane fade show active" id="categoria">                     
+                    <div class="row m-3">                                        
+                        <div class="col">
+                            <button type='button' class='btn btn-success' data-toggle="modal" data-target="#divCat" '>Agregar</button>
+                        </div>
+                    </div>
+                                  
+                    <div class="row m-3">
                         <table class="table table-hover">
                             <thead class="thead-dark">
                                 <tr class="d-flex">                                                                                                              
@@ -45,7 +54,7 @@
                                     <td class="col-2"><?= "{$cat -> logo}"?></td>
                                     <td class="col-2">
                                         <button type='button' class='btn btn-info' data-toggle="modal" data-target="#divCat" onclick= 'divCat(<?= "{$cat -> id}"?>)'>Editar</button>
-                                        <button class='btn btn-danger' type='button'>X</button>
+                                        <button type='button' class='btn btn-danger' onclick= 'elimCat(<?= "{$cat -> id}"?>)'>X</button>
                                     </td>
                                 </tr>                                  
                                 <?php }
@@ -111,7 +120,7 @@
                             <tbody>
                             <?php if ($curso != []) { ?>                                
                                 <?php foreach ($curso as $cur) { ?>
-                                <tr class="d-flex">                                                                                 
+                                <tr class="d-flex" id="<?= "{$cur -> id}"?>" name="<?= "{$cur -> id}"?>">                                                                                 
                                     <td class="col-1"><?= "{$cur -> titulo}"?></td>
                                     <td class="col-4"><?= "{$cur -> descripcion}"?></td>
                                     <td class="col-2"><?= "{$cur -> categoria -> nombre}" ?></td>
@@ -138,30 +147,27 @@
 	        <h5 class="modal-title" id="exampleModalLabel">Categoría</h5>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	      </div>
-	      <div class="modal-body">
-	        <form>            
-	        	<div class="form-group">
-				    <label for="txtnombre">Id</label>
-				    <input type="text" class="form-control" name="txtid" id="txtid" >
-				</div>
-				<div class="form-group">
-				    <label for="txtprecio">Nombre</label>
-				    <input type="text" class="form-control" name="txtnombre" id="txtnombre" >
-				</div>
-				<div class="form-group">
-				    <label for="txtdescripcion">Descripción</label>
-				    <input type="text" class="form-control" name="txtdescripcion" id="txtdescripcion" >
-				</div>
-				<div class="form-group">
-				    <label for="txtlogo">Logo:</label>
-				    <input type="text" class="form-control" name="txtlogo" id="txtlogo" >
-                </div>                
-            </form>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-	        <button type="button" class="btn btn-primary" onclick="">Guardar</button>
-	      </div>
+          <form id="registroCat" enctype="multipart/form-data">            
+            <div class="modal-body">	
+                    <div class="form-group">
+                        <label for="txtprecio">Nombre</label>
+                        <input type="text" class="form-control" name="txtnombre" id="txtnombre" >
+                    </div>
+                    <div class="form-group">
+                        <label for="txtdescripcion">Descripción</label>
+                        <input type="text" class="form-control" name="txtdescripcion" id="txtdescripcion" >
+                    </div>
+                    <div class="form-group">
+                        <label for="txtlogo">Logo:</label>
+                        <input type="text" class="form-control" name="txtlogo" id="txtlogo" >
+                    </div>                
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary" >Guardar</button>
+            </div>
+          </form>
 	    </div>
 	  </div>
     </div>
@@ -269,10 +275,54 @@
 <script>
     function divCat(id){
         fetch('../clase/Categoria/' + id).then(res => res.json().then(data => {
-            document.getElementById("txtid").value = data.id
             document.getElementById("txtnombre").value = data.nombre
             document.getElementById("txtdescripcion").value = data.descripcion
             document.getElementById("txtlogo").value = data.logo
+        }))
+    };
+</script>
+<script>
+    let $registro = document.getElementById('registroCat');
+    $registro.onsubmit = e => {
+        e.preventDefault();
+        fetch('../clase/Categoria/crear', {
+            method: 'POST',
+            body: new FormData($registro)
+        }).then(res => {
+            res.text().then(data => {
+                if (data) {
+                    if (data == 1) {
+                        let $felicidades = document.getElementById('felicidades');
+                        $felicidades.classList.add('m-2', 'alert', 'alert-warning');
+                        $felicidades.innerText = "Felicidades!!... se a registrado correctamente";
+                    }
+                } else {
+                    let $errores = document.getElementById('felicidades');
+                    $errores.classList.add('m-2', 'alert', 'alert-danger');
+                    $errores.innerText = "Se a producido un error al registrar!!";
+                }
+            })
+        });
+    };
+
+</script>
+<script>
+    function elimCat(id){
+        fetch('../clase/Categoria/eliminar' + id,{
+            method: 'POST',
+            body: {id}
+        }).then(res => res.json().then(data => {
+            if (data) {
+                if (data == 1) {
+                    let $felicidades = document.getElementById('felicidades');
+                    $felicidades.classList.add('m-2', 'alert', 'alert-warning');
+                    $felicidades.innerText = "Felicidades!!... se a eliminado correctamente";
+                }
+            } else {
+                let $errores = document.getElementById('felicidades');
+                $errores.classList.add('m-2', 'alert', 'alert-danger');
+                $errores.innerText = "Se a producido un error al eliminar!!";
+            }
         }))
     };
 </script>
