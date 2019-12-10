@@ -223,22 +223,19 @@ INSERT INTO categoria
 VALUES (DEFAULT, 'Tecnología',
         'Aprende el siglo XXI, la era de información y la tecnología te esperan para dejar huella o aprende por diversión.',
         'tecnologia.webp'),
-       (DEFAULT, 'Ciencia', '', 'ciencia.webp'),
        (DEFAULT, 'Matemáticas', 'Aprende a resolver problemas, desarrollar el pensamiento deductivo, elaborar algoritmos y construir modelos para toma de decisiones que resuelven problemas.
 
 Dominarás conceptos básicos y avanzados de matemáticas, entenderás temas con mayor grado de dificultad, como machine learning, IA o marketing digital.',
-        'matematicas.webp'),
-       (DEFAULT, 'Arte', '', 'arte.webp'),
-       (DEFAULT, 'Marketing', '', 'marketing.webp'),
-       (DEFAULT, 'Música', '', 'musica.webp');
+        'matematicas.webp');               
 
 INSERT INTO usuario
-VALUES (DEFAULT, 'Andle17', '123456789', 'Andrés', 'Baldárrago', 'ab@gmail.com', '2000-07-01',
-        'Me gusta jugar y enseñar.', DEFAULT, '¿Quién soy?', 'nose', 'Andle17.png', 1, 1, '2019-11-14 16:42:51',
-        DEFAULT),
-        (DEFAULT, 'ADMIN', '123', 'Pedro', 'Picapiedra', 'pedropicapiedra@gmail.com', '1999-05-23',
+VALUES (DEFAULT, 'ADMIN', '123', 'Pedro', 'Picapiedra', 'pedropicapiedra@gmail.com', '1999-05-23',
             'Soy el ADMIN', DEFAULT,
             '¿Eres el administrador?', 'SI', 'user.jpg', 1, 1, '2019-11-14 16:42:51', DEFAULT),
+        (DEFAULT, 'Andle17', '123456789', 'Andrés', 'Baldárrago', 'ab@gmail.com', '2000-07-01',
+        'Me gusta jugar y enseñar.', DEFAULT, '¿Quién soy?', 'nose', 'Andle17.png', 1, 1, '2019-11-14 16:42:51',
+        DEFAULT),
+        
         (DEFAULT, 'CinthyaYomona', '123', 'Cinthya Lisseth', 'Yomona Parraguez', 'cinthya@gmail.com', '1999-05-23',
             'Se suponde que me debo de bañar, que mis convers ya no aguantan más!!...Pero llegas tú !! :) <3', DEFAULT,
             'Inspiraciíon?', 'Priscila', '20180319_103506.jpg', 1, 1, '2019-11-14 16:42:51', DEFAULT);
@@ -335,10 +332,15 @@ VALUES (DEFAULT, 1, 1, 'Es un framework', FALSE),
        (DEFAULT, 4, 3, 'No, Java no es Javascript', FALSE),
        (DEFAULT, 4, 4, 'No lo sé', FALSE);
 
-INSERT INTO blog VALUES (DEFAULT, 1, 3, 'La importancia de la ciberseguridad, también en el hogar', 'Como ya se ha comentado en recientes artículos, las nuevas tecnologías, a parte de hacer más cómoda la vida de muchas personas, también han favorecido la aparición de nuevos riesgos. El caso que nos ocupa es, una vez más, la ciberseguridad. Los riesgos informáticos a los que se ven sometidas las PYMEs aconsejan la contratación de un seguro de ciberseguridad. Pero, ¿qué pasa con la seguridad informática en los hogares? De la misma manera que los ordenadores son vitales para las empresas, hoy en día también lo son para una gran cantidad de familias: pago de facturas, contratación de servicios, compras online, etc. Por ello, con el objetivo de poder estar bien protegidos, hay que conocer a qué amenazas podemos tener que hacer frente. A continuación, se presenta una lista de 7 problemas informáticos cuyo conocimiento puede ayudar a prevenirlos.', current_date, 2, 5,'https://vilmanunez.com/wp-content/uploads/2019/02/editor-de-videos.png');
-INSERT INTO blog VALUES (DEFAULT, 2, 3,'La importancia de la ciberseguridad, también en el hogar', 'Como ya se ha comentado en recientes artículos, las nuevas tecnologías, a parte de hacer más cómoda la vida de muchas personas, también han favorecido la aparición de nuevos riesgos. El caso que nos ocupa es, una vez más, la ciberseguridad. Los riesgos informáticos a los que se ven sometidas las PYMEs aconsejan la contratación de un seguro de ciberseguridad. Pero, ¿qué pasa con la seguridad informática en los hogares? De la misma manera que los ordenadores son vitales para las empresas, hoy en día también lo son para una gran cantidad de familias: pago de facturas, contratación de servicios, compras online, etc. Por ello, con el objetivo de poder estar bien protegidos, hay que conocer a qué amenazas podemos tener que hacer frente. A continuación, se presenta una lista de 7 problemas informáticos cuyo conocimiento puede ayudar a prevenirlos.', current_date, 2, 5,'https://josefacchin.com/wp-content/uploads/2017/08/como-crear-un-canal-de-youtube.png');
-INSERT INTO blog VALUES (DEFAULT, 1, 3, 'La importancia de la ciberseguridad, también en el hogar', 'Como ya se ha comentado en recientes artículos, las nuevas tecnologías, a parte de hacer más cómoda la vida de muchas personas, también han favorecido la aparición de nuevos riesgos. El caso que nos ocupa es, una vez más, la ciberseguridad. Los riesgos informáticos a los que se ven sometidas las PYMEs aconsejan la contratación de un seguro de ciberseguridad. Pero, ¿qué pasa con la seguridad informática en los hogares? De la misma manera que los ordenadores son vitales para las empresas, hoy en día también lo son para una gran cantidad de familias: pago de facturas, contratación de servicios, compras online, etc. Por ello, con el objetivo de poder estar bien protegidos, hay que conocer a qué amenazas podemos tener que hacer frente. A continuación, se presenta una lista de 7 problemas informáticos cuyo conocimiento puede ayudar a prevenirlos.', '02-05-2019', 2, 5,'https://vilmanunez.com/wp-content/uploads/2019/02/editor-de-videos.png');
-INSERT INTO blog VALUES (DEFAULT, 2, 3,'La importancia de la ciberseguridad, también en el hogar', 'Como ya se ha comentado en recientes artículos, las nuevas tecnologías, a parte de hacer más cómoda la vida de muchas personas, también han favorecido la aparición de nuevos riesgos. El caso que nos ocupa es, una vez más, la ciberseguridad. Los riesgos informáticos a los que se ven sometidas las PYMEs aconsejan la contratación de un seguro de ciberseguridad. Pero, ¿qué pasa con la seguridad informática en los hogares? De la misma manera que los ordenadores son vitales para las empresas, hoy en día también lo son para una gran cantidad de familias: pago de facturas, contratación de servicios, compras online, etc. Por ello, con el objetivo de poder estar bien protegidos, hay que conocer a qué amenazas podemos tener que hacer frente. A continuación, se presenta una lista de 7 problemas informáticos cuyo conocimiento puede ayudar a prevenirlos.','02-05-2019', 2, 5,'https://josefacchin.com/wp-content/uploads/2017/08/como-crear-un-canal-de-youtube.png');
+INSERT INTO blog VALUES (DEFAULT, 1, 1, 'La importancia de la ciberseguridad, también en el hogar', 'Como ya se ha comentado en recientes artículos, las nuevas tecnologías, a parte de hacer más cómoda la vida de muchas personas, también han favorecido la aparición de nuevos riesgos. El caso que nos ocupa es, una vez más, la ciberseguridad. Los riesgos informáticos a los que se ven sometidas las PYMEs aconsejan la contratación de un seguro de ciberseguridad. Pero, ¿qué pasa con la seguridad informática en los hogares? De la misma manera que los ordenadores son vitales para las empresas, hoy en día también lo son para una gran cantidad de familias: pago de facturas, contratación de servicios, compras online, etc. Por ello, con el objetivo de poder estar bien protegidos, hay que conocer a qué amenazas podemos tener que hacer frente. A continuación, se presenta una lista de 7 problemas informáticos cuyo conocimiento puede ayudar a prevenirlos.', current_date, 2, 5,'https://vilmanunez.com/wp-content/uploads/2019/02/editor-de-videos.png');
+INSERT INTO blog VALUES (DEFAULT, 2, 2, 'El príncipe de los matemáticos', 'Se cuenta que cuando Carl Friedrich Gauss tenía nueve años, en clase de matemáticas el profesor castigó colectivamente a los alumnos a sumar los números del 1 al 100, seguramente con la esperanza de tenerlos entretenidos un buen rato. Pero el pequeño Carl halló el resultado en cuestión de segundos: se dio cuenta de que el 2 y el 99, el 3 y el 98, el 4 y el 97… sumaban lo mismo que el 1 y el 100, por lo que, emparejando los cien números de esta manera, para hallar la suma total no tenía más que multiplicar 101 x 50 = 5.050. Y generalizando este método es fácil hallar la fórmula de la suma de los términos de una progresión aritmética (¿puedes deducirla?). 
+
+
+Para sumar los 11 números consecutivos del problema de la semana pasada, podemos usar el método de Gauss: (1985 + 1995) x 11/2, y ni siquiera tenemos que efectuar la operación para ver que el resultado será múltiplo de 11, lo que facilita considerablemente la solución del problema, pues es fácil ver que todos los números de 44 cifras resultantes de la reordenación de los números del 1985 al 1995 también serán múltiplos de 11, por lo que ninguno de ellos puede ser primo.', current_date, 15, 25,'https://josefacchin.com/wp-content/uploads/2017/08/como-crear-un-canal-de-youtube.png');
+INSERT INTO blog VALUES (DEFAULT, 1, 1, '51 regalos tecnológicos para el amigo secreto', 'Aunque técnicamente todavía no es Navidad, un vistazo a los escaparates y calles evidencia que la tenemos a la vuelta de la esquina. Fechas para reunirse, celebrar y también hacer regalos. Algunos grandes, pero otros más pequeños.
+
+Tanto si no quieres gastarte demasiado como si tienes un tope de presupuesto, en nuestra guía de compras de regalos tecnológicos por menos de 15 euros te ofrecemos una buena lista de alternativas. Aunque la inmensa mayoría son tecnología, también hemos reservado un pequeño hueco a productos del "universo Xataka", como series, películas y merchandising de ciencia ficción. Ojo porque hay chollos y cosas muy atractivas.', '02-05-2019', 75, 100,'https://i.blogs.es/862373/gifts-3886310_1920/1366_2000.jpg');
+INSERT INTO blog VALUES (DEFAULT, 2, 2, '¿Nos podemos fiar de los modelos matemáticos del cambio climático?', 'El cambio climático y sus efectos en el medio ambiente y en la sociedad son de los asuntos más importantes y controvertidos del momento actual, como se puede comprobar durante estos días en la Conferencia de las Naciones Unidas sobre el Cambio Climático. Pero para poder entablar un debate profundo sobre el cambio climático es importante saber cómo se construyen los modelos en los que se basan las predicciones y recomendaciones planteadas, cómo se comprueba su funcionamiento, qué tipo de predicciones producen y cómo de fiables son.','02-05-2019', 10, 4,'https://vilmanunez.com/wp-content/uploads/2019/02/editor-de-videos.png');
 
 CREATE OR REPLACE FUNCTION fn_porcentajeCurso_Usuario(id_curso integer, id_usuario integer) RETURNS NUMERIC AS
 $$
@@ -403,6 +405,11 @@ BEGIN
     WHERE curso.id = _curso_id;
 
     UPDATE curso SET duracion = _duracion WHERE id = _curso_id;
+    IF tg_op = 'INSERT' THEN
+        RETURN new;
+    ELSE
+        RETURN old;
+    END IF;
     RETURN new;
 END;
 $$ LANGUAGE 'plpgsql';
@@ -456,6 +463,11 @@ BEGIN
     WHERE comentario.id = new.id;
 
     UPDATE comentario SET numero_comentarios = numero_comentarios + 1 WHERE id = _id_comentario;
+    IF tg_op = 'INSERT' THEN
+        RETURN new;
+    ELSE
+        RETURN old;
+    END IF;
 END;
 $$ LANGUAGE 'plpgsql';
 
