@@ -940,13 +940,6 @@ iframe.video {
 	justify-content: center;
 }
 
-.icono-curso {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	flex: 0 1 auto;
-}
-
 .fa-image {
 	border: 1px solid #363636;
 	border-radius: 50%;
@@ -970,28 +963,6 @@ input[type='file'] {
 	flex-direction: column;
 	flex: 1 1 auto;
 	margin: 15px 20px;
-}
-
-#txtTituloCurso {
-	height: fit-content;
-	border-radius: 25px;
-	border: 1px solid #363636;
-	padding: 10px 20px;
-	font-size: 18px;
-	font-weight: 500;
-	margin-bottom: 20px;
-	flex: 0 1 auto;
-	font-family: 'Segoe UI', sans-serif;
-}
-
-#txtDescripcionCurso {
-	border-radius: 25px;
-	border: 1px solid #363636;
-	padding: 10px 20px;
-	font-family: 'Segoe UI', sans-serif;
-	font-size: 15px;
-	resize: none;
-	flex: 1 1 auto;
 }
 
 .fa-times {

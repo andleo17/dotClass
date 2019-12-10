@@ -1,5 +1,5 @@
 <?php
-    require_once 'php/blog.php';
+    require_once 'php/Blog.php';
     require_once 'php/Categoria.php';
 ?>
 <div class="container">
