@@ -4,6 +4,10 @@
         $curso = Curso ::buscar($curso[3]);
         include 'views/examen.php';
         return;
+    } else if (end($curso) == 'editar') {
+        $curso = Curso ::buscar($curso[3]);
+        include 'views/administrar-curso.php';
+        return;
     }
 
     $curso = Curso ::buscar(end($curso));
