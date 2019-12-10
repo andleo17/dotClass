@@ -40,70 +40,45 @@
                         <h4>Plan de estudios:</h4>
                         <hr>
                     </div>
+                    <div class="col">
+                        <div class="row" id="prerequisitos"></div>
+                    </div>
                     <div class="col-3 p-0 m-3">
-                        <div id="prerequisitos"></div>
                         <button class="agregar-config" type="button" data-toggle="modal"
                                 data-target="#exampleModalCenter">Agregar
                         </button>
                     </div>
                 </div>
                 <div class="form-row mt-5">
-                    <div class="col-12 ">
+                    <div class="col-12">
                         <h4>Detalles del Curso:</h4>
                         <hr>
                     </div>
-                    <div class="col-12 card mx-4 rounded-0">
-                        <div class="card-header pb-0">
-                            <ul class="nav nav-tabs">
-                                <li class="nav-item">
-                                    <a id="contenido-tab" class="nav-link active" href="#contenido" data-toggle="tab">Contenido</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a id="preguntas-tab" class="nav-link" href="#preguntas"
-                                       data-toggle="tab">Preguntas</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a id="aportes-tab" class="nav-link" href="#aportes" data-toggle="tab">Aportes</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a id="marcadores-tab" class="nav-link" href="#marcadores" data-toggle="tab">Marcadores</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="tab-content px-5 py-4">
-                            <div id="contenido" class="tab-pane fade show active">
-                                <div class="border border-secondary px-4 py-3 mb-4 row">
-                                    <div class="col-12">
-                                        <input class="form-control" type="text" name="nombreSeccion" id="nombreSeccion"
-                                               placeholder="Introduce un título para la sección" required>
+                    <div id="contenido" class="col-12">
+                        <div class="border border-secondary px-4 py-3 mb-4">
+                            <input class="form-control" type="text" name="nombreSeccion" id="nombreSeccion"
+                                   placeholder="Introduce un título para la sección" required>
+                            <div class="col-3 my-3">
+                                <div class="card border border-secondary rounded-top">
+                                    <div class="card-header bg-success"></div>
+                                    <div class="p-4">
+                                        <input class="form-control" type="text" name="nombreSeccion"
+                                               id="nombreSeccion" placeholder="Título para tu clase" required>
                                     </div>
-
-                                    <div class="col-3 m-3">
-                                        <div class="card border border-secondary rounded-top">
-                                            <div class="card-header bg-success"></div>
-                                            <div class="p-4">
-                                                <input class="form-control" type="text" name="nombreSeccion"
-                                                       id="nombreSeccion" placeholder="Título para tu clase" required>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-3 p-0 m-3">
-                                        <button id="agregar-clase" class="agregar-config" type="button">Agregar</button>
-                                    </div>
-                                </div>
-                                <div class="col-12 m-3">
-                                    <button id="agregar-seccion" class="agregar-config" type="button">Agregar</button>
                                 </div>
                             </div>
-                            <div id="preguntas" class="tab-pane fade"></div>
-                            <div id="aportes" class="tab-pane fade"></div>
-                            <div id="marcadores" class="tab-pane fade"></div>
+                            <div class="col-3 p-0 m-3">
+                                <button id="agregar-clase" class="agregar-config" type="button">Agregar</button>
+                            </div>
+                        </div>
+                        <div class="col-12 m-3">
+                            <button id="agregar-seccion" class="agregar-config" type="button">Agregar</button>
                         </div>
                     </div>
                 </div>
                 <div class="form-row mt-5">
                     <div class="col-12 text-center">
-                        <input class="btn btn-primary" type="submit" value="Guardar">
+                        <input id="btnGuardar" type="button" value="Guardar">
                     </div>
                 </div>
             </form>
@@ -129,7 +104,7 @@
                         <?php foreach ($cursos as $key => $prerequisito) { ?>
                             <input type="checkbox"
                                    value="<?= $prerequisito -> id ?>">
-                            <div class="col-12 my-2">
+                            <div class="col my-2">
                                 <div class="mini card text-dark prerequisito">
                                     <a href="../curso/<?= $prerequisito -> id ?>" class="card-head">
                                         <img src="<?= SERVER_URL ?>uploads/logos/<?= $prerequisito -> logo ?>"
@@ -159,7 +134,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-primary" id="agregar-prerequisito">Guardar</button>
+                <button type="button" class="btn btn-primary" id="agregar-prerequisito">Guardar</button>
             </div>
         </div>
     </div>
@@ -167,16 +142,21 @@
 
 <script>
     let btn = document.getElementById('agregar-prerequisito');
+    let $prerequisitos = document.getElementById('prerequisitos');
     btn.onclick = e => {
         let chck = document.getElementsByTagName('input');
-        let chks = [];
         for (let i = 0; i < chck.length; i++) {
             let c = chck.item(i);
             if (c.type === 'checkbox') {
-                chks.push(c);
+                if (c.checked) {
+                    $prerequisitos.append(c.nextElementSibling);
+                }
             }
         }
-
+        $('#exampleModalCenter').modal('hide')
+    }
+    document.getElementById('btnGuardar').onclick = e => {
+        window.location = 'http://localhost/dotclass/';
     }
 </script>
 

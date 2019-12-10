@@ -221,28 +221,31 @@
                                 $usuario -> registrar();
                                 $usuario = self::buscar(null, $usuario -> nickname);
 
-                                foreach ($_POST['nombreConocimiento'] as $id => $nombre) {
-                                    $conocimiento = new Conocimiento();
-                                    $conocimiento -> id = $id;
-                                    $conocimiento -> nombre = $nombre;
-                                    $conocimiento -> gradoAcademico = $_POST['gradoConocimiento'][$id];
-                                    $conocimiento -> lugarEstudio = $_POST['lugarEstudio'][$id];
-                                    $conocimiento -> anio = $_POST['anioConocimiento'][$id];
-                                    $conocimiento -> pais = $_POST['paisConocimiento'][$id];
-                                    $conocimiento -> usuario = $usuario -> id;
-                                    $conocimiento -> registrar();
+                                if (isset($_POST['nombreConocimiento'])) {
+                                    foreach ($_POST['nombreConocimiento'] as $id => $nombre) {
+                                        $conocimiento = new Conocimiento();
+                                        $conocimiento -> id = $id;
+                                        $conocimiento -> nombre = $nombre;
+                                        $conocimiento -> gradoAcademico = $_POST['gradoConocimiento'][$id];
+                                        $conocimiento -> lugarEstudio = $_POST['lugarEstudio'][$id];
+                                        $conocimiento -> anio = $_POST['anioConocimiento'][$id];
+                                        $conocimiento -> pais = $_POST['paisConocimiento'][$id];
+                                        $conocimiento -> usuario = $usuario -> id;
+                                        $conocimiento -> registrar();
+                                    }
                                 }
-
-                                foreach ($_POST['nombreExp'] as $id => $nombre) {
-                                    $experiencia = new ExperienciaLaboral();
-                                    $experiencia -> id = $id;
-                                    $experiencia -> nombre = $nombre;
-                                    $experiencia -> lugar = $_POST['lugarExp'][$id];
-                                    $experiencia -> fechaInicio = $_POST['fechaInicioExp'][$id];
-                                    $experiencia -> fechaFin = $_POST['fechaFinExp'][$id];
-                                    $experiencia -> pais = $_POST['paisExp'][$id];
-                                    $experiencia -> usuario = $usuario -> id;
-                                    $experiencia -> registrar();
+                                if (isset($_POST['nombreExp'])) {
+                                    foreach ($_POST['nombreExp'] as $id => $nombre) {
+                                        $experiencia = new ExperienciaLaboral();
+                                        $experiencia -> id = $id;
+                                        $experiencia -> nombre = $nombre;
+                                        $experiencia -> lugar = $_POST['lugarExp'][$id];
+                                        $experiencia -> fechaInicio = $_POST['fechaInicioExp'][$id];
+                                        $experiencia -> fechaFin = $_POST['fechaFinExp'][$id];
+                                        $experiencia -> pais = $_POST['paisExp'][$id];
+                                        $experiencia -> usuario = $usuario -> id;
+                                        $experiencia -> registrar();
+                                    }
                                 }
 
                                 echo 1;
