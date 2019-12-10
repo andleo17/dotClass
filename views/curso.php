@@ -22,7 +22,7 @@
                         <div class="col">
                             <div class="d-flex flex-column">
                             <?php if (empty($_SESSION['usuario'])) { ?>
-                                <button type="button" class="btn btn-success"> + Seguir</button>
+                                <a role="button" class="btn btn-success" href="<?= SERVER_URL ?>inicio-sesion/">+ Seguir</a>
                             <?php } ?> 
                             <?php if (isset($_SESSION['usuario'])) { ?>                       
                                 <div class="bar">

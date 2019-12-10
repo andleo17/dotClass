@@ -4,7 +4,8 @@
     require_once 'php/Conocimiento.php';
     require_once 'php/config.php';
    
-    $curso = Curso :: listarCursosUsuario($_SESSION['usuario'] -> id);    
+    $curso = Curso :: listarCursosUsuario($_SESSION['usuario'] -> id);
+    $cursosUsuario = Usuario ::listarEnseñanza($curso -> usuario -> id);   
 ?>
 
 <div class="container my-4">
@@ -13,6 +14,8 @@
             <a role="button" class="btn btn-success" href="<?= SERVER_URL ?>agregar-curso/">Agregar</a>
         </div>
     </div>
+
+    <?php if (count($cursosUsuario) > 0) { ?>
     <table class="table">
         <thead class="thead-dark">
             <tr class="d-flex">                                                                                                              
@@ -34,13 +37,14 @@
                 <td class="col-2"><?= "{$cur -> logo}"?></td>
                 <td class="col-1"><?= "{$cur -> usuario -> nickname}" ?></td>
                 <td class="col-2">
-                    <a role="button" class='btn btn-success' href="<?= SERVER_URL . 'administrar-curso/' . $cur -> id ?>">Ver</a>
+                    <a role="button" class='btn btn-success' href="<?= SERVER_URL . 'administrar-curso/' . $cur -> id . '/editar' ?>">Ver</a>
                     <button class='btn btn-danger' type='button'>X</button>
                 </td>
             </tr>                                  
             <?php }
         } ?> 
         </tbody>
-    </table>    
+    </table>
+    <?php } ?>   
 
 </div>
