@@ -4,18 +4,17 @@
     require_once 'php/Conocimiento.php';
     require_once 'php/config.php';
    
-    $curso = Curso :: listarCursosUsuario($_SESSION['usuario'] -> id);
-    $cursosUsuario = Usuario ::listarEnseñanza($curso -> usuario -> id);   
+    $curso = Curso :: listarCursosUsuario($_SESSION['usuario'] -> id);  
 ?>
 
 <div class="container my-4">
-    <div class="row m-3">
+    <div class="row my-3">
         <div class="col">
             <a role="button" class="btn btn-success" href="<?= SERVER_URL ?>agregar-curso/">Agregar</a>
         </div>
     </div>
 
-    <?php if (count($cursosUsuario) > 0) { ?>
+    <?php if (count($curso) > 0) { ?>
     <table class="table">
         <thead class="thead-dark">
             <tr class="d-flex">                                                                                                              
@@ -45,6 +44,16 @@
         } ?> 
         </tbody>
     </table>
-    <?php } ?>   
+    <?php } ?>
+    
+    <?php if (count($curso) == 0) { ?>
+        <div style="height: 200px;"> 
+            <div class="alert alert-danger" role="alert">
+                <h4 class="alert-heading">Usted no a registrado cursos!!</h4>
+                <hr>
+                <p class="mb-0"><strong>Recuerde :</strong> El conocimiento es poder, por eso le invitamos a que comparta su conocimiento con las personas</p>
+            </div>
+        </div>
+    <?php } ?>
 
 </div>
