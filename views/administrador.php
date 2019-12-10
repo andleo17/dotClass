@@ -29,10 +29,8 @@
         </ul>
         <div class="tab-content">
                 <div role="tabpanel" class="tab-pane fade show active" id="categoria">                     
-                    <div class="row m-3">                                        
-                        <div class="col">
-                            <button type='button' class='btn btn-success' data-toggle="modal" data-target="#divCat" '>Agregar</button>
-                        </div>
+                    <div class="row m-3"> 
+                        <button type='button' class='btn btn-success' data-toggle="modal" data-target="#divCat" '>Agregar</button>                        
                     </div>
                                   
                     <div class="row m-3">
@@ -67,8 +65,12 @@
                     <!--<div id="divbuscar">
                         <input type="text" name="txtbuscar" id="txtbuscar" class="form-control" 
                             placeholder="Escribe aquí para buscar un usuario" >
-                    </div> <br> -->                    
-                    <div>
+                    </div> <br> -->
+                    <div class="row m-3"> 
+                        <button type='button' class='btn btn-success' onclick="location.href='<?php echo SERVER_URL ?>registro/'" '>Agregar</button>
+                        
+                    </div>                  
+                    <div class="row m-3">
                         <table class="table">
                             <thead class="thead-dark">
                                 <tr>                                                                                                              
@@ -104,8 +106,12 @@
                     <!--<div id="divbuscar">
                         <input type="text" name="txtbuscar" id="txtbuscar" class="form-control" 
                             placeholder="Escribe aquí para buscar un usuario" >
-                    </div> <br> -->                    
-                    <div>
+                    </div> <br> -->
+                    <div class="row m-3">                                        
+                        <button type='button' class='btn btn-success' onclick="location.href='<?php echo SERVER_URL ?>agregar-curso/'" '>Agregar</button>
+                        
+                    </div>                  
+                    <div class="row m-3">
                         <table class="table">
                             <thead class="thead-dark">
                                 <tr class="d-flex">                                                                                                              
@@ -203,7 +209,7 @@
                 </div>
                 <div class="form-group">
                 <label for="cbopais">País</label>
-                    <select class="form-control name="cboPais" id="cboPais" >
+                    <select class="form-control" name="cboPais" id="cboPais" >
                         <?php foreach (Pais ::listar() as $pais) { ?>
                             <option value="<?= $pais -> id ?>"><?= $pais -> nombre ?></option>
                         <?php } ?>
@@ -211,7 +217,7 @@
                 </div>
                 <div class="form-group">
                 <label for="cbociudad">Ciudad</label>
-                    <select class="form-control name="cboCiudad" id="cboCiudad >
+                    <select class="form-control" name="cboCiudad" id="cboCiudad">
                         <?php foreach (Ciudad ::listar() as $ciu) { ?>
                             <option value="<?= $ciu -> id ?>"><?= $ciu -> nombre ?></option>
                         <?php } ?>
