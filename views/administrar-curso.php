@@ -5,23 +5,36 @@
 <div class="container my-5">
     <div class="row">
         <div class="col-12">
-            <h1>Modificar Curso</h1>
+            <h1><strong>Modificar Curso: </strong> <?= $curso -> titulo ?></h1>
         </div>
         <div class="col mt-5">
             <form id="formulario" enctype="multipart/form-data">
-                <div class="form-row">
-                    <div class="icono-curso">                        
-                        <img src="<?= SERVER_URL ?>uploads/logos/<?= $curso -> logo ?>"
-                                                 alt="logo">
-                        <input type="file" name="cargar-foto" id="cargar-foto"><?= $curso -> logo ?></input>
+                <div class="form-row align-items-center justify-content-center">
+                    <div class="col-3">
+                        <label class="position-relative" for="btnSubirFoto">
+                            <img id="imagen-usuario"
+                                    class="rounded-circle"
+                                    style="width: 200px; height:auto;"
+                                    src="<?= SERVER_URL ?>uploads/logos/<?= $curso -> logo ?>"
+                                    alt="">
+                            <span id="editar-hover">
+                                <i class="far fa-edit"></i>
+                            </span>
+                        </label>
+                        <input type="file" name="cargar-foto" id="cargar-foto">
                     </div>
-                    <div class="curso-titulo">
-                        <input type="text" name="TituloCurso" id="txtTituloCurso" 
+                    <div class="col-6">
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="TituloCurso" id="txtTituloCurso" 
                             value="<?= $curso -> titulo ?>" >
-                        <textarea name="DescripcionCurso" id="txtDescripcionCurso"
-                            placeholder="Descripción del curso"><?= $curso -> descripcion ?></textarea>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" name="DescripcionCurso" id="txtDescripcionCurso"
+                            placeholder="Descripción del curso" rows="5"><?= $curso -> descripcion ?></textarea>
+                        </div>
                     </div>
-                </div>                
+
+                </div>              
                 <div class="form-row mt-5">
                     <div class="col-12 ">
                         <h4>Plan de estudios:</h4>
