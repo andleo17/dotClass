@@ -1,6 +1,4 @@
-<?php        
-    $curso = explode('/', $_SERVER['REQUEST_URI']);    
-    $curso = Curso ::buscar(end($curso));
+<?php
     $cursos = Curso ::listar();    
 ?>
 

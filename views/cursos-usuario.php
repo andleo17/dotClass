@@ -36,7 +36,7 @@
                 <td class="col-2"><?= "{$cur -> logo}"?></td>
                 <td class="col-1"><?= "{$cur -> usuario -> nickname}" ?></td>
                 <td class="col-2">
-                    <a role="button" class='btn btn-success' href="<?= SERVER_URL . 'administrar-curso/' . $cur -> id . '/editar' ?>">Ver</a>
+                    <a role="button" class='btn btn-success' href="<?= SERVER_URL . 'curso/' . $cur -> id . '/editar' ?>">Ver</a>
                     <button class='btn btn-danger' type='button'>X</button>
                 </td>
             </tr>                                  
