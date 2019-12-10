@@ -5,6 +5,7 @@
     require_once 'php/config.php';
 
     $usuario = explode('/', $_SERVER['REQUEST_URI']);
+    
     if (end($usuario) == 'editar') {
         if ($usuario[3] == $_SESSION['usuario'] -> nickname) {
             $usuario = Usuario::buscar(null, $usuario[3]);

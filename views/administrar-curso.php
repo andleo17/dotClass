@@ -1,13 +1,7 @@
-<?php    
-    
-    $curso = explode('/', $_SERVER['REQUEST_URI']);
-    if (end($curso) == 'editar') {
-        $curso = Curso ::buscar($curso[3]);
-        include 'views/administrar-curso.php';
-        return;
-    }
+<?php        
+    $curso = explode('/', $_SERVER['REQUEST_URI']);    
     $curso = Curso ::buscar(end($curso));
-    $cursos = Curso ::listar();
+    $cursos = Curso ::listar();    
 ?>
 
 <div class="container my-5">
@@ -35,17 +29,13 @@
                         <h4>Plan de estudios:</h4>
                         <hr>
                     </div>
-                    <?php if ($cursosPrerequisitos = Curso ::listarPrerequisitos($curso -> id)) { ?>
+                    <?php foreach (Curso ::listarPrerequisitos($curso -> id) as $cur) { ?>
                     <div class="col-3 p-0 m-3">
                         <div class="card p-4">
-                            <label for="cboPreRequisito[<?= $cursos -> id ?>]">Curso Pre-Requisito: </label>
-                            <select class="form-control"
-                                    id="cboPreRequisito[<?= $cursos -> id ?>]"
-                                    name="PreRequisitoCurso[<?= $cursos -> id ?>]">
-                                <?php foreach ($cursosPrerequisitos as $cur) { ?>
-                                    <option value="<?= $cur -> id ?>" > <?= $cur -> titulo ?> </option>                                                            
-                                 <?php } ?>
-                            </select>
+                            <label for="cboPreRequisito">Curso Pre-Requisito: </label>                            
+                            <select class="form-control" id="cboPreRequisito" name="PreRequisitoCurso">                                
+                                <option value="<?= $cur -> id ?>" > <?= $cur -> titulo ?> </option>
+                            </select>                            
                         </div>                         
                     </div>
                     <?php } ?>
@@ -73,121 +63,26 @@
                             </ul>
                         </div>
                         <div class="tab-content px-5 py-4">
-                            <div id="contenido" class="tab-pane fade show active">                                
+                            <div id="contenido" class="tab-pane fade show active"> 
+                                <?php foreach (Seccion :: buscarSecciones ($curso -> id) as $seccion) { ?>
                                 <div class="border border-secondary px-4 py-3 mb-4 row">
                                     <div class="col-12">                                                                                 
-                                        <input class="form-control" type="text" name="nombreSeccion" id="nombreSeccion" placeholder="Introduce un título para la sección" required>
+                                        <input class="form-control" value="<?= $seccion -> titulo ?>" type="text" name="nombreSeccion" id="nombreSeccion" placeholder="Introduce un título para la sección" required>
                                     </div>
+                                    <?php  foreach (Clase :: buscarClases($seccion -> id) as $clase) { ?> 
+                                    <div class="col-3 my-3">
+                                        <div class="card border border-secondary rounded-top">
+                                            <div class="card-header bg-success"></div>
+                                            <div class ="p-4">
+                                                <input class="form-control" value="<?= $clase -> titulo ?>" type="text" name="nombreSeccion" id="nombreSeccion" placeholder="Título para tu clase" required>
+                                            </div>
+                                        </div>                         
+                                    </div>
+                                    <?php } ?>
                                     
-                                    <div class="col-3 my-3">
-                                        <div class="card border border-secondary rounded-top">
-                                            <div class="card-header bg-success"></div>
-                                            <div class ="p-4">
-                                                <input class="form-control" type="text" name="nombreSeccion" id="nombreSeccion" placeholder="Título para tu clase" required>
-                                            </div>
-                                        </div>                         
-                                    </div>
-                                    <div class="col-3 my-3">
-                                        <div class="card border border-secondary rounded-top">
-                                            <div class="card-header bg-success"></div>
-                                            <div class ="p-4">
-                                                <input class="form-control" type="text" name="nombreSeccion" id="nombreSeccion" placeholder="Título para tu clase" required>
-                                            </div>
-                                        </div>                         
-                                    </div>
-                                    <div class="col-3 my-3">
-                                        <div class="card border border-secondary rounded-top">
-                                            <div class="card-header bg-success"></div>
-                                            <div class ="p-4">
-                                                <input class="form-control" type="text" name="nombreSeccion" id="nombreSeccion" placeholder="Título para tu clase" required>
-                                            </div>
-                                        </div>                         
-                                    </div>
-                                    <div class="col-3 my-3">
-                                        <div class="card border border-secondary rounded-top">
-                                            <div class="card-header bg-success"></div>
-                                            <div class ="p-4">
-                                                <input class="form-control" type="text" name="nombreSeccion" id="nombreSeccion" placeholder="Título para tu clase" required>
-                                            </div>
-                                        </div>                         
-                                    </div>
                                 </div>
-                                <div class="border border-secondary px-4 py-3 mb-4 row">
-                                    <div class="col-12">                                                                                 
-                                        <input class="form-control" type="text" name="nombreSeccion" id="nombreSeccion" placeholder="Introduce un título para la sección" required>
-                                    </div>
-                                    
-                                    <div class="col-3 my-3">
-                                        <div class="card border border-secondary rounded-top">
-                                            <div class="card-header bg-success"></div>
-                                            <div class ="p-4">
-                                                <input class="form-control" type="text" name="nombreSeccion" id="nombreSeccion" placeholder="Título para tu clase" required>
-                                            </div>
-                                        </div>                         
-                                    </div>
-                                    <div class="col-3 my-3">
-                                        <div class="card border border-secondary rounded-top">
-                                            <div class="card-header bg-success"></div>
-                                            <div class ="p-4">
-                                                <input class="form-control" type="text" name="nombreSeccion" id="nombreSeccion" placeholder="Título para tu clase" required>
-                                            </div>
-                                        </div>                         
-                                    </div>
-                                    <div class="col-3 my-3">
-                                        <div class="card border border-secondary rounded-top">
-                                            <div class="card-header bg-success"></div>
-                                            <div class ="p-4">
-                                                <input class="form-control" type="text" name="nombreSeccion" id="nombreSeccion" placeholder="Título para tu clase" required>
-                                            </div>
-                                        </div>                         
-                                    </div>
-                                    <div class="col-3 my-3">
-                                        <div class="card border border-secondary rounded-top">
-                                            <div class="card-header bg-success"></div>
-                                            <div class ="p-4">
-                                                <input class="form-control" type="text" name="nombreSeccion" id="nombreSeccion" placeholder="Título para tu clase" required>
-                                            </div>
-                                        </div>                         
-                                    </div>
-                                </div>
-                                <div class="border border-secondary px-4 py-3 mb-4 row">
-                                    <div class="col-12">                                                                                 
-                                        <input class="form-control" type="text" name="nombreSeccion" id="nombreSeccion" placeholder="Introduce un título para la sección" required>
-                                    </div>
-                                    
-                                    <div class="col-3 my-3">
-                                        <div class="card border border-secondary rounded-top">
-                                            <div class="card-header bg-success"></div>
-                                            <div class ="p-4">
-                                                <input class="form-control" type="text" name="nombreSeccion" id="nombreSeccion" placeholder="Título para tu clase" required>
-                                            </div>
-                                        </div>                         
-                                    </div>
-                                    <div class="col-3 my-3">
-                                        <div class="card border border-secondary rounded-top">
-                                            <div class="card-header bg-success"></div>
-                                            <div class ="p-4">
-                                                <input class="form-control" type="text" name="nombreSeccion" id="nombreSeccion" placeholder="Título para tu clase" required>
-                                            </div>
-                                        </div>                         
-                                    </div>
-                                    <div class="col-3 my-3">
-                                        <div class="card border border-secondary rounded-top">
-                                            <div class="card-header bg-success"></div>
-                                            <div class ="p-4">
-                                                <input class="form-control" type="text" name="nombreSeccion" id="nombreSeccion" placeholder="Título para tu clase" required>
-                                            </div>
-                                        </div>                         
-                                    </div>
-                                    <div class="col-3 my-3">
-                                        <div class="card border border-secondary rounded-top">
-                                            <div class="card-header bg-success"></div>
-                                            <div class ="p-4">
-                                                <input class="form-control" type="text" name="nombreSeccion" id="nombreSeccion" placeholder="Título para tu clase" required>
-                                            </div>
-                                        </div>                         
-                                    </div>
-                                </div>
+                                <?php } ?>
+                                
                             </div>
                             <div id="preguntas" class="tab-pane fade"></div>
                             <div id="aportes" class="tab-pane fade"></div>
@@ -204,3 +99,22 @@
         </div>
     </div>
 </div>
+
+<script>
+    window.onload = function () {
+        var observer = new MutationObserver(function (mutations) {
+            let elemento = mutations[1];
+            if (elemento && !document.getElementById(elemento.target.id).innerHTML) {
+                fetch(`../views/curso-${elemento.target.id}.php?id=<?= $curso -> id ?>`)
+                    .then(res => res.text()
+                        .then(data => {
+                            document.getElementById(elemento.target.id).innerHTML = data;
+                        }))
+            }
+        });
+        observer.observe(document.getElementById('preguntas'), {attributes: true});
+        observer.observe(document.getElementById('aportes'), {attributes: true});
+        observer.observe(document.getElementById('marcadores'), {attributes: true});
+    };
+
+</script>

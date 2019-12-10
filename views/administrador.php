@@ -118,7 +118,7 @@
                                     <td class="col-2"><?= "{$cur -> logo}"?></td>
                                     <td class="col-1"><?= "{$cur -> usuario -> nickname}" ?></td>
                                     <td class="col-2">
-                                        <button type='button' class='btn btn-info' data-toggle="modal" data-target="#divCur" onclick= 'divCur(<?= "{$cur -> id}"?>)'>Editar</button>
+                                    <a role="button" class='btn btn-success' href="<?= SERVER_URL . 'administrar-curso/' . $cur -> id ?>">Ver</a>
                                         <button class='btn btn-danger' type='button'>X</button>
                                     </td>
                                 </tr>                                  

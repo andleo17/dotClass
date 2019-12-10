@@ -1,6 +1,7 @@
 <?php
     require_once 'Conexion.php';
     require_once 'Clase.php';
+    require_once 'Curso.php';
 
     class Seccion {
 

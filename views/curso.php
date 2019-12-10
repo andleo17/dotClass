@@ -15,16 +15,25 @@
             <div class="card panel-container rounded-0 border-0 p-5">
                 <div class="card-head">
                     <img src="<?= SERVER_URL ?>uploads/logos/<?= $curso -> logo ?>" alt="logo">
-                    <h1 class="ml-3"><?= $curso -> titulo ?></h1>
-                    <div class="d-flex flex-column">
-                    <?php if (isset($_SESSION['usuario'])) { ?>
-                        <div class="bar">
-                            <div class="bar-progress"></div>
-                            <div class="full-progress"></div>
-                            <span>75%</span>
+                    <div class="row">
+                        <div class="col">
+                            <h1 class="ml-3"><?= $curso -> titulo ?></h1>                    
                         </div>
-                    <?php } ?>
-                        <button type="button" class="btn btn-success"> + Seguir</button>
+                        <div class="col">
+                            <div class="d-flex flex-column">
+                            <?php if (empty($_SESSION['usuario'])) { ?>
+                                <button type="button" class="btn btn-success"> + Seguir</button>
+                            <?php } ?> 
+                            <?php if (isset($_SESSION['usuario'])) { ?>                       
+                                <div class="bar">
+                                    <div class="bar-progress"></div>
+                                    <div class="full-progress"></div>
+                                    <span>75%</span>
+                                </div>
+                            <?php } ?>
+                            </div>
+                        </div>
+                    
                     </div>
                 </div>
                 <div class="card-body">
@@ -111,11 +120,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <?php if ($key != count($cursosPrerequisitos) - 1) { ?>
-                                    <div class="col mt-3 d-flex align-items-center">
-                                        <i class="fas fa-arrow-right"></i>
-                                    </div>
-                                <?php } ?>
                             <?php } ?>
                         </div>
                     </div>
